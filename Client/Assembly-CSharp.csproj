@@ -49,6 +49,7 @@
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
     <Compile Include="Assets/Scripts/Framework/Utils/Singleton.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Network.cs" />
+    <Compile Include="Assets/Scripts/Test.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Define.cs" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
