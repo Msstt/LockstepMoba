@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/Framework/Network/Log.cs" />
+    <Compile Include="Assets/Scripts/Framework/Utils/Updater.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
     <Compile Include="Assets/Scripts/Framework/Utils/Singleton.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Network.cs" />

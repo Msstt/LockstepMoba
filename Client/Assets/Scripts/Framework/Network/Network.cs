@@ -6,22 +6,31 @@ namespace Framework.Network {
         
         private Connect connect = new Connect();
         
+        private int reconnectCount = 0;
+        
         public void Connect(string ip, int port, bool isForce = false) {
             if (connect.IsSameConfig(ip, port) && !isForce) {
                 if (state == NetworkState.Connecting || state == NetworkState.Connected) {
                     return;
                 }
             }
+            reconnectCount = 0;
             ChangeState(NetworkState.Connecting);
-            connect.SetConfig(ip, port);
-            connect.BeginConnect(ConnectComp);
+            connect.SetConfig(ip, port, ConnectComp);
+            connect.BeginConnect();
         }
 
-        private void ConnectComp(bool IsSuccess) {
-            if (IsSuccess) {
+        private void ConnectComp(bool isSuccess) {
+            if (isSuccess) {
                 ChangeState(NetworkState.Connected);
             } else {
-                ChangeState(NetworkState.Disconnected);
+                if (reconnectCount < ConnectConfig.MaxReconnectCount) {
+                    reconnectCount += 1;
+                    ChangeState(NetworkState.Reconnecting);
+                    connect.BeginConnect();
+                } else {
+                    ChangeState(NetworkState.Disconnected);
+                }
             }
         }
 

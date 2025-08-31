@@ -7,4 +7,9 @@ namespace Framework.Network {
         Reconnecting,
         NoNetwork,
     }
+    
+    public static class ConnectConfig {
+        public static int MaxReconnectCount = 5;
+        public static int ConnectTimeout = 10;
+    }
 }
