@@ -33,6 +33,12 @@ namespace Framework.Network {
                 }
             }
         }
+        
+        public void DisConnect() {
+            connect.DisConnect();
+            ChangeState(NetworkState.Disconnected);
+            Log.Info("客户端断开连接");
+        }
 
         #region 事件
 

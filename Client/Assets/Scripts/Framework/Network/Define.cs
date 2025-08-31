@@ -10,6 +10,6 @@ namespace Framework.Network {
     
     public static class ConnectConfig {
         public static int MaxReconnectCount = 5;
-        public static int ConnectTimeout = 10;
+        public static float ConnectTimeout = 10;
     }
 }

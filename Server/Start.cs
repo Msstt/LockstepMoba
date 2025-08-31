@@ -2,8 +2,9 @@
 void Main() {
     Console.WriteLine("Server is starting...");
     
-    Framework.Network.Network network = new Framework.Network.Network(9980);
-    network.Start();
+    Framework.Network.Network.Instance.Start(9980);
+    
+    while (true) {}
 }
 
 Main();
