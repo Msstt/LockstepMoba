@@ -3,6 +3,8 @@ using System.Net.Sockets;
 
 namespace Framework.Network {
     public class Network : Singleton<Network> {
+        const int DispatchMsgFrameCount = 10;
+        
         private int port;
         
         private Listener listener;
@@ -10,6 +12,14 @@ namespace Framework.Network {
         private ConcurrentDictionary<TcpClient, Client> clients = new ConcurrentDictionary<TcpClient, Client>();
         
         private ConcurrentQueue<Message> msgQueue = new ConcurrentQueue<Message>();
+        
+        private Dictionary<MessageDef, Action<Message>> msgHandlers = new Dictionary<MessageDef, Action<Message>>();
+
+        public Network() {
+            for (int i = 1; i <= Enum.GetValues(typeof(MessageDef)).Length; i++) {
+                msgHandlers.Add((MessageDef)i, null);
+            }
+        }
         
         private void AcceptClient() {
             var client = listener.Accept();
@@ -34,12 +44,41 @@ namespace Framework.Network {
             clients.TryRemove(client.Socket, out _);
         }
         
-        public void PushMsg(Client client, int msgId, byte[] data) {
+        public void PushMsg(Client client, MessageDef msgId, byte[] data) {
             msgQueue.Enqueue(new Message() {
                 client = client,
                 msgId = msgId,
                 data = data
             });
         }
+
+        public void Send(Message msg) {
+            if (!clients.TryGetValue(msg.client.Socket, out Client client)) {
+                return;
+            }
+            client.Send(msg);
+        }
+
+        #region 消息分发
+
+        public void DispatchMsg() {
+            for (int i = 0; i < DispatchMsgFrameCount; i++) {
+                if (!msgQueue.TryDequeue(out Message msg)) {
+                    break;
+                }
+                Log.Info("Receive Message " + msg.ToString());
+                msgHandlers[msg.msgId]?.Invoke(msg);
+            }
+        }
+        
+        public void RegisterMsgHandler(MessageDef msgDef, Action<Message> handler) {
+            msgHandlers[msgDef] += handler;
+        }
+        
+        public void RemoveMsgHandler(MessageDef msgDef, Action<Message> handler) { 
+            msgHandlers[msgDef] -= handler;
+        }
+
+        #endregion
     }
 }

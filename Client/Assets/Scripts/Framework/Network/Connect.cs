@@ -9,6 +9,7 @@ namespace Framework.Network {
         private int port;
         
         private Socket socket;
+        public Socket Socket { get => socket; }
 
         private Action<bool> callback;
         
@@ -36,10 +37,11 @@ namespace Framework.Network {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.SendTimeout = 1000;
             socket.NoDelay = true;
+            socket.Blocking = true;
         }
 
         public void BeginConnect() {
-            DisConnect();
+            Disconnect();
             
             state = ConnectState.Connecting;
             beginConnectTime = null;
@@ -66,7 +68,7 @@ namespace Framework.Network {
             }
         }
         
-        public void DisConnect() {
+        public void Disconnect() {
             state = ConnectState.Disconnected;
             
             if (socket == null) {
@@ -94,7 +96,7 @@ namespace Framework.Network {
             }
 
             if (Time.realtimeSinceStartup - beginConnectTime > ConnectConfig.ConnectTimeout) {
-                DisConnect();
+                Disconnect();
                 callback?.Invoke(false);
                 Log.Error("客户端连接超时 {0} s", ConnectConfig.ConnectTimeout);
             }

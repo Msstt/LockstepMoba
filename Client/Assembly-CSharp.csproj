@@ -46,10 +46,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/Framework/Network/Log.cs" />
+    <Compile Include="Assets/Scripts/Framework/Network/Writer.cs" />
     <Compile Include="Assets/Scripts/Framework/Utils/Updater.cs" />
+    <Compile Include="Assets/Scripts/Network/MessageDef.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
+    <Compile Include="Assets/Scripts/Framework/Utils/ThreadMgr.cs" />
     <Compile Include="Assets/Scripts/Framework/Utils/Singleton.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Network.cs" />
+    <Compile Include="Assets/Scripts/Framework/Network/Message.cs" />
     <Compile Include="Assets/Scripts/Test.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Define.cs" />
     <Reference Include="UnityEngine">

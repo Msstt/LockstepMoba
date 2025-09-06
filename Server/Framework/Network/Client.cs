@@ -20,7 +20,13 @@ namespace Framework.Network {
             this.socket = socket;
         }
 
-        public void Send(byte[] data) {
+        public void Send(Message msg) {
+            Send(BitConverter.GetBytes(msg.data.Length));
+            Send(BitConverter.GetBytes((int)msg.msgId));
+            Send(msg.data);
+        }
+        
+        private void Send(byte[] data) {
             lock (writeBuffer) {
                 if (writeBufferIndex + data.Length > MaxBufferSize) {
                     Log.Error("Write buffer overflow");
@@ -44,8 +50,9 @@ namespace Framework.Network {
             int msgId = BitConverter.ToInt32(readBuffer, 4);
             byte[] msgData = new byte[msgLen];
             Array.Copy(readBuffer, 8, msgData, 0, msgLen);
-            Network.Instance.PushMsg(this, msgId, msgData);
+            Network.Instance.PushMsg(this, (MessageDef)msgId, msgData);
             Array.Copy(readBuffer, 8 + msgLen, readBuffer, 0, readBufferIndex - (8 + msgLen));
+            readBufferIndex -= 8 + msgLen;
             return true;
         }
 
