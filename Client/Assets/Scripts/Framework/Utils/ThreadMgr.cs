@@ -6,11 +6,13 @@ using System.Threading;
 namespace Framework {
     public enum ThreadTaskId {
         SocketWrite = 1,
+        SocketRead = 2,
     }
     
     public class ThreadMgr : Singleton<ThreadMgr> {
         public Dictionary<ThreadTaskId, Action> tasks = new Dictionary<ThreadTaskId, Action>() {
             {ThreadTaskId.SocketWrite, () => Network.Network.Instance.FlushWrite() },
+            {ThreadTaskId.SocketRead, () => Network.Network.Instance.FlushRead() },
         };
         public ConcurrentDictionary<ThreadTaskId, bool> taskIsRunning = new ConcurrentDictionary<ThreadTaskId, bool>();
         

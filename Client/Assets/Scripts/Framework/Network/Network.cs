@@ -6,6 +6,7 @@ namespace Framework.Network {
         
         private Connect connect = new Connect();
         private Writer writer = new Writer();
+        private Reader reader = new Reader();
         
         private int reconnectCount = 0;
         
@@ -13,6 +14,10 @@ namespace Framework.Network {
 
         public Network() {
             Updater.Instance.RegisterUpdate(CheckDisconnect);
+            Updater.Instance.RegisterUpdate(DispatchMsg);
+            UnityEventMgr.Instance.RegisterOnQuit(() => {
+                Disconnect();
+            });
         }
 
         #region 连接
@@ -29,12 +34,14 @@ namespace Framework.Network {
             connect.BeginConnect();
             
             ThreadMgr.Instance.Start(ThreadTaskId.SocketWrite);
+            ThreadMgr.Instance.Start(ThreadTaskId.SocketRead);
         }
 
         private void ConnectComp(bool isSuccess) {
             if (isSuccess) {
                 ChangeState(NetworkState.Connected);
                 writer.SetSocket(connect.Socket);
+                reader.SetSocket(connect.Socket);
             } else {
                 if (reconnectCount < ConnectConfig.MaxReconnectCount) {
                     reconnectCount += 1;
@@ -49,7 +56,7 @@ namespace Framework.Network {
         public void Disconnect() {
             connect.Disconnect();
             ChangeState(NetworkState.Disconnected);
-            Log.Info("客户端断开连接");
+            Log.Error("客户端断开连接");
         }
         
         public void TryDisconnect() {
@@ -67,18 +74,39 @@ namespace Framework.Network {
 
         #region 发送
 
-        public void Send(Message msg) {
-            writer.Send(msg);
-            
-            Log.Info("<color=green>Send To " + msg.ToString() + "</color>");
-        }
-        
         public void FlushWrite() {
             writer.Flush();
         }
-
+        
+        public void Send(Message msg) {
+            if (state != NetworkState.Connected) {
+                return;
+            }
+            
+            writer.Send(msg);
+            Log.Info("<color=green>Send To " + msg + "</color>");
+        }
+        
         #endregion
 
+        #region 接收
+
+        public void FlushRead() {
+            reader.Flush();
+        }
+        
+        public void DispatchMsg() {
+            for (int i = 0; i < ReceiveConfig.DispatchCountPerFrame; i++) {
+                Message? msg = reader.GetMessage();
+                if (msg == null) {
+                    return;
+                }
+                Log.Info("<color=orange>Receive From " + msg + "</color>");
+                MsgDispatcher.Instance.Dispatch(msg.Value);
+            }
+        }
+
+        #endregion
 
         #region 事件
 

@@ -12,6 +12,10 @@ namespace Framework.Network {
         }
         
         public void Send(Message msg) {
+            if (queue.Count >= SendConfig.MaxQueueCount) {
+                Log.Warning("Message queue full, dropping message {0}", msg.msgId);
+                return;
+            }
             queue.Enqueue(msg);
         }
 
@@ -28,8 +32,10 @@ namespace Framework.Network {
                 socket.Send(BitConverter.GetBytes((int)msg.msgId));
                 socket.Send(msg.data);
             } catch (Exception e) {
-                Log.Error("Failed to send message: {0}", e.Message);
-                Network.Instance.TryDisconnect();
+                if (e.Message != "interrupted") {
+                    Log.Error("Failed to send message: {0}", e.Message);
+                    Network.Instance.TryDisconnect();
+                }
             }
         }
     }
