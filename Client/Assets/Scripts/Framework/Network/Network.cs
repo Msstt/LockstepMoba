@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Framework.Network {
     public class Network : Singleton<Network> {
@@ -84,7 +85,7 @@ namespace Framework.Network {
             }
             
             writer.Send(msg);
-            Log.Info("<color=green>Send To " + msg + "</color>");
+            Debug.Log("<color=green>Send To " + msg + "</color>");
         }
         
         #endregion
@@ -101,7 +102,7 @@ namespace Framework.Network {
                 if (msg == null) {
                     return;
                 }
-                Log.Info("<color=orange>Receive From " + msg + "</color>");
+                Debug.Log("<color=orange>Receive From " + msg + "</color>");
                 MsgDispatcher.Instance.Dispatch(msg.Value);
             }
         }

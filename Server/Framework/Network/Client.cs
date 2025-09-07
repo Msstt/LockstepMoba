@@ -1,4 +1,7 @@
+using System.Data.Common;
 using System.Net.Sockets;
+using Google.Protobuf;
+using Network;
 
 namespace Framework.Network {
     public class Client {
@@ -21,9 +24,10 @@ namespace Framework.Network {
         }
 
         public void Send(Message msg) {
-            Send(BitConverter.GetBytes(msg.data.Length));
+            byte[] buffer = msg.data.ToByteArray();
+            Send(BitConverter.GetBytes(buffer.Length));
             Send(BitConverter.GetBytes((int)msg.msgId));
-            Send(msg.data);
+            Send(buffer);
         }
         
         private void Send(byte[] data) {
@@ -48,9 +52,13 @@ namespace Framework.Network {
                 return false;
             }
             int msgId = BitConverter.ToInt32(readBuffer, 4);
-            byte[] msgData = new byte[msgLen];
-            Array.Copy(readBuffer, 8, msgData, 0, msgLen);
-            Network.Instance.PushMsg(this, (MessageDef)msgId, msgData);
+            IMessage data = null;
+            try {
+                data = MessageParserDef.Parsers[(MessageDef)msgId].ParseFrom(readBuffer, 8, msgLen);
+            } catch (Exception e) {
+                Log.Error("Failed to parse message {0}: {1}", msgId, e.Message);
+            }
+            Network.Instance.PushMsg(this, (MessageDef)msgId, data);
             Array.Copy(readBuffer, 8 + msgLen, readBuffer, 0, readBufferIndex - (8 + msgLen));
             readBufferIndex -= 8 + msgLen;
             return true;

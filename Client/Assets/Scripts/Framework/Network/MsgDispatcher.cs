@@ -29,6 +29,7 @@ namespace Framework.Network {
             try {
                 msgHandlers[msg.msgId]?.Invoke(msg);
             } catch (Exception e) {
+                Log.Error(e.ToString());
                 Log.Error("Exception when handling message {0}: {1}", msg.msgId, e.Message);
             }
         }

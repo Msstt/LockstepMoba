@@ -1,5 +1,7 @@
 using System.Collections.Concurrent;
 using System.Net.Sockets;
+using Google.Protobuf;
+using Network;
 
 namespace Framework.Network {
     public class Network : Singleton<Network> {
@@ -44,11 +46,11 @@ namespace Framework.Network {
             clients.TryRemove(client.Socket, out _);
         }
         
-        public void PushMsg(Client client, MessageDef msgId, byte[] data) {
+        public void PushMsg(Client client, MessageDef msgId, IMessage data) {
             msgQueue.Enqueue(new Message() {
                 client = client,
                 msgId = msgId,
-                data = data
+                data = data,
             });
         }
 
@@ -66,7 +68,7 @@ namespace Framework.Network {
                 if (!msgQueue.TryDequeue(out Message msg)) {
                     break;
                 }
-                Log.Info("Receive Message " + msg.ToString());
+                Console.WriteLine("Receive Message " + msg);
                 msgHandlers[msg.msgId]?.Invoke(msg);
             }
         }

@@ -45,8 +45,11 @@ namespace Framework.Network {
             }
             Message msg = new Message();
             msg.msgId = (MessageDef)BitConverter.ToInt32(buffer, 4);
-            msg.data = new byte[msgLen];
-            Array.Copy(buffer, 8, msg.data, 0, msgLen);
+            try {
+                msg.data = MessageParserDef.Parsers[msg.msgId].ParseFrom(buffer, 8, msgLen);
+            } catch (Exception e) {
+                Log.Error("Failed to parse message {0}: {1}", msg.msgId, e.Message);
+            }
             Array.Copy(buffer, 8 + msgLen, buffer, 0, readIndex - (8 + msgLen));
             readIndex -= 8 + msgLen;
             queue.Enqueue(msg);

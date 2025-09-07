@@ -51,6 +51,7 @@
     <Compile Include="Assets/Scripts/Framework/Utils/Updater.cs" />
     <Compile Include="Assets/Scripts/Network/MessageDef.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
+    <Compile Include="Assets/Scripts/Network/Proto/TestMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Utils/ThreadMgr.cs" />
     <Compile Include="Assets/Scripts/Framework/Utils/Singleton.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Network.cs" />
@@ -754,6 +755,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{8e399d07-fc4a-7ecd-7881-f923d075ebd1}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Net.Sockets;
+using Google.Protobuf;
 
 namespace Framework.Network {
     public class Writer {
@@ -28,9 +29,10 @@ namespace Framework.Network {
             }
 
             try {
-                socket.Send(BitConverter.GetBytes(msg.data.Length));
+                byte[] buffer = msg.data.ToByteArray();
+                socket.Send(BitConverter.GetBytes(buffer.Length));
                 socket.Send(BitConverter.GetBytes((int)msg.msgId));
-                socket.Send(msg.data);
+                socket.Send(buffer);
             } catch (Exception e) {
                 if (e.Message != "interrupted") {
                     Log.Error("Failed to send message: {0}", e.Message);
