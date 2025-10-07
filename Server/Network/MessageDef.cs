@@ -3,12 +3,14 @@ using Google.Protobuf;
 
 namespace Network {
     public enum MessageDef {
-        Test = 1,
+        test_c2s = 1,
+
     }
 
     public static class MessageParserDef {
         public static readonly Dictionary<MessageDef, MessageParser> Parsers = new Dictionary<MessageDef, MessageParser>() {
-            { MessageDef.Test, TestMsg.Parser },
+            { MessageDef.test_c2s, test_c2s.Parser },
+
         };
     }
 }

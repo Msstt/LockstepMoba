@@ -81,3 +81,12 @@ Server/*.DotSettings.user
 .DS_Store
 Thumbs.db
 
+########################
+# proto
+########################
+
+# IDE for Proto
+Proto/.vs/
+Proto/.idea/
+Proto/.vscode/
+Proto/*.DotSettings.user

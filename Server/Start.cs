@@ -5,7 +5,7 @@ void Main() {
     
     Framework.Network.Network.Instance.Start(9980);
     
-    Framework.Network.Network.Instance.RegisterMsgHandler(MessageDef.Test, (msg) => {
+    Framework.Network.Network.Instance.RegisterMsgHandler(MessageDef.test_c2s, (msg) => {
         Framework.Network.Network.Instance.Send(msg);
     });
 

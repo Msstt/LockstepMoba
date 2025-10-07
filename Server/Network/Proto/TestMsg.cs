@@ -24,23 +24,23 @@ namespace Network {
     static TestMsgReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChREZWZpbmUvVGVzdE1zZy5wcm90bxIHTmV0d29yayIjCgdUZXN0TXNnEgoK",
-            "AmlkGAEgASgFEgwKBG5hbWUYAiABKAliBnByb3RvMw=="));
+            "ChREZWZpbmUvVGVzdE1zZy5wcm90bxIHTmV0d29yayIkCgh0ZXN0X2MycxIK",
+            "CgJpZBgBIAEoBRIMCgRuYW1lGAIgASgJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.TestMsg), global::Network.TestMsg.Parser, new[]{ "Id", "Name" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.test_c2s), global::Network.test_c2s.Parser, new[]{ "Id", "Name" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class TestMsg : pb::IMessage<TestMsg> {
-    private static readonly pb::MessageParser<TestMsg> _parser = new pb::MessageParser<TestMsg>(() => new TestMsg());
+  public sealed partial class test_c2s : pb::IMessage<test_c2s> {
+    private static readonly pb::MessageParser<test_c2s> _parser = new pb::MessageParser<test_c2s>(() => new test_c2s());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<TestMsg> Parser { get { return _parser; } }
+    public static pb::MessageParser<test_c2s> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -53,22 +53,22 @@ namespace Network {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TestMsg() {
+    public test_c2s() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TestMsg(TestMsg other) : this() {
+    public test_c2s(test_c2s other) : this() {
       id_ = other.id_;
       name_ = other.name_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public TestMsg Clone() {
-      return new TestMsg(this);
+    public test_c2s Clone() {
+      return new test_c2s(this);
     }
 
     /// <summary>Field number for the "id" field.</summary>
@@ -95,11 +95,11 @@ namespace Network {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as TestMsg);
+      return Equals(other as test_c2s);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(TestMsg other) {
+    public bool Equals(test_c2s other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -158,7 +158,7 @@ namespace Network {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(TestMsg other) {
+    public void MergeFrom(test_c2s other) {
       if (other == null) {
         return;
       }

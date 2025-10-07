@@ -1,0 +1,12 @@
+using System.Collections.Generic;
+using Google.Protobuf;
+
+namespace Network {
+    public enum MessageDef {{MessageEnumList}
+    }
+
+    public static class MessageParserDef {
+        public static readonly Dictionary<MessageDef, MessageParser> Parsers = new Dictionary<MessageDef, MessageParser>() {{MessageParserList}
+        };
+    }
+}
