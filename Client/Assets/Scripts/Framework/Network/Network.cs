@@ -1,4 +1,6 @@
 using System;
+using Google.Protobuf;
+using Network;
 using UnityEngine;
 
 namespace Framework.Network {
@@ -83,6 +85,20 @@ namespace Framework.Network {
             if (state != NetworkState.Connected) {
                 return;
             }
+            
+            writer.Send(msg);
+            Debug.Log("<color=green>Send To " + msg + "</color>");
+        }
+        
+        public void Send(MessageDef msgId, IMessage data) {
+            if (state != NetworkState.Connected) {
+                return;
+            }
+
+            Message msg = new Message() {
+                msgId = msgId,
+                data = data,
+            };
             
             writer.Send(msg);
             Debug.Log("<color=green>Send To " + msg + "</color>");

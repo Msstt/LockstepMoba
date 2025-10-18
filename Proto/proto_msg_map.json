@@ -1,3 +1,4 @@
 {
-  "test_c2s": 1
+  "echo_test_c2s": 10001,
+  "echo_test_s2c": 20001
 }

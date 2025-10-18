@@ -24,23 +24,25 @@ namespace Network {
     static TestMsgReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChREZWZpbmUvVGVzdE1zZy5wcm90bxIHTmV0d29yayIkCgh0ZXN0X2MycxIK",
-            "CgJpZBgBIAEoBRIMCgRuYW1lGAIgASgJYgZwcm90bzM="));
+            "ChREZWZpbmUvVGVzdE1zZy5wcm90bxIHTmV0d29yayIpCg1lY2hvX3Rlc3Rf",
+            "YzJzEgoKAmlkGAEgASgFEgwKBG5hbWUYAiABKAkiKQoNZWNob190ZXN0X3My",
+            "YxIKCgJpZBgBIAEoBRIMCgRuYW1lGAIgASgJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.test_c2s), global::Network.test_c2s.Parser, new[]{ "Id", "Name" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.echo_test_c2s), global::Network.echo_test_c2s.Parser, new[]{ "Id", "Name" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.echo_test_s2c), global::Network.echo_test_s2c.Parser, new[]{ "Id", "Name" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class test_c2s : pb::IMessage<test_c2s> {
-    private static readonly pb::MessageParser<test_c2s> _parser = new pb::MessageParser<test_c2s>(() => new test_c2s());
+  public sealed partial class echo_test_c2s : pb::IMessage<echo_test_c2s> {
+    private static readonly pb::MessageParser<echo_test_c2s> _parser = new pb::MessageParser<echo_test_c2s>(() => new echo_test_c2s());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<test_c2s> Parser { get { return _parser; } }
+    public static pb::MessageParser<echo_test_c2s> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -53,22 +55,22 @@ namespace Network {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public test_c2s() {
+    public echo_test_c2s() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public test_c2s(test_c2s other) : this() {
+    public echo_test_c2s(echo_test_c2s other) : this() {
       id_ = other.id_;
       name_ = other.name_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public test_c2s Clone() {
-      return new test_c2s(this);
+    public echo_test_c2s Clone() {
+      return new echo_test_c2s(this);
     }
 
     /// <summary>Field number for the "id" field.</summary>
@@ -95,11 +97,11 @@ namespace Network {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as test_c2s);
+      return Equals(other as echo_test_c2s);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(test_c2s other) {
+    public bool Equals(echo_test_c2s other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -158,7 +160,164 @@ namespace Network {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(test_c2s other) {
+    public void MergeFrom(echo_test_c2s other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Name = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class echo_test_s2c : pb::IMessage<echo_test_s2c> {
+    private static readonly pb::MessageParser<echo_test_s2c> _parser = new pb::MessageParser<echo_test_s2c>(() => new echo_test_s2c());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<echo_test_s2c> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Network.TestMsgReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public echo_test_s2c() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public echo_test_s2c(echo_test_s2c other) : this() {
+      id_ = other.id_;
+      name_ = other.name_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public echo_test_s2c Clone() {
+      return new echo_test_s2c(this);
+    }
+
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private int id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 2;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as echo_test_s2c);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(echo_test_s2c other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (Name != other.Name) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0) hash ^= Id.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(echo_test_s2c other) {
       if (other == null) {
         return;
       }

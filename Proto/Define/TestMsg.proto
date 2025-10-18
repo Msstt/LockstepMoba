@@ -2,7 +2,12 @@ syntax = "proto3";
 
 package Network;
 
-message test_c2s {
+message echo_test_c2s {
+  int32 id = 1;
+  string name = 2;
+}
+
+message echo_test_s2c {
   int32 id = 1;
   string name = 2;
 }

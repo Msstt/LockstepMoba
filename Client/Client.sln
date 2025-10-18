@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{8e399d07-fc4a-7ecd-7881-f923d075ebd1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins", "Plugins.csproj", "{b7057248-8898-b7fe-9ecb-7feff9d4d038}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{8441f412-22a4-275f-22e6-507969043f15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scripts", "Scripts.csproj", "{e8edfcb1-94ef-5247-6486-ca3030a098c4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test.csproj", "{64c70d35-e320-0dbd-57a6-e3bd24bc02a7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{9cf74455-0653-9f90-c855-53d6959d5dfd}"
 EndProject
@@ -12,10 +14,12 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8e399d07-fc4a-7ecd-7881-f923d075ebd1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8e399d07-fc4a-7ecd-7881-f923d075ebd1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8441f412-22a4-275f-22e6-507969043f15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8441f412-22a4-275f-22e6-507969043f15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{b7057248-8898-b7fe-9ecb-7feff9d4d038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{b7057248-8898-b7fe-9ecb-7feff9d4d038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{e8edfcb1-94ef-5247-6486-ca3030a098c4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e8edfcb1-94ef-5247-6486-ca3030a098c4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64c70d35-e320-0dbd-57a6-e3bd24bc02a7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64c70d35-e320-0dbd-57a6-e3bd24bc02a7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9cf74455-0653-9f90-c855-53d6959d5dfd}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9cf74455-0653-9f90-c855-53d6959d5dfd}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection

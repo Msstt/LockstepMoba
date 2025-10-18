@@ -15,11 +15,11 @@ namespace Framework.Network {
         
         private ConcurrentQueue<Message> msgQueue = new ConcurrentQueue<Message>();
         
-        private Dictionary<MessageDef, Action<Message>> msgHandlers = new Dictionary<MessageDef, Action<Message>>();
+        private Dictionary<MessageDef, Action<Client, IMessage>> msgHandlers = new Dictionary<MessageDef, Action<Client, IMessage>>();
 
         public Network() {
-            for (int i = 1; i <= Enum.GetValues(typeof(MessageDef)).Length; i++) {
-                msgHandlers.Add((MessageDef)i, null);
+            foreach (MessageDef value in Enum.GetValues(typeof(MessageDef))) {
+                msgHandlers.Add(value, null);
             }
         }
         
@@ -60,6 +60,19 @@ namespace Framework.Network {
             }
             client.Send(msg);
         }
+        
+        public void Send(Client receiver, MessageDef msgId, IMessage data) {
+            if (!clients.TryGetValue(receiver.Socket, out Client client)) {
+                return;
+            }
+            
+            Message msg = new Message() {
+                client = client,
+                msgId = msgId,
+                data = data,
+            };
+            client.Send(msg);
+        }
 
         #region 消息分发
 
@@ -69,15 +82,15 @@ namespace Framework.Network {
                     break;
                 }
                 Console.WriteLine("Receive Message " + msg);
-                msgHandlers[msg.msgId]?.Invoke(msg);
+                msgHandlers[msg.msgId]?.Invoke(msg.client, msg.data);
             }
         }
         
-        public void RegisterMsgHandler(MessageDef msgDef, Action<Message> handler) {
+        public void RegisterMsgHandler(MessageDef msgDef, Action<Client, IMessage> handler) {
             msgHandlers[msgDef] += handler;
         }
         
-        public void RemoveMsgHandler(MessageDef msgDef, Action<Message> handler) { 
+        public void RemoveMsgHandler(MessageDef msgDef, Action<Client, IMessage> handler) { 
             msgHandlers[msgDef] -= handler;
         }
 

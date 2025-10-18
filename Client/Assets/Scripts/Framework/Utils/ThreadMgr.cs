@@ -17,8 +17,8 @@ namespace Framework {
         public ConcurrentDictionary<ThreadTaskId, bool> taskIsRunning = new ConcurrentDictionary<ThreadTaskId, bool>();
         
         public ThreadMgr() {
-            for (int i = 1; i <= Enum.GetValues(typeof(ThreadTaskId)).Length; i++) {
-                taskIsRunning.TryAdd((ThreadTaskId)i, false);
+            foreach (ThreadTaskId value in Enum.GetValues(typeof(ThreadTaskId))) {
+                taskIsRunning.TryAdd(value, false);
             }
         }
         
