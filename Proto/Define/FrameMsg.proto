@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package Network;
+
+// 收集操作广播
+message frame_start_s2c {
+  int32 frame = 1;
+}
+
+// 帧操作
+message frame_input_c2s {
+  int32 id = 1;
+  string name = 2;
+}
+
+// 帧操作广播
+message frame_input_s2c {
+}

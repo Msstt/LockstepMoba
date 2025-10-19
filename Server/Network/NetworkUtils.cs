@@ -18,7 +18,7 @@ namespace Network {
                 }
             }
             
-            Framework.Network.Network.Instance.Start(9980);
+            Framework.Network.Network.Instance.Start(Config.Instance.Network.port);
         }
         
         // 网络层更新
