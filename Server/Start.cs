@@ -11,6 +11,7 @@ void Main() {
     NetworkUtils.Start();
     
     while (true) {
+        CommandUtils.HandleCommand();
         NetworkUtils.Update();
     }
 }
