@@ -3,10 +3,7 @@ using Newtonsoft.Json;
 
 public class Config : Singleton<Config> {
     private static readonly string ConfigFilePath = Directory.GetCurrentDirectory() + "/../../../Config/Config/";
-
-    public class NetworkConfig {
-        public int port;
-    };
+    
     public NetworkConfig Network { get; private set; }
 
     public bool ParseConfig() {

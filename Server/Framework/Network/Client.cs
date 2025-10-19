@@ -1,4 +1,5 @@
-using System.Data.Common;
+global using Uid = int;
+
 using System.Net.Sockets;
 using Google.Protobuf;
 using Network;
@@ -6,6 +7,9 @@ using Network;
 namespace Framework.Network {
     public class Client {
         private static readonly int MaxBufferSize = 4096;
+
+        private static int MaxUid = 0;
+        public Uid Uid { get; private set; }
         
         private TcpClient socket;
         public TcpClient Socket { get => socket; }
@@ -21,12 +25,13 @@ namespace Framework.Network {
 
         public Client(TcpClient socket) {
             this.socket = socket;
+            Uid = ++MaxUid;
         }
 
-        public void Send(Message msg) {
-            byte[] buffer = msg.data.ToByteArray();
+        public void Send(MessageDef msgId, IMessage data) {
+            byte[] buffer = data.ToByteArray();
             Send(BitConverter.GetBytes(buffer.Length));
-            Send(BitConverter.GetBytes((int)msg.msgId));
+            Send(BitConverter.GetBytes((int)msgId));
             Send(buffer);
         }
         
@@ -58,7 +63,7 @@ namespace Framework.Network {
             } catch (Exception e) {
                 Log.Error("Failed to parse message {0}: {1}", msgId, e.Message);
             }
-            Network.Instance.PushMsg(this, (MessageDef)msgId, data);
+            Network.Instance.PushMsg(Uid, (MessageDef)msgId, data);
             Array.Copy(readBuffer, 8 + msgLen, readBuffer, 0, readBufferIndex - (8 + msgLen));
             readBufferIndex -= 8 + msgLen;
             return true;

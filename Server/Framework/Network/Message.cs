@@ -3,7 +3,7 @@ using Google.Protobuf;
 
 namespace Framework.Network {
     public struct Message {
-        public Client client;
+        public Uid client;
         public MessageDef msgId;
         public IMessage data;
 

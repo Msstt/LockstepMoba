@@ -1,4 +1,10 @@
 {
   "echo_test_c2s": 10001,
-  "echo_test_s2c": 20001
+  "echo_test_s2c": 20001,
+  
+  "frame_start_s2c": 20002,
+  "frame_input_c2s": 10003,
+  "frame_input_s2c": 20003,
+  
+  "battle_start_s2c": 20004
 }

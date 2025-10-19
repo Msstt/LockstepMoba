@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package Network;
 
+import "Define/BattleMsg.proto";
+
 // 收集操作广播
 message frame_start_s2c {
   int32 frame = 1;
@@ -9,10 +11,18 @@ message frame_start_s2c {
 
 // 帧操作
 message frame_input_c2s {
-  int32 id = 1;
-  string name = 2;
+  int32 frame = 1;
+  battle_input input = 2;
 }
 
 // 帧操作广播
 message frame_input_s2c {
+  int32 frame = 1;
+  
+  message input_info {
+    int32 uid = 1;
+    battle_input input = 2;
+  }
+  
+  repeated input_info inputs = 2;
 }

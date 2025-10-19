@@ -11,11 +11,11 @@ namespace Framework.Network {
         
         private Listener listener;
         
-        private ConcurrentDictionary<TcpClient, Client> clients = new ConcurrentDictionary<TcpClient, Client>();
+        private ConcurrentDictionary<Uid, Client> clients = new ConcurrentDictionary<Uid, Client>();
         
         private ConcurrentQueue<Message> msgQueue = new ConcurrentQueue<Message>();
         
-        private Dictionary<MessageDef, Action<Client, IMessage>> msgHandlers = new Dictionary<MessageDef, Action<Client, IMessage>>();
+        private Dictionary<MessageDef, Action<Uid, IMessage>> msgHandlers = new Dictionary<MessageDef, Action<Uid, IMessage>>();
 
         public Network() {
             foreach (MessageDef value in Enum.GetValues(typeof(MessageDef))) {
@@ -24,11 +24,12 @@ namespace Framework.Network {
         }
         
         private void AcceptClient() {
-            var client = listener.Accept();
-            if (client != null) {
-                clients.TryAdd(client, new Client(client));
-                ThreadPool.QueueUserWorkItem(_ => clients[client].FlushRead());
-                ThreadPool.QueueUserWorkItem(_ => clients[client].FlushWrite());
+            var tcpClient = listener.Accept();
+            if (tcpClient != null) {
+                Client client = new Client(tcpClient);
+                clients.TryAdd(client.Uid, client);
+                ThreadPool.QueueUserWorkItem(_ => clients[client.Uid].FlushRead());
+                ThreadPool.QueueUserWorkItem(_ => clients[client.Uid].FlushWrite());
             }
             ThreadPool.QueueUserWorkItem(_ => AcceptClient());
         }
@@ -43,35 +44,45 @@ namespace Framework.Network {
         }
 
         public void OnDisconnect(Client client) {
-            clients.TryRemove(client.Socket, out _);
+            clients.TryRemove(client.Uid, out _);
         }
         
-        public void PushMsg(Client client, MessageDef msgId, IMessage data) {
+        public void PushMsg(Uid uid, MessageDef msgId, IMessage data) {
             msgQueue.Enqueue(new Message() {
-                client = client,
+                client = uid,
                 msgId = msgId,
                 data = data,
             });
         }
-
-        public void Send(Message msg) {
-            if (!clients.TryGetValue(msg.client.Socket, out Client client)) {
+        
+        public void Send(Uid receiver, MessageDef msgId, IMessage msg) {
+            if (!clients.TryGetValue(receiver, out Client client)) {
                 return;
             }
-            client.Send(msg);
+            client.Send(msgId, msg);
         }
         
-        public void Send(Client receiver, MessageDef msgId, IMessage data) {
-            if (!clients.TryGetValue(receiver.Socket, out Client client)) {
-                return;
+        public void Broadcast(MessageDef msgId, IMessage msg) {
+            foreach (var client in clients.Values) {
+                client.Send(msgId, msg);
             }
-            
-            Message msg = new Message() {
-                client = client,
-                msgId = msgId,
-                data = data,
-            };
-            client.Send(msg);
+        }
+
+        public void Broadcast(MessageDef msgId, Func<Uid, IMessage> getMsgFunc) {
+            foreach (var (uid, client) in clients) {
+                var msg = getMsgFunc?.Invoke(uid);
+                if (msg != null) {
+                    client.Send(msgId, msg);
+                }
+            }
+        }
+        
+        public List<Uid> GetAllClientUid() {
+            List<Uid> uids = new List<Uid>();
+            foreach (var uid in clients.Keys) {
+                uids.Add(uid);
+            }
+            return uids;
         }
 
         #region 消息分发
@@ -86,11 +97,11 @@ namespace Framework.Network {
             }
         }
         
-        public void RegisterMsgHandler(MessageDef msgDef, Action<Client, IMessage> handler) {
+        public void RegisterMsgHandler(MessageDef msgDef, Action<Uid, IMessage> handler) {
             msgHandlers[msgDef] += handler;
         }
         
-        public void RemoveMsgHandler(MessageDef msgDef, Action<Client, IMessage> handler) { 
+        public void RemoveMsgHandler(MessageDef msgDef, Action<Uid, IMessage> handler) { 
             msgHandlers[msgDef] -= handler;
         }
 

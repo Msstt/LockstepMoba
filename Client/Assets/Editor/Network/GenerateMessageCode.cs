@@ -9,8 +9,8 @@ using Debug = UnityEngine.Debug;
 namespace Network {
     public class GenerateMessageCode {
         private static string protoPath = Application.dataPath + "/../../Proto";
-        private static string clientCodePath = Application.dataPath + "/Scripts/Network";
-        private static string serverCodePath = Application.dataPath + "/../../Server/Network";
+        private static string clientCodePath = Application.dataPath + "/Scripts/Network/Message";
+        private static string serverCodePath = Application.dataPath + "/../../Server/Network/Message";
         private static string defineTemplatePath = Application.dataPath + "/Editor/Network/Template/MessageDef.txt";
         
         private static bool GenerateProto(string outputPath) {
