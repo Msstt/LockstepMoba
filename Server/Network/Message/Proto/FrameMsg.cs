@@ -25,15 +25,15 @@ namespace Network {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChVEZWZpbmUvRnJhbWVNc2cucHJvdG8SB05ldHdvcmsaFkRlZmluZS9CYXR0",
-            "bGVNc2cucHJvdG8iIAoPZnJhbWVfc3RhcnRfczJjEg0KBWZyYW1lGAEgASgF",
-            "IkYKD2ZyYW1lX2lucHV0X2MycxINCgVmcmFtZRgBIAEoBRIkCgVpbnB1dBgC",
-            "IAEoCzIVLk5ldHdvcmsuYmF0dGxlX2lucHV0IpYBCg9mcmFtZV9pbnB1dF9z",
-            "MmMSDQoFZnJhbWUYASABKAUSMwoGaW5wdXRzGAIgAygLMiMuTmV0d29yay5m",
-            "cmFtZV9pbnB1dF9zMmMuaW5wdXRfaW5mbxo/CgppbnB1dF9pbmZvEgsKA3Vp",
-            "ZBgBIAEoBRIkCgVpbnB1dBgCIAEoCzIVLk5ldHdvcmsuYmF0dGxlX2lucHV0",
-            "YgZwcm90bzM="));
+            "bGVNc2cucHJvdG8aFURlZmluZS9JbnB1dE1zZy5wcm90byIgCg9mcmFtZV9z",
+            "dGFydF9zMmMSDQoFZnJhbWUYASABKAUiRgoPZnJhbWVfaW5wdXRfYzJzEg0K",
+            "BWZyYW1lGAEgASgFEiQKBWlucHV0GAIgASgLMhUuTmV0d29yay5iYXR0bGVf",
+            "aW5wdXQilgEKD2ZyYW1lX2lucHV0X3MyYxINCgVmcmFtZRgBIAEoBRIzCgZp",
+            "bnB1dHMYAiADKAsyIy5OZXR3b3JrLmZyYW1lX2lucHV0X3MyYy5pbnB1dF9p",
+            "bmZvGj8KCmlucHV0X2luZm8SCwoDdWlkGAEgASgFEiQKBWlucHV0GAIgASgL",
+            "MhUuTmV0d29yay5iYXR0bGVfaW5wdXRiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Network.BattleMsgReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Network.BattleMsgReflection.Descriptor, global::Network.InputMsgReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_start_s2c), global::Network.frame_start_s2c.Parser, new[]{ "Frame" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_input_c2s), global::Network.frame_input_c2s.Parser, new[]{ "Frame", "Input" }, null, null, null),

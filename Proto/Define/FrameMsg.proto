@@ -3,6 +3,7 @@ syntax = "proto3";
 package Network;
 
 import "Define/BattleMsg.proto";
+import "Define/InputMsg.proto";
 
 // 收集操作广播
 message frame_start_s2c {

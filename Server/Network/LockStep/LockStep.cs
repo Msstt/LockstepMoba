@@ -38,7 +38,7 @@ namespace Network {
             }
             
             long nowTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-            if (nowTime - lastFrameTime >= frameTime) {
+            if (!isCollectingInput && nowTime - lastFrameTime >= frameTime) {
                 NextFrame();
             }
             if (isCollectingInput && nowTime - lastFrameTime >= collectTime) {

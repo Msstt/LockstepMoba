@@ -3,12 +3,13 @@ using Google.Protobuf;
 
 namespace Network {
     public enum MessageDef {
-        echo_test_c2s = 10001,
-        echo_test_s2c = 20001,
-        frame_start_s2c = 20002,
-        frame_input_c2s = 10003,
-        frame_input_s2c = 20003,
-        battle_start_s2c = 20004,
+        echo_test_c2s = 1001,
+        echo_test_s2c = 11001,
+        frame_start_s2c = 11002,
+        frame_input_c2s = 1003,
+        frame_input_s2c = 11003,
+        battle_start_s2c = 11004,
+        test_input = 20001,
 
     }
 
@@ -20,6 +21,7 @@ namespace Network {
             { MessageDef.frame_input_c2s, frame_input_c2s.Parser },
             { MessageDef.frame_input_s2c, frame_input_s2c.Parser },
             { MessageDef.battle_start_s2c, battle_start_s2c.Parser },
+            { MessageDef.test_input, test_input.Parser },
 
         };
     }

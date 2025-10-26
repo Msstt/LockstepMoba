@@ -75,6 +75,9 @@ namespace Framework.Network {
                     return;
                 }
             }
+            if (!socket.Connected) {
+                return;
+            }
             try {
                 var stream = socket.GetStream();
                 int byteCount = stream.Read(readBuffer, readBufferIndex, readBuffer.Length - readBufferIndex);
@@ -97,6 +100,9 @@ namespace Framework.Network {
                     return;
                 }
             }
+            if (!socket.Connected) {
+                return;
+            }
             try {
                 lock (writeBuffer) {
                     var stream = socket.GetStream();
@@ -113,6 +119,9 @@ namespace Framework.Network {
         public void Disconnect() {
             lock (lockObject) {
                 isDisconnected = true;
+            }
+            if (!socket.Connected) {
+                return;
             }
             Log.Info("Disconnect tcp client: {0}", socket.Client.RemoteEndPoint);
             socket.Close();

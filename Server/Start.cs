@@ -1,7 +1,6 @@
 ﻿using Network;
 
 void Main() {
-    Console.WriteLine("当前目录: " + Directory.GetCurrentDirectory());
     if (!Config.Instance.ParseConfig()) {
         Console.WriteLine("Config parse failed!");
         return;
@@ -10,9 +9,16 @@ void Main() {
     
     NetworkUtils.Start();
     
+    Task.Run(() => {
+        while (true) {
+            CommandUtils.HandleCommand();
+            Thread.Sleep(1);
+        }
+    });
+    
     while (true) {
-        CommandUtils.HandleCommand();
         NetworkUtils.Update();
+        Thread.Sleep(1);
     }
 }
 

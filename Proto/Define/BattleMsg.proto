@@ -7,6 +7,3 @@ message battle_start_s2c {
   int32 self_uid = 1;
   repeated int32 uids = 2;
 }
-
-message battle_input {
-}

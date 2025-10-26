@@ -1,4 +1,6 @@
 using System.Reflection;
+using Framework;
+using Google.Protobuf;
 
 namespace Network {
     public static class NetworkUtils {
@@ -19,11 +21,17 @@ namespace Network {
             }
             
             Framework.Network.Network.Instance.Connect("127.0.0.1", 9980);
+            
+            Updater.Instance.RegisterUpdate(NetworkUtils.Update);
         }
         
         // 网络层更新
-        public static void Update() {
+        private static void Update() {
             Framework.Network.Network.Instance.DispatchMsg();
+        }
+        
+        public static void Send(MessageDef msgId, IMessage msg) {
+            Framework.Network.Network.Instance.Send(msgId, msg);
         }
     }
 }

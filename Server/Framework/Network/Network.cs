@@ -66,6 +66,7 @@ namespace Framework.Network {
             foreach (var client in clients.Values) {
                 client.Send(msgId, msg);
             }
+            Console.WriteLine("Broadcast Message " + msg);
         }
 
         public void Broadcast(MessageDef msgId, Func<Uid, IMessage> getMsgFunc) {

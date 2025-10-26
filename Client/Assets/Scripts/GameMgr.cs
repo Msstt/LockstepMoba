@@ -6,7 +6,7 @@ public class GameMgr : Singleton<GameMgr> {
         NetworkUtils.Start();
     }
     
-    public void Update() {
-        NetworkUtils.Update();
-    }
+    // public void Update() {
+    //     NetworkUtils.Update();
+    // }
 }
