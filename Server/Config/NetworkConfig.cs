@@ -6,4 +6,6 @@ public class NetworkConfig {
     public float input_collect_window;
     
     public int frame_max_delay;
+    
+    public int auto_start_count;
 };

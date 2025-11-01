@@ -26,32 +26,39 @@ public class Main : MonoBehaviour {
     private bool hasAdd = false;
     private Dictionary<Uid, int> inputCount = new();
     public Text statusText;
-    public void InputTest() {
+    private int count = 0;
+    public void InputTestStart() {
         if (!hasAdd) {
             LockStep.Instance.RegisterCollector(MessageDef.test_input, () => {
-                return new test_input {
-                    Count = 1,
+                var ret = new test_input {
+                    Count = count,
                 };
+                count = 0;
+                return ret;
             });
             LockStep.Instance.RegisterHandler(MessageDef.test_input, (inputs) => {
                 string status = "";
-                foreach (var pair in inputs) {
-                    test_input msg = pair.Value as test_input;
+                foreach (var (uid, tMsg) in inputs) {
+                    var msg = tMsg as test_input;
                     if (msg == null) {
                         continue;
                     }
-                    if (!inputCount.ContainsKey(pair.Key)) {
-                        inputCount[pair.Key] = 0;
+                    if (!inputCount.ContainsKey(uid)) {
+                        inputCount[uid] = 0;
                     }
-                    inputCount[pair.Key] += msg.Count;
+                    inputCount[uid] += msg.Count;
                 }
-                foreach (var pair in inputCount) {
-                    status += pair.Key + ": " + pair.Value + "\n";
+                foreach (var (uid, count) in inputCount) {
+                    status += uid + ": " + count + "\n";
                 }
                 statusText.text = status;
             });
             hasAdd = true;
         }
+    }
+    
+    public void InputTest() {
+        count = 1;
     }
 
     #endregion

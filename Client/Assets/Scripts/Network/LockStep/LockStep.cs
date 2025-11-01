@@ -121,9 +121,10 @@ namespace Network {
                 MessageDef id = String2Id[field.Name];
                 Dictionary<Uid, IMessage> inputs = new Dictionary<Uid, IMessage>();
                 foreach (var input in frameInput.Inputs) {
-                    inputs[input.Uid] = field.Accessor.GetValue(input) as IMessage;
+                    inputs[input.Uid] = field.Accessor.GetValue(input.Input) as IMessage;
                 }
                 Dispatch(id, inputs);
+                
             }
         }
         
