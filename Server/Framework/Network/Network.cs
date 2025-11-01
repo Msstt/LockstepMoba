@@ -28,6 +28,8 @@ namespace Framework.Network {
             if (tcpClient != null) {
                 Client client = new Client(tcpClient);
                 clients.TryAdd(client.Uid, client);
+                EventMgr.Instance.Send(EventDef.OnPlayerConnected, client.Uid);
+                
                 ThreadPool.QueueUserWorkItem(_ => clients[client.Uid].FlushRead());
                 ThreadPool.QueueUserWorkItem(_ => clients[client.Uid].FlushWrite());
             }

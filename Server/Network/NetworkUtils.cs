@@ -19,6 +19,8 @@ namespace Network {
                 }
             }
             
+            EventUtils.Register(EventDef.OnPlayerConnected, Battle.Match.Instance.AddPlayer);
+            
             Framework.Network.Network.Instance.Start(Config.Instance.Network.port);
         }
         

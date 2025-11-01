@@ -15,6 +15,19 @@ namespace Battle {
                 }
                 return msg;
             });
+            
+            Network.LockStep.Instance.Start();
+        }
+
+        public void AddPlayer(Uid uid) {
+            CheckAutoStart();
+        }
+
+        private void CheckAutoStart() {
+            List<Uid> uids = NetworkUtils.GetAllClientUid();
+            if (uids.Count >= Config.Instance.Network.auto_start_count) {
+                Start();
+            }
         }
     }
 }
