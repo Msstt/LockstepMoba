@@ -124,7 +124,6 @@ namespace Network {
                     inputs[input.Uid] = field.Accessor.GetValue(input.Input) as IMessage;
                 }
                 Dispatch(id, inputs);
-                
             }
         }
         

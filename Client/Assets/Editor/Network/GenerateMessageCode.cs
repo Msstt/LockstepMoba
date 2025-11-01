@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace Network {
+namespace Editor.Network {
     public class GenerateMessageCode {
         private static string protoPath = Application.dataPath + "/../../Proto";
         private static string clientCodePath = Application.dataPath + "/Scripts/Network/Message";
@@ -22,8 +22,7 @@ namespace Network {
             foreach (var file in protoFiles) {
                 string args = $"--csharp_out={outputPath} --proto_path={protoPath} {file}";
 
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
+                ProcessStartInfo psi = new ProcessStartInfo {
                     FileName = protoPath + "/protoc",
                     Arguments = args,
                     RedirectStandardError = true,
@@ -31,8 +30,7 @@ namespace Network {
                     CreateNoWindow = true,
                 };
 
-                using (var process = Process.Start(psi))
-                {
+                using (var process = Process.Start(psi)) {
                     string error = process.StandardError.ReadToEnd();
                     process.WaitForExit();
 
