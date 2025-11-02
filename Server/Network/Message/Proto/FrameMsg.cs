@@ -31,13 +31,15 @@ namespace Network {
             "aW5wdXQilgEKD2ZyYW1lX2lucHV0X3MyYxINCgVmcmFtZRgBIAEoBRIzCgZp",
             "bnB1dHMYAiADKAsyIy5OZXR3b3JrLmZyYW1lX2lucHV0X3MyYy5pbnB1dF9p",
             "bmZvGj8KCmlucHV0X2luZm8SCwoDdWlkGAEgASgFEiQKBWlucHV0GAIgASgL",
-            "MhUuTmV0d29yay5iYXR0bGVfaW5wdXRiBnByb3RvMw=="));
+            "MhUuTmV0d29yay5iYXR0bGVfaW5wdXQiJAoTZnJhbWVfcmVjb25uZWN0X2My",
+            "cxINCgVmcmFtZRgBIAEoBWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Network.BattleMsgReflection.Descriptor, global::Network.InputMsgReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_start_s2c), global::Network.frame_start_s2c.Parser, new[]{ "Frame" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_input_c2s), global::Network.frame_input_c2s.Parser, new[]{ "Frame", "Input" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_input_s2c), global::Network.frame_input_s2c.Parser, new[]{ "Frame", "Inputs" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_input_s2c.Types.input_info), global::Network.frame_input_s2c.Types.input_info.Parser, new[]{ "Uid", "Input" }, null, null, null)})
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_input_s2c), global::Network.frame_input_s2c.Parser, new[]{ "Frame", "Inputs" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_input_s2c.Types.input_info), global::Network.frame_input_s2c.Types.input_info.Parser, new[]{ "Uid", "Input" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_reconnect_c2s), global::Network.frame_reconnect_c2s.Parser, new[]{ "Frame" }, null, null, null)
           }));
     }
     #endregion
@@ -661,6 +663,138 @@ namespace Network {
 
     }
     #endregion
+
+  }
+
+  /// <summary>
+  /// 断线重连请求历史帧
+  /// </summary>
+  public sealed partial class frame_reconnect_c2s : pb::IMessage<frame_reconnect_c2s> {
+    private static readonly pb::MessageParser<frame_reconnect_c2s> _parser = new pb::MessageParser<frame_reconnect_c2s>(() => new frame_reconnect_c2s());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<frame_reconnect_c2s> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Network.FrameMsgReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public frame_reconnect_c2s() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public frame_reconnect_c2s(frame_reconnect_c2s other) : this() {
+      frame_ = other.frame_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public frame_reconnect_c2s Clone() {
+      return new frame_reconnect_c2s(this);
+    }
+
+    /// <summary>Field number for the "frame" field.</summary>
+    public const int FrameFieldNumber = 1;
+    private int frame_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Frame {
+      get { return frame_; }
+      set {
+        frame_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as frame_reconnect_c2s);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(frame_reconnect_c2s other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Frame != other.Frame) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Frame != 0) hash ^= Frame.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Frame != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Frame);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Frame != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Frame);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(frame_reconnect_c2s other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Frame != 0) {
+        Frame = other.Frame;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Frame = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
 
   }
 

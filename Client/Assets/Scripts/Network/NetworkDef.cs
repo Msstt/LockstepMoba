@@ -6,6 +6,7 @@ namespace Network {
         public static readonly List<Type> Dispatcher = new List<Type>() {
             typeof(TestMsgDispatcher),
             typeof(FrameMsgDispatcher),
+            typeof(BattleMsgDispatcher),
         };
     }
 }

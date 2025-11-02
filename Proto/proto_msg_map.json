@@ -5,6 +5,7 @@
   "frame_start_s2c": 11002,
   "frame_input_c2s": 1003,
   "frame_input_s2c": 11003,
+  "frame_reconnect_c2s": 1004,
   
   "battle_start_s2c": 11004,
   

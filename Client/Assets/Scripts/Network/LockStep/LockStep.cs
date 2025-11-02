@@ -24,16 +24,33 @@ namespace Network {
         
         public delegate IMessage InputCollector();
         private Dictionary<MessageDef, InputCollector> inputCollectors = new Dictionary<MessageDef, InputCollector>();
+        private Action reqFrameData;
 
         private void Clear() {
             Frame = 0;
             allInputs = new Dictionary<int, frame_input_s2c>();
             inputHandlers = new Dictionary<MessageDef, InputHandler>();
             inputCollectors = new Dictionary<MessageDef, InputCollector>();
+
+            if (reqFrameData != null) {
+                EventUtils.Remove(EventDef.OnConnected, reqFrameData);
+            }
         }
 
         public void Start() {
             Clear();
+
+            reqFrameData = ReqFrameData;
+            EventUtils.Register(EventDef.OnConnected, reqFrameData);
+            ReqFrameData();
+            
+            EventUtils.Send(EventDef.OnLockStepStart);
+        }
+
+        public void ReqFrameData() {
+            NetworkUtils.Send(MessageDef.frame_reconnect_c2s, new frame_reconnect_c2s {
+                Frame = Frame + 1,
+            });
         }
 
         #region 发送
@@ -101,7 +118,7 @@ namespace Network {
 
         public void PushInputMsg(frame_input_s2c msg) {
             if (allInputs.ContainsKey(msg.Frame)) {
-                Log.Error("Duplicate frame input from server: " + msg.Frame);
+                Log.Warning("Duplicate frame input from server: " + msg.Frame);
                 return;
             }
             allInputs.Add(msg.Frame, msg);

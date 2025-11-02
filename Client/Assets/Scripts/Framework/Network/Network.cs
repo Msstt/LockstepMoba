@@ -45,6 +45,8 @@ namespace Framework.Network {
                 ChangeState(NetworkState.Connected);
                 writer.SetSocket(connect.Socket);
                 reader.SetSocket(connect.Socket);
+                
+                EventMgr.Instance.Send(EventDef.OnConnected);
             } else {
                 if (reconnectCount < ConnectConfig.MaxReconnectCount) {
                     reconnectCount += 1;
@@ -91,7 +93,7 @@ namespace Framework.Network {
         }
         
         public void Send(MessageDef msgId, IMessage data) {
-            if (state != NetworkState.Connected) {
+            if (state != NetworkState.Connected || data == null) {
                 return;
             }
 

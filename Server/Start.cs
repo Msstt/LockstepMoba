@@ -1,4 +1,5 @@
-﻿using Network;
+﻿using Framework;
+using Network;
 
 void Main() {
     if (!Config.Instance.ParseConfig()) {
@@ -18,6 +19,7 @@ void Main() {
     
     while (true) {
         NetworkUtils.Update();
+        AsyncUtils.Update();
         Thread.Sleep(1);
     }
 }

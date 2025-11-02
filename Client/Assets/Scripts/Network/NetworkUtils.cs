@@ -23,6 +23,10 @@ namespace Network {
             Framework.Network.Network.Instance.Connect("127.0.0.1", 9980);
             
             Updater.Instance.RegisterUpdate(NetworkUtils.Update);
+            
+            NetworkUtils.Send(MessageDef.frame_reconnect_c2s, new frame_reconnect_c2s {
+                Frame = 1,
+            });
         }
         
         // 网络层更新

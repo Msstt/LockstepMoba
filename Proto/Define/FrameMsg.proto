@@ -27,3 +27,8 @@ message frame_input_s2c {
   
   repeated input_info inputs = 2;
 }
+
+// 断线重连请求历史帧
+message frame_reconnect_c2s {
+  int32 frame = 1;
+}

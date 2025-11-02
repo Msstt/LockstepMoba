@@ -1,3 +1,6 @@
 public enum EventDef {
-    OnPlayerConnected,
+    OnConnected,
+    
+    OnBattleStart,
+    OnLockStepStart,
 }

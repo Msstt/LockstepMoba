@@ -8,6 +8,7 @@ namespace Network {
         frame_start_s2c = 11002,
         frame_input_c2s = 1003,
         frame_input_s2c = 11003,
+        frame_reconnect_c2s = 1004,
         battle_start_s2c = 11004,
         test_input = 20001,
 
@@ -20,6 +21,7 @@ namespace Network {
             { MessageDef.frame_start_s2c, frame_start_s2c.Parser },
             { MessageDef.frame_input_c2s, frame_input_c2s.Parser },
             { MessageDef.frame_input_s2c, frame_input_s2c.Parser },
+            { MessageDef.frame_reconnect_c2s, frame_reconnect_c2s.Parser },
             { MessageDef.battle_start_s2c, battle_start_s2c.Parser },
             { MessageDef.test_input, test_input.Parser },
 

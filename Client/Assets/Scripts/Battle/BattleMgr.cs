@@ -10,6 +10,9 @@ namespace Battle {
         public Uid SelfUid { get; private set; }
         
         public void Start(battle_start_s2c msg) {
+            IsRunning = true;
+            
+            EventUtils.Send(EventDef.OnBattleStart);
         }
     }
 }

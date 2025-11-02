@@ -23,6 +23,9 @@ namespace Framework {
         }
 
         public void Send(EventDef eventDef, params object[] args) {
+            if (eventHandlers[eventDef] == null) {
+                return;
+            }
             foreach (var func in eventHandlers[eventDef].GetInvocationList()) {
                 try {
                     func.DynamicInvoke(args);

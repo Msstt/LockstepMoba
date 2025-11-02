@@ -58,13 +58,16 @@ namespace Framework.Network {
         }
         
         public void Send(Uid receiver, MessageDef msgId, IMessage msg) {
-            if (!clients.TryGetValue(receiver, out Client client)) {
+            if (!clients.TryGetValue(receiver, out Client client) || msg == null) {
                 return;
             }
             client.Send(msgId, msg);
         }
         
         public void Broadcast(MessageDef msgId, IMessage msg) {
+            if (msg == null) {
+                return;
+            }
             foreach (var client in clients.Values) {
                 client.Send(msgId, msg);
             }

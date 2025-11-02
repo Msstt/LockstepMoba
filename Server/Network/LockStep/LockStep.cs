@@ -3,7 +3,15 @@ using Framework.Network;
 
 namespace Network {
     public class LockStep : Singleton<LockStep> {
-        public int Frame { get; private set; }
+        public int Frame {
+            get {
+                if (isCollectingInput) {
+                    return frame - 1;
+                }
+                return frame;
+            }
+        }
+        private int frame = 0;
         public bool IsRunning { get; private set; } = false;
         
         private Dictionary<Uid, battle_input> inputs = new Dictionary<Uid, battle_input>();
@@ -17,7 +25,7 @@ namespace Network {
         private int frameMaxDelay = 0;
         
         private void Clear() {
-            Frame = 0;
+            frame = 0;
             inputs = new Dictionary<Uid, battle_input>();
             historyInputs = new List<Dictionary<Uid, battle_input>>();
         }
@@ -47,7 +55,7 @@ namespace Network {
         }
 
         public void AddInput(int frame, Uid uid, battle_input input) {
-            if (frame < Frame - frameMaxDelay) {
+            if (frame < frame - frameMaxDelay) {
                 return;
             }
 
@@ -59,12 +67,12 @@ namespace Network {
         }
 
         private void NextFrame() {
-            Frame++;
+            frame++;
             lastFrameTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             
             // 广播收集玩家输入
-            NetworkUtils.Broadcast(MessageDef.frame_start_s2c, new frame_start_s2c() {
-                Frame = Frame,
+            NetworkUtils.Broadcast(MessageDef.frame_start_s2c, new frame_start_s2c {
+                Frame = frame,
             });
             isCollectingInput = true;
         }
@@ -73,19 +81,28 @@ namespace Network {
             isCollectingInput = false;
             
             // 广播收集到的指令
+            historyInputs.Add(inputs);
+            NetworkUtils.Broadcast(MessageDef.frame_input_s2c, GetInputMsg(frame));
+            
+            inputs = new Dictionary<Uid, battle_input>();
+        }
+
+        public frame_input_s2c GetInputMsg(int frame) {
+            if (historyInputs.Count < frame) {
+                return null;
+            }
+            
             frame_input_s2c msg = new frame_input_s2c() {
-                Frame = Frame,
+                Frame = frame,
             };
-            foreach (var (uid, battleInput) in inputs) {
-                msg.Inputs.Add(new frame_input_s2c.Types.input_info() {
+            foreach (var (uid, battleInput) in historyInputs[frame - 1]) {
+                msg.Inputs.Add(new frame_input_s2c.Types.input_info {
                     Uid = uid,
                     Input = battleInput,
                 });
             }
-            NetworkUtils.Broadcast(MessageDef.frame_input_s2c, msg);
-            
-            historyInputs.Add(inputs);
-            inputs = new Dictionary<Uid, battle_input>();
+
+            return msg;
         }
     }
 }

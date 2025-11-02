@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Battle;
 using Network;
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 public class Main : MonoBehaviour {
     private void Start() {
         GameMgr.Instance.Start();
+
+        EventUtils.Register(EventDef.OnLockStepStart, new Action(InputTestStart));
     }
     
     // public void Update() {
