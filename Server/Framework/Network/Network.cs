@@ -22,11 +22,19 @@ namespace Framework.Network {
                 msgHandlers.Add(value, null);
             }
         }
+
+        private int GetUid() {
+            int uid = 1;
+            while (clients.ContainsKey(uid)) {
+                uid++;
+            }
+            return uid;
+        }
         
         private void AcceptClient() {
             var tcpClient = listener.Accept();
             if (tcpClient != null) {
-                Client client = new Client(tcpClient);
+                Client client = new Client(GetUid(), tcpClient);
                 clients.TryAdd(client.Uid, client);
                 EventMgr.Instance.Send(EventDef.OnPlayerConnected, client.Uid);
                 
@@ -62,6 +70,7 @@ namespace Framework.Network {
                 return;
             }
             client.Send(msgId, msg);
+            FileLog.Instance.Log("Send Message " + msgId + " To: " + receiver + "\n" + msg);
         }
         
         public void Broadcast(MessageDef msgId, IMessage msg) {
@@ -71,7 +80,7 @@ namespace Framework.Network {
             foreach (var client in clients.Values) {
                 client.Send(msgId, msg);
             }
-            Console.WriteLine("Broadcast Message " + msg);
+            FileLog.Instance.Log("Broadcast Message " + msgId + "\n" + msg);
         }
 
         public void Broadcast(MessageDef msgId, Func<Uid, IMessage> getMsgFunc) {
@@ -79,6 +88,7 @@ namespace Framework.Network {
                 var msg = getMsgFunc?.Invoke(uid);
                 if (msg != null) {
                     client.Send(msgId, msg);
+                    FileLog.Instance.Log("Send Message " + msgId + " To: " + uid + "\n" + msg);
                 }
             }
         }
@@ -98,7 +108,7 @@ namespace Framework.Network {
                 if (!msgQueue.TryDequeue(out Message msg)) {
                     break;
                 }
-                Console.WriteLine("Receive Message " + msg);
+                FileLog.Instance.Log("Receive Message " + msg.msgId + " from: " + msg.client + "\n" + msg.data);
                 msgHandlers[msg.msgId]?.Invoke(msg.client, msg.data);
             }
         }

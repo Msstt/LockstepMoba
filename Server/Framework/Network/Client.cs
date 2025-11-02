@@ -7,8 +7,6 @@ using Network;
 namespace Framework.Network {
     public class Client {
         private static readonly int MaxBufferSize = 4096;
-
-        private static int MaxUid = 0;
         public Uid Uid { get; private set; }
         
         private TcpClient socket;
@@ -23,9 +21,9 @@ namespace Framework.Network {
         private object lockObject = new object();
         private bool isDisconnected = false;
 
-        public Client(TcpClient socket) {
+        public Client(int uid, TcpClient socket) {
+            Uid = uid;
             this.socket = socket;
-            Uid = ++MaxUid;
         }
 
         public void Send(MessageDef msgId, IMessage data) {
