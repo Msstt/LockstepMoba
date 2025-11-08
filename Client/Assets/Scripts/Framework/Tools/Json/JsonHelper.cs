@@ -19,5 +19,20 @@ namespace Framework {
                 return default;
             }
         }
+        
+        public static bool SaveToFile<T>(T data, string path) {
+            try {
+                File.Delete(path);
+                string json = JsonConvert.SerializeObject(data, new JsonSerializerSettings {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    Formatting = Formatting.Indented
+                });
+                File.WriteAllText(path, json);
+            } catch (Exception e) {
+                Debug.LogError($"[JsonHelper.LoadFromFile] parse failed, {e}");
+                return false;
+            }
+            return true;
+        }
     }
 }

@@ -48,6 +48,7 @@
     <Compile Include="Assets/Scripts/Framework/Network/Log.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventDef.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Writer.cs" />
+    <Compile Include="Assets/Scripts/Tools/Camera/CameraCom.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/MsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/GameMgr.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkDef.cs" />
