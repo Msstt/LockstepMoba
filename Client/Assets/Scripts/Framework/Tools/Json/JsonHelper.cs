@@ -5,18 +5,31 @@ using Newtonsoft.Json;
 
 namespace Framework {
     public static class JsonHelper {
-        public static T LoadFromFile<T>(string path) {
+        public static bool LoadFromFile<T>(string path, out T ret) {
+            ret = default;
             try {
                 if (!File.Exists(path)) {
                     Debug.LogError($"[JsonHelper.LoadFromFile] {path} not exists");
-                    return default;
+                    return false;
                 }
                 
                 string json = File.ReadAllText(path);
-                return JsonConvert.DeserializeObject<T>(json);
+                ret = JsonConvert.DeserializeObject<T>(json);
+                return true;
             } catch (Exception e) {
                 Debug.LogError($"[JsonHelper.LoadFromFile] parse failed, {e}");
-                return default;
+                return false;
+            }
+        }
+        
+        public static bool LoadFromString<T>(string json, out T ret) {
+            ret = default;
+            try {
+                ret = JsonConvert.DeserializeObject<T>(json);
+                return true;
+            } catch (Exception e) {
+                Debug.LogError($"[JsonHelper.LoadFromFile] parse failed, {e}");
+                return false;
             }
         }
         

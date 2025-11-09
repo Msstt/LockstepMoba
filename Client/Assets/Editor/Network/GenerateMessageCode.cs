@@ -49,8 +49,7 @@ namespace Editor.Network {
                 File.Delete(outputPath);
             }
             
-            var protoMap = JsonHelper.LoadFromFile<Dictionary<string, int>>(protoPath + "/proto_msg_map.json");
-            if (protoMap == null) {
+            if (!JsonHelper.LoadFromFile(protoPath + "/proto_msg_map.json", out Dictionary<string, int> protoMap)) {
                 Debug.LogError("proto_msg_map.json 解析失败");
                 return false;
             }
