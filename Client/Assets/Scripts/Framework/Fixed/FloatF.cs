@@ -15,6 +15,12 @@ public struct FloatF {
     }
     
     public static implicit operator FloatF(float f) => new FloatF(f);
+    public static implicit operator FloatF(string s) {
+        if (!float.TryParse(s, out float d)) {
+            throw new ArgumentException($"Cannot parse '{s}' to FloatF");
+        }
+        return new FloatF(d);
+    }
 
     public static FloatF operator+(FloatF a, FloatF b) => new FloatF(a.value + b.value);
     public static FloatF operator-(FloatF a, FloatF b) => new FloatF(a.value - b.value);
@@ -30,6 +36,7 @@ public struct FloatF {
     
     public override bool Equals(object obj) => obj is FloatF f && f.value == value;
     public override int GetHashCode() => value.GetHashCode();
+    public override string ToString() => (1.0f * value / scale).ToString();
 
     #region Json Converter
     private class FloatFConverter : JsonConverter<FloatF> {

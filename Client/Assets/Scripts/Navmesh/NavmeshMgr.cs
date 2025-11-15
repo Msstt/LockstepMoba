@@ -6,7 +6,7 @@ using UnityEngine.AI;
 namespace Navmesh {
     public class NavmeshMgr : Singleton<NavmeshMgr> {
         private NavmeshMapInfo mapInfo;
-        private Dictionary<float, NavmeshSurface> surfaces;
+        private Dictionary<FloatF, NavmeshSurface> surfaces;
         
         public void Start() {
             if (!LoadData()) {

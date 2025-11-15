@@ -14,7 +14,7 @@ namespace Editor.Network {
         [MenuItem("工具/Navmesh/导出 Navmesh 网格数据")]
         public static void Execute() {
             var protoFiles = Directory.GetFiles(assetPath, "*.asset", SearchOption.AllDirectories);
-            Dictionary<float, NavmeshSurface> surfaces = new Dictionary<float, NavmeshSurface>();
+            Dictionary<FloatF, NavmeshSurface> surfaces = new Dictionary<FloatF, NavmeshSurface>();
             foreach (var file in protoFiles) {
                 var data = AssetDatabase.LoadAssetAtPath<NavMeshData>(assetRePath + Path.GetFileName(file));
                 if (data == null) {
