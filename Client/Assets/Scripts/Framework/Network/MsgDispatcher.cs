@@ -5,7 +5,7 @@ using Network;
 
 namespace Framework.Network {
     public class MsgDispatcher : Singleton<MsgDispatcher> {
-        private Dictionary<MessageDef, Action<IMessage>> msgHandlers = new Dictionary<MessageDef, Action<IMessage>>();
+        private Dictionary<MessageDef, Delegate> msgHandlers = new Dictionary<MessageDef, Delegate>();
 
         public MsgDispatcher() {
             foreach (MessageDef value in Enum.GetValues(typeof(MessageDef))) {
@@ -13,12 +13,12 @@ namespace Framework.Network {
             }
         }
         
-        public void RegisterHandler(MessageDef msgId, Action<IMessage> handler) {
-            msgHandlers[msgId] += handler;
+        public void RegisterHandler<T>(MessageDef msgId, Action<T> handler) where T : IMessage {
+            msgHandlers[msgId] = Delegate.Combine(msgHandlers[msgId], handler);
         }
 
         public void RemoveHandler(MessageDef msgId, Action<IMessage> handler) {
-            msgHandlers[msgId] -= handler;
+            msgHandlers[msgId] = Delegate.Remove(msgHandlers[msgId], handler);
         }
         
         public void Dispatch(Message msg) {
@@ -28,7 +28,7 @@ namespace Framework.Network {
             }
 
             try {
-                msgHandlers[msg.msgId]?.Invoke(msg.data);
+                msgHandlers[msg.msgId]?.DynamicInvoke(msg.data);
             } catch (Exception e) {
                 Log.Error(e.ToString());
                 Log.Error("Exception when handling message {0}: {1}", msg.msgId, e.Message);

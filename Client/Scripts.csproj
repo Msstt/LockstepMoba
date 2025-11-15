@@ -73,6 +73,7 @@
     <Compile Include="Assets/Scripts/Framework/Tools/ThreadMgr.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/LockStep.cs" />
     <Compile Include="Assets/Scripts/Battle/Uid.cs" />
+    <Compile Include="Assets/Scripts/Network/Dispatcher/IMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Reader.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/FrameMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Log.cs" />

@@ -15,7 +15,7 @@ namespace Framework.Network {
         
         private ConcurrentQueue<Message> msgQueue = new ConcurrentQueue<Message>();
         
-        private Dictionary<MessageDef, Action<Uid, IMessage>> msgHandlers = new Dictionary<MessageDef, Action<Uid, IMessage>>();
+        private Dictionary<MessageDef, Delegate> msgHandlers = new Dictionary<MessageDef, Delegate>();
 
         public Network() {
             foreach (MessageDef value in Enum.GetValues(typeof(MessageDef))) {
@@ -109,16 +109,16 @@ namespace Framework.Network {
                     break;
                 }
                 FileLog.Instance.Log("Receive Message " + msg.msgId + " from: " + msg.client + "\n" + msg.data);
-                msgHandlers[msg.msgId]?.Invoke(msg.client, msg.data);
+                msgHandlers[msg.msgId]?.DynamicInvoke(msg.client, msg.data);
             }
         }
         
-        public void RegisterMsgHandler(MessageDef msgDef, Action<Uid, IMessage> handler) {
-            msgHandlers[msgDef] += handler;
+        public void RegisterMsgHandler<T>(MessageDef msgDef, Action<Uid, T> handler) where T : IMessage {
+            msgHandlers[msgDef] = Delegate.Combine(msgHandlers[msgDef], handler);
         }
         
-        public void RemoveMsgHandler(MessageDef msgDef, Action<Uid, IMessage> handler) { 
-            msgHandlers[msgDef] -= handler;
+        public void RemoveMsgHandler<T>(MessageDef msgDef, Action<Uid, T> handler) where T : IMessage { 
+            msgHandlers[msgDef] = Delegate.Remove(msgHandlers[msgDef], handler);
         }
 
         #endregion

@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Test/Scenes/LockstepTest.unity
+    guid: 122fb658317994a1e92a97c04a082bcc
   m_configObjects: {}

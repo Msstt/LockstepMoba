@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Battle;
 using Framework;
@@ -19,29 +20,25 @@ namespace Network {
         
         private Dictionary<int, frame_input_s2c> allInputs = new Dictionary<int, frame_input_s2c>();
         
-        public delegate void InputHandler(Dictionary<Uid, IMessage> inputs);
-        private Dictionary<MessageDef, InputHandler> inputHandlers = new Dictionary<MessageDef, InputHandler>();
+        public delegate void InputHandler<T>(Dictionary<Uid, T> inputs);
+        private Dictionary<MessageDef, Delegate> inputHandlers = new Dictionary<MessageDef, Delegate>();
         
-        public delegate IMessage InputCollector();
-        private Dictionary<MessageDef, InputCollector> inputCollectors = new Dictionary<MessageDef, InputCollector>();
-        private Action reqFrameData;
+        public delegate T InputCollector<T>();
+        private Dictionary<MessageDef, Delegate> inputCollectors = new Dictionary<MessageDef, Delegate>();
 
         private void Clear() {
             Frame = 0;
             allInputs = new Dictionary<int, frame_input_s2c>();
-            inputHandlers = new Dictionary<MessageDef, InputHandler>();
-            inputCollectors = new Dictionary<MessageDef, InputCollector>();
+            inputHandlers = new Dictionary<MessageDef, Delegate>();
+            inputCollectors = new Dictionary<MessageDef, Delegate>();
 
-            if (reqFrameData != null) {
-                EventUtils.Remove(EventDef.OnConnected, reqFrameData);
-            }
+            EventUtils.Remove(EventDef.OnConnected, ReqFrameData);
         }
 
         public void Start() {
             Clear();
 
-            reqFrameData = ReqFrameData;
-            EventUtils.Register(EventDef.OnConnected, reqFrameData);
+            EventUtils.Register(EventDef.OnConnected, ReqFrameData);
             ReqFrameData();
             
             EventUtils.Send(EventDef.OnLockStepStart);
@@ -55,17 +52,17 @@ namespace Network {
 
         #region 发送
 
-        public void RegisterCollector(MessageDef id, InputCollector collector) {
+        public void RegisterCollector<T>(MessageDef id, InputCollector<T> collector) {
             if (!inputCollectors.ContainsKey(id)) {
                 inputCollectors.Add(id, collector);
             } else {
-                inputCollectors[id] += collector;
+                inputCollectors[id] = Delegate.Combine(inputCollectors[id], collector);
             }
         }
         
-        public void RemoveCollector(MessageDef id, InputCollector collector) {
+        public void RemoveCollector<T>(MessageDef id, InputCollector<T> collector) {
             if (inputCollectors.ContainsKey(id)) {
-                inputCollectors[id] -= collector;
+                inputCollectors[id] = Delegate.Remove(inputCollectors[id], collector);
             }
         }
 
@@ -74,13 +71,7 @@ namespace Network {
                 Frame = Frame + 1,
                 Input = new battle_input(),
             };
-            foreach (var field in battle_input.Descriptor.Fields.InFieldNumberOrder()) {
-                MessageDef id = String2Id[field.Name];
-                IMessage input = Collect(id);
-                if (input != null) {
-                    field.Accessor.SetValue(msg.Input, input);
-                }
-            }
+            NetworkDef.SetInputMsgField(ref msg, Collect);
             return msg;
         }
         
@@ -90,7 +81,7 @@ namespace Network {
             }
             
             try {
-                return inputCollectors[id]?.Invoke();
+                return inputCollectors[id]?.DynamicInvoke() as IMessage;
             } catch (Exception e) {
                 Log.Error(e.ToString());
                 Log.Error("Exception when collecting input msg {0}: {1}", id, e.Message);
@@ -102,17 +93,17 @@ namespace Network {
 
         #region 接收
         
-        public void RegisterHandler(MessageDef id, InputHandler handler) {
+        public void RegisterHandler<T>(MessageDef id, InputHandler<T> handler) {
             if (!inputHandlers.ContainsKey(id)) {
                 inputHandlers.Add(id, handler);
             } else {
-                inputHandlers[id] += handler;
+                inputHandlers[id] = Delegate.Combine(inputHandlers[id], handler);
             }
         }
         
-        public void RemoveHandler(MessageDef id, InputHandler handler) {
+        public void RemoveHandler<T>(MessageDef id, InputHandler<T> handler) {
             if (inputHandlers.ContainsKey(id)) {
-                inputHandlers[id] -= handler;
+                inputHandlers[id] = Delegate.Remove(inputHandlers[id], handler);
             }
         }
 
@@ -134,23 +125,20 @@ namespace Network {
         }
         
         private void HandleFrameInputs(frame_input_s2c frameInput) {
-            foreach (var field in battle_input.Descriptor.Fields.InFieldNumberOrder()) {
-                MessageDef id = String2Id[field.Name];
-                Dictionary<Uid, IMessage> inputs = new Dictionary<Uid, IMessage>();
-                foreach (var input in frameInput.Inputs) {
-                    inputs[input.Uid] = field.Accessor.GetValue(input.Input) as IMessage;
-                }
-                Dispatch(id, inputs);
+            Dictionary<MessageDef, IDictionary> inputs = new Dictionary<MessageDef, IDictionary>();
+            NetworkDef.SetInputMsgField(frameInput, ref inputs);
+            foreach (var (id, input) in inputs) {
+                Dispatch(id, input);
             }
         }
         
-        private void Dispatch(MessageDef id, Dictionary<Uid, IMessage> inputs) {
+        private void Dispatch(MessageDef id, IDictionary inputs) {
             if (!inputHandlers.ContainsKey(id)) {
                 return;
             }
 
             try {
-                inputHandlers[id]?.Invoke(inputs);
+                inputHandlers[id]?.DynamicInvoke(inputs);
             } catch (Exception e) {
                 Log.Error(e.ToString());
                 Log.Error("Exception when handling input msg {0}: {1}", id, e.Message);

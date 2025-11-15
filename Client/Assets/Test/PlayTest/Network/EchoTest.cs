@@ -7,11 +7,11 @@ public class EchoTest
 {
     [SetUp]
     public void Setup() {
-        GameMgr.Instance.Start();
+        NetworkUtils.Start();
     }
     
     [UnityTest]
-    public IEnumerator EchoTestWithEnumeratorPasses() {
+    public IEnumerator EchoTest1() {
         int x = 1;
         while (true) {
             NetworkUtils.Send(MessageDef.echo_test_c2s, new echo_test_c2s() {
