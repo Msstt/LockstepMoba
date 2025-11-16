@@ -22,7 +22,7 @@ namespace Editor.Network {
                 }
                 var instance = NavMesh.AddNavMeshData(data);
                 var settings = NavMesh.GetSettingsByID(int.Parse(Path.GetFileNameWithoutExtension(file)));
-                surfaces[settings.agentRadius] = ExportNavmeshData();
+                surfaces[FloatF.FromFloat(settings.agentRadius)] = ExportNavmeshData();
                 NavMesh.RemoveNavMeshData(instance);
             }
             if (!JsonHelper.SaveToFile(surfaces, assetPath + "navmesh_surfaces.json")) {
@@ -40,7 +40,7 @@ namespace Editor.Network {
             };
             var tri = NavMesh.CalculateTriangulation();
             foreach (var vertice in tri.vertices) {
-                surface.vertices.Add(new Vector3F(vertice.x, vertice.y, vertice.z));
+                surface.vertices.Add(new Vector3F(FloatF.FromFloat(vertice.x), FloatF.FromFloat(vertice.y), FloatF.FromFloat(vertice.z)));
             }
             foreach (var indice in tri.indices) {
                 surface.indices.Add(indice);

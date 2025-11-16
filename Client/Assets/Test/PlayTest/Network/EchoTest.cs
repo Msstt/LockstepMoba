@@ -3,8 +3,7 @@ using Network;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
-public class EchoTest
-{
+public class EchoTest {
     [SetUp]
     public void Setup() {
         NetworkUtils.Start();

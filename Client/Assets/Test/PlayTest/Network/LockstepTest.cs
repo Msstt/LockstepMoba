@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
 
-public class LockstepTest
-{
+public class LockstepTest {
     private int count = 0;
     private Dictionary<Uid, int> inputCount = new Dictionary<Uid, int>();
     private Text statusText;

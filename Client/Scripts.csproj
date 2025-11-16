@@ -57,6 +57,7 @@
     <Compile Include="Assets/Scripts/StartUp/Main.cs" />
     <Compile Include="Assets/Scripts/Framework/Event/EventMgr.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/Core/NavmeshMgr.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/UnityEventMgr.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Updater.cs" />
@@ -73,16 +74,18 @@
     <Compile Include="Assets/Scripts/Framework/Tools/ThreadMgr.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/LockStep.cs" />
     <Compile Include="Assets/Scripts/Battle/Uid.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/Core/Layer.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/IMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Reader.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/FrameMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Log.cs" />
     <Compile Include="Assets/Scripts/Navmesh/NavmeshMapInfo.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/InputMsg.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/Core/Connection.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Message.cs" />
+    <Compile Include="Assets/Scripts/Framework/Math/PriorityQueue.cs" />
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
     <Compile Include="Assets/Scripts/Tools/DebugUtils.cs" />
-    <Compile Include="Assets/Scripts/Navmesh/NavmeshMgr.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Define.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/BattleMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Framework/Fixed/FloatF.cs" />

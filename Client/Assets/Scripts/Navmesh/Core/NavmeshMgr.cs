@@ -1,19 +1,27 @@
 using System.Collections.Generic;
 using Framework;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Navmesh {
     public class NavmeshMgr : Singleton<NavmeshMgr> {
         private NavmeshMapInfo mapInfo;
         private Dictionary<FloatF, NavmeshSurface> surfaces;
         
+        private Dictionary<FloatF, Layer> layers;
+        
         public void Start() {
             if (!LoadData()) {
                 return;
             }
 
-            InitConnection();
+            layers = new Dictionary<FloatF, Layer>();
+            foreach (var (radius, data) in surfaces) {
+                var layer = new Layer(data);
+                if (!layer.Init()) {
+                    return;
+                }
+                layers.Add(radius, layer);
+            }
         }
 
         private bool LoadData() {
@@ -31,10 +39,6 @@ namespace Navmesh {
                 return false;
             }
             return true;
-        }
-
-        // 初始化邻接表
-        private void InitConnection() {
         }
     }
 }

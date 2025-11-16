@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Navmesh {
     public class NavmeshMapInfo : MonoBehaviour {
