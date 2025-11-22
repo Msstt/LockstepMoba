@@ -14,6 +14,7 @@ public struct Vector3F {
     }
     
     public static Vector3F FromVector3(Vector3 v) => new Vector3F(FloatF.FromFloat(v.x), FloatF.FromFloat(v.y), FloatF.FromFloat(v.z));
+    public Vector3 ToVector3() => new Vector3(x.ToFloat(), y.ToFloat(), z.ToFloat());
     
     public static Vector3F operator+(Vector3F a, Vector3F b) => new Vector3F(a.x + b.x, a.y + b.y, a.z + b.z);
     public static Vector3F operator-(Vector3F a, Vector3F b) => new Vector3F(a.x - b.x, a.y - b.y, a.z - b.z);
@@ -26,10 +27,29 @@ public struct Vector3F {
     public override bool Equals(object obj) => obj is Vector3F v && v == this;
     public override int GetHashCode() => x.GetHashCode() ^ y.GetHashCode() << 2 ^ z.GetHashCode() >> 2;
 
-    public static FloatF DistanceF(Vector3F a, Vector3F b) {
+    public static FloatF Distance(Vector3F a, Vector3F b) {
+        FloatF dx = a.x - b.x;
+        FloatF dy = a.y - b.y;
+        FloatF dz = a.z - b.z;
+        return FloatF.Sqrt(dx * dx + dy * dy + dz * dz);
+    }
+    
+    public static FloatF Distance2(Vector3F a, Vector3F b) {
         FloatF dx = a.x - b.x;
         FloatF dy = a.y - b.y;
         FloatF dz = a.z - b.z;
         return dx * dx + dy * dy + dz * dz;
+    }
+    
+    public static FloatF Dot(Vector3F a, Vector3F b) {
+        return a.x * b.x + a.y * b.y + a.z * b.z;
+    }
+    
+    public static Vector3F Cross(Vector3F a, Vector3F b) {
+        return new Vector3F(
+            a.y * b.z - a.z * b.y,
+            a.z * b.x - a.x * b.z,
+            a.x * b.y - a.y * b.x
+        );
     }
 }

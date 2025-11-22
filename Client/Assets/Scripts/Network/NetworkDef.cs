@@ -18,11 +18,11 @@ namespace Network {
             };
             
             public static Dictionary<MessageDef, Func<battle_input, IMessage>> getter = new Dictionary<MessageDef, Func<battle_input, IMessage>>() {
-                { MessageDef.test_input, (msg) => { return msg.Test; } },
+                { MessageDef.test_input, (msg) => msg.Test },
             };
             
             public static Dictionary<MessageDef, Func<IDictionary>> creator = new Dictionary<MessageDef, Func<IDictionary>>() {
-                { MessageDef.test_input, () => { return new Dictionary<Uid, test_input>(); } },
+                { MessageDef.test_input, () => new Dictionary<Uid, test_input>() },
             };
         }
     }

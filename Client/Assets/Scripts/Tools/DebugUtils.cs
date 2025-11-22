@@ -8,4 +8,8 @@ public static class DebugUtils {
         }
         DebugMgr.Instance.DrawLine(start, end, color, duration, width);
     }
+    
+    public static void DrawLine(Vector3F start, Vector3F end, Color color = default, float duration = 2f, float width = 0.1f) {
+        DrawLine(start.ToVector3(), end.ToVector3(), color, duration, width);
+    }
 }

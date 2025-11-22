@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Framework;
 
 namespace Navmesh {
     public class Connection {
@@ -11,11 +12,14 @@ namespace Navmesh {
         }
         
         private NavmeshSurface data;
+        private Layer layer;
         
         private List<Dictionary<int, Info>> connections;
+        private List<Vector3F> centroid;
         
-        public Connection(NavmeshSurface data) {
+        public Connection(NavmeshSurface data, Layer layer) {
             this.data = data;
+            this.layer = layer;
         }
         
         public bool Init() {
@@ -35,11 +39,16 @@ namespace Navmesh {
                 return false;
             }
             
-            connections = new List<Dictionary<int, Info>>(data.indices.Count / 3);
+            connections = new List<Dictionary<int, Info>>();
+            centroid = new List<Vector3F>();
+            for (int i = 0; i < data.indices.Count / 3; i++) {
+                connections.Add(new Dictionary<int, Info>());
+                centroid.Add(layer.GetCentroid(i));
+            }
             foreach (var ((vId1, vId2), tId1) in edges) {
                 var revEdge = Tuple.Create(vId2, vId1);
                 if (edges.TryGetValue(revEdge, out int tId2)) {
-                    connections[tId1].Add(tId2, new Info {
+                    connections[tId1].TryAdd(tId2, new Info {
                         w = GetW(tId1, tId2),
                         tId = tId2,
                         vId1 = vId1,
@@ -51,25 +60,55 @@ namespace Navmesh {
             return true;
         }
 
-        private Vector3F GetCentroid(int tId) {
-            var v1 = data.vertices[data.indices[tId * 3]];
-            var v2 = data.vertices[data.indices[tId * 3 + 1]];
-            var v3 = data.vertices[data.indices[tId * 3 + 2]];
-            return (v1 + v2 + v3) / 3;
-        }
-
         private FloatF GetW(int tId1, int tId2) {
-            return Vector3F.DistanceF(GetCentroid(tId1), GetCentroid(tId2));
+            return Vector3F.Distance(centroid[tId1], centroid[tId2]);
         }
 
-        // // 获取最短路
-        // public List<Info> GetPath(int startId, int endId) {
-        //     HashSet<int> visited = new HashSet<int>();
-        //     PriorityQueue<int, FloatF> queue = new PriorityQueue<int, FloatF>();
-        //     queue.Enqueue(startId, 0);
-        // }
+        // 获取最短路
+        // startId, endId: 三角形ID
+        public bool GetPath(int startId, int endId, out List<Info> path) {
+            path = new List<Info>();
+            
+            Dictionary<int, FloatF> cost = new Dictionary<int, FloatF>();
+            Dictionary<int, int> parent = new Dictionary<int, int>();
+            HashSet<int> visited = new HashSet<int>();
+            PriorityQueue<int, FloatF> queue = new PriorityQueue<int, FloatF>();
+            queue.Enqueue(startId, 0);
+            cost[startId] = 0;
 
-        private void GetH(int tId) {
+            FloatF GetF(int id) {
+                return cost[id] + Vector3F.Distance2(centroid[id], centroid[endId]);; // f = g + h
+            }
+
+            while (queue.Count != 0) {
+                queue.Dequeue(out int currentId, out _);
+                
+                if (currentId == endId) {
+                    while (currentId != startId) {
+                        int pId = parent[currentId];
+                        path.Add(connections[pId][currentId]);
+                        currentId = pId;
+                    }
+                    path.Reverse();
+                    return true;
+                }
+
+                if (visited.Contains(currentId)) {
+                    continue;
+                }
+                visited.Add(currentId);
+
+                foreach (var info in connections[currentId].Values) {
+                    FloatF newCost = cost[currentId] + info.w;
+                    if (!cost.ContainsKey(info.tId) || newCost < cost[info.tId]) {
+                        cost[info.tId] = newCost;
+                        parent[info.tId] = currentId;
+                        queue.Enqueue(info.tId, GetF(info.tId));
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

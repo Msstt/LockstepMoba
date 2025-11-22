@@ -4,7 +4,7 @@ using System;
 using Newtonsoft.Json;
 
 [JsonConverter(typeof(FloatFConverter))]
-public struct FloatF {
+public struct FloatF : IComparable<FloatF> {
     public static FloatF eps = new FloatF(3, true);
     
     private const long scale = 1_000_000;
@@ -21,12 +21,13 @@ public struct FloatF {
     }
     
     public static implicit operator FloatF(long f) => new FloatF(f);
+    public static explicit operator int(FloatF f) => (int)(f.value / scale);
 
     public static FloatF FromFloat(double f) {
         return new FloatF((long)(f * scale), true);
     }
-    public double ToFloat(FloatF f) {
-        return 1.0 * f.value / scale;
+    public float ToFloat() {
+        return 1.0f * value / scale;
     }
     public static implicit operator FloatF(string s) {
         if (!s.EndsWith("F") || !long.TryParse(s[..^1], out long f)) {
@@ -46,6 +47,9 @@ public struct FloatF {
     public static bool operator<=(FloatF a, FloatF b) => a.value <= b.value;
     public static bool operator==(FloatF a, FloatF b) => a.value == b.value;
     public static bool operator!=(FloatF a, FloatF b) => a.value != b.value;
+    public int CompareTo(FloatF other) => value.CompareTo(other.value);
+    public static FloatF Max(FloatF a, FloatF b) => a > b ? a : b;
+    public static FloatF Min(FloatF a, FloatF b) => a < b ? a : b;
     
     public override bool Equals(object obj) => obj is FloatF f && f.value == value;
     public override int GetHashCode() => value.GetHashCode();

@@ -39,11 +39,25 @@ namespace Editor.Network {
                 indices = new List<int>(),
             };
             var tri = NavMesh.CalculateTriangulation();
+            List<int> mapping = new List<int>();
             foreach (var vertice in tri.vertices) {
-                surface.vertices.Add(new Vector3F(FloatF.FromFloat(vertice.x), FloatF.FromFloat(vertice.y), FloatF.FromFloat(vertice.z)));
+                var point = new Vector3F(FloatF.FromFloat(vertice.x), FloatF.FromFloat(vertice.y),
+                    FloatF.FromFloat(vertice.z));
+                bool has = false;
+                for (int i = 0; i < surface.vertices.Count; i++) {
+                    if (surface.vertices[i] == point) {
+                        has = true;
+                        mapping.Add(i);
+                        break;
+                    }
+                }
+                if (!has) {
+                    surface.vertices.Add(point);
+                    mapping.Add(surface.vertices.Count - 1);
+                }
             }
             foreach (var indice in tri.indices) {
-                surface.indices.Add(indice);
+                surface.indices.Add(mapping[indice]);
             }
             return surface;
         }

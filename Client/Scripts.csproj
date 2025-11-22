@@ -78,8 +78,10 @@
     <Compile Include="Assets/Scripts/Network/Dispatcher/IMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Reader.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/FrameMsgDispatcher.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/Core/Raycaster.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Log.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/InputMsg.cs" />
+    <Compile Include="Assets/Scripts/Tools/Geo/GeoUtils.cs" />
     <Compile Include="Assets/Scripts/Navmesh/NavmeshMapInfo.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/InputMsg.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Connection.cs" />
