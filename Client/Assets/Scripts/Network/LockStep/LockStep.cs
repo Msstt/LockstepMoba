@@ -20,17 +20,14 @@ namespace Network {
         
         private Dictionary<int, frame_input_s2c> allInputs = new Dictionary<int, frame_input_s2c>();
         
-        public delegate void InputHandler<T>(Dictionary<Uid, T> inputs);
-        private Dictionary<MessageDef, Delegate> inputHandlers = new Dictionary<MessageDef, Delegate>();
-        
-        public delegate T InputCollector<T>();
-        private Dictionary<MessageDef, Delegate> inputCollectors = new Dictionary<MessageDef, Delegate>();
+        private Dictionary<MessageDef, IInputHandler> inputHandlers = new Dictionary<MessageDef, IInputHandler>();
+        private Dictionary<MessageDef, IInputCollector> inputCollectors = new Dictionary<MessageDef, IInputCollector>();
 
         private void Clear() {
             Frame = 0;
             allInputs = new Dictionary<int, frame_input_s2c>();
-            inputHandlers = new Dictionary<MessageDef, Delegate>();
-            inputCollectors = new Dictionary<MessageDef, Delegate>();
+            inputHandlers = new Dictionary<MessageDef, IInputHandler>();
+            inputCollectors = new Dictionary<MessageDef, IInputCollector>();
 
             EventUtils.Remove(EventDef.OnConnected, ReqFrameData);
         }
@@ -52,18 +49,26 @@ namespace Network {
 
         #region 发送
 
-        public void RegisterCollector<T>(MessageDef id, InputCollector<T> collector) {
-            if (!inputCollectors.ContainsKey(id)) {
-                inputCollectors.Add(id, collector);
-            } else {
-                inputCollectors[id] = Delegate.Combine(inputCollectors[id], collector);
+        public void RegisterCollector<T>(MessageDef id, Func<T> collector) where T : IMessage, new() {
+            if (!NetworkUtils.CheckMessageType(id, typeof(T))) {
+                return;
             }
+            
+            if (!inputCollectors.ContainsKey(id)) {
+                inputCollectors.Add(id, new InputCollector<T>());
+            }
+            inputCollectors[id].Add(collector);
         }
         
-        public void RemoveCollector<T>(MessageDef id, InputCollector<T> collector) {
-            if (inputCollectors.ContainsKey(id)) {
-                inputCollectors[id] = Delegate.Remove(inputCollectors[id], collector);
+        public void RemoveCollector<T>(MessageDef id, Func<T> collector) where T : IMessage, new() {
+            if (!NetworkUtils.CheckMessageType(id, typeof(T))) {
+                return;
             }
+            
+            if (!inputCollectors.ContainsKey(id)) {
+                return;
+            }
+            inputCollectors[id].Remove(collector);
         }
 
         public frame_input_c2s GetInputMsg() {
@@ -71,7 +76,13 @@ namespace Network {
                 Frame = Frame + 1,
                 Input = new battle_input(),
             };
-            NetworkDef.SetInputMsgField(ref msg, Collect);
+            foreach (var (msgId, setter) in NetworkDef.InputMsgDef.setter) {
+                try {
+                    setter(Collect(msgId), msg.Input);
+                } catch (Exception ex) {
+                    Log.Error("Exception when setting input msg {0}: {1}", msgId, ex.Message);
+                }
+            }
             return msg;
         }
         
@@ -81,7 +92,7 @@ namespace Network {
             }
             
             try {
-                return inputCollectors[id]?.DynamicInvoke() as IMessage;
+                return inputCollectors[id].Collect();
             } catch (Exception e) {
                 Log.Error(e.ToString());
                 Log.Error("Exception when collecting input msg {0}: {1}", id, e.Message);
@@ -93,18 +104,26 @@ namespace Network {
 
         #region 接收
         
-        public void RegisterHandler<T>(MessageDef id, InputHandler<T> handler) {
-            if (!inputHandlers.ContainsKey(id)) {
-                inputHandlers.Add(id, handler);
-            } else {
-                inputHandlers[id] = Delegate.Combine(inputHandlers[id], handler);
+        public void RegisterHandler<T>(MessageDef id, Action<Dictionary<Uid, T>> handler) where T : IMessage {
+            if (!NetworkUtils.CheckMessageType(id, typeof(T))) {
+                return;
             }
+            
+            if (!inputHandlers.ContainsKey(id)) {
+                inputHandlers.Add(id, new InputHandler<T>());
+            }
+            inputHandlers[id].Add(handler);
         }
         
-        public void RemoveHandler<T>(MessageDef id, InputHandler<T> handler) {
-            if (inputHandlers.ContainsKey(id)) {
-                inputHandlers[id] = Delegate.Remove(inputHandlers[id], handler);
+        public void RemoveHandler<T>(MessageDef id, Action<Dictionary<Uid, T>> handler) where T : IMessage {
+            if (!NetworkUtils.CheckMessageType(id, typeof(T))) {
+                return;
             }
+            
+            if (!inputHandlers.ContainsKey(id)) {
+                return;
+            }
+            inputHandlers[id].Remove(handler);
         }
 
         public void PushInputMsg(frame_input_s2c msg) {
@@ -125,10 +144,23 @@ namespace Network {
         }
         
         private void HandleFrameInputs(frame_input_s2c frameInput) {
-            Dictionary<MessageDef, IDictionary> inputs = new Dictionary<MessageDef, IDictionary>();
-            NetworkDef.SetInputMsgField(frameInput, ref inputs);
-            foreach (var (id, input) in inputs) {
-                Dispatch(id, input);
+            foreach (var (msgId, getter) in NetworkDef.InputMsgDef.getter) {
+                if (!NetworkDef.InputMsgDef.creator.ContainsKey(msgId)) {
+                    Log.Warning("NetworkDef.InputMsgDef.creator missing: " + msgId);
+                    return;
+                }
+                IDictionary inputs = NetworkDef.InputMsgDef.creator[msgId].Invoke();
+                foreach (var inputInfo in frameInput.Inputs) {
+                    try {
+                        var msg = getter(inputInfo.Input);
+                        if (msg != null) {
+                            inputs.Add(new Uid(inputInfo.Uid), msg);
+                        }
+                    } catch (Exception ex) {
+                        Log.Error("Exception when getting input msg {0}: {1}", msgId, ex.Message);
+                    }
+                }
+                Dispatch(msgId, inputs);
             }
         }
         
@@ -138,7 +170,7 @@ namespace Network {
             }
 
             try {
-                inputHandlers[id]?.DynamicInvoke(inputs);
+                inputHandlers[id].Handle(inputs);
             } catch (Exception e) {
                 Log.Error(e.ToString());
                 Log.Error("Exception when handling input msg {0}: {1}", id, e.Message);

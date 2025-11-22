@@ -21,17 +21,37 @@ namespace Framework {
         public void Remove(EventDef eventDef, Delegate handler) {
             eventHandlers[eventDef] = Delegate.Remove(eventHandlers[eventDef], handler);
         }
-
-        public void Send(EventDef eventDef, params object[] args) {
-            if (eventHandlers[eventDef] == null) {
+        
+        public void Send(EventDef eventDef) {
+            if (eventHandlers[eventDef] is not Action handler) {
                 return;
             }
-            foreach (var func in eventHandlers[eventDef].GetInvocationList()) {
-                try {
-                    func.DynamicInvoke(args);
-                } catch (Exception e) {
-                    Console.WriteLine($"[EventMgr] Error calling {eventDef.ToString()}: {e}");
-                }
+            try {
+                handler?.Invoke();
+            } catch (Exception e) {
+                Console.WriteLine($"[EventMgr] Error calling {eventDef.ToString()}: {e}");
+            }
+        }
+
+        public void Send<T1>(EventDef eventDef, T1 param1) {
+            if (eventHandlers[eventDef] is not Action<T1> handler) {
+                return;
+            }
+            try {
+                handler?.Invoke(param1);
+            } catch (Exception e) {
+                Console.WriteLine($"[EventMgr] Error calling {eventDef.ToString()}: {e}");
+            }
+        }
+        
+        public void Send<T1, T2>(EventDef eventDef, T1 param1, T2 param2) {
+            if (eventHandlers[eventDef] is not Action<T1, T2> handler) {
+                return;
+            }
+            try {
+                handler?.Invoke(param1, param2);
+            } catch (Exception e) {
+                Console.WriteLine($"[EventMgr] Error calling {eventDef.ToString()}: {e}");
             }
         }
     }

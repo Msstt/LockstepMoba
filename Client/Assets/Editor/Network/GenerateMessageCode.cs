@@ -55,13 +55,16 @@ namespace Editor.Network {
             }
 
             string messageEnumList = "\n";
+            string messageMapping = "\n";
             string messageParserList = "\n";
             foreach (var value in protoMap) {
                 messageEnumList += "        " + value.Key + " = " + value.Value + ",\n";
+                messageMapping += "            { MessageDef." + value.Key + ", typeof(" + value.Key + ") },\n";
                 messageParserList += "            { MessageDef." + value.Key + ", " + value.Key + ".Parser },\n";
             }
             string template = File.ReadAllText(defineTemplatePath);
             template = template.Replace("{MessageEnumList}", messageEnumList);
+            template = template.Replace("{MessageMapping}", messageMapping);
             template = template.Replace("{MessageParserList}", messageParserList);
             EditorApplication.LockReloadAssemblies();
             File.WriteAllText(outputPath, template);

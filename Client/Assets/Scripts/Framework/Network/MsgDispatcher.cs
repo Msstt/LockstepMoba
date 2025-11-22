@@ -4,31 +4,72 @@ using Google.Protobuf;
 using Network;
 
 namespace Framework.Network {
-    public class MsgDispatcher : Singleton<MsgDispatcher> {
-        private Dictionary<MessageDef, Delegate> msgHandlers = new Dictionary<MessageDef, Delegate>();
+    public interface IMsgHandler {
+        public void Handle(IMessage msg);
+        public void Add(Delegate handler);
+        public void Remove(Delegate handler);
+    }
 
-        public MsgDispatcher() {
-            foreach (MessageDef value in Enum.GetValues(typeof(MessageDef))) {
-                msgHandlers.Add(value, null);
+    public class MsgHandler<T> : IMsgHandler where T : IMessage {
+        public Action<T> handlers = null;
+        
+        public void Handle(IMessage iMsg) {
+            if (iMsg is not T msg) {
+                return;
             }
+            handlers?.Invoke(msg);
         }
         
+        public void Add(Delegate iHandler) {
+            if (iHandler is not Action<T> handler) {
+                return;
+            }
+            handlers += handler;
+        }
+        
+        public void Remove(Delegate iHandler) {
+            if (iHandler is not Action<T> handler) {
+                return;
+            }
+            handlers -= handler;
+        }
+    }
+    
+    public class MsgDispatcher : Singleton<MsgDispatcher> {
+        private Dictionary<MessageDef, IMsgHandler> msgHandlers = new Dictionary<MessageDef, IMsgHandler>();
+        
         public void RegisterHandler<T>(MessageDef msgId, Action<T> handler) where T : IMessage {
-            msgHandlers[msgId] = Delegate.Combine(msgHandlers[msgId], handler);
+            if (MessageMapping.type[msgId] != typeof(T)) {
+                Log.Error("Handler type does not match message type for msgId: {0}", msgId);
+                return;
+            }
+
+            if (!msgHandlers.ContainsKey(msgId)) {
+                msgHandlers.Add(msgId, new MsgHandler<T>());
+            }
+            msgHandlers[msgId].Add(handler);
         }
 
-        public void RemoveHandler(MessageDef msgId, Action<IMessage> handler) {
-            msgHandlers[msgId] = Delegate.Remove(msgHandlers[msgId], handler);
+        public void RemoveHandler<T>(MessageDef msgId, Action<T> handler) where T : IMessage {
+            if (MessageMapping.type[msgId] != typeof(T)) {
+                Log.Error("Handler type does not match message type for msgId: {0}", msgId);
+                return;
+            }
+
+            if (!msgHandlers.ContainsKey(msgId)) {
+                return;
+            }
+            msgHandlers[msgId].Remove(handler);
         }
         
         public void Dispatch(Message msg) {
             if (!msgHandlers.ContainsKey(msg.msgId)) {
-                Log.Warning("Received message with invalid msgId : {0}", msg.msgId);
+                Log.Warning("Received message without handler : {0}", msg.msgId);
                 return;
             }
 
             try {
-                msgHandlers[msg.msgId]?.DynamicInvoke(msg.data);
+                msgHandlers[msg.msgId].Handle(msg.data);
             } catch (Exception e) {
                 Log.Error(e.ToString());
                 Log.Error("Exception when handling message {0}: {1}", msg.msgId, e.Message);

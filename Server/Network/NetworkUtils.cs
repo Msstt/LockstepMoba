@@ -8,7 +8,7 @@ namespace Network {
             // 注册 Dispatcher
             NetworkDef.RegisterDispatcher();
             
-            EventUtils.Register(EventDef.OnPlayerConnected, Battle.Match.Instance.AddPlayer);
+            EventUtils.Register<Uid>(EventDef.OnPlayerConnected, Battle.Match.Instance.AddPlayer);
             
             Framework.Network.Network.Instance.Start(Config.Instance.Network.port);
         }

@@ -1,6 +1,7 @@
-using System.Reflection;
+using System;
 using Framework;
 using Google.Protobuf;
+using UnityEngine;
 
 namespace Network {
     public static class NetworkUtils {
@@ -25,6 +26,14 @@ namespace Network {
         
         public static void Send(MessageDef msgId, IMessage msg) {
             Framework.Network.Network.Instance.Send(msgId, msg);
+        }
+        
+        public static bool CheckMessageType(MessageDef msgId, Type type) {
+            if (MessageMapping.type[msgId] != type) {
+                Debug.LogError($"Message type does not match for msgId: {msgId}");
+                return false;
+            }
+            return true;
         }
     }
 }

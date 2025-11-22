@@ -12,23 +12,18 @@ namespace Network {
             BattleMsgDispatcher.Register();
         }
 
-        public static void SetInputMsgField(ref frame_input_c2s msg, Func<MessageDef, IMessage> collectFunc) {
-            if (collectFunc(MessageDef.test_input) is test_input test_input) msg.Input.Test = test_input;
-        }
-        
-        public static void SetInputMsgField(frame_input_s2c msg, ref Dictionary<MessageDef, IDictionary> inputs) {
-            void SetField<T>(ref Dictionary<MessageDef, IDictionary> inputs, MessageDef id, Func<battle_input, IMessage> getter) where T : class, IMessage{
-                Dictionary<Uid, T> input = new Dictionary<Uid, T>();
-                foreach (var inputInfo in msg.Inputs) {
-                    var msg = getter(inputInfo.Input) as T;
-                    if (msg != null) {
-                        input[inputInfo.Uid] = msg;
-                    }
-                }
-                inputs[id] = input;
-            }
-
-            SetField<test_input>(ref inputs, MessageDef.test_input, (msg) => msg.Test);
+        public static class InputMsgDef {
+            public static Dictionary<MessageDef, Action<IMessage, battle_input>> setter = new Dictionary<MessageDef, Action<IMessage, battle_input>>() {
+                { MessageDef.test_input, (msg, inputMsg) => { inputMsg.Test = msg as test_input; } },
+            };
+            
+            public static Dictionary<MessageDef, Func<battle_input, IMessage>> getter = new Dictionary<MessageDef, Func<battle_input, IMessage>>() {
+                { MessageDef.test_input, (msg) => { return msg.Test; } },
+            };
+            
+            public static Dictionary<MessageDef, Func<IDictionary>> creator = new Dictionary<MessageDef, Func<IDictionary>>() {
+                { MessageDef.test_input, () => { return new Dictionary<Uid, test_input>(); } },
+            };
         }
     }
 }

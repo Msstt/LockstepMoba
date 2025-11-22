@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Google.Protobuf;
 
@@ -12,6 +13,20 @@ namespace Network {
         battle_start_s2c = 11004,
         test_input = 20001,
 
+    }
+    
+    public static class MessageMapping {
+        public static readonly Dictionary<MessageDef, Type> type = new Dictionary<MessageDef, Type>() {
+            { MessageDef.echo_test_c2s, typeof(echo_test_c2s) },
+            { MessageDef.echo_test_s2c, typeof(echo_test_s2c) },
+            { MessageDef.frame_start_s2c, typeof(frame_start_s2c) },
+            { MessageDef.frame_input_c2s, typeof(frame_input_c2s) },
+            { MessageDef.frame_input_s2c, typeof(frame_input_s2c) },
+            { MessageDef.frame_reconnect_c2s, typeof(frame_reconnect_c2s) },
+            { MessageDef.battle_start_s2c, typeof(battle_start_s2c) },
+            { MessageDef.test_input, typeof(test_input) },
+
+        };
     }
 
     public static class MessageParserDef {
