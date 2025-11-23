@@ -52,4 +52,15 @@ public struct Vector3F {
             a.x * b.y - a.y * b.x
         );
     }
+    
+    public static Vector3F Mid(Vector3F a, Vector3F b) {
+        return (a + b) / 2;
+    }
+    
+    public static FloatF MaxDistance(Vector3F a, Vector3F b) {
+        FloatF dx = FloatF.Abs(a.x - b.x);
+        FloatF dy = FloatF.Abs(a.y - b.y);
+        FloatF dz = FloatF.Abs(a.z - b.z);
+        return FloatF.Max(FloatF.Max(dx, dy), dz);
+    }
 }

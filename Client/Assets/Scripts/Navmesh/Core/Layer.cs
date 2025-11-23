@@ -43,7 +43,7 @@ namespace Navmesh {
             if (!raycaster.Raycast(start, out int startTId)) return false;
             if (!raycaster.Raycast(end, out int endTId)) return false;
             
-            if (!connection.GetPath(startTId, endTId, out List<Connection.Info> connectionList)) return false;
+            if (!connection.GetPath(start, end, startTId, endTId, out List<Connection.Info> connectionList)) return false;
             
             int lastTId = startTId;
             for (int i = 0; i < connectionList.Count; i++) {

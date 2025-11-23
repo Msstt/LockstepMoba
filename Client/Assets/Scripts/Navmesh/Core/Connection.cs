@@ -53,7 +53,7 @@ namespace Navmesh {
                 var revEdge = Tuple.Create(vId2, vId1);
                 if (edges.TryGetValue(revEdge, out int tId2)) {
                     connections[tId1].TryAdd(tId2, new Info {
-                        w = GetW(tId1, tId2),
+                        w = GetW(tId1, tId2, vId1, vId2),
                         tId = tId2,
                         vId1 = vId1,
                         vId2 = vId2,
@@ -64,13 +64,14 @@ namespace Navmesh {
             return true;
         }
 
-        private FloatF GetW(int tId1, int tId2) {
+        private FloatF GetW(int tId1, int tId2, int vId1, int vId2) {
             return Vector3F.Distance(centroid[tId1], centroid[tId2]);
+            // return Vector3F.Distance(centroid[tId1], Vector3F.Mid(data.vertices[vId1], data.vertices[vId2]));\
         }
 
         // 获取最短路
         // startId, endId: 三角形ID
-        public bool GetPath(int startId, int endId, out List<Info> path) {
+        public bool GetPath(Vector3F start, Vector3F end, int startId, int endId, out List<Info> path) {
             path = new List<Info>();
             
             Dictionary<int, FloatF> cost = new Dictionary<int, FloatF>();
@@ -81,7 +82,9 @@ namespace Navmesh {
             cost[startId] = 0;
 
             FloatF GetF(int id) {
-                return cost[id] + Vector3F.Distance2(centroid[id], centroid[endId]);; // f = g + h
+                // return cost[id];
+                return cost[id] + Vector3F.MaxDistance(centroid[id], centroid[endId]);; // f = g + h
+                // return cost[id] + Vector3F.Distance2(centroid[id], centroid[endId]);; // f = g + h
             }
 
             while (queue.Count != 0) {
@@ -104,6 +107,12 @@ namespace Navmesh {
 
                 foreach (var info in connections[currentId].Values) {
                     FloatF newCost = cost[currentId] + info.w;
+                    if (currentId == startId) {
+                        newCost = cost[currentId] + Vector3F.Distance(start, centroid[info.tId]);
+                    }
+                    if (info.tId == endId) {
+                        newCost = cost[currentId] + Vector3F.Distance(centroid[info.tId], end);
+                    }
                     if (!cost.ContainsKey(info.tId) || newCost < cost[info.tId]) {
                         cost[info.tId] = newCost;
                         parent[info.tId] = currentId;
