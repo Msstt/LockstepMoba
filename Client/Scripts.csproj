@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/Navmesh/NavmeshUtils.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/Core/PathSmoother.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Log.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventDef.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Writer.cs" />

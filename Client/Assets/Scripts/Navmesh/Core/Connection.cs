@@ -29,9 +29,13 @@ namespace Navmesh {
                 edges.TryAdd(edge, index);
             }
             for (int i = 0; i < data.indices.Count; i += 3) {
-                AddEdge(i / 3, data.indices[i], data.indices[i + 1]);
-                AddEdge(i / 3, data.indices[i + 1], data.indices[i + 2]);
-                AddEdge(i / 3, data.indices[i + 2], data.indices[i]);
+                int p1 = data.indices[i], p2 = data.indices[i + 1], p3 = data.indices[i + 2];
+                if (Vector3F.Cross(data.vertices[p2] - data.vertices[p1], data.vertices[p3] - data.vertices[p1]).y > 0) {
+                    (p3, p1) = (p1, p3);
+                }
+                AddEdge(i / 3, p1, p2);
+                AddEdge(i / 3, p2, p3);
+                AddEdge(i / 3, p3, p1);
             }
 
             if (edges.Count != data.indices.Count) {

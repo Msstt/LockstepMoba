@@ -22,6 +22,9 @@ public class CameraCom : MonoBehaviour {
     
     public void Awake() {
         mainCamera = GetComponent<Camera>();
+    }
+
+    public void Start() {
         mainCamera.transform.position = -mainCamera.transform.forward * cameraHeight.y;
         curHeight = cameraHeight.y;
         cameraPos = Vector3.zero;
