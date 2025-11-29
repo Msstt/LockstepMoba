@@ -1,6 +1,7 @@
 // 漏斗算法平滑路径
 
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Navmesh {
     public class PathSmoother {
@@ -23,42 +24,48 @@ namespace Navmesh {
                 return Vector3F.Cross(v2 - curPoint, v1 - curPoint).y >= 0;
             }
 
-            int curIndex = -1;
-            for (int i = 0; i < connection.Count; i++) {
+            int curLeftIndex = -1, curRightIndex = -1;
+            for (int i = 0; i <= connection.Count; i++) {
                 if (i < 0) {
                     Log.Error("PathSmoother SmoothPath i < 0");
                     break;
                 }
                 
-                Vector3F newLeft = data.vertices[connection[i].vId1], newRight = data.vertices[connection[i].vId2];
+                Vector3F newLeft, newRight;
+                if (i < connection.Count) {
+                    newLeft = data.vertices[connection[i].vId1];
+                    newRight = data.vertices[connection[i].vId2];
+                } else {
+                    newLeft = end;
+                    newRight = end;
+                }
 
-                if (IsRight(left, newLeft) && IsRight(newLeft, right) && IsRight(left, newRight) &&
-                    IsRight(newRight, right)) {
+                if (IsRight(left, newLeft) && IsRight(newLeft, right)) {
                     left = newLeft;
+                    curLeftIndex = i;
+                }
+                
+                if (IsRight(left, newRight) && IsRight(newRight, right)) {
                     right = newRight;
-                    curIndex = i;
-                    continue;
+                    curRightIndex = i;
                 }
 
                 if (IsRight(right, newLeft)) {
                     curPoint = right;
+                    i = curRightIndex;
                 } else if (IsRight(newRight, left)) {
                     curPoint = left;
+                    i = curLeftIndex;
                 } else {
                     continue;
                 }
                 path.Add(curPoint);
                 left = curPoint;
                 right = curPoint;
-                i = curIndex - 1;
-                curIndex = i;
+                curLeftIndex = -1;
+                curRightIndex = -1;
             }
-
-            if (IsRight(end, left)) {
-                path.Add(left);
-            } else if (IsRight(right, end)) {
-                path.Add(right);
-            }
+            
             path.Add(end);
             return path;
         }

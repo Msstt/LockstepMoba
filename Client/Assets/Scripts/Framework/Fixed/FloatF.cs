@@ -2,14 +2,18 @@
 
 using System;
 using Newtonsoft.Json;
+using UnityEditor;
+using UnityEngine;
 
 [JsonConverter(typeof(FloatFConverter))]
+[Serializable]
 public struct FloatF : IComparable<FloatF> {
     public static FloatF eps = new FloatF(3, true);
     
     private const long scale = 1_000_000;
     
     [JsonProperty]
+    [SerializeField]
     private long value;
     
     public FloatF(long f, bool isRaw = false) {
@@ -92,6 +96,22 @@ public struct FloatF : IComparable<FloatF> {
         }
     }
     
+    #endregion
+
+    #region PropertyDrawer
+
+    [CustomPropertyDrawer(typeof(FloatF))]
+    public class MyFloatDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect pos, SerializedProperty prop, GUIContent label)
+        {
+            EditorGUI.PropertyField(pos, prop.FindPropertyRelative("value"), label);
+        }
+
+        public override float GetPropertyHeight(SerializedProperty prop, GUIContent label)
+            => EditorGUIUtility.singleLineHeight;
+    }
+
     #endregion
 }
 

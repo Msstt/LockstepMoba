@@ -3,17 +3,30 @@ using System.Collections.Generic;
 namespace Navmesh {
     public class Raycaster {
         private static int MaxAABBCount = 10;
-        private static int AABBSize = 2;
         
         private NavmeshSurface data;
         
         private List<List<List<int>>> aabbGrids;
+
+        private Vector3F min, max;
+        private Vector3F size;
         
         public Raycaster(NavmeshSurface data) {
             this.data = data;
         }
 
         public bool Init() {
+            min = max = data.vertices[0];
+            for (int i = 0; i < data.vertices.Count; i++) {
+                min.x = FloatF.Min(min.x, data.vertices[i].x);
+                min.y = FloatF.Min(min.y, data.vertices[i].y);
+                min.z = FloatF.Min(min.z, data.vertices[i].z);
+                max.x = FloatF.Max(max.x, data.vertices[i].x);
+                max.y = FloatF.Max(max.y, data.vertices[i].y);
+                max.z = FloatF.Max(max.z, data.vertices[i].z);
+            }
+            size = new Vector3F((max.x - min.x) / MaxAABBCount, (max.y - min.y) / MaxAABBCount, (max.z - min.z) / MaxAABBCount);
+            
             aabbGrids = new List<List<List<int>>>();
             for (int row = 0; row < MaxAABBCount; row++) {
                 aabbGrids.Add(new List<List<int>>());
@@ -35,10 +48,10 @@ namespace Navmesh {
         }
         
         bool TriangleInAABB(int row, int col, int tId) {
-            Vector3F p1 = new Vector3F(row * AABBSize, 0, col * AABBSize);
-            Vector3F p2 = new Vector3F(row * AABBSize, 0, (col + 1) * AABBSize);
-            Vector3F p3 = new Vector3F((row + 1) * AABBSize, 0, col * AABBSize);
-            Vector3F p4 = new Vector3F((row + 1) * AABBSize, 0, (col + 1) * AABBSize);
+            Vector3F p1 = min + new Vector3F(row * size.x, 0, col * size.z);
+            Vector3F p2 = min + new Vector3F(row * size.x, 0, (col + 1) * size.z);
+            Vector3F p3 = min + new Vector3F((row + 1) * size.x, 0, col * size.z);
+            Vector3F p4 = min + new Vector3F((row + 1) * size.x, 0, (col + 1) * size.z);
 
             Vector3F t1 = data.vertices[data.indices[tId * 3]];
             Vector3F t2 = data.vertices[data.indices[tId * 3 + 1]];
@@ -66,14 +79,12 @@ namespace Navmesh {
         }
         
         bool PointInTriangle(Vector3F point, int tId) {
-            int vId1 = data.indices[tId * 3];
-            int vId2 = data.indices[tId * 3 + 1];
-            int vId3 = data.indices[tId * 3 + 2];
-            FloatF Sign(Vector3F p1, Vector3F p2, Vector3F p3) =>
-                (p1.x - p3.x) * (p2.z - p3.z) - (p2.x - p3.x) * (p1.z - p3.z);
-            FloatF d1 = Sign(point, data.vertices[vId1], data.vertices[vId2]);
-            FloatF d2 = Sign(point, data.vertices[vId2], data.vertices[vId3]);
-            FloatF d3 = Sign(point, data.vertices[vId3], data.vertices[vId1]);
+            Vector3F vId1 = data.vertices[data.indices[tId * 3]];
+            Vector3F vId2 = data.vertices[data.indices[tId * 3 + 1]];
+            Vector3F vId3 = data.vertices[data.indices[tId * 3 + 2]];
+            FloatF d1 = Vector3F.Cross(point - vId1, vId2 - vId1).y;
+            FloatF d2 = Vector3F.Cross(point - vId2, vId3 - vId2).y;
+            FloatF d3 = Vector3F.Cross(point - vId3, vId1 - vId3).y;
             bool hasNeg = (d1 < 0) || (d2 < 0) || (d3 < 0);
             bool hasPos = (d1 > 0) || (d2 > 0) || (d3 > 0);
             return !(hasNeg && hasPos);
@@ -82,8 +93,8 @@ namespace Navmesh {
         // XZ 平面射线检测，返回三角形 id
         public bool Raycast(Vector3F point, out int tId) {
             tId = -1;
-            int row = (int)(point.x / AABBSize);
-            int col = (int)(point.z / AABBSize);
+            int row = (int)((point - min).x / size.x);
+            int col = (int)((point - min).z / size.z);
             if (row < 0 || row >= MaxAABBCount || col < 0 || col >= MaxAABBCount) {
                 return false;
             }

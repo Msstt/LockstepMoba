@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Framework;
+using UnityEngine;
 
 namespace Navmesh {
     public class Connection {
@@ -58,6 +59,7 @@ namespace Navmesh {
                         vId1 = vId1,
                         vId2 = vId2,
                     });
+                    // DebugUtils.DrawLine(centroid[tId1], centroid[tId2], Color.green, 0);
                 }
             }
 

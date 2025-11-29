@@ -24,16 +24,26 @@ namespace Navmesh {
             if (!connection.Init()) return false;
             if (!raycaster.Init()) return false;
 
-            for (int i = 0; i < data.indices.Count / 3; i++) {
-                DrawTriangle(i, 0);
-            }
+            // for (int i = 0; i < data.indices.Count / 3; i++) {
+            //     DrawTriangle(i, 0);
+            // }
             return true;
         }
 
         private bool CheckData() {
+            if (data.indices.Count == 0 || data.vertices.Count == 0) {
+                Log.Error("NavmeshSurface data is empty");
+                return false;
+            }
             if (data.indices.Count % 3 != 0) {
                 Log.Error("NavmeshSurface indices count error");
                 return false;
+            }
+            for (int i = 0; i < data.indices.Count; i++) {
+                if (data.indices[i] < 0 || data.indices[i] >= data.vertices.Count) {
+                    Log.Error("NavmeshSurface indices has invalid vertex index");
+                    return false;
+                }
             }
             return true;
         }
@@ -45,16 +55,13 @@ namespace Navmesh {
             
             if (!connection.GetPath(start, end, startTId, endTId, out List<Connection.Info> connectionList)) return false;
             
-            int lastTId = startTId;
-            for (int i = 0; i < connectionList.Count; i++) {
-                DebugUtils.DrawLine(GetCentroid(lastTId), GetCentroid(connectionList[i].tId), Color.blue);
-                lastTId = connectionList[i].tId;
-            }
+            // int lastTId = startTId;
+            // for (int i = 0; i < connectionList.Count; i++) {
+            //     DebugUtils.DrawLine(GetCentroid(lastTId), GetCentroid(connectionList[i].tId), Color.blue);
+            //     lastTId = connectionList[i].tId;
+            // }
 
             path = smoother.SmoothPath(start, end, startTId, connectionList);
-            for (int i = 0; i + 1 < path.Count; i++) {
-                DebugUtils.DrawLine(path[i], path[i + 1]);
-            }
             return true;
         }
         

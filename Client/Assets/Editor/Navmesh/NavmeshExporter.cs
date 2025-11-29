@@ -8,11 +8,19 @@ using UnityEngine.AI;
 
 namespace Editor.Network {
     public class NavmeshExporter {
-        private static string assetPath = Application.dataPath + "/Scenes/NavmeshData/";
-        private static string assetRePath = "Assets/Scenes/NavmeshData/";
-        
         [MenuItem("工具/Navmesh/导出 Navmesh 网格数据")]
         public static void Execute() {
+            var selected = Selection.activeObject;
+            if (selected == null) {
+                Debug.LogError("请先选中文件夹");
+                return;
+            }
+            string assetRePath = AssetDatabase.GetAssetPath(selected) + "/";
+            string assetPath = Application.dataPath + assetRePath.Substring("Assets".Length);
+            if (!Directory.Exists(assetPath)) {
+                Debug.LogError("请先选中文件夹");
+                return;
+            }
             var protoFiles = Directory.GetFiles(assetPath, "*.asset", SearchOption.AllDirectories);
             Dictionary<FloatF, NavmeshSurface> surfaces = new Dictionary<FloatF, NavmeshSurface>();
             foreach (var file in protoFiles) {
@@ -45,7 +53,7 @@ namespace Editor.Network {
                     FloatF.FromFloat(vertice.z));
                 bool has = false;
                 for (int i = 0; i < surface.vertices.Count; i++) {
-                    if (surface.vertices[i] == point) {
+                    if (Vector3F.IsEqualInEps(surface.vertices[i], point)) {
                         has = true;
                         mapping.Add(i);
                         break;

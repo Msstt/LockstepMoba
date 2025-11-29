@@ -5,9 +5,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins", "Plugins.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scripts", "Scripts.csproj", "{e8edfcb1-94ef-5247-6486-ca3030a098c4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests.csproj", "{d378aee9-cea8-8001-3ac1-e1ca339482a9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayTest", "PlayTest.csproj", "{d3f32805-4558-1f78-24d4-05a7b95f67a6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests.csproj", "{d378aee9-cea8-8001-3ac1-e1ca339482a9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{9cf74455-0653-9f90-c855-53d6959d5dfd}"
 EndProject
@@ -22,10 +22,10 @@ Global
 		{b7057248-8898-b7fe-9ecb-7feff9d4d038}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{e8edfcb1-94ef-5247-6486-ca3030a098c4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{e8edfcb1-94ef-5247-6486-ca3030a098c4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{d378aee9-cea8-8001-3ac1-e1ca339482a9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{d378aee9-cea8-8001-3ac1-e1ca339482a9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{d3f32805-4558-1f78-24d4-05a7b95f67a6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{d3f32805-4558-1f78-24d4-05a7b95f67a6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d378aee9-cea8-8001-3ac1-e1ca339482a9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d378aee9-cea8-8001-3ac1-e1ca339482a9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9cf74455-0653-9f90-c855-53d6959d5dfd}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9cf74455-0653-9f90-c855-53d6959d5dfd}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8441f412-22a4-275f-22e6-507969043f15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

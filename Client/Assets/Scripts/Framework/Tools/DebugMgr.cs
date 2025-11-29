@@ -19,5 +19,19 @@ namespace Framework {
                 Destroy(lineObj, duration);
             }
         }
+        
+        public void DrawDot(Vector3 point, Color color, float duration, float size) {
+            GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            sphere.transform.SetParent(transform);
+            sphere.transform.localScale = Vector3.one * size;
+            sphere.transform.position = point;
+            var renderer = sphere.GetComponent<Renderer>();
+            renderer.material = new Material(Shader.Find("Standard"));
+            renderer.material.color = color;
+            Destroy(sphere.GetComponent<Collider>());
+            if (duration > 0) {
+                Destroy(sphere, duration);
+            }
+        }
     }
 }
