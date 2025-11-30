@@ -727,6 +727,9 @@
     <Reference Include="Unity.EditorCoroutines.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Siccity.GLTFUtility.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Siccity.GLTFUtility.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.AI.Navigation">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.AI.Navigation.dll</HintPath>
     </Reference>
@@ -783,6 +786,9 @@
     </Reference>
     <Reference Include="Unity.AI.Navigation.Updater">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.AI.Navigation.Updater.dll</HintPath>
+    </Reference>
+    <Reference Include="Siccity.GLTFUtility">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Siccity.GLTFUtility.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
