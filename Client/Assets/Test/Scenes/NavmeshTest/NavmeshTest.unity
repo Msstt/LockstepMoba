@@ -847,7 +847,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 595227209}
-  - component: {fileID: 595227210}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -888,19 +887,6 @@ Transform:
   - {fileID: 1237436546}
   m_Father: {fileID: 999119036}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &595227210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595227208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4889e5d55b6d418bb9217214c5529062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surfaceData: {fileID: 4900000, guid: 20c201b504c9b400aa93ca2425c01859, type: 3}
 --- !u!1 &603592061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1759,6 +1745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 999119036}
+  - component: {fileID: 999119037}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -1783,6 +1770,19 @@ Transform:
   - {fileID: 595227209}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &999119037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999119035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4889e5d55b6d418bb9217214c5529062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaceData: {fileID: 4900000, guid: 20c201b504c9b400aa93ca2425c01859, type: 3}
 --- !u!1 &1211031290
 GameObject:
   m_ObjectHideFlags: 0

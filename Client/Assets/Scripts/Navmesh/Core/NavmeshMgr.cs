@@ -32,7 +32,7 @@ namespace Navmesh {
         }
 
         private bool LoadData() {
-            mapInfo = GameObject.Find("Map/Terrain")?.GetComponent<NavmeshMapInfo>();
+            mapInfo = GameObject.Find("Map")?.GetComponent<NavmeshMapInfo>();
             if (mapInfo == null) {
                 Log.Error("NavmeshMapInfo not found");
                 return false;

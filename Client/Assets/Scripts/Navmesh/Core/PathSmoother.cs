@@ -50,10 +50,10 @@ namespace Navmesh {
                     curRightIndex = i;
                 }
 
-                if (IsRight(right, newLeft)) {
+                if (!IsRight(newLeft, right)) {
                     curPoint = right;
                     i = curRightIndex;
-                } else if (IsRight(newRight, left)) {
+                } else if (!IsRight(left, newRight)) {
                     curPoint = left;
                     i = curLeftIndex;
                 } else {

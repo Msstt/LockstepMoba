@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Main : MonoBehaviour {
     public void Start() {
@@ -15,10 +17,28 @@ public class Main : MonoBehaviour {
                     Debug.Log(point.Value);
                     Debug.Log(hit.point);
                     NavmeshUtils.FindPath(Vector3F.FromVector3(point.Value), Vector3F.FromVector3(hit.point), out var path);
-                    // NavmeshUtils.FindPath(Vector3F.FromVector3(new Vector3(10.31f, 5.00f, 8.70f)), Vector3F.FromVector3(new Vector3(10.75f, 5.00f, 10.20f)), out var path);
+                    // Vector3 s = new Vector3(729.86f, 125.01f, 1424.97f);
+                    // Vector3 e = new Vector3(675.86f, 125.01f, 1319.80f);
+                    // DebugUtils.DrawDot(s);
+                    // DebugUtils.DrawDot(e);
+                    // NavmeshUtils.FindPath(Vector3F.FromVector3(s), Vector3F.FromVector3(e), out var path);
                     for (int i = 0; i + 1 < path.Count; i++) {
-                        DebugUtils.DrawLine(path[i], path[i + 1]);
+                        DebugUtils.DrawLine(path[i], path[i + 1], Color.red);
                     }
+                    Debug.Log($"path Count: {path.Count}");
+                    
+                    NavMeshPath ppath = new NavMeshPath();
+                    bool hasPath = NavMesh.CalculatePath(point.Value, hit.point, NavMesh.AllAreas, ppath);
+                    
+                    if (hasPath)
+                    {
+                        // path.corners 就是路径点数组
+                        for (int i = 0; i + 1 < ppath.corners.Length; i++)
+                        {
+                            DebugUtils.DrawLine(ppath.corners[i], ppath.corners[i + 1], Color.blue);
+                        }
+                    }
+                    
                     point = null;
                 } else {
                     point = hit.point;

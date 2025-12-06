@@ -24,9 +24,9 @@ namespace Navmesh {
             if (!connection.Init()) return false;
             if (!raycaster.Init()) return false;
 
-            // for (int i = 0; i < data.indices.Count / 3; i++) {
-            //     DrawTriangle(i, 0);
-            // }
+            for (int i = 0; i < data.indices.Count / 3; i++) {
+                DrawTriangle(i, 0);
+            }
             return true;
         }
 
@@ -69,9 +69,9 @@ namespace Navmesh {
             int vId1 = data.indices[tId * 3];
             int vId2 = data.indices[tId * 3 + 1];
             int vId3 = data.indices[tId * 3 + 2];
-            DebugUtils.DrawLine(data.vertices[vId1], data.vertices[vId2], Color.black, duration, 0.03f);
-            DebugUtils.DrawLine(data.vertices[vId2], data.vertices[vId3], Color.black, duration, 0.03f);
-            DebugUtils.DrawLine(data.vertices[vId3], data.vertices[vId1], Color.black, duration, 0.03f);
+            DebugUtils.DrawLine(data.vertices[vId1], data.vertices[vId2], Color.black, duration, 0.8f);
+            DebugUtils.DrawLine(data.vertices[vId2], data.vertices[vId3], Color.black, duration, 0.8f);
+            DebugUtils.DrawLine(data.vertices[vId3], data.vertices[vId1], Color.black, duration, 0.8f);
         }
         
         public Vector3F GetCentroid(int tId) {

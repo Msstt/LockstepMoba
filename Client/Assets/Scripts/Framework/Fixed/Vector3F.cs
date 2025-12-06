@@ -67,8 +67,8 @@ public struct Vector3F {
         return FloatF.Max(FloatF.Max(dx, dy), dz);
     }
     
-    public static bool IsEqualInEps(Vector3F a, Vector3F b) {
-        return FloatF.Abs(a.x - b.x) <= FloatF.eps && FloatF.Abs(a.y - b.y) <= FloatF.eps && FloatF.Abs(a.z - b.z) <= FloatF.eps;
+    public static bool IsEqualInEps(Vector3F a, Vector3F b, FloatF eps) {
+        return FloatF.Abs(a.x - b.x) <= eps && FloatF.Abs(a.y - b.y) <= eps && FloatF.Abs(a.z - b.z) <= eps;
     }
     
     #region PropertyDrawer

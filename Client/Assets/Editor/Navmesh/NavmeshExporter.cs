@@ -53,7 +53,7 @@ namespace Editor.Network {
                     FloatF.FromFloat(vertice.z));
                 bool has = false;
                 for (int i = 0; i < surface.vertices.Count; i++) {
-                    if (Vector3F.IsEqualInEps(surface.vertices[i], point)) {
+                    if (Vector3F.IsEqualInEps(surface.vertices[i], point, FloatF.FromFloat(0.001f))) {
                         has = true;
                         mapping.Add(i);
                         break;
