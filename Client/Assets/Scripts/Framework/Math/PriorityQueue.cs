@@ -20,7 +20,6 @@ namespace Framework {
         public void Dequeue(out TElement element, out TPriority priority) {
             if (data.Count == 0) {
                 throw new InvalidOperationException("PriorityQueue is empty");
-                return;
             }
             
             (element, priority) = data[0];

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Editor/Tools/MultiLaunchCreator.cs" />
+    <Compile Include="Assets/Editor/Tools/CombineMesh.cs" />
     <Compile Include="Assets/Editor/Navmesh/NavmeshExporter.cs" />
     <Compile Include="Assets/Editor/Network/GenerateMessageCode.cs" />
     <None Include="Assets/Editor/Network/Template/MessageDef.txt" />

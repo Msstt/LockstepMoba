@@ -70,6 +70,7 @@
     <Compile Include="Assets/Scripts/Framework/Tools/Json/JsonHelper.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Network.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/TestMsgDispatcher.cs" />
+    <Compile Include="Assets/Scripts/Framework/Tools/GameObjectExtensions.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/BattleMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/DebugMgr.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/ThreadMgr.cs" />

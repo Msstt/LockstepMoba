@@ -49,6 +49,7 @@
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/DescriptorPool.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/WireFormat.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/TypeRegistry.cs" />
+    <Compile Include="Assets/Plugins/Ultimate Game Tools/MeshSimplify/Editor/MeshSimplifyEditor.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/Descriptor.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/IMessage.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/JsonToken.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Assets/Plugins/Google.Protobuf/InvalidProtocolBufferException.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/FileDescriptor.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/WellKnownTypes/SourceContext.cs" />
+    <Compile Include="Assets/Plugins/Ultimate Game Tools/MeshSimplify/Scripts/Simplifier.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Collections/Lists.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/ReflectionUtil.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/WellKnownTypes/TimestampPartial.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Assets/Plugins/Google.Protobuf/CodedOutputStream.ComputeSize.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/MapFieldAccessor.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/WellKnownTypes/Wrappers.cs" />
+    <Compile Include="Assets/Plugins/Ultimate Game Tools/MeshSimplify/Scripts/RuntimeMeshSimplifier.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/ICustomDiagnosticMessage.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/WellKnownTypes/Empty.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/CodedOutputStream.cs" />
@@ -83,6 +86,7 @@
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/EnumDescriptor.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/IDescriptor.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/WellKnownTypes/WrappersPartial.cs" />
+    <Compile Include="Assets/Plugins/Ultimate Game Tools/MeshSimplify/Scripts/MeshSimplify.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/FieldType.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/CustomOptions.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/FrameworkPortability.cs" />
@@ -99,9 +103,11 @@
     <Compile Include="Assets/Plugins/Google.Protobuf/ByteArray.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/IDeepCloneable.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/DescriptorDeclaration.cs" />
+    <Compile Include="Assets/Plugins/Ultimate Game Tools/MeshSimplify/Data/Scripts/SimplifyMeshPreview.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/FieldDescriptor.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/FieldCodec.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/MessageExtensions.cs" />
+    <Compile Include="Assets/Plugins/Ultimate Game Tools/MeshSimplify/Scripts/MeshUniqueVertices.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Compatibility/MethodInfoExtensions.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/UnknownFieldSet.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/JsonParser.cs" />
@@ -124,8 +130,11 @@
     <Compile Include="Assets/Plugins/Google.Protobuf/FieldMaskTree.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/Reflection/RepeatedFieldAccessor.cs" />
     <Compile Include="Assets/Plugins/Google.Protobuf/ProtoPreconditions.cs" />
+    <None Include="Assets/Plugins/Ultimate Game Tools/MeshSimplify/Data/Shaders/StandardSpecularTwoSided.shader" />
+    <None Include="Assets/Plugins/Ultimate Game Tools/MeshSimplify/Data/Shaders/Wireframe.shader" />
     <None Include="Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.xml" />
     <None Include="Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.xml" />
+    <None Include="Assets/Plugins/Ultimate Game Tools/MeshSimplify/!Readme.txt" />
     <None Include="Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.xml" />
     <None Include="Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.xml" />
     <None Include="Assets/Plugins/Sirenix/Readme.txt" />
