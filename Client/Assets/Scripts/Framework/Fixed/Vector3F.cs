@@ -1,6 +1,7 @@
 // 帧同步 Vector3
 
 using System;
+using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -70,40 +71,24 @@ public struct Vector3F {
     public static bool IsEqualInEps(Vector3F a, Vector3F b, FloatF eps) {
         return FloatF.Abs(a.x - b.x) <= eps && FloatF.Abs(a.y - b.y) <= eps && FloatF.Abs(a.z - b.z) <= eps;
     }
-    
-    #region PropertyDrawer
-    
-    [CustomPropertyDrawer(typeof(Vector3F))]
-    public class Float3Drawer : PropertyDrawer
-    {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
-            EditorGUI.BeginProperty(position, label, property);
+}
 
-            var x = property.FindPropertyRelative("x");
-            var y = property.FindPropertyRelative("y");
-            var z = property.FindPropertyRelative("z");
+public class Vector3FDrawer : OdinValueDrawer<Vector3F> {
+    protected override void DrawPropertyLayout(GUIContent label) {
+        Vector3F v = ValueEntry.SmartValue;
 
-            position = EditorGUI.PrefixLabel(position, label);
+        EditorGUILayout.BeginHorizontal();
 
-            float width = position.width / 3f;
-
-            var r1 = new Rect(position.x + width * 0, position.y, width - 2, position.height);
-            var r2 = new Rect(position.x + width * 1, position.y, width - 2, position.height);
-            var r3 = new Rect(position.x + width * 2, position.y, width - 2, position.height);
-
-            EditorGUI.PropertyField(r1, x, GUIContent.none);
-            EditorGUI.PropertyField(r2, y, GUIContent.none);
-            EditorGUI.PropertyField(r3, z, GUIContent.none);
-
-            EditorGUI.EndProperty();
+        if (label != null) {
+            EditorGUILayout.LabelField(label, GUILayout.Width(EditorGUIUtility.labelWidth));
         }
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUIUtility.singleLineHeight;
+        foreach (var property in Property.Children) {
+            property.Draw();
         }
+        
+        EditorGUILayout.EndHorizontal();
+
+        ValueEntry.SmartValue = v;
     }
-    
-    #endregion
 }

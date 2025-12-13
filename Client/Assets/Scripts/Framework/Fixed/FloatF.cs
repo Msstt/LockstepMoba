@@ -2,18 +2,17 @@
 
 using System;
 using Newtonsoft.Json;
+using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 
-[JsonConverter(typeof(FloatFConverter))]
-[Serializable]
+[Serializable, JsonConverter(typeof(FloatFConverter))]
 public struct FloatF : IComparable<FloatF> {
     public static FloatF eps = new FloatF(3, true);
     
-    private const long scale = 1_000_000;
+    public const long scale = 1_000_000;
     
-    [JsonProperty]
-    [SerializeField]
+    [SerializeField, JsonProperty]
     private long value;
     
     public FloatF(long f, bool isRaw = false) {
@@ -57,7 +56,10 @@ public struct FloatF : IComparable<FloatF> {
     
     public override bool Equals(object obj) => obj is FloatF f && f.value == value;
     public override int GetHashCode() => value.GetHashCode();
-    public override string ToString() => value + "F";
+
+    public override string ToString() {
+        return value / scale + (value % scale != 0 ? "." + Math.Abs(value % scale).ToString("D6").TrimEnd('0') : "");
+    }
     
     public static FloatF Abs(FloatF a) {
         if (a.value < 0) {
@@ -78,7 +80,7 @@ public struct FloatF : IComparable<FloatF> {
         }
         return new FloatF(approx, true);
     }
-
+    
     #region Json Converter
     private class FloatFConverter : JsonConverter<FloatF> {
         public override void WriteJson(JsonWriter writer, FloatF value, JsonSerializer serializer) {
@@ -97,22 +99,54 @@ public struct FloatF : IComparable<FloatF> {
     }
     
     #endregion
-
-    #region PropertyDrawer
-
-    [CustomPropertyDrawer(typeof(FloatF))]
-    public class MyFloatDrawer : PropertyDrawer
-    {
-        public override void OnGUI(Rect pos, SerializedProperty prop, GUIContent label)
-        {
-            EditorGUI.PropertyField(pos, prop.FindPropertyRelative("value"), label);
-        }
-
-        public override float GetPropertyHeight(SerializedProperty prop, GUIContent label)
-            => EditorGUIUtility.singleLineHeight;
-    }
-
-    #endregion
 }
 
+#region PropertyDrawer
 
+public class FloatFPropertyDrawer : OdinValueDrawer<FloatF> {
+    protected override void DrawPropertyLayout(GUIContent label) {
+        FloatF f = ValueEntry.SmartValue;
+
+        EditorGUILayout.BeginHorizontal();
+
+        if (label != null) {
+            Rect rect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
+            EditorGUI.PrefixLabel(rect, GUIUtility.GetControlID(FocusType.Passive), label);
+        }
+
+        string input = EditorGUILayout.TextField(f.ToString());
+        f = Parse(input)??f;
+        
+
+        EditorGUILayout.EndHorizontal();
+
+        ValueEntry.SmartValue = f;
+    }
+
+    private FloatF? Parse(string s) {
+        if (string.IsNullOrEmpty(s)) {
+            return null;
+        }
+        
+        string[] parts = s.Split('.');
+        if (parts.Length > 2) {
+            return null;
+        }
+
+        if (!long.TryParse(parts[0], out long intPart)) {
+            return null;
+        }
+
+        long fracPart = 0;
+        if (parts.Length == 2) {
+            string fracStr = parts[1].PadRight(6, '0');
+            if (fracStr.Length > 6 || !long.TryParse(fracStr, out fracPart)) {
+                return null;
+            }
+        }
+
+        return new FloatF(intPart * FloatF.scale + (intPart < 0 ? -fracPart : fracPart), true);
+    }
+}
+
+#endregion
