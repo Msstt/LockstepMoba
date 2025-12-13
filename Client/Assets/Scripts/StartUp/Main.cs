@@ -17,8 +17,8 @@ public class Main : MonoBehaviour {
                     Debug.Log(point.Value);
                     Debug.Log(hit.point);
                     NavmeshUtils.FindPath(Vector3F.FromVector3(point.Value), Vector3F.FromVector3(hit.point), out var path);
-                    // Vector3 s = new Vector3(729.86f, 125.01f, 1424.97f);
-                    // Vector3 e = new Vector3(675.86f, 125.01f, 1319.80f);
+                    // Vector3 s = new Vector3(677.11f, 125.01f, 1490.28f);
+                    // Vector3 e = new Vector3(591.55f, 125.01f, 1456.38f);
                     // DebugUtils.DrawDot(s);
                     // DebugUtils.DrawDot(e);
                     // NavmeshUtils.FindPath(Vector3F.FromVector3(s), Vector3F.FromVector3(e), out var path);

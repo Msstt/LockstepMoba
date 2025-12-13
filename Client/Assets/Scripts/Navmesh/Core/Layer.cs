@@ -24,8 +24,10 @@ namespace Navmesh {
             if (!connection.Init()) return false;
             if (!raycaster.Init()) return false;
 
-            for (int i = 0; i < data.indices.Count / 3; i++) {
-                DrawTriangle(i, 0);
+            if (NavmeshUtils.Config.DrawDebugTriangle) {
+                for (int i = 0; i < data.indices.Count / 3; i++) {
+                    DrawTriangle(i, 0);
+                }
             }
             return true;
         }

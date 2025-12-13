@@ -5,8 +5,15 @@ using UnityEngine;
 
 namespace Navmesh {
     public class Connection {
+        enum WType {
+            centroidDis,
+            edgeMidDis,
+        }
+        
+        private static WType wType = WType.edgeMidDis;
+        
         public class Info {
-            public FloatF w;
+            public FloatF centroidDis;
             public int vId1;
             public int vId2;
             public int tId;
@@ -16,6 +23,7 @@ namespace Navmesh {
         private Layer layer;
         
         private List<Dictionary<int, Info>> connections;
+        private Dictionary<Tuple<int, int, int>, FloatF> midDis;
         private List<Vector3F> centroid;
         
         public Connection(NavmeshSurface data, Layer layer) {
@@ -50,25 +58,45 @@ namespace Navmesh {
                 connections.Add(new Dictionary<int, Info>());
                 centroid.Add(layer.GetCentroid(i));
             }
-            foreach (var ((vId1, vId2), tId1) in edges) {
+            foreach (var ((vId1, vId2), sTId) in edges) {
                 var revEdge = Tuple.Create(vId2, vId1);
-                if (edges.TryGetValue(revEdge, out int tId2)) {
-                    connections[tId1].TryAdd(tId2, new Info {
-                        w = GetW(tId1, tId2, vId1, vId2),
-                        tId = tId2,
+                if (edges.TryGetValue(revEdge, out int tTId)) {
+                    connections[sTId].TryAdd(tTId, new Info {
+                        centroidDis = Vector3F.Distance(centroid[sTId], centroid[tTId]),
+                        tId = tTId,
                         vId1 = vId1,
                         vId2 = vId2,
                     });
-                    // DebugUtils.DrawLine(centroid[tId1], centroid[tId2], Color.green, 0);
+
+                    if (NavmeshUtils.Config.DrawDebugConnection && wType == WType.centroidDis) {
+                        DebugUtils.DrawLine(centroid[sTId], centroid[tTId], Color.green, 0);
+                    }
+                }
+            }
+
+            midDis = new Dictionary<Tuple<int, int, int>, FloatF>();
+            for (int sTId = 0; sTId < data.indices.Count / 3; sTId++) {
+                foreach (var pTId in connections[sTId].Keys) {
+                    foreach (var tTId in connections[sTId].Keys) {
+                        if (pTId == tTId) {
+                            continue;
+                        }
+                        Vector3F p1 = GetEdgeMidPoint(connections[pTId][sTId]);
+                        Vector3F p2 = GetEdgeMidPoint(connections[sTId][tTId]);
+                        midDis[Tuple.Create(pTId, sTId, tTId)] = Vector3F.Distance(p1, p2);
+                        
+                        if (NavmeshUtils.Config.DrawDebugConnection && wType == WType.edgeMidDis) {
+                            DebugUtils.DrawLine(p1, p2, Color.green, 0);
+                        }
+                    }
                 }
             }
 
             return true;
         }
-
-        private FloatF GetW(int tId1, int tId2, int vId1, int vId2) {
-            return Vector3F.Distance(centroid[tId1], centroid[tId2]);
-            // return Vector3F.Distance(centroid[tId1], Vector3F.Mid(data.vertices[vId1], data.vertices[vId2]));\
+        
+        private Vector3F GetEdgeMidPoint(Info info) {
+            return Vector3F.Mid(data.vertices[info.vId1], data.vertices[info.vId2]);
         }
 
         // 获取最短路
@@ -82,11 +110,46 @@ namespace Navmesh {
             PriorityQueue<int, FloatF> queue = new PriorityQueue<int, FloatF>();
             queue.Enqueue(startId, 0);
             cost[startId] = 0;
+            parent[startId] = -1;
 
             FloatF GetF(int id) {
                 // return cost[id];
                 return cost[id] + Vector3F.MaxDistance(centroid[id], centroid[endId]);; // f = g + h
                 // return cost[id] + Vector3F.Distance2(centroid[id], centroid[endId]);; // f = g + h
+            }
+            
+            FloatF GetW(int pTId, int sTId, int tTId) {
+                #region 重心
+                
+                // if (sTId == startId && tTId == endId) {
+                //     return Vector3F.Distance(start, end);
+                // } else if (sTId == startId) {
+                //     return Vector3F.Distance(start, centroid[tTId]);
+                // } else if (tTId == endId) {
+                //     return Vector3F.Distance(centroid[sTId], end);
+                // } else {
+                //     return connections[sTId][tTId].centroidDis;
+                // }
+
+                #endregion
+
+                #region 边中点
+                
+                if (sTId == startId && tTId == endId) {
+                    return Vector3F.Distance(start, end);
+                } else if (sTId == startId) {
+                    Info info = connections[sTId][tTId];
+                    return Vector3F.Distance(start, Vector3F.Mid(data.vertices[info.vId1], data.vertices[info.vId2]));
+                } else if (tTId == endId) {
+                    Info info = connections[pTId][sTId];
+                    return Vector3F.Distance(Vector3F.Mid(data.vertices[info.vId1], data.vertices[info.vId2]), end);
+                } else {
+                    if (!midDis.ContainsKey(Tuple.Create(pTId, sTId, tTId))) {
+                        Debug.Log("error" + pTId + " " + sTId + " " + tTId);
+                    }
+                    return midDis[Tuple.Create(pTId, sTId, tTId)];
+                }
+                #endregion
             }
 
             while (queue.Count != 0) {
@@ -108,13 +171,10 @@ namespace Navmesh {
                 visited.Add(currentId);
 
                 foreach (var info in connections[currentId].Values) {
-                    FloatF newCost = cost[currentId] + info.w;
-                    if (currentId == startId) {
-                        newCost = cost[currentId] + Vector3F.Distance(start, centroid[info.tId]);
+                    if (parent[currentId] == info.tId) {
+                        continue;
                     }
-                    if (info.tId == endId) {
-                        newCost = cost[currentId] + Vector3F.Distance(centroid[info.tId], end);
-                    }
+                    FloatF newCost = cost[currentId] + GetW(parent[currentId], currentId, info.tId);
                     if (!cost.ContainsKey(info.tId) || newCost < cost[info.tId]) {
                         cost[info.tId] = newCost;
                         parent[info.tId] = currentId;

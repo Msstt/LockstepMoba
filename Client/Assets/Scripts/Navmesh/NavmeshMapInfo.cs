@@ -1,10 +1,18 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Navmesh {
     public class NavmeshMapInfo : MonoBehaviour {
         [Header("Navmesh 网格数据")]
         public TextAsset surfaceData;
+        
+        [FoldoutGroup("调试参数")]
+        [LabelText("绘制网格三角形")]
+        public bool DrawDebugTriangle;
+        [FoldoutGroup("调试参数")]
+        [LabelText("绘制网格连接")]
+        public bool DrawDebugConnection;
     }
 
     public class NavmeshSurface {
