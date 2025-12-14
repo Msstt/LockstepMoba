@@ -50,21 +50,16 @@ namespace Navmesh {
             return true;
         }
 
-        public bool FindPath(Vector3F start, Vector3F end, out List<Vector3F> path) {
-            path = new List<Vector3F>();
-            if (!raycaster.Raycast(start, out int startTId)) return false;
-            if (!raycaster.Raycast(end, out int endTId)) return false;
+        public List<Vector3F> FindPath(Vector3F start, Vector3F end) {
+            List<Vector3F> path = new List<Vector3F> { start };
             
-            if (!connection.GetPath(start, end, startTId, endTId, out List<Connection.Info> connectionList)) return false;
-            
-            // int lastTId = startTId;
-            // for (int i = 0; i < connectionList.Count; i++) {
-            //     DebugUtils.DrawLine(GetCentroid(lastTId), GetCentroid(connectionList[i].tId), Color.blue);
-            //     lastTId = connectionList[i].tId;
-            // }
+            if (!raycaster.Raycast(start, out int startTId)) return path;
+            if (!raycaster.Raycast(end, out int endTId)) endTId = -1;
+
+            List<Connection.Info> connectionList = connection.GetPath(start, end, startTId, endTId);
 
             path = smoother.SmoothPath(start, end, startTId, connectionList);
-            return true;
+            return path;
         }
         
         public void DrawTriangle(int tId, float duration = 2f) {

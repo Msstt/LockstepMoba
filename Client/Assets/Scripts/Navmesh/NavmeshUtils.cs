@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Navmesh;
 
@@ -8,6 +9,10 @@ public static class NavmeshUtils {
         NavmeshMgr.Instance.Start();
     }
     
+    public static void Update() {
+        NavmeshMgr.Instance.Update();
+    }
+    
     public static bool Raycast(Vector3F point, out int tId) {
         return NavmeshMgr.Instance.Raycast(0, point, out tId);
     }
@@ -16,11 +21,11 @@ public static class NavmeshUtils {
         return NavmeshMgr.Instance.Raycast(radius, point, out tId);
     }
     
-    public static bool FindPath(Vector3F start, Vector3F end, out List<Vector3F> path) {
-        return NavmeshMgr.Instance.FindPath(0, start, end, out path);
+    public static void FindPath(Vector3F start, Vector3F end, Action<List<Vector3F>> callback, bool force = false) {
+        NavmeshMgr.Instance.FindPath(0, start, end, callback, force);
     }
     
-    public static bool FindPathByRadius(FloatF radius, Vector3F start, Vector3F end, out List<Vector3F> path) {
-        return NavmeshMgr.Instance.FindPath(radius, start, end, out path);
+    public static void FindPathByRadius(FloatF radius, Vector3F start, Vector3F end, Action<List<Vector3F>> callback, bool force = false) {
+        NavmeshMgr.Instance.FindPath(radius, start, end, callback, force);
     }
 }

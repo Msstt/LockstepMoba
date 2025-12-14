@@ -63,6 +63,7 @@
     <Compile Include="Assets/Scripts/Framework/Tools/UnityEventMgr.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Updater.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkUtils.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/Define.cs" />
     <Compile Include="Assets/Scripts/Battle/BattleMgr.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/FrameMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Fixed/Vector3F.cs" />

@@ -5,13 +5,6 @@ using UnityEngine;
 
 namespace Navmesh {
     public class Connection {
-        enum WType {
-            centroidDis,
-            edgeMidDis,
-        }
-        
-        private static WType wType = WType.edgeMidDis;
-        
         public class Info {
             public FloatF centroidDis;
             public int vId1;
@@ -68,7 +61,7 @@ namespace Navmesh {
                         vId2 = vId2,
                     });
 
-                    if (NavmeshUtils.Config.DrawDebugConnection && wType == WType.centroidDis) {
+                    if (NavmeshUtils.Config.DrawDebugConnection && FindPathConfig.wType == FindPathConfig.WType.centroidDis) {
                         DebugUtils.DrawLine(centroid[sTId], centroid[tTId], Color.green, 0);
                     }
                 }
@@ -85,7 +78,7 @@ namespace Navmesh {
                         Vector3F p2 = GetEdgeMidPoint(connections[sTId][tTId]);
                         midDis[Tuple.Create(pTId, sTId, tTId)] = Vector3F.Distance(p1, p2);
                         
-                        if (NavmeshUtils.Config.DrawDebugConnection && wType == WType.edgeMidDis) {
+                        if (NavmeshUtils.Config.DrawDebugConnection && FindPathConfig.wType == FindPathConfig.WType.edgeMidDis) {
                             DebugUtils.DrawLine(p1, p2, Color.green, 0);
                         }
                     }
@@ -101,8 +94,8 @@ namespace Navmesh {
 
         // 获取最短路
         // startId, endId: 三角形ID
-        public bool GetPath(Vector3F start, Vector3F end, int startId, int endId, out List<Info> path) {
-            path = new List<Info>();
+        public List<Info> GetPath(Vector3F start, Vector3F end, int startId, int endId) {
+            List<Info> path = new List<Info>();
             
             Dictionary<int, FloatF> cost = new Dictionary<int, FloatF>();
             Dictionary<int, int> parent = new Dictionary<int, int>();
@@ -111,58 +104,52 @@ namespace Navmesh {
             queue.Enqueue(startId, 0);
             cost[startId] = 0;
             parent[startId] = -1;
-
-            FloatF GetF(int id) {
-                // return cost[id];
-                return cost[id] + Vector3F.MaxDistance(centroid[id], centroid[endId]);; // f = g + h
-                // return cost[id] + Vector3F.Distance2(centroid[id], centroid[endId]);; // f = g + h
-            }
             
             FloatF GetW(int pTId, int sTId, int tTId) {
-                #region 重心
-                
-                // if (sTId == startId && tTId == endId) {
-                //     return Vector3F.Distance(start, end);
-                // } else if (sTId == startId) {
-                //     return Vector3F.Distance(start, centroid[tTId]);
-                // } else if (tTId == endId) {
-                //     return Vector3F.Distance(centroid[sTId], end);
-                // } else {
-                //     return connections[sTId][tTId].centroidDis;
-                // }
-
-                #endregion
-
-                #region 边中点
-                
-                if (sTId == startId && tTId == endId) {
-                    return Vector3F.Distance(start, end);
-                } else if (sTId == startId) {
-                    Info info = connections[sTId][tTId];
-                    return Vector3F.Distance(start, Vector3F.Mid(data.vertices[info.vId1], data.vertices[info.vId2]));
-                } else if (tTId == endId) {
-                    Info info = connections[pTId][sTId];
-                    return Vector3F.Distance(Vector3F.Mid(data.vertices[info.vId1], data.vertices[info.vId2]), end);
-                } else {
-                    if (!midDis.ContainsKey(Tuple.Create(pTId, sTId, tTId))) {
-                        Debug.Log("error" + pTId + " " + sTId + " " + tTId);
-                    }
-                    return midDis[Tuple.Create(pTId, sTId, tTId)];
+                switch (FindPathConfig.wType) {
+                    case FindPathConfig.WType.centroidDis:
+                        if (sTId == startId && tTId == endId) {
+                            return Vector3F.Distance(start, end);
+                        } else if (sTId == startId) {
+                            return Vector3F.Distance(start, centroid[tTId]);
+                        } else if (tTId == endId) {
+                            return Vector3F.Distance(centroid[sTId], end);
+                        } else {
+                            return connections[sTId][tTId].centroidDis;
+                        }
+                    case FindPathConfig.WType.edgeMidDis:
+                        if (sTId == startId && tTId == endId) {
+                            return Vector3F.Distance(start, end);
+                        } else if (sTId == startId) {
+                            Info info = connections[sTId][tTId];
+                            return Vector3F.Distance(start, Vector3F.Mid(data.vertices[info.vId1], data.vertices[info.vId2]));
+                        } else if (tTId == endId) {
+                            Info info = connections[pTId][sTId];
+                            return Vector3F.Distance(Vector3F.Mid(data.vertices[info.vId1], data.vertices[info.vId2]), end);
+                        } else {
+                            return midDis[Tuple.Create(pTId, sTId, tTId)];
+                        }
                 }
-                #endregion
+                return FloatF.zero;
+            }
+            
+            FloatF GetH(int id) {
+                return Vector3F.MaxDistance(centroid[id], end);
+            }
+            
+            FloatF GetF(int id) {
+                // return cost[id];
+                return cost[id] + GetH(id); // f = g + h
+                // return cost[id] + Vector3F.Distance2(centroid[id], end); // f = g + h
             }
 
+            int nearestId = startId;
+            FloatF nearestDis = GetH(startId);
             while (queue.Count != 0) {
                 queue.Dequeue(out int currentId, out _);
                 
-                if (currentId == endId) {
-                    while (currentId != startId) {
-                        int pId = parent[currentId];
-                        path.Add(connections[pId][currentId]);
-                        currentId = pId;
-                    }
-                    path.Reverse();
-                    return true;
+                if (currentId == endId || visited.Count > FindPathConfig.FindPathMaxIterationCount) {
+                    break;
                 }
 
                 if (visited.Contains(currentId)) {
@@ -179,11 +166,23 @@ namespace Navmesh {
                         cost[info.tId] = newCost;
                         parent[info.tId] = currentId;
                         queue.Enqueue(info.tId, GetF(info.tId));
+                        
+                        FloatF h = GetH(info.tId);
+                        if (h < nearestDis) {
+                            nearestId = info.tId;
+                            nearestDis = h;
+                        }
                     }
                 }
             }
-
-            return false;
+            
+            while (nearestId != startId) {
+                int pId = parent[nearestId];
+                path.Add(connections[pId][nearestId]);
+                nearestId = pId;
+            }
+            path.Reverse();
+            return path;
         }
     }
 }

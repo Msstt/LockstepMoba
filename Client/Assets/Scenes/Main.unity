@@ -1300,6 +1300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba5af7f941049b38a7bea314f291812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsLocalDebug: 1
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,6 +1324,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 110155095823755260, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: DrawDebugTriangle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924100096024110221, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4252495362845666768, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_meshOriginal
       value: 
@@ -1334,6 +1343,10 @@ PrefabInstance:
     - target: {fileID: 4949772678890610153, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_Name
       value: Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892078044215765852, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6050057132898784399, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1379,6 +1392,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 212588825}
+    - target: {fileID: 7617082698648352176, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_originalMesh
       value: 
@@ -1387,126 +1404,6 @@ PrefabInstance:
       propertyPath: m_simplifiedMesh
       value: 
       objectReference: {fileID: 212588825}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[4]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[5]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[6]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[7]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[8]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[9]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[10]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[11]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[12]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[13]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[14]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[15]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[16]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[17]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[18]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[19]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[20]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[21]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[22]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[23]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[24]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[25]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[26]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[27]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[28]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732492616897935650, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_listDependentChildren.Array.data[29]
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

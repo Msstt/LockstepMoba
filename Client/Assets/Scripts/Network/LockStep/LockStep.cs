@@ -140,6 +140,7 @@ namespace Network {
             while (allInputs.ContainsKey(Frame + 1)) {
                 Frame++;
                 HandleFrameInputs(allInputs[Frame]);
+                GameMgr.Instance.FrameUpdate();
             }
         }
         

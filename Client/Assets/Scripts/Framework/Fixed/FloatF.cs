@@ -9,6 +9,7 @@ using UnityEngine;
 [Serializable, JsonConverter(typeof(FloatFConverter))]
 public struct FloatF : IComparable<FloatF> {
     public static FloatF eps = new FloatF(3, true);
+    public static FloatF zero = new FloatF(0, true);
     
     public const long scale = 1_000_000;
     
@@ -33,10 +34,11 @@ public struct FloatF : IComparable<FloatF> {
         return 1.0f * value / scale;
     }
     public static implicit operator FloatF(string s) {
-        if (!s.EndsWith("F") || !long.TryParse(s[..^1], out long f)) {
-            throw new ArgumentException($"Cannot parse '{s}' to FloatF");
+        FloatF? f = Parse(s);
+        if (f.HasValue) {
+            return f.Value;
         }
-        return new FloatF(f, true);
+        throw new ArgumentException($"Cannot parse '{s}' to FloatF");
     }
 
     public static FloatF operator+(FloatF a, FloatF b) => new FloatF(a.value + b.value, true);
@@ -61,69 +63,7 @@ public struct FloatF : IComparable<FloatF> {
         return value / scale + (value % scale != 0 ? "." + Math.Abs(value % scale).ToString("D6").TrimEnd('0') : "");
     }
     
-    public static FloatF Abs(FloatF a) {
-        if (a.value < 0) {
-            return new FloatF(-a.value, true);
-        } else {
-            return new FloatF(a.value, true);
-        }
-    }
-    public static FloatF Sqrt(FloatF x) {
-        if (x.value < 0) {
-            throw new ArgumentException($"Cannot sqrt negative FloatF: {x}");
-        }
-    
-        long n = x.value;
-        long approx = n;
-        for (int i = 0; i < 20; i++) {
-            approx = (approx + n * scale / approx) / 2;
-        }
-        return new FloatF(approx, true);
-    }
-    
-    #region Json Converter
-    private class FloatFConverter : JsonConverter<FloatF> {
-        public override void WriteJson(JsonWriter writer, FloatF value, JsonSerializer serializer) {
-            writer.WriteValue(value.value + "F");
-        }
-
-        public override FloatF ReadJson(JsonReader reader, System.Type objectType, FloatF existingValue, bool hasExistingValue, JsonSerializer serializer) {
-            if (reader.Value is string s && s.EndsWith("F")) {
-                if (long.TryParse(s[..^1], out long f)) {
-                    return new FloatF(f, true);
-                }
-            }
-
-            throw new JsonSerializationException("FloatF Serialize failed");
-        }
-    }
-    
-    #endregion
-}
-
-#region PropertyDrawer
-
-public class FloatFPropertyDrawer : OdinValueDrawer<FloatF> {
-    protected override void DrawPropertyLayout(GUIContent label) {
-        FloatF f = ValueEntry.SmartValue;
-
-        EditorGUILayout.BeginHorizontal();
-
-        if (label != null) {
-            Rect rect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
-            EditorGUI.PrefixLabel(rect, GUIUtility.GetControlID(FocusType.Passive), label);
-        }
-
-        string input = EditorGUILayout.TextField(f.ToString());
-        f = Parse(input)??f;
-        
-
-        EditorGUILayout.EndHorizontal();
-
-        ValueEntry.SmartValue = f;
-    }
-
-    private FloatF? Parse(string s) {
+    public static FloatF? Parse(string s) {
         if (string.IsNullOrEmpty(s)) {
             return null;
         }
@@ -145,7 +85,69 @@ public class FloatFPropertyDrawer : OdinValueDrawer<FloatF> {
             }
         }
 
-        return new FloatF(intPart * FloatF.scale + (intPart < 0 ? -fracPart : fracPart), true);
+        return new FloatF(intPart * scale + (intPart < 0 ? -fracPart : fracPart), true);
+    }
+    
+    public static FloatF Abs(FloatF a) {
+        if (a.value < 0) {
+            return new FloatF(-a.value, true);
+        } else {
+            return new FloatF(a.value, true);
+        }
+    }
+    public static FloatF Sqrt(FloatF x) {
+        if (x.value < 0) {
+            throw new ArgumentException($"Cannot sqrt negative FloatF: {x}");
+        }
+    
+        long n = x.value;
+        long approx = n;
+        for (int i = 0; i < 20; i++) {
+            approx = (approx + n * scale / approx) / 2;
+        }
+        return new FloatF(approx, true);
+    }
+}
+
+#region Json Converter
+public class FloatFConverter : JsonConverter<FloatF> {
+    public override void WriteJson(JsonWriter writer, FloatF value, JsonSerializer serializer) {
+        writer.WriteValue(value.ToString());
+    }
+
+    public override FloatF ReadJson(JsonReader reader, Type objectType, FloatF existingValue, bool hasExistingValue, JsonSerializer serializer) {
+        if (reader.Value is string s) {
+            FloatF? f = FloatF.Parse(s);
+            if (f.HasValue) {
+                return f.Value;
+            }
+        }
+
+        throw new JsonSerializationException("FloatF Serialize failed");
+    }
+}
+    
+#endregion
+
+#region PropertyDrawer
+
+public class FloatFPropertyDrawer : OdinValueDrawer<FloatF> {
+    protected override void DrawPropertyLayout(GUIContent label) {
+        FloatF f = ValueEntry.SmartValue;
+
+        EditorGUILayout.BeginHorizontal();
+
+        if (label != null) {
+            Rect rect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
+            EditorGUI.PrefixLabel(rect, GUIUtility.GetControlID(FocusType.Passive), label);
+        }
+
+        string input = EditorGUILayout.TextField(f.ToString());
+        f = FloatF.Parse(input)??f;
+
+        EditorGUILayout.EndHorizontal();
+
+        ValueEntry.SmartValue = f;
     }
 }
 

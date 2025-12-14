@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Framework;
 using UnityEngine;
@@ -11,6 +12,14 @@ namespace Navmesh {
         private Dictionary<FloatF, Layer> layers;
 
         public NavmeshMapInfo MapInfo => mapInfo;
+
+        private struct FindPathQuery {
+            public FloatF radius;
+            public Vector3F start;
+            public Vector3F end;
+            public Action<List<Vector3F>> callback;
+        }
+        private Queue<FindPathQuery> findPathQueue = new Queue<FindPathQuery>();
 
         public void Start() {
             if (!LoadData()) {
@@ -47,17 +56,45 @@ namespace Navmesh {
             }
             return true;
         }
+        
+        public void Update() {
+            HandleFindPathQueue();
+        }
 
         #region 寻路
 
-        public bool FindPath(FloatF radius, Vector3F start, Vector3F end, out List<Vector3F> path) {
-            path = new List<Vector3F>();
+        private List<Vector3F> FindPath(FloatF radius, Vector3F start, Vector3F end) {
             foreach (var r in allRadius) {
                 if (radius <= r) {
-                    return layers[r].FindPath(start, end, out path);
+                    return layers[r].FindPath(start, end);
                 }
             }
-            return false;
+            return new List<Vector3F> { start };
+        }
+        
+        public void FindPath(FloatF radius, Vector3F start, Vector3F end, Action<List<Vector3F>> callback, bool force) {
+            if (force) {
+                var path = FindPath(radius, start, end);
+                callback?.Invoke(path);
+                return;
+            }
+            findPathQueue.Enqueue(new FindPathQuery {
+                radius = radius,
+                start = start,
+                end = end,
+                callback = callback,
+            });
+        }
+
+        private void HandleFindPathQueue() {
+            for (int i = 0; i < FindPathConfig.FindPathMaxQueryPerFrame; i++) {
+                if (findPathQueue.Count == 0) {
+                    break;
+                }
+                var query = findPathQueue.Dequeue();
+                var path = FindPath(query.radius, query.start, query.end);
+                query.callback?.Invoke(path);
+            }
         }
 
         #endregion
