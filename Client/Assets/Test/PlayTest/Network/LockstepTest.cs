@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Battle;
 using Network;
 using NUnit.Framework;
 using UnityEngine;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Navmesh {
     public class NavmeshMapInfo : MonoBehaviour {
-        [Header("Navmesh 网格数据")]
+        [LabelText("Navmesh 网格数据")]
         public TextAsset surfaceData;
         
         [FoldoutGroup("调试参数")]

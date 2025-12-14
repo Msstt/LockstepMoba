@@ -1,4 +1,4 @@
-using Battle;
+using Combat;
 using Network;
 
 public class BattleMsgDispatcher : MsgDispatcher {
@@ -7,10 +7,10 @@ public class BattleMsgDispatcher : MsgDispatcher {
     }
     
     private static void battle_start_s2c(battle_start_s2c msg) {
-        if (BattleMgr.Instance.IsRunning) {
+        if (CombatMgr.Instance.IsRunning) {
             return;
         }
-        BattleMgr.Instance.Start(msg);
+        CombatMgr.Instance.Start(msg);
         LockStep.Instance.Start();
     }
 }

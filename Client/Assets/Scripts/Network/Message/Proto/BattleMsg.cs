@@ -24,13 +24,15 @@ namespace Network {
     static BattleMsgReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChZEZWZpbmUvQmF0dGxlTXNnLnByb3RvEgdOZXR3b3JrIjIKEGJhdHRsZV9z",
-            "dGFydF9zMmMSEAoIc2VsZl91aWQYASABKAUSDAoEdWlkcxgCIAMoBWIGcHJv",
-            "dG8z"));
+            "ChZEZWZpbmUvQmF0dGxlTXNnLnByb3RvEgdOZXR3b3JrIo0BChBiYXR0bGVf",
+            "c3RhcnRfczJjEhAKCHNlbGZfdWlkGAEgASgFEjYKB3BsYXllcnMYAiADKAsy",
+            "JS5OZXR3b3JrLmJhdHRsZV9zdGFydF9zMmMucGxheWVyX2luZm8aLwoLcGxh",
+            "eWVyX2luZm8SCwoDdWlkGAEgASgFEhMKC2NoYW1waW9uX2lkGAIgASgFYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c), global::Network.battle_start_s2c.Parser, new[]{ "SelfUid", "Uids" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c), global::Network.battle_start_s2c.Parser, new[]{ "SelfUid", "Players" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c.Types.player_info), global::Network.battle_start_s2c.Types.player_info.Parser, new[]{ "Uid", "ChampionId" }, null, null, null)})
           }));
     }
     #endregion
@@ -66,7 +68,7 @@ namespace Network {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public battle_start_s2c(battle_start_s2c other) : this() {
       selfUid_ = other.selfUid_;
-      uids_ = other.uids_.Clone();
+      players_ = other.players_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -86,14 +88,14 @@ namespace Network {
       }
     }
 
-    /// <summary>Field number for the "uids" field.</summary>
-    public const int UidsFieldNumber = 2;
-    private static readonly pb::FieldCodec<int> _repeated_uids_codec
-        = pb::FieldCodec.ForInt32(18);
-    private readonly pbc::RepeatedField<int> uids_ = new pbc::RepeatedField<int>();
+    /// <summary>Field number for the "players" field.</summary>
+    public const int PlayersFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Network.battle_start_s2c.Types.player_info> _repeated_players_codec
+        = pb::FieldCodec.ForMessage(18, global::Network.battle_start_s2c.Types.player_info.Parser);
+    private readonly pbc::RepeatedField<global::Network.battle_start_s2c.Types.player_info> players_ = new pbc::RepeatedField<global::Network.battle_start_s2c.Types.player_info>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<int> Uids {
-      get { return uids_; }
+    public pbc::RepeatedField<global::Network.battle_start_s2c.Types.player_info> Players {
+      get { return players_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -110,7 +112,7 @@ namespace Network {
         return true;
       }
       if (SelfUid != other.SelfUid) return false;
-      if(!uids_.Equals(other.uids_)) return false;
+      if(!players_.Equals(other.players_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -118,7 +120,7 @@ namespace Network {
     public override int GetHashCode() {
       int hash = 1;
       if (SelfUid != 0) hash ^= SelfUid.GetHashCode();
-      hash ^= uids_.GetHashCode();
+      hash ^= players_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -136,7 +138,7 @@ namespace Network {
         output.WriteRawTag(8);
         output.WriteInt32(SelfUid);
       }
-      uids_.WriteTo(output, _repeated_uids_codec);
+      players_.WriteTo(output, _repeated_players_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -148,7 +150,7 @@ namespace Network {
       if (SelfUid != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(SelfUid);
       }
-      size += uids_.CalculateSize(_repeated_uids_codec);
+      size += players_.CalculateSize(_repeated_players_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -163,7 +165,7 @@ namespace Network {
       if (other.SelfUid != 0) {
         SelfUid = other.SelfUid;
       }
-      uids_.Add(other.uids_);
+      players_.Add(other.players_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -179,14 +181,177 @@ namespace Network {
             SelfUid = input.ReadInt32();
             break;
           }
-          case 18:
-          case 16: {
-            uids_.AddEntriesFrom(input, _repeated_uids_codec);
+          case 18: {
+            players_.AddEntriesFrom(input, _repeated_players_codec);
             break;
           }
         }
       }
     }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the battle_start_s2c message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class player_info : pb::IMessage<player_info> {
+        private static readonly pb::MessageParser<player_info> _parser = new pb::MessageParser<player_info>(() => new player_info());
+        private pb::UnknownFieldSet _unknownFields;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<player_info> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Network.battle_start_s2c.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public player_info() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public player_info(player_info other) : this() {
+          uid_ = other.uid_;
+          championId_ = other.championId_;
+          _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public player_info Clone() {
+          return new player_info(this);
+        }
+
+        /// <summary>Field number for the "uid" field.</summary>
+        public const int UidFieldNumber = 1;
+        private int uid_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int Uid {
+          get { return uid_; }
+          set {
+            uid_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "champion_id" field.</summary>
+        public const int ChampionIdFieldNumber = 2;
+        private int championId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int ChampionId {
+          get { return championId_; }
+          set {
+            championId_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as player_info);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(player_info other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Uid != other.Uid) return false;
+          if (ChampionId != other.ChampionId) return false;
+          return Equals(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Uid != 0) hash ^= Uid.GetHashCode();
+          if (ChampionId != 0) hash ^= ChampionId.GetHashCode();
+          if (_unknownFields != null) {
+            hash ^= _unknownFields.GetHashCode();
+          }
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Uid != 0) {
+            output.WriteRawTag(8);
+            output.WriteInt32(Uid);
+          }
+          if (ChampionId != 0) {
+            output.WriteRawTag(16);
+            output.WriteInt32(ChampionId);
+          }
+          if (_unknownFields != null) {
+            _unknownFields.WriteTo(output);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Uid != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(Uid);
+          }
+          if (ChampionId != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(ChampionId);
+          }
+          if (_unknownFields != null) {
+            size += _unknownFields.CalculateSize();
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(player_info other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Uid != 0) {
+            Uid = other.Uid;
+          }
+          if (other.ChampionId != 0) {
+            ChampionId = other.ChampionId;
+          }
+          _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                break;
+              case 8: {
+                Uid = input.ReadInt32();
+                break;
+              }
+              case 16: {
+                ChampionId = input.ReadInt32();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
 
   }
 

@@ -1,8 +1,6 @@
-using Battle;
+using Combat;
 using Framework;
-using Google.Protobuf.Collections;
 using Network;
-using PlasticGui.WorkspaceWindow.Merge;
 using UnityEngine;
 
 public class GameMgr : Singleton<GameMgr> {
@@ -16,6 +14,7 @@ public class GameMgr : Singleton<GameMgr> {
     }
     
     public void FrameUpdate() {
+        CombatMgr.Instance.Update();
         NavmeshUtils.Update();
     }
 
@@ -28,11 +27,15 @@ public class GameMgr : Singleton<GameMgr> {
     public void StartLocalDebug() {
         isLocalDebug = true;
         lastTick = Time.time;
-        
-        BattleMgr.Instance.Start(new battle_start_s2c {
+
+        var msg = new battle_start_s2c {
             SelfUid = 1,
-            Uids = { 1 },
+        };
+        msg.Players.Add(new battle_start_s2c.Types.player_info {
+            Uid = 1,
+            ChampionId = 1,
         });
+        CombatMgr.Instance.Start(msg);
         LockStep.Instance.Start();
     }
     

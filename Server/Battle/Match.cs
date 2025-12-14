@@ -32,7 +32,11 @@ namespace Battle {
             };
             List<Uid> uids = NetworkUtils.GetAllClientUid();
             foreach (var uid in uids) {
-                msg.Uids.Add(uid);
+                msg.Players.Add(
+                    new battle_start_s2c.Types.player_info {
+                        Uid = uid,
+                        ChampionId = 1,
+                    });
             }
             return msg;
         }

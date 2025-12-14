@@ -4,6 +4,11 @@ package Network;
 
 // 战斗开始
 message battle_start_s2c {
+  message player_info {
+    int32 uid = 1;
+    int32 champion_id = 2;
+  }
+  
   int32 self_uid = 1;
-  repeated int32 uids = 2;
+  repeated player_info players = 2;
 }
