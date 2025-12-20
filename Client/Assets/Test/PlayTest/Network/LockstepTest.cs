@@ -56,7 +56,7 @@ public class LockstepTest {
         return ret;
     }
     
-    private void TestInputHandler(Dictionary<Uid, test_input> inputs) {
+    private void TestInputHandler(SortedDictionary<Uid, test_input> inputs) {
         string status = "";
         foreach (var (uid, tMsg) in inputs) {
             var msg = tMsg;
