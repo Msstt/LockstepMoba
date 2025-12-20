@@ -35,6 +35,7 @@ namespace Combat {
                 playerUid.Add(player.Uid);
                 championId[player.Uid] = player.ChampionId;
             }
+            playerUid.Sort();
 
             ActorMgr.Instance.Start();
             

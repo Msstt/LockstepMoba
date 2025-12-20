@@ -12,16 +12,16 @@ namespace Network {
         }
 
         public static class InputMsgDef {
-            public static Dictionary<MessageDef, Action<IMessage, battle_input>> setter = new Dictionary<MessageDef, Action<IMessage, battle_input>>() {
+            public static SortedDictionary<MessageDef, Action<IMessage, battle_input>> setter = new SortedDictionary<MessageDef, Action<IMessage, battle_input>>() {
                 { MessageDef.test_input, (msg, inputMsg) => { inputMsg.Test = msg as test_input; } },
             };
             
-            public static Dictionary<MessageDef, Func<battle_input, IMessage>> getter = new Dictionary<MessageDef, Func<battle_input, IMessage>>() {
+            public static SortedDictionary<MessageDef, Func<battle_input, IMessage>> getter = new SortedDictionary<MessageDef, Func<battle_input, IMessage>>() {
                 { MessageDef.test_input, (msg) => msg.Test },
             };
             
-            public static Dictionary<MessageDef, Func<IDictionary>> creator = new Dictionary<MessageDef, Func<IDictionary>>() {
-                { MessageDef.test_input, () => new Dictionary<Uid, test_input>() },
+            public static SortedDictionary<MessageDef, Func<IDictionary>> creator = new SortedDictionary<MessageDef, Func<IDictionary>>() {
+                { MessageDef.test_input, () => new SortedDictionary<Uid, test_input>() },
             };
         }
     }

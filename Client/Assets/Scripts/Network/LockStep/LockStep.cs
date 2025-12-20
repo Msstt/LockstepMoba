@@ -98,7 +98,7 @@ namespace Network {
 
         #region 接收
         
-        public void RegisterHandler<T>(MessageDef id, Action<Dictionary<Uid, T>> handler) where T : IMessage {
+        public void RegisterHandler<T>(MessageDef id, Action<SortedDictionary<Uid, T>> handler) where T : IMessage {
             if (!NetworkUtils.CheckMessageType(id, typeof(T))) {
                 return;
             }
@@ -109,7 +109,7 @@ namespace Network {
             inputHandlers[id].Add(handler);
         }
         
-        public void RemoveHandler<T>(MessageDef id, Action<Dictionary<Uid, T>> handler) where T : IMessage {
+        public void RemoveHandler<T>(MessageDef id, Action<SortedDictionary<Uid, T>> handler) where T : IMessage {
             if (!NetworkUtils.CheckMessageType(id, typeof(T))) {
                 return;
             }

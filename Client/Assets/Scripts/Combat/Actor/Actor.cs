@@ -11,7 +11,7 @@ namespace Combat.Actor {
         public int Uid { get; private set; }
         public ActorType Type { get; protected set; }
         
-        private Dictionary<Type, Com> coms = new Dictionary<Type, Com>();
+        private Dictionary<Type, Com> coms = new Dictionary<Type, Com>(); //TODO +list
         
         private Vector3F pos;
         private FloatF dir;

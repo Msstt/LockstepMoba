@@ -18,11 +18,11 @@ namespace Network {
         public static void RemoveCollector<T>(MessageDef id, Func<T> collector) where T : IMessage, new() {
             GameMgr.Instance.GetSystem<ILockStep>().RemoveCollector(id, collector);
         }
-        public static void RegisterHandler<T>(MessageDef id, Action<Dictionary<Uid, T>> handler) where T : IMessage {
+        public static void RegisterHandler<T>(MessageDef id, Action<SortedDictionary<Uid, T>> handler) where T : IMessage {
             GameMgr.Instance.GetSystem<ILockStep>().RegisterHandler(id, handler);
             
         }
-        public static void RemoveHandler<T>(MessageDef id, Action<Dictionary<Uid, T>> handler) where T : IMessage {
+        public static void RemoveHandler<T>(MessageDef id, Action<SortedDictionary<Uid, T>> handler) where T : IMessage {
             GameMgr.Instance.GetSystem<ILockStep>().RemoveHandler(id, handler);
             
         }

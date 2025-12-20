@@ -15,7 +15,7 @@ namespace Navmesh {
         private NavmeshSurface data;
         private Layer layer;
         
-        private List<Dictionary<int, Info>> connections;
+        private List<SortedDictionary<int, Info>> connections;
         private Dictionary<Tuple<int, int, int>, FloatF> midDis;
         private List<Vector3F> centroid;
         
@@ -45,10 +45,10 @@ namespace Navmesh {
                 return false;
             }
             
-            connections = new List<Dictionary<int, Info>>();
+            connections = new List<SortedDictionary<int, Info>>();
             centroid = new List<Vector3F>();
             for (int i = 0; i < data.indices.Count / 3; i++) {
-                connections.Add(new Dictionary<int, Info>());
+                connections.Add(new SortedDictionary<int, Info>());
                 centroid.Add(layer.GetCentroid(i));
             }
             foreach (var ((vId1, vId2), sTId) in edges) {

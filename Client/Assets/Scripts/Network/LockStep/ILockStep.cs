@@ -12,7 +12,7 @@ namespace Network {
         public void RegisterCollector<T>(MessageDef id, Func<T> collector) where T : IMessage, new();
         public void RemoveCollector<T>(MessageDef id, Func<T> collector) where T : IMessage, new();
 
-        public void RegisterHandler<T>(MessageDef id, Action<Dictionary<Uid, T>> handler) where T : IMessage;
-        public void RemoveHandler<T>(MessageDef id, Action<Dictionary<Uid, T>> handler) where T : IMessage;
+        public void RegisterHandler<T>(MessageDef id, Action<SortedDictionary<Uid, T>> handler) where T : IMessage;
+        public void RemoveHandler<T>(MessageDef id, Action<SortedDictionary<Uid, T>> handler) where T : IMessage;
     }
 }

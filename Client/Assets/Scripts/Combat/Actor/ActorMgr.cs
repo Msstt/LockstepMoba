@@ -8,7 +8,7 @@ namespace Combat.Actor {
 
         private int maxUid = 0;
         
-        private Dictionary<int, Actor> actors = new Dictionary<int, Actor>();
+        private SortedDictionary<int, Actor> actors = new SortedDictionary<int, Actor>();
         
         public void Start() {
             TransRoot = new GameObject("[Actor]").transform;

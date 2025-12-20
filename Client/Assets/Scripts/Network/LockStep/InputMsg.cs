@@ -11,24 +11,24 @@ namespace Network {
     }
 
     public class InputHandler<T> : IInputHandler where T : IMessage {
-        public Action<Dictionary<Uid, T>> handlers = null;
+        public Action<SortedDictionary<Uid, T>> handlers = null;
         
         public void Handle(IDictionary iMsg) {
-            if (iMsg is not Dictionary<Uid, T> msg) {
+            if (iMsg is not SortedDictionary<Uid, T> msg) {
                 return;
             }
             handlers?.Invoke(msg);
         }
         
         public void Add(Delegate iHandler) {
-            if (iHandler is not Action<Dictionary<Uid, T>> handler) {
+            if (iHandler is not Action<SortedDictionary<Uid, T>> handler) {
                 return;
             }
             handlers += handler;
         }
         
         public void Remove(Delegate iHandler) {
-            if (iHandler is not Action<Dictionary<Uid, T>> handler) {
+            if (iHandler is not Action<SortedDictionary<Uid, T>> handler) {
                 return;
             }
             handlers -= handler;
