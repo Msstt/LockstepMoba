@@ -67,7 +67,7 @@ namespace Framework.Network {
                 writer.SetSocket(connect.Socket);
                 reader.SetSocket(connect.Socket);
                 
-                EventMgr.Instance.Send(EventDef.OnConnected);
+                EventMgr.Instance.Send(new EventType.OnConnected());
             } else {
                 if (reconnectCount < ConnectConfig.MaxReconnectCount) {
                     reconnectCount += 1;

@@ -21,7 +21,7 @@ public class LockstepTest {
             GameMgr.Instance.Init(new HashSet<Type> { typeof(INetwork), typeof(ILockStep) });
             GameMgr.Instance.Start();
             
-            EventUtils.Register(EventDef.OnLockStepStart, OnLockStepStart);
+            EventUtils.Register<EventType.OnLockStepStart>(OnLockStepStart);
             GameObject.Find("Canvas/+1").GetComponent<Button>().onClick.AddListener(() => {
                 count = 1;
             });

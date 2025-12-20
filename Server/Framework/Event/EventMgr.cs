@@ -3,52 +3,56 @@
 namespace Framework {
     public class EventMgr : Singleton<EventMgr> {
         
-        private Dictionary<EventDef, Delegate> eventHandlers = new Dictionary<EventDef, Delegate>();
-
-        public EventMgr() {
-            foreach (EventDef value in Enum.GetValues(typeof(EventDef))) {
-                eventHandlers.Add(value, null);
+        private Dictionary<Type, Delegate> eventListeners = new Dictionary<Type, Delegate>();
+        private Dictionary<Type, Delegate> noParamEventListeners = new Dictionary<Type, Delegate>();
+        
+        public void Register<T>(Action listener) where T : struct {
+            Type type = typeof(T);
+            if (!noParamEventListeners.ContainsKey(type)) {
+                noParamEventListeners.Add(type, null);
             }
+            noParamEventListeners[type] = Delegate.Combine(noParamEventListeners[type], listener);
         }
         
-        public void Register(EventDef eventDef, Delegate handler) {
-            eventHandlers[eventDef] = Delegate.Combine(eventHandlers[eventDef], handler);
-        }
-        
-        public void Remove(EventDef eventDef, Delegate handler) {
-            eventHandlers[eventDef] = Delegate.Remove(eventHandlers[eventDef], handler);
-        }
-        
-        public void Send(EventDef eventDef) {
-            if (eventHandlers[eventDef] is not Action handler) {
+        public void UnRegister<T>(Action listener) where T : struct {
+            Type type = typeof(T);
+            if (!noParamEventListeners.ContainsKey(type)) {
                 return;
             }
-            try {
-                handler?.Invoke();
-            } catch (Exception e) {
-                Console.WriteLine($"[EventMgr] Error calling {eventDef.ToString()}: {e}");
-            }
-        }
-
-        public void Send<T1>(EventDef eventDef, T1 param1) {
-            if (eventHandlers[eventDef] is not Action<T1> handler) {
-                return;
-            }
-            try {
-                handler?.Invoke(param1);
-            } catch (Exception e) {
-                Console.WriteLine($"[EventMgr] Error calling {eventDef.ToString()}: {e}");
-            }
+            noParamEventListeners[type] = Delegate.Remove(noParamEventListeners[type], listener);
         }
         
-        public void Send<T1, T2>(EventDef eventDef, T1 param1, T2 param2) {
-            if (eventHandlers[eventDef] is not Action<T1, T2> handler) {
+        public void Register<T>(Action<T> listener) where T : struct {
+            Type type = typeof(T);
+            if (!eventListeners.ContainsKey(type)) {
+                eventListeners.Add(type, null);
+            }
+            eventListeners[type] = Delegate.Combine(eventListeners[type], listener);
+        }
+        
+        public void UnRegister<T>(Action<T> listener) where T : struct {
+            Type type = typeof(T);
+            if (!eventListeners.ContainsKey(type)) {
                 return;
             }
+            eventListeners[type] = Delegate.Remove(eventListeners[type], listener);
+        }
+        
+        public void Send<T>(T param) where T : struct {
+            Type type = typeof(T);
+            Action<T> listener = null;
+            Action noParamListener = null;
+            if (eventListeners.ContainsKey(type)) {
+                listener = eventListeners[type] as Action<T>;
+            }
+            if (noParamEventListeners.ContainsKey(type)) {
+                noParamListener = noParamEventListeners[type] as Action;
+            }
             try {
-                handler?.Invoke(param1, param2);
+                noParamListener?.Invoke();
+                listener?.Invoke(param);
             } catch (Exception e) {
-                Console.WriteLine($"[EventMgr] Error calling {eventDef.ToString()}: {e}");
+                Console.WriteLine($"[EventMgr] Error calling {param.ToString()}: {e}");
             }
         }
     }

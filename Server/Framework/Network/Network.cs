@@ -1,5 +1,4 @@
 using System.Collections.Concurrent;
-using System.Net.Sockets;
 using Google.Protobuf;
 using Network;
 
@@ -11,7 +10,7 @@ namespace Framework.Network {
     }
 
     public class MsgHandler<T> : IMsgHandler where T : IMessage {
-        public Action<Uid, T> handlers = null;
+        private Action<Uid, T> handlers = null;
         
         public void Handle(Uid uid, IMessage iMsg) {
             if (iMsg is not T msg) {
@@ -61,7 +60,9 @@ namespace Framework.Network {
             if (tcpClient != null) {
                 Client client = new Client(GetUid(), tcpClient);
                 clients.TryAdd(client.Uid, client);
-                EventMgr.Instance.Send(EventDef.OnPlayerConnected, client.Uid);
+                EventMgr.Instance.Send(new EventType.OnPlayerConnected {
+                    uid = client.Uid,
+                });
                 
                 ThreadPool.QueueUserWorkItem(_ => clients[client.Uid].FlushRead());
                 ThreadPool.QueueUserWorkItem(_ => clients[client.Uid].FlushWrite());

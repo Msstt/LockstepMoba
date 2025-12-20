@@ -1,20 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Framework;
 using Framework.Network;
 using Google.Protobuf;
 
 namespace Network {
     public class LockStep : ILockStep {
-        #region 输入消息映射
-        
-        private static readonly Dictionary<string, MessageDef> String2Id = new Dictionary<string, MessageDef>() {
-            { "test", MessageDef.test_input },
-        };
-        
-        #endregion
-        
         public int Frame { get; private set; }
         
         private Dictionary<int, frame_input_s2c> allInputs = new Dictionary<int, frame_input_s2c>();
@@ -28,16 +19,16 @@ namespace Network {
             inputHandlers = new Dictionary<MessageDef, IInputHandler>();
             inputCollectors = new Dictionary<MessageDef, IInputCollector>();
 
-            EventUtils.Remove(EventDef.OnConnected, ReqFrameData);
+            EventUtils.UnRegister<EventType.OnConnected>(ReqFrameData);
         }
 
         public void FrameStart() {
             Clear();
 
-            EventUtils.Register(EventDef.OnConnected, ReqFrameData);
+            EventUtils.Register<EventType.OnConnected>(ReqFrameData);
             ReqFrameData();
             
-            EventUtils.Send(EventDef.OnLockStepStart);
+            EventUtils.Send<EventType.OnLockStepStart>();
         }
         
         public void Start() {}

@@ -11,9 +11,9 @@ namespace Battle {
             Network.LockStep.Instance.Start();
         }
 
-        public void AddPlayer(Uid uid) {
+        public void AddPlayer(EventType.OnPlayerConnected param) {
             if (LockStep.Instance.IsRunning) {
-                NetworkUtils.Send(uid, MessageDef.battle_start_s2c, GetStartMsg(uid));
+                NetworkUtils.Send(param.uid, MessageDef.battle_start_s2c, GetStartMsg(param.uid));
             } else {
                 CheckAutoStart();
             }

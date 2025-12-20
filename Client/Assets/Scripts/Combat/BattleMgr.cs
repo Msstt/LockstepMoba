@@ -38,7 +38,7 @@ namespace Combat {
 
             ActorMgr.Instance.Start();
             
-            EventUtils.Send(EventDef.OnBattleStart);
+            EventUtils.Send<EventType.OnBattleStart>();
         }
 
         public void Update() {
