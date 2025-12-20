@@ -1,29 +1,44 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Framework {
+    public enum UnityEventType {
+        OnUpdate,
+        OnQuit,
+    }
+    
     public class UnityEventMgr : MonoSingleton<UnityEventMgr> {
-        #region 退出应用
+        private Dictionary<UnityEventType, Action> listener = new();
 
-        private Action onQuit;
-        
-        public void RegisterOnQuit(Action handler) {
-            onQuit += handler;
+        public void Awake() {
+            for (int i = 0; i < Enum.GetValues(typeof(UnityEventType)).Length; i++) {
+                listener[(UnityEventType)i] = null;
+            }
         }
         
-        public void RemoveOnQuit(Action handler) {
-            onQuit -= handler;
+        public void Register(UnityEventType type, Action handler) {
+            listener[type] += handler;
         }
         
-        public void OnApplicationQuit() {
+        public void UnRegister(UnityEventType type, Action handler) {
+            listener[type] -= handler;
+        }
+       
+        public void Update() {
             try {
-                onQuit?.Invoke();
+                listener[UnityEventType.OnUpdate]?.Invoke();
             } catch (Exception ex) {
                 Debug.LogError(ex.ToString());
             }
         }
-
-        #endregion
         
+        public void OnApplicationQuit() {
+            try {
+                listener[UnityEventType.OnQuit]?.Invoke();
+            } catch (Exception ex) {
+                Debug.LogError(ex.ToString());
+            }
+        }
     }
 }

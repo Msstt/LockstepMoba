@@ -35,7 +35,7 @@ namespace Framework.Network {
         }
     }
     
-    public class MsgDispatcher : Singleton<MsgDispatcher> {
+    public class MsgDispatcher {
         private Dictionary<MessageDef, IMsgHandler> msgHandlers = new Dictionary<MessageDef, IMsgHandler>();
         
         public void RegisterHandler<T>(MessageDef msgId, Action<T> handler) where T : IMessage {
@@ -50,7 +50,7 @@ namespace Framework.Network {
             msgHandlers[msgId].Add(handler);
         }
 
-        public void RemoveHandler<T>(MessageDef msgId, Action<T> handler) where T : IMessage {
+        public void UnRegisterHandler<T>(MessageDef msgId, Action<T> handler) where T : IMessage {
             if (MessageMapping.type[msgId] != typeof(T)) {
                 Log.Error("Handler type does not match message type for msgId: {0}", msgId);
                 return;

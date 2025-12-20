@@ -5,8 +5,13 @@ using Google.Protobuf;
 
 namespace Framework.Network {
     public class Writer {
+        private Network system;
         private Socket socket;
         private ConcurrentQueue<Message> queue = new ConcurrentQueue<Message>();
+
+        public Writer(Network system) {
+            this.system = system;
+        }
 
         public void SetSocket(Socket socket) {
             this.socket = socket;
@@ -36,7 +41,7 @@ namespace Framework.Network {
             } catch (Exception e) {
                 if (e.Message != "interrupted") {
                     Log.Error("Failed to send message: {0}", e.Message);
-                    Network.Instance.TryDisconnect();
+                    system.TryDisconnect();
                 }
             }
         }

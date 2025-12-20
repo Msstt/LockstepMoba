@@ -1301,6 +1301,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsLocalDebug: 1
+  test:
+    value: -1900000
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0

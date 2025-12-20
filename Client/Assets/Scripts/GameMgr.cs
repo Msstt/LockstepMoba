@@ -1,21 +1,90 @@
+using System;
+using System.Collections.Generic;
 using Combat;
 using Framework;
+using Framework.Network;
 using Network;
 using UnityEngine;
+using Log = Combat.Log;
 
 public class GameMgr : Singleton<GameMgr> {
+    private Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
+    private List<ISystem> systemList = new List<ISystem>();
+    
+    private IFrameDriver driver = null;
+    private bool frameHasStarted = false;
+    
+    public bool IsRunning => frameHasStarted;
+
+    public int Frame => GetSystem<ILockStep>().Frame;
+
+    public void Init(HashSet<Type> system = null) {
+        void Register<T1, T2>() where T2 : T1, new() where T1 : ISystem {
+            if (system == null || system.Contains(typeof(T1))) {
+                RegisterSystem<T1>(new T2());
+            }
+        }
+        
+        // 注册顺序即为更新顺序
+        Register<INetwork, Framework.Network.Network>();
+        Register<ILockStep, LockStep>();
+        Register<Navmesh.INavmesh, Navmesh.Navmesh>();
+    }
+    
     public void Start() {
-        NavmeshUtils.Start();
-        NetworkUtils.Start();
+        foreach (var system in systemList) {
+            system.Start();
+        }
+    }
+
+    public void StartFrame() {
+        foreach (var system in systemList) {
+            system.FrameStart();
+        }
+        frameHasStarted = true;
     }
     
     public void Update() {
+        if (frameHasStarted && driver != null && driver.FrameReady()) {
+            FrameUpdate();
+        }
+        
+        foreach (var system in systemList) {
+            system.Update();
+        }
         UpdateLocalDebug();
     }
     
     public void FrameUpdate() {
-        CombatMgr.Instance.Update();
-        NavmeshUtils.Update();
+        foreach (var system in systemList) {
+            system.FrameUpdate();
+        }
+    }
+    
+    private void RegisterSystem<T>(T system) where T : ISystem {
+        var type = typeof(T);
+        if (systems.ContainsKey(type)) {
+            Debug.LogError($"[GameMgr!!!] System {type} already registered");
+            return;
+        }
+        systems[type] = system;
+        systemList.Add(system);
+        if (system is IFrameDriver) {
+            if (driver != null) {
+                Debug.LogError("[GameMgr!!!] Frame driver already registered");
+                return;
+            }
+            driver = system as IFrameDriver;
+        }
+    }
+    
+    public T GetSystem<T>() where T : class, ISystem {
+        var type = typeof(T);
+        if (systems.ContainsKey(type)) {
+            return systems[type] as T;
+        }
+        Log.Error("[GameMgr!!!] System {0} not found", type);
+        return null;
     }
 
     #region 本地调试模式
@@ -35,8 +104,7 @@ public class GameMgr : Singleton<GameMgr> {
             Uid = 1,
             ChampionId = 1,
         });
-        CombatMgr.Instance.Start(msg);
-        LockStep.Instance.Start();
+        // CombatMgr.Instance.Start(msg);
     }
     
     public void UpdateLocalDebug() {
@@ -46,7 +114,7 @@ public class GameMgr : Singleton<GameMgr> {
         lastTick = Time.time;
         frame++;
 
-        var inputMsg = LockStep.Instance.GetInputMsg();
+        var inputMsg = GetSystem<ILockStep>().GetInputMsg();
         var msg = new frame_input_s2c {
             Frame = frame,
         };
@@ -55,7 +123,7 @@ public class GameMgr : Singleton<GameMgr> {
                 Uid = 1, 
                 Input = inputMsg.Input,
             });
-        LockStep.Instance.PushInputMsg(msg);
+        GetSystem<ILockStep>().PushInputMsg(msg);
     }
 
     #endregion

@@ -8,7 +8,13 @@ using UnityEngine.AI;
 public class Main : MonoBehaviour {
     [LabelText("本地调试模式")]
     public bool IsLocalDebug = false;
-    
+
+    public FloatF test;
+
+    public void Awake() {
+        GameMgr.Instance.Init();
+    }
+
     public void Start() {
         GameMgr.Instance.Start();
 

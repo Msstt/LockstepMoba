@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Framework.Network;
 using Network;
 using NUnit.Framework;
 using UnityEngine;
@@ -16,32 +18,34 @@ public class LockstepTest {
     public void Setup() {
         SceneManager.LoadScene("LockstepTest", LoadSceneMode.Single);
         SceneManager.sceneLoaded += (scene, mode) => {
+            GameMgr.Instance.Init(new HashSet<Type> { typeof(INetwork), typeof(ILockStep) });
+            GameMgr.Instance.Start();
+            
             EventUtils.Register(EventDef.OnLockStepStart, OnLockStepStart);
             GameObject.Find("Canvas/+1").GetComponent<Button>().onClick.AddListener(() => {
                 count = 1;
             });
             GameObject.Find("Canvas/connect").GetComponent<Button>().onClick.AddListener(() => {
-                Framework.Network.Network.Instance.Connect("127.0.0.1", 9980);
+                GameMgr.Instance.GetSystem<INetwork>().Connect("127.0.0.1", 9980);
             });
             GameObject.Find("Canvas/disconnect").GetComponent<Button>().onClick.AddListener(() => {
-                Framework.Network.Network.Instance.Disconnect();
+                GameMgr.Instance.GetSystem<INetwork>().Disconnect();
             });
             statusText = GameObject.Find("Canvas/status").GetComponent<Text>();
-
-            NetworkUtils.Start();
         };
     }
     
     [UnityTest]
     public IEnumerator LockstepTest1() {
         while (true) {
+            GameMgr.Instance.Update();
             yield return null;
         }
     }
 
     private void OnLockStepStart() {
-        LockStep.Instance.RegisterCollector<test_input>(MessageDef.test_input, TestInputCollector);
-        LockStep.Instance.RegisterHandler<test_input>(MessageDef.test_input, TestInputHandler);
+        NetworkUtils.RegisterCollector<test_input>(MessageDef.test_input, TestInputCollector);
+        NetworkUtils.RegisterHandler<test_input>(MessageDef.test_input, TestInputHandler);
     }
     
     private test_input TestInputCollector() {

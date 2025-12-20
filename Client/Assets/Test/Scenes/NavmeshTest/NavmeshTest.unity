@@ -1783,6 +1783,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surfaceData: {fileID: 4900000, guid: 20c201b504c9b400aa93ca2425c01859, type: 3}
+  DrawDebugTriangle: 0
+  DrawDebugConnection: 0
 --- !u!1 &1211031290
 GameObject:
   m_ObjectHideFlags: 0

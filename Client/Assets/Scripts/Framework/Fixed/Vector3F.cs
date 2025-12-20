@@ -30,6 +30,7 @@ public struct Vector3F {
     
     public override bool Equals(object obj) => obj is Vector3F v && v == this;
     public override int GetHashCode() => x.GetHashCode() ^ y.GetHashCode() << 2 ^ z.GetHashCode() >> 2;
+    public override string ToString() => $"({x}, {y}, {z})";
 
     public static FloatF Distance(Vector3F a, Vector3F b) {
         FloatF dx = a.x - b.x;

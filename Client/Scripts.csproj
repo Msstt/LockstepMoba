@@ -63,11 +63,11 @@
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/UnityEventMgr.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com.cs" />
-    <Compile Include="Assets/Scripts/Framework/Tools/Updater.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Actor.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkUtils.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Define.cs" />
+    <Compile Include="Assets/Scripts/Framework/Res/ResMgr.cs" />
     <Compile Include="Assets/Scripts/Combat/Uid.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorMgr.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/FrameMsg.cs" />
@@ -77,6 +77,7 @@
     <Compile Include="Assets/Scripts/Framework/Network/Network.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/TestMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Config.cs" />
+    <Compile Include="Assets/Scripts/ISystem.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/BattleMsg.cs" />
     <Compile Include="Assets/Scripts/Combat/BattleMgr.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/DebugMgr.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets/Scripts/Framework/Tools/ThreadMgr.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/LockStep.cs" />
     <Compile Include="Assets/Scripts/Combat/MapConfig.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/INavmesh.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Layer.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/IMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Reader.cs" />
@@ -97,11 +99,13 @@
     <Compile Include="Assets/Scripts/Navmesh/NavmeshMapInfo.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/InputMsg.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Connection.cs" />
+    <Compile Include="Assets/Scripts/Network/LockStep/ILockStep.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Message.cs" />
     <Compile Include="Assets/Scripts/Framework/Math/PriorityQueue.cs" />
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
     <Compile Include="Assets/Scripts/Tools/DebugUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
+    <Compile Include="Assets/Scripts/Framework/Network/INetwork.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Define.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/GameObject/GoUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/BattleMsgDispatcher.cs" />

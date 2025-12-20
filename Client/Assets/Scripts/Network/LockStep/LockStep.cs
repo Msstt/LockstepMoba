@@ -6,7 +6,7 @@ using Framework.Network;
 using Google.Protobuf;
 
 namespace Network {
-    public class LockStep : Singleton<LockStep> {
+    public class LockStep : ILockStep {
         #region 输入消息映射
         
         private static readonly Dictionary<string, MessageDef> String2Id = new Dictionary<string, MessageDef>() {
@@ -31,7 +31,7 @@ namespace Network {
             EventUtils.Remove(EventDef.OnConnected, ReqFrameData);
         }
 
-        public void Start() {
+        public void FrameStart() {
             Clear();
 
             EventUtils.Register(EventDef.OnConnected, ReqFrameData);
@@ -39,6 +39,10 @@ namespace Network {
             
             EventUtils.Send(EventDef.OnLockStepStart);
         }
+        
+        public void Start() {}
+        public void FrameUpdate() {}
+        public void Update() {}
 
         public void ReqFrameData() {
             NetworkUtils.Send(MessageDef.frame_reconnect_c2s, new frame_reconnect_c2s {
@@ -131,16 +135,16 @@ namespace Network {
                 return;
             }
             allInputs.Add(msg.Frame, msg);
-            UpdateFrame();
         }
 
-        private void UpdateFrame() {
+        public bool FrameReady() {
             // TODO 当收到不连续帧时，加速表现层，而不是一帧内直接更新
-            while (allInputs.ContainsKey(Frame + 1)) {
+            if (allInputs.ContainsKey(Frame + 1)) {
                 Frame++;
                 HandleFrameInputs(allInputs[Frame]);
-                GameMgr.Instance.FrameUpdate();
+                return true;
             }
+            return false;
         }
         
         private void HandleFrameInputs(frame_input_s2c frameInput) {

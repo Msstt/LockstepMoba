@@ -4,7 +4,7 @@ using Framework;
 using UnityEngine;
 
 namespace Navmesh {
-    public class NavmeshMgr : Singleton<NavmeshMgr> {
+    public class Navmesh : INavmesh {
         private NavmeshMapInfo mapInfo;
         private List<FloatF> allRadius;
         private Dictionary<FloatF, NavmeshSurface> surfaces;
@@ -57,9 +57,12 @@ namespace Navmesh {
             return true;
         }
         
-        public void Update() {
+        public void FrameUpdate() {
             HandleFindPathQueue();
         }
+        
+        public void FrameStart() { }
+        public void Update() { }
 
         #region 寻路
 

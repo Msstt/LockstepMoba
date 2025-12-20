@@ -45,7 +45,7 @@ namespace Framework.Network {
             
             state = ConnectState.Connecting;
             beginConnectTime = null;
-            Updater.Instance.RegisterUpdate(OnUpdate);
+            UnityEventMgr.Instance.Register(UnityEventType.OnUpdate, OnUpdate);
             
             try {
                 InitSocket();
@@ -87,7 +87,7 @@ namespace Framework.Network {
 
         private void OnUpdate() {
             if (state != ConnectState.Connecting) {
-                Updater.Instance.RemoveUpdate(OnUpdate);
+                UnityEventMgr.Instance.UnRegister(UnityEventType.OnUpdate, OnUpdate);
                 return;
             }
 

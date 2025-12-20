@@ -1,12 +1,17 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using Framework.Network;
 using Network;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
 public class EchoTest {
+    
     [SetUp]
     public void Setup() {
-        NetworkUtils.Start();
+        GameMgr.Instance.Init(new HashSet<Type> { typeof(INetwork) });
+        GameMgr.Instance.Start();
     }
     
     [UnityTest]
@@ -19,8 +24,7 @@ public class EchoTest {
             });
             x++;
             
-            // GameMgr.Instance.Update();
-            
+            GameMgr.Instance.Update();
             yield return null;
         }
     }

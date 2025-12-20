@@ -4,24 +4,45 @@ using Network;
 using UnityEngine;
 
 namespace Framework.Network {
-    public class Network : Singleton<Network> {
+    public class Network : INetwork {
         private NetworkState state = NetworkState.None;
         
         private Connect connect = new Connect();
-        private Writer writer = new Writer();
-        private Reader reader = new Reader();
+        private Writer writer = null;
+        private Reader reader = null;
         
         private int reconnectCount = 0;
         
         private bool needDisconnect = false;
+        
+        private MsgDispatcher msgDispatcher = new MsgDispatcher();
 
         public Network() {
-            Updater.Instance.RegisterUpdate(CheckDisconnect);
-            Updater.Instance.RegisterUpdate(DispatchMsg);
-            UnityEventMgr.Instance.RegisterOnQuit(() => {
+            writer = new Writer(this);
+            reader = new Reader(this);
+            
+            UnityEventMgr.Instance.Register(UnityEventType.OnUpdate, CheckDisconnect);
+            UnityEventMgr.Instance.Register(UnityEventType.OnQuit, () => {
                 Disconnect();
             });
         }
+
+        public void Start() {
+            NetworkDef.RegisterDispatcher();
+            
+            Connect("127.0.0.1", 9980);
+            
+            Send(MessageDef.frame_reconnect_c2s, new frame_reconnect_c2s {
+                Frame = 1,
+            });
+        }
+
+        public void Update() {
+            DispatchMsg();
+        }
+
+        public void FrameStart() { }
+        public void FrameUpdate() { }
 
         #region 连接
         
@@ -36,8 +57,8 @@ namespace Framework.Network {
             connect.SetConfig(ip, port, ConnectComp);
             connect.BeginConnect();
             
-            ThreadMgr.Instance.Start(ThreadTaskId.SocketWrite);
-            ThreadMgr.Instance.Start(ThreadTaskId.SocketRead);
+            ThreadMgr.Instance.Start(ThreadTaskId.SocketWrite, FlushWrite);
+            ThreadMgr.Instance.Start(ThreadTaskId.SocketRead, FlushRead);
         }
 
         private void ConnectComp(bool isSuccess) {
@@ -68,7 +89,7 @@ namespace Framework.Network {
             needDisconnect = true;
         }
 
-        public void CheckDisconnect() {
+        private void CheckDisconnect() {
             if (needDisconnect) {
                 Disconnect();
                 needDisconnect = false;
@@ -121,8 +142,16 @@ namespace Framework.Network {
                     return;
                 }
                 Debug.Log("<color=orange>Receive From " + msg + "</color>");
-                MsgDispatcher.Instance.Dispatch(msg.Value);
+                msgDispatcher.Dispatch(msg.Value);
             }
+        }
+        
+        public void RegisterHandler<T>(MessageDef msgId, Action<T> handler) where T : IMessage {
+            msgDispatcher.RegisterHandler<T>(msgId, handler);
+        }
+
+        public void UnRegisterHandler<T>(MessageDef msgId, Action<T> handler) where T : IMessage {
+            msgDispatcher.UnRegisterHandler<T>(msgId, handler);
         }
 
         #endregion

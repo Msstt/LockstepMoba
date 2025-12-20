@@ -60,7 +60,7 @@ public struct FloatF : IComparable<FloatF> {
     public override int GetHashCode() => value.GetHashCode();
 
     public override string ToString() {
-        return value / scale + (value % scale != 0 ? "." + Math.Abs(value % scale).ToString("D6").TrimEnd('0') : "");
+        return (value < 0 ? "-" + -value / scale : value / scale) + (value % scale != 0 ? "." + Math.Abs(value % scale).ToString("D6").TrimEnd('0') : "");
     }
     
     public static FloatF? Parse(string s) {
@@ -85,7 +85,7 @@ public struct FloatF : IComparable<FloatF> {
             }
         }
 
-        return new FloatF(intPart * scale + (intPart < 0 ? -fracPart : fracPart), true);
+        return new FloatF(intPart * scale + (s[0] == '-' ? -fracPart : fracPart), true);
     }
     
     public static FloatF Abs(FloatF a) {

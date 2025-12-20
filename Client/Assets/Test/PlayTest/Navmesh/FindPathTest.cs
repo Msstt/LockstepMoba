@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using Navmesh;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,7 +13,8 @@ public class FindPathTest {
     public void Setup() {
         SceneManager.LoadScene("NavmeshTest", LoadSceneMode.Single);
         SceneManager.sceneLoaded += (scene, mode) => {
-            NavmeshUtils.Start();
+            GameMgr.Instance.Init(new HashSet<Type> { typeof(INavmesh) });
+            GameMgr.Instance.Start();
         };
     }
     
@@ -45,7 +49,7 @@ public class FindPathTest {
                 }
             }
             
-            NavmeshUtils.Update();
+            GameMgr.Instance.FrameUpdate();
             
             yield return null;
         }

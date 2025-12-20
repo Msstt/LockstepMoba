@@ -5,11 +5,16 @@ using Network;
 
 namespace Framework.Network {
     public class Reader {
+        private Network system;
         private Socket socket;
         private ConcurrentQueue<Message> queue = new ConcurrentQueue<Message>();
 
         private int readIndex = 0;
         private byte[] buffer = new byte[ReceiveConfig.BufferSize];
+        
+        public Reader(Network system) {
+            this.system = system;
+        }
 
         public void SetSocket(Socket socket) {
             this.socket = socket;
@@ -30,7 +35,7 @@ namespace Framework.Network {
             } catch (Exception e) {
                 if (e.Message != "interrupted") {
                     Log.Error("Failed to receive message: {0}", e.Message);
-                    Network.Instance.TryDisconnect();
+                    system.TryDisconnect();
                 }
             }
         }
