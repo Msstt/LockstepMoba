@@ -3,7 +3,7 @@ using Framework;
 using UnityEngine;
 
 namespace Combat.Actor {
-    public class ActorMgr : Singleton<ActorMgr> {
+    public class ActorSystem : IActorSystem {
         public Transform TransRoot { get; private set; }
 
         private int maxUid = 0;
@@ -12,22 +12,27 @@ namespace Combat.Actor {
         
         public void Start() {
             TransRoot = new GameObject("[Actor]").transform;
-
+        }
+        
+        public void FrameStart() {
             CreateChampion();
         }
         
-        public void Update() {
+        public void FrameUpdate() {
             foreach (var actor in actors.Values) {
                 actor.Update();
             }
         }
         
+        public void Update() { }
+        
         private void CreateChampion() {
+            ICombatSystem combat = GameMgr.Instance.GetSystem<ICombatSystem>();
             int index = 0;
-            foreach (var uid in CombatMgr.Instance.PlayerUid) {
-                var championId = CombatMgr.Instance.GetChampionId(uid);
+            foreach (var uid in combat.PlayerUid) {
+                var championId = combat.GetChampionId(uid);
                 Champion actor = Champion.Create(championId);
-                actor.Pos = CombatMgr.instance.mapConfig.spawnPoint[index++];
+                actor.Pos = combat.MapConfig.spawnPoint[index++];
                 actors[actor.Uid] = actor;
             }
         }

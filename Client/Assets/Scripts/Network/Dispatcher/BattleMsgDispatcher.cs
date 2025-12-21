@@ -10,7 +10,8 @@ public class BattleMsgDispatcher : MsgDispatcher {
         if (GameMgr.Instance.IsRunning) {
             return;
         }
-        // CombatMgr.Instance.Start(msg);
+
+        GameMgr.Instance.GetSystem<ICombatSystem>().Init(msg);
         GameMgr.Instance.StartFrame();
     }
 }

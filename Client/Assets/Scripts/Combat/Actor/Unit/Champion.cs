@@ -3,12 +3,14 @@ using UnityEngine;
 namespace Combat.Actor {
     public class Champion : Actor {
         public static Champion Create(int championId) {
+            IActorSystem system = GameMgr.Instance.GetSystem<IActorSystem>();
+            
             ChampionConfig config = Config.Champion[championId];
             GameObject go = new GameObject("Champion_" + championId);
-            go.transform.SetParent(ActorMgr.Instance.TransRoot);
+            go.transform.SetParent(system.TransRoot);
             GoUtils.NewGo(config.prefabName, go.transform, true);
             
-            Champion actor = new Champion(ActorMgr.Instance.GetUid(), go);
+            Champion actor = new Champion(system.GetUid(), go);
             return actor;
         }
         

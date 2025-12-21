@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Combat;
+using Combat.Actor;
 using Framework;
 using Framework.Network;
 using Network;
 using UnityEngine;
-using Log = Combat.Log;
 
 public class GameMgr : Singleton<GameMgr> {
     private Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
@@ -29,6 +29,8 @@ public class GameMgr : Singleton<GameMgr> {
         Register<INetwork, Framework.Network.Network>();
         Register<ILockStep, LockStep>();
         Register<Navmesh.INavmesh, Navmesh.Navmesh>();
+        Register<ICombatSystem, CombatSystem>();
+        Register<IActorSystem, ActorSystem>();
     }
     
     public void Start() {
@@ -83,7 +85,7 @@ public class GameMgr : Singleton<GameMgr> {
         if (systems.ContainsKey(type)) {
             return systems[type] as T;
         }
-        Log.Error("[GameMgr!!!] System {0} not found", type);
+        Debug.LogError($"[GameMgr!!!] System {type} not found");
         return null;
     }
 
@@ -104,7 +106,8 @@ public class GameMgr : Singleton<GameMgr> {
             Uid = 1,
             ChampionId = 1,
         });
-        // CombatMgr.Instance.Start(msg);
+        GetSystem<ICombatSystem>().Init(msg);
+        StartFrame();
     }
     
     public void UpdateLocalDebug() {
