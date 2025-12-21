@@ -11,34 +11,30 @@ namespace Combat.Actor {
         public int Uid { get; private set; }
         public ActorType Type { get; protected set; }
         
-        private Dictionary<Type, Com> coms = new Dictionary<Type, Com>(); //TODO +list
+        private Dictionary<Type, Com> coms = new Dictionary<Type, Com>();
+        private List<Com> comList = new List<Com>();
         
         private Vector3F pos;
-        private FloatF dir;
+        private Vector3F dir;
 
+        public GameObject Go => go;
         private GameObject go;
+
+        public Stats Stats;
         
         protected Actor(int uid, GameObject go) {
             Uid = uid;
             this.go = go;
         }
 
-        public Vector3F Pos {
-            get => pos;
-            set {
-                pos = value;
-                if (go != null) {
-                    go.transform.position = pos.ToVector3();
-                }
-            }
-        }
+        public Vector3F Pos => pos;
         
-        public FloatF Dir {
+        public Vector3F Dir {
             get => dir;
             set {
-                dir = value;
+                dir = value.Normalized();
                 if (go != null) {
-                    go.transform.rotation = Quaternion.Euler(0f, dir.ToFloat(), 0f);
+                    go.transform.forward = dir.ToVector3();
                 }
             }
         }
@@ -52,6 +48,8 @@ namespace Combat.Actor {
             T com = new T();
             com.Actor = this;
             coms[typeof(T)] = com;
+            comList.Add(com);
+            coms[typeof(T)].Awake();
         }
         
         public void RemoveComponent<T>() where T : Com {
@@ -61,12 +59,33 @@ namespace Combat.Actor {
             }
 
             coms[typeof(T)].Destroy();
+            comList.Remove(coms[typeof(T)]);
             coms.Remove(typeof(T));
         }
         
+        public T GetComponent<T>() where T : Com {
+            if (coms.ContainsKey(typeof(T))) {
+                return coms[typeof(T)] as T;
+            }
+            return null;
+        }
+        
         public void Update() {
-            foreach (var com in coms.Values) {
+            foreach (var com in comList) {
                 com.Update();
+            }
+        }
+        
+        public void RenderUpdate() {
+            foreach (var com in comList) {
+                com.RenderUpdate();
+            }
+        }
+        
+        public void SetPos(Vector3F pos, bool updateGo = false) {
+            this.pos = pos;
+            if (updateGo && go != null) {
+                go.transform.position = new Vector3(pos.x.ToFloat(), go.transform.position.y, pos.z.ToFloat());
             }
         }
     }

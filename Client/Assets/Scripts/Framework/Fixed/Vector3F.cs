@@ -72,6 +72,14 @@ public struct Vector3F {
     public static bool IsEqualInEps(Vector3F a, Vector3F b, FloatF eps) {
         return FloatF.Abs(a.x - b.x) <= eps && FloatF.Abs(a.y - b.y) <= eps && FloatF.Abs(a.z - b.z) <= eps;
     }
+
+    public Vector3F Normalized() {
+        FloatF len = FloatF.Sqrt(x * x + y * y + z * z);
+        if (len == FloatF.zero) {
+            return new Vector3F(FloatF.zero, FloatF.zero, FloatF.zero);
+        }
+        return new Vector3F(x / len, y / len, z / len);
+    }
 }
 
 public class Vector3FDrawer : OdinValueDrawer<Vector3F> {

@@ -1301,8 +1301,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsLocalDebug: 1
-  test:
-    value: -1900000
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1334,6 +1332,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 212588825}
+    - target: {fileID: 2133362505522742770, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: DrawDebugTriangle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662665081684943250, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2987348575707063166, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3004068146920950643, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_originalMesh
       value: 

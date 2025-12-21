@@ -55,6 +55,7 @@
     <Compile Include="Assets/Scripts/GameMgr.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkDef.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Singleton.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Stats.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/IActorSystem.cs" />
     <Compile Include="Assets/Scripts/StartUp/Main.cs" />

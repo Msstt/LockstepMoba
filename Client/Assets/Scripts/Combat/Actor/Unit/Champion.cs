@@ -16,6 +16,8 @@ namespace Combat.Actor {
         
         public Champion(int uid, GameObject go) : base(uid, go) {
             Type = ActorType.Champion;
+            
+            AddComponent<MoveCom>();
         }
     }
 }

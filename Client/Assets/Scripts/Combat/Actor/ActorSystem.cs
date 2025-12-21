@@ -9,6 +9,7 @@ namespace Combat.Actor {
         private int maxUid = 0;
         
         private SortedDictionary<int, Actor> actors = new SortedDictionary<int, Actor>();
+        public Champion SelfChampion { get; private set; }
         
         public void Start() {
             TransRoot = new GameObject("[Actor]").transform;
@@ -23,8 +24,12 @@ namespace Combat.Actor {
                 actor.Update();
             }
         }
-        
-        public void Update() { }
+
+        public void Update() {
+            foreach (var actor in actors.Values) {
+                actor.RenderUpdate();
+            }
+        }
         
         private void CreateChampion() {
             ICombatSystem combat = GameMgr.Instance.GetSystem<ICombatSystem>();
@@ -32,8 +37,11 @@ namespace Combat.Actor {
             foreach (var uid in combat.PlayerUid) {
                 var championId = combat.GetChampionId(uid);
                 Champion actor = Champion.Create(championId);
-                actor.Pos = combat.MapConfig.spawnPoint[index++];
+                actor.SetPos(combat.MapConfig.spawnPoint[index++], true);
                 actors[actor.Uid] = actor;
+                if (uid == combat.SelfUid) {
+                    SelfChampion = actor;
+                }
             }
         }
 

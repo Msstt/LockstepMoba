@@ -17,6 +17,9 @@ namespace Combat.Actor {
         // 同步帧的 Update
         public virtual void Update() { }
         
+        // 表现层的 Update
+        public virtual void RenderUpdate() { }
+        
         public virtual void Destroy() { }
     }
 }

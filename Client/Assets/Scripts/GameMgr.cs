@@ -17,6 +17,7 @@ public class GameMgr : Singleton<GameMgr> {
     public bool IsRunning => frameHasStarted;
 
     public int Frame => GetSystem<ILockStep>().Frame;
+    public FloatF DeltaTime => 1 / new FloatF(30);
 
     public void Init(HashSet<Type> system = null) {
         void Register<T1, T2>() where T2 : T1, new() where T1 : ISystem {
