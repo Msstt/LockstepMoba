@@ -99,6 +99,10 @@ public struct FloatF : IComparable<FloatF> {
         if (x.value < 0) {
             throw new ArgumentException($"Cannot sqrt negative FloatF: {x}");
         }
+
+        if (x.value == 0) {
+            return zero;
+        }
     
         long n = x.value;
         long approx = n;

@@ -11,9 +11,14 @@ namespace Navmesh {
             this.data = data;
         }
 
-        public List<Vector3F> SmoothPath(Vector3F start, Vector3F end, int startId, List<Connection.Info> connection) {
+        // TODO: 不可达时走向边界
+        public List<Vector3F> SmoothPath(Vector3F start, Vector3F end, int startId, int endTId, List<Connection.Info> connection) {
             if (connection.Count == 0) {
-                return new List<Vector3F> { start, end };
+                if (endTId != -1) {
+                    return new List<Vector3F> { start, end };
+                } else {
+                    return new List<Vector3F> { start };
+                }
             }
             
             List<Vector3F> path = new List<Vector3F> { start };
@@ -23,9 +28,11 @@ namespace Navmesh {
             bool IsRight(Vector3F v1, Vector3F v2) {
                 return Vector3F.Cross(v2 - curPoint, v1 - curPoint).y >= 0;
             }
+            
+            bool reachEnd = endTId == connection[^1].tId;
 
             int curLeftIndex = -1, curRightIndex = -1;
-            for (int i = 0; i <= connection.Count; i++) {
+            for (int i = 0; i < connection.Count + (reachEnd ? 1 : 0); i++) {
                 if (i < 0) {
                     Log.Error("PathSmoother SmoothPath i < 0");
                     break;
@@ -65,8 +72,12 @@ namespace Navmesh {
                 curLeftIndex = -1;
                 curRightIndex = -1;
             }
-            
-            path.Add(end);
+
+            if (reachEnd) {
+                path.Add(end);
+            } else {
+                path.Add(Vector3F.Mid(left, right));
+            }
             return path;
         }
     }

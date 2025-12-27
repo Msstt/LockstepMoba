@@ -38,6 +38,7 @@ namespace Combat.Actor {
                 var championId = combat.GetChampionId(uid);
                 Champion actor = Champion.Create(championId);
                 actor.SetPos(combat.MapConfig.spawnPoint[index++], true);
+                actor.SetDir(new Vector3F( 1, 0, 0), true);
                 actors[actor.Uid] = actor;
                 if (uid == combat.SelfUid) {
                     SelfChampion = actor;

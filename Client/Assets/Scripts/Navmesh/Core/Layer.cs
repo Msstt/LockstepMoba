@@ -58,7 +58,13 @@ namespace Navmesh {
 
             List<Connection.Info> connectionList = connection.GetPath(start, end, startTId, endTId);
 
-            path = smoother.SmoothPath(start, end, startTId, connectionList);
+            path = smoother.SmoothPath(start, end, startTId, endTId, connectionList);
+
+            for (int i = path.Count - 1; i >= 1; i--) {
+                if (Vector3F.IsEqualInEps(path[i - 1] ,path[i], FloatF.eps)) {
+                    path.RemoveAt(i);
+                }
+            }
             return path;
         }
         

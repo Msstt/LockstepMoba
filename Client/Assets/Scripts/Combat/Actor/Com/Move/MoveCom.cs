@@ -1,25 +1,48 @@
+// MoveType 之间互相不能转移，需要调用方主动释放，所以实现方式类似状态机但不完全是
+
+using System;
 using System.Collections.Generic;
+using Combat.Actor.Move;
 using UnityEngine;
 
 namespace Combat.Actor {
     public enum MoveType {
         None,
-        MoveToPos,
+        PosByPath,
     }
     
     public class MoveCom : Com {
         private MoveType curType = MoveType.None;
         
-        private Vector3F targetPos;
-        
-        private List<Vector3F> path = new List<Vector3F>();
-
         private float smoothPosSpeed = 0f;
         private readonly float smoothDirSpeed = 12f;
 
+        private readonly Dictionary<MoveType, MoveComStatus> typeToStatus = new Dictionary<MoveType, MoveComStatus>();
+        
+        private Vector3F targetPos;
+        public Vector3F TargetPos => targetPos;
+        
+        private List<Vector3F> path = new List<Vector3F>();
+        public IReadOnlyList<Vector3F> Path => path;
+        
+        private Action finishCallback, failCallback;
+
+        public override void Awake() {
+            typeToStatus[MoveType.PosByPath] = new PosByPath(this);
+        }
+
         public override void Update(int frame) {
-            if (curType == MoveType.MoveToPos) {
-                MoveToPosUpdate();
+            Vector3F lastPos = Actor.Pos;
+            
+            if (curType != MoveType.None) {
+                typeToStatus[curType].Update(frame);
+            }
+
+            FloatF dis = Vector3F.Distance(Actor.Pos, lastPos);
+            if (dis == FloatF.zero) {
+                smoothPosSpeed = 0;
+            } else {
+                smoothPosSpeed = (dis / GameMgr.Instance.DeltaTime).ToFloat();
             }
         }
         
@@ -31,52 +54,7 @@ namespace Combat.Actor {
             
             UpdateHeight();
         }
-
-        public void Clear() {
-            curType = MoveType.None;
-            targetPos = new Vector3F();
-        }
-
-        #region MoveToPos
-
-        public void MoveToPos(Vector3F target) {
-            Clear();
-            curType = MoveType.MoveToPos;
-            targetPos = target;
-            GetPath(targetPos, true);
-        }
         
-        private void MoveToPosUpdate() {
-            Vector3F lastPos = Actor.Pos;
-            FloatF remDis = Actor.Stats.MoveSpeed * GameMgr.Instance.DeltaTime;
-            while (remDis > 0) {
-                if (Vector3F.Distance(Actor.Pos, targetPos) < 10) { // TODO
-                    Clear();
-                    return;
-                }
-                if (path.Count == 0) {
-                    GetPath(targetPos, true);
-                }
-                if (path.Count == 0) {
-                    Log.Error("Actor findPath failed: " + Actor.Pos + " -> " + targetPos);
-                }
-                FloatF dis = Vector3F.Distance(Actor.Pos, path[0]);
-                Actor.SetDir(path[0] - Actor.Pos);
-                if (remDis >= dis) {
-                    remDis -= dis;
-                    Actor.SetPos(path[0]);
-                    path.RemoveAt(0);
-                } else {
-                    Vector3F dir = (path[0] - Actor.Pos).Normalized();
-                    Actor.SetPos(Actor.Pos + dir * remDis);
-                    remDis = 0;
-                }
-            }
-            smoothPosSpeed = (Vector3F.Distance(Actor.Pos, lastPos) / GameMgr.Instance.DeltaTime).ToFloat();
-        }
-
-        #endregion
-
         // 表现层的 y，不需要同步，所以直接用 Unity
         private void UpdateHeight() {
             Vector3 pos = Actor.Go.transform.position;
@@ -88,11 +66,67 @@ namespace Combat.Actor {
             }
         }
 
-        private void GetPath(Vector3F pos, bool force) {
-            NavmeshUtils.FindPath(Actor.Pos, pos, (path) => { // TODO
+        private void Clear() {
+            curType = MoveType.None;
+            targetPos = new Vector3F();
+            path = new List<Vector3F>();
+            finishCallback = failCallback = null;
+        }
+
+        private void Finish() {
+            finishCallback?.Invoke();
+            Clear();
+        }
+
+        private void Fail() {
+            failCallback?.Invoke();
+            Clear();
+        }
+
+        private void CalcPath(Vector3F pos, bool force = true) {
+            NavmeshUtils.FindPath(Actor.Pos, pos, (path) => { // TODO radius
+                for (int i = 0; i < path.Count - 1; i++) {
+                    DebugUtils.DrawLine(path[i], path[i + 1]);
+                }
                 path.RemoveAt(0);
                 this.path = path;
             }, force);
         }
+        
+        public abstract class MoveComStatus {
+            protected MoveCom com;
+            protected MoveComStatus(MoveCom com) {
+                this.com = com;
+            }
+        
+            protected Actor Actor => com.Actor;
+        
+            public virtual void Enter() { }
+            public virtual void Update(int frame) { }
+            public virtual void Exit() { }
+
+            protected void Finish() => com.Finish();
+            protected void Fail() => com.Fail();
+            protected void CalcPath(Vector3F pos, bool force = true) => com.CalcPath(pos, force);
+        }
+        
+        #region 接口
+
+        public void ForceFail() {
+            Fail();
+        }
+        
+        public void MoveToPosByPath(Vector3F target, Action finish = null, Action fail = null) {
+            if (curType != MoveType.None) {
+                return;
+            }
+            curType = MoveType.PosByPath;
+            targetPos = target;
+            finishCallback = finish;
+            failCallback = fail;
+            typeToStatus[curType].Enter();
+        }
+        
+        #endregion
     }
 }

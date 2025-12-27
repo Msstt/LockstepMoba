@@ -28,7 +28,15 @@ public class Main : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Map"))) {
-                GameMgr.Instance.GetSystem<IActorSystem>().SelfChampion.GetComponent<MoveCom>().MoveToPos(Vector3F.FromVector3(hit.point));
+                MoveCom com = GameMgr.Instance.GetSystem<IActorSystem>().SelfChampion.GetComponent<MoveCom>();
+                com.ForceFail();
+                com.MoveToPosByPath(Vector3F.FromVector3(hit.point),
+                    () => {
+                        Debug.Log("Move finished");
+                    },
+                    () => {
+                        Debug.Log("Move failed");
+                    });
             }
         }
         

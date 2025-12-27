@@ -1,0 +1,45 @@
+namespace Combat.Actor.Move {
+    public class PosByPath : MoveCom.MoveComStatus {
+        private int index = 0;
+
+        public PosByPath(MoveCom com) : base(com) {
+        }
+        
+        public override void Enter() {
+            index = 0;
+            CalcPath(com.TargetPos);
+        }
+
+        public override void Update(int frame) {
+            FloatF remDis = Actor.Stats.MoveSpeed * GameMgr.Instance.DeltaTime;
+            while (remDis > 0) {
+                if (Vector3F.Distance(Actor.Pos, com.TargetPos) < 1) { // TODO radius
+                    Finish();
+                    return;
+                }
+                if (index >= com.Path.Count) {
+                    index = 0;
+                    CalcPath(com.TargetPos);
+                }
+                if (index >= com.Path.Count) {
+                    Fail();
+                    return;
+                }
+                FloatF dis = Vector3F.Distance(Actor.Pos, com.Path[index]);
+                Actor.SetDir(com.Path[index] - Actor.Pos);
+                if (remDis >= dis) {
+                    remDis -= dis;
+                    Actor.SetPos(com.Path[index]);
+                    index++;
+                } else {
+                    Vector3F dir = (com.Path[index] - Actor.Pos).Normalized();
+                    Actor.SetPos(Actor.Pos + dir * remDis);
+                    remDis = 0;
+                }
+            }
+        }
+
+        public override void Exit() {
+        }
+    }
+}
