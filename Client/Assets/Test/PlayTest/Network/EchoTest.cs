@@ -10,8 +10,8 @@ public class EchoTest {
     
     [SetUp]
     public void Setup() {
-        GameMgr.Instance.Init(new HashSet<Type> { typeof(INetwork) });
-        GameMgr.Instance.Start();
+        GameMgr.Instance.RegisterSystem(new HashSet<Type> { typeof(INetwork) });
+        GameMgr.Instance.Init();
     }
     
     [UnityTest]

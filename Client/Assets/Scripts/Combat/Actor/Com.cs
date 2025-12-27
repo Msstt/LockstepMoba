@@ -15,7 +15,7 @@ namespace Combat.Actor {
         public virtual void Awake() { }
         
         // 同步帧的 Update
-        public virtual void Update() { }
+        public virtual void Update(int frame) { }
         
         // 表现层的 Update
         public virtual void RenderUpdate() { }

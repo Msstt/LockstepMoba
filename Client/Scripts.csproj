@@ -58,10 +58,10 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Stats.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/IActorSystem.cs" />
+    <Compile Include="Assets/Scripts/Network/LockStep/MockLockStep.cs" />
     <Compile Include="Assets/Scripts/StartUp/Main.cs" />
     <Compile Include="Assets/Scripts/Framework/Event/EventMgr.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
-    <Compile Include="Assets/Scripts/Navmesh/Core/NavmeshMgr.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/UnityEventMgr.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com.cs" />
@@ -97,6 +97,7 @@
     <Compile Include="Assets/Scripts/Network/LockStep/InputMsg.cs" />
     <Compile Include="Assets/Scripts/Tools/Geo/GeoUtils.cs" />
     <Compile Include="Assets/Scripts/Navmesh/NavmeshMapInfo.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/Core/Navmesh.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/InputMsg.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Connection.cs" />
     <Compile Include="Assets/Scripts/Combat/ICombatSystem.cs" />

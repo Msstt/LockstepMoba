@@ -27,7 +27,7 @@ namespace Framework.Network {
             });
         }
 
-        public void Start() {
+        public void Init() {
             NetworkDef.RegisterDispatcher();
             
             Connect("127.0.0.1", 9980);
@@ -40,9 +40,6 @@ namespace Framework.Network {
         public void Update() {
             DispatchMsg();
         }
-
-        public void FrameStart() { }
-        public void FrameUpdate() { }
 
         #region 连接
         

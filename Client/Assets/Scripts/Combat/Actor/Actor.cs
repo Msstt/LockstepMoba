@@ -62,9 +62,9 @@ namespace Combat.Actor {
             return null;
         }
         
-        public void Update() {
+        public void Update(int frame) {
             foreach (var com in comList) {
-                com.Update();
+                com.Update(frame);
             }
         }
         

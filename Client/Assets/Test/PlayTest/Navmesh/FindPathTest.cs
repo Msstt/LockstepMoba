@@ -13,8 +13,8 @@ public class FindPathTest {
     public void Setup() {
         SceneManager.LoadScene("NavmeshTest", LoadSceneMode.Single);
         SceneManager.sceneLoaded += (scene, mode) => {
-            GameMgr.Instance.Init(new HashSet<Type> { typeof(INavmesh) });
-            GameMgr.Instance.Start();
+            GameMgr.Instance.RegisterSystem(new HashSet<Type> { typeof(INavmesh) });
+            GameMgr.Instance.Init();
         };
     }
     

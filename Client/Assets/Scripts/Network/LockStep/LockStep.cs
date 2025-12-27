@@ -22,7 +22,7 @@ namespace Network {
             EventUtils.UnRegister<EventType.OnConnected>(ReqFrameData);
         }
 
-        public void FrameStart() {
+        public void Start() {
             Clear();
 
             EventUtils.Register<EventType.OnConnected>(ReqFrameData);
@@ -30,10 +30,6 @@ namespace Network {
             
             EventUtils.Send<EventType.OnLockStepStart>();
         }
-        
-        public void Start() {}
-        public void FrameUpdate() {}
-        public void Update() {}
 
         public void ReqFrameData() {
             NetworkUtils.Send(MessageDef.frame_reconnect_c2s, new frame_reconnect_c2s {

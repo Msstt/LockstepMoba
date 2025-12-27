@@ -12,6 +12,6 @@ public class BattleMsgDispatcher : MsgDispatcher {
         }
 
         GameMgr.Instance.GetSystem<ICombatSystem>().Init(msg);
-        GameMgr.Instance.StartFrame();
+        GameMgr.Instance.Start();
     }
 }

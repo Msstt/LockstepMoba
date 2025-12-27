@@ -3,7 +3,7 @@ using Google.Protobuf;
 using Network;
 
 namespace Framework.Network {
-    public interface INetwork : ISystem {
+    public interface INetwork : IInitSystem, IUpdateSystem {
         public void Connect(string ip, int port, bool isForce = false);
         public void Disconnect();
 

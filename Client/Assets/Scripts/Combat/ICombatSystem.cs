@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Network;
 
 namespace Combat {
-    public interface ICombatSystem : ISystem {
+    public interface ICombatSystem : IInitSystem {
         
         public Uid SelfUid { get; }
         public IReadOnlyList<Uid> PlayerUid { get; }

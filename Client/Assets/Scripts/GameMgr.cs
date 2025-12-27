@@ -16,10 +16,19 @@ public class GameMgr : Singleton<GameMgr> {
     
     public bool IsRunning => frameHasStarted;
 
-    public int Frame => GetSystem<ILockStep>().Frame;
+    public int Frame {
+        get {
+            if (driver == null) {
+                Debug.LogError("[GameMgr!!!] No frame driver registered");
+                return -1;
+            }
+            return driver.Frame;
+        }
+    }
+
     public FloatF DeltaTime => 1 / new FloatF(30);
 
-    public void Init(HashSet<Type> system = null) {
+    public void RegisterSystem(HashSet<Type> system = null) {
         void Register<T1, T2>() where T2 : T1, new() where T1 : ISystem {
             if (system == null || system.Contains(typeof(T1))) {
                 RegisterSystem<T1>(new T2());
@@ -32,17 +41,21 @@ public class GameMgr : Singleton<GameMgr> {
         Register<Navmesh.INavmesh, Navmesh.Navmesh>();
         Register<ICombatSystem, CombatSystem>();
         Register<IActorSystem, ActorSystem>();
+
+        if (driver == null) {
+            RegisterSystem<IFrameDriver>(new MockLockStep());
+        }
     }
     
-    public void Start() {
+    public void Init() {
         foreach (var system in systemList) {
-            system.Start();
+            (system as IInitSystem)?.Init();
         }
     }
 
-    public void StartFrame() {
+    public void Start() {
         foreach (var system in systemList) {
-            system.FrameStart();
+            (system as IStartSystem)?.Start();
         }
         frameHasStarted = true;
     }
@@ -53,14 +66,14 @@ public class GameMgr : Singleton<GameMgr> {
         }
         
         foreach (var system in systemList) {
-            system.Update();
+            (system as IUpdateSystem)?.Update();
         }
         UpdateLocalDebug();
     }
     
     public void FrameUpdate() {
         foreach (var system in systemList) {
-            system.FrameUpdate();
+            (system as IFrameUpdateSystem)?.FrameUpdate(Frame);
         }
     }
     
@@ -108,7 +121,7 @@ public class GameMgr : Singleton<GameMgr> {
             ChampionId = 1,
         });
         GetSystem<ICombatSystem>().Init(msg);
-        StartFrame();
+        Start();
     }
     
     public void UpdateLocalDebug() {

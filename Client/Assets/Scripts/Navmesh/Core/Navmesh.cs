@@ -21,7 +21,7 @@ namespace Navmesh {
         }
         private Queue<FindPathQuery> findPathQueue = new Queue<FindPathQuery>();
 
-        public void Start() {
+        public void Init() {
             if (!LoadData()) {
                 return;
             }
@@ -57,12 +57,9 @@ namespace Navmesh {
             return true;
         }
         
-        public void FrameUpdate() {
+        public void FrameUpdate(int frame) {
             HandleFindPathQueue();
         }
-        
-        public void FrameStart() { }
-        public void Update() { }
 
         #region 寻路
 

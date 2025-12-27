@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using Google.Protobuf;
 
 namespace Network {
-    public interface ILockStep : ISystem, IFrameDriver {
-        public int Frame { get; }
-
+    public interface ILockStep : IStartSystem, IFrameDriver {
         public void PushInputMsg(frame_input_s2c msg);
         public frame_input_c2s GetInputMsg();
 

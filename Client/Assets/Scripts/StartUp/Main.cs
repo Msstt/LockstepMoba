@@ -7,11 +7,11 @@ public class Main : MonoBehaviour {
     public bool IsLocalDebug = false;
 
     public void Awake() {
-        GameMgr.Instance.Init();
+        GameMgr.Instance.RegisterSystem();
     }
 
     public void Start() {
-        GameMgr.Instance.Start();
+        GameMgr.Instance.Init();
 
         if (IsLocalDebug) {
             GameMgr.Instance.StartLocalDebug();

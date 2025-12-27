@@ -18,17 +18,13 @@ namespace Combat {
         
         public MapConfig MapConfig { get; private set; }
 
-        public void Start() {
+        public void Init() {
             MapConfig = GameObject.Find("Map")?.GetComponent<MapConfig>();
             if (MapConfig == null) {
                 Log.Error("MapConfig not found");
                 return;
             }
         }
-        
-        public void FrameStart() { }
-        public void Update() { }
-        public void FrameUpdate() { }
         
         public void Init(battle_start_s2c msg) {
             SelfUid = msg.SelfUid;

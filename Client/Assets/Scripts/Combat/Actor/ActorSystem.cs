@@ -11,17 +11,17 @@ namespace Combat.Actor {
         private SortedDictionary<int, Actor> actors = new SortedDictionary<int, Actor>();
         public Champion SelfChampion { get; private set; }
         
-        public void Start() {
+        public void Init() {
             TransRoot = new GameObject("[Actor]").transform;
         }
         
-        public void FrameStart() {
+        public void Start() {
             CreateChampion();
         }
         
-        public void FrameUpdate() {
+        public void FrameUpdate(int frame) {
             foreach (var actor in actors.Values) {
-                actor.Update();
+                actor.Update(frame);
             }
         }
 

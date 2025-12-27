@@ -18,8 +18,8 @@ public class LockstepTest {
     public void Setup() {
         SceneManager.LoadScene("LockstepTest", LoadSceneMode.Single);
         SceneManager.sceneLoaded += (scene, mode) => {
-            GameMgr.Instance.Init(new HashSet<Type> { typeof(INetwork), typeof(ILockStep) });
-            GameMgr.Instance.Start();
+            GameMgr.Instance.RegisterSystem(new HashSet<Type> { typeof(INetwork), typeof(ILockStep) });
+            GameMgr.Instance.Init();
             
             EventUtils.Register<EventType.OnLockStepStart>(OnLockStepStart);
             GameObject.Find("Canvas/+1").GetComponent<Button>().onClick.AddListener(() => {

@@ -17,7 +17,7 @@ namespace Combat.Actor {
         private float smoothPosSpeed = 0f;
         private readonly float smoothDirSpeed = 12f;
 
-        public override void Update() {
+        public override void Update(int frame) {
             if (curType == MoveType.MoveToPos) {
                 MoveToPosUpdate();
             }
