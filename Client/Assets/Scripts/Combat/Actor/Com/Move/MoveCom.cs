@@ -14,7 +14,8 @@ namespace Combat.Actor {
         
         private List<Vector3F> path = new List<Vector3F>();
 
-        private float smoothSpeed = 0f;
+        private float smoothPosSpeed = 0f;
+        private readonly float smoothDirSpeed = 12f;
 
         public override void Update() {
             if (curType == MoveType.MoveToPos) {
@@ -23,12 +24,11 @@ namespace Combat.Actor {
         }
         
         public override void RenderUpdate() {
-            if (Vector3.Distance(Actor.Pos.ToVector3(), Actor.Go.transform.position) <= smoothSpeed * Time.deltaTime) {
-                Actor.Go.transform.position = Actor.Pos.ToVector3();
-            } else {
-                Vector3 pos = smoothSpeed * Time.deltaTime * (Actor.Pos.ToVector3() - Actor.Go.transform.position).normalized;
-                Actor.Go.transform.position += pos;
-            }
+            Actor.Go.transform.position = Vector3.MoveTowards(Actor.Go.transform.position, Actor.Pos.ToVector3(), smoothPosSpeed * Time.deltaTime);
+            
+            Quaternion targetRot = Quaternion.LookRotation(Actor.Dir.ToVector3());
+            Actor.Go.transform.rotation = Quaternion.Slerp(Actor.Go.transform.rotation, targetRot, smoothDirSpeed * Time.deltaTime);
+            
             UpdateHeight();
         }
 
@@ -61,7 +61,7 @@ namespace Combat.Actor {
                     Log.Error("Actor findPath failed: " + Actor.Pos + " -> " + targetPos);
                 }
                 FloatF dis = Vector3F.Distance(Actor.Pos, path[0]);
-                Actor.Dir = path[0] - Actor.Pos;
+                Actor.SetDir(path[0] - Actor.Pos);
                 if (remDis >= dis) {
                     remDis -= dis;
                     Actor.SetPos(path[0]);
@@ -72,7 +72,7 @@ namespace Combat.Actor {
                     remDis = 0;
                 }
             }
-            smoothSpeed = (Vector3F.Distance(Actor.Pos, lastPos) / GameMgr.Instance.DeltaTime).ToFloat();
+            smoothPosSpeed = (Vector3F.Distance(Actor.Pos, lastPos) / GameMgr.Instance.DeltaTime).ToFloat();
         }
 
         #endregion

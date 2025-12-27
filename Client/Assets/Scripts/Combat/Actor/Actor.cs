@@ -28,16 +28,8 @@ namespace Combat.Actor {
         }
 
         public Vector3F Pos => pos;
-        
-        public Vector3F Dir {
-            get => dir;
-            set {
-                dir = value.Normalized();
-                if (go != null) {
-                    go.transform.forward = dir.ToVector3();
-                }
-            }
-        }
+
+        public Vector3F Dir => dir;
 
         public void AddComponent<T>() where T : Com, new() {
             if (coms.ContainsKey(typeof(T))) {
@@ -86,6 +78,18 @@ namespace Combat.Actor {
             this.pos = pos;
             if (updateGo && go != null) {
                 go.transform.position = new Vector3(pos.x.ToFloat(), go.transform.position.y, pos.z.ToFloat());
+            }
+        }
+        
+        public void SetDir(Vector3F dir, bool updateGo = false) {
+            dir.y = 0;
+            dir = dir.Normalized();
+            if (dir == Vector3F.zero) {
+                return;
+            }
+            this.dir = dir;
+            if (updateGo && go != null) {
+                go.transform.forward = dir.ToVector3();
             }
         }
     }

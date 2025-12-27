@@ -31,5 +31,7 @@ public class Main : MonoBehaviour {
                 GameMgr.Instance.GetSystem<IActorSystem>().SelfChampion.GetComponent<MoveCom>().MoveToPos(Vector3F.FromVector3(hit.point));
             }
         }
+        
+        // DebugUtils.DrawDot(GameMgr.Instance.GetSystem<IActorSystem>().SelfChampion.Pos);
     }
 }

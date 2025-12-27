@@ -7,6 +7,8 @@ using UnityEngine;
 
 [Serializable]
 public struct Vector3F {
+    public static Vector3F zero = new Vector3F(0, 0, 0);
+    
     public FloatF x;
     public FloatF y;
     public FloatF z;
@@ -75,7 +77,7 @@ public struct Vector3F {
 
     public Vector3F Normalized() {
         FloatF len = FloatF.Sqrt(x * x + y * y + z * z);
-        if (len == FloatF.zero) {
+        if (len < FloatF.eps) {
             return new Vector3F(FloatF.zero, FloatF.zero, FloatF.zero);
         }
         return new Vector3F(x / len, y / len, z / len);
