@@ -9,5 +9,11 @@ namespace Combat.Actor {
         
         [LabelText("预制体")]
         public string prefabName;
+        
+        [LabelText("生命值")]
+        public LevelNumber<int> health;
+        
+        [LabelText("攻击速度")]
+        public LevelNumber<FloatF> attackSpeed;
     }
 }

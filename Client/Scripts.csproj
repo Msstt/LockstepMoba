@@ -60,9 +60,11 @@
     <Compile Include="Assets/Scripts/Network/LockStep/MockLockStep.cs" />
     <Compile Include="Assets/Scripts/StartUp/Main.cs" />
     <Compile Include="Assets/Scripts/Framework/Event/EventMgr.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/SlotCom.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/UnityEventMgr.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Config/LevelNumber.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Actor.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
@@ -94,7 +96,6 @@
     <Compile Include="Assets/Scripts/Network/Dispatcher/FrameMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Raycaster.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/GameObject/GameObjectExtensions.cs" />
-    <Compile Include="Assets/Scripts/Combat/Actor/Com/StateCom.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom_PosByPath.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/InputMsg.cs" />
