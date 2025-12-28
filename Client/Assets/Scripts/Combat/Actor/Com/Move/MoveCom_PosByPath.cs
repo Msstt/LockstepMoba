@@ -1,8 +1,8 @@
-using UnityEngine;
 
 namespace Combat.Actor.Move {
     public class PosByPath : MoveCom.MoveComStatus {
         private int index = 0;
+        private int lastEventFrame = -1;
 
         public PosByPath(MoveCom com) : base(com) {
         }
@@ -37,6 +37,10 @@ namespace Combat.Actor.Move {
                    Actor.SetPos(Actor.Pos + (com.Path[index] - Actor.Pos) * (remDis / dis));
                     remDis = 0;
                 }
+            }
+
+            if (frame - lastEventFrame > GameMgr.Instance.FramePerSecond) {
+                Actor.Event.OnChangePos.Send();
             }
         }
 

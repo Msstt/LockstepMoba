@@ -25,8 +25,9 @@ public class GameMgr : Singleton<GameMgr> {
             return driver.Frame;
         }
     }
-
-    public FloatF DeltaTime => 1 / new FloatF(30);
+    
+    public readonly int FramePerSecond = 30;
+    public FloatF DeltaTime => 1 / new FloatF(FramePerSecond);
 
     public void RegisterSystem(HashSet<Type> system = null) {
         void Register<T1, T2>() where T2 : T1, new() where T1 : ISystem {

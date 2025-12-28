@@ -22,6 +22,8 @@ namespace Combat.Actor {
 
         public Stats Stats;
         
+        public readonly EventHub Event = new EventHub();
+        
         protected Actor(int uid, GameObject go) {
             Uid = uid;
             this.go = go;
@@ -30,6 +32,8 @@ namespace Combat.Actor {
         public Vector3F Pos => pos;
 
         public Vector3F Dir => dir;
+        
+        #region 组件
 
         public void AddComponent<T>() where T : Com, new() {
             if (coms.ContainsKey(typeof(T))) {
@@ -73,6 +77,8 @@ namespace Combat.Actor {
                 com.RenderUpdate();
             }
         }
+        
+        #endregion
         
         public void SetPos(Vector3F pos, bool updateGo = false) {
             this.pos = pos;

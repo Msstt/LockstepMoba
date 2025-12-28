@@ -55,7 +55,6 @@
     <Compile Include="Assets/Scripts/GameMgr.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkDef.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Singleton.cs" />
-    <Compile Include="Assets/Scripts/Combat/Actor/Stats.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/IActorSystem.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/MockLockStep.cs" />
@@ -77,6 +76,7 @@
     <Compile Include="Assets/Scripts/Network/Message/Proto/TestMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Json/JsonHelper.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Network.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Stats/Stats.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/TestMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Config.cs" />
     <Compile Include="Assets/Scripts/ISystem.cs" />
@@ -108,6 +108,7 @@
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
+    <Compile Include="Assets/Scripts/Combat/Event/EventHub.cs" />
     <Compile Include="Assets/Scripts/Tools/DebugUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/INetwork.cs" />
