@@ -19,6 +19,7 @@ namespace Combat.Actor {
             
             AddComponent<MoveCom>();
             AddComponent<AnimCom>();
+            AddComponent<SlotCom>();
         }
     }
 }

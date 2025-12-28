@@ -10,6 +10,6 @@ namespace Combat.Actor {
             public void Send() => listeners();
         }
         
-        public SafeEvent OnChangePos = new SafeEvent();
+        public readonly SafeEvent OnChangePos = new SafeEvent();
     };
 }

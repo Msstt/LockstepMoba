@@ -112,6 +112,10 @@ public struct FloatF : IComparable<FloatF> {
         }
         return new FloatF(approx, true);
     }
+
+    public static int FloorInt(FloatF x) {
+        return (int)(x.value / scale);
+    }
 }
 
 #region Json Converter

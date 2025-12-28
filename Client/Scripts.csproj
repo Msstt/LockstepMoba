@@ -71,6 +71,7 @@
     <Compile Include="Assets/Scripts/Framework/Res/ResMgr.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventType.cs" />
     <Compile Include="Assets/Scripts/Combat/Uid.cs" />
+    <Compile Include="Assets/Scripts/Tools/TimeUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/FrameMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Fixed/Vector3F.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/TestMsg.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Assets/Scripts/Network/Dispatcher/FrameMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Raycaster.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/GameObject/GameObjectExtensions.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/StateCom.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom_PosByPath.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/InputMsg.cs" />
