@@ -12,4 +12,22 @@ public class GeoUtils {
         if (Vector3F.Cross(a - c, b - c).y * Vector3F.Cross(a - d, b - d).y > 0) return false;
         return true;
     }
+    
+    // 点到线段的距离 XZ
+    public static FloatF PointToSegment(Vector3F p, Vector3F a, Vector3F b) {
+        p.y = a.y = b.y = 0;
+        if (Vector3F.IsEqualInEps(a, b, FloatF.eps)) {
+            return Vector3F.Distance(p, a);
+        }
+        Vector3F ab = b - a;
+        Vector3F ap = p - a;
+        FloatF abLen = Vector3F.Distance2(a, b);
+        FloatF t = Vector3F.Dot(ap, ab) / abLen;
+        if (t < 0) {
+            t = 0;
+        } else if (t > 1) {
+            t = 1;
+        }
+        return Vector3F.Distance(p, a + ab * t);
+    }
 }

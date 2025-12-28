@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Navmesh {
     public class Raycaster {
@@ -89,28 +91,70 @@ namespace Navmesh {
             bool hasPos = (d1 > 0) || (d2 > 0) || (d3 > 0);
             return !(hasNeg && hasPos);
         }
+        
+        FloatF PointToTriangleDistance(Vector3F point, int tId) {
+            Vector3F vId1 = data.vertices[data.indices[tId * 3]];
+            Vector3F vId2 = data.vertices[data.indices[tId * 3 + 1]];
+            Vector3F vId3 = data.vertices[data.indices[tId * 3 + 2]];
+            FloatF d1 = GeoUtils.PointToSegment(point, vId1, vId2);
+            FloatF d2 = GeoUtils.PointToSegment(point, vId2, vId3);
+            FloatF d3 = GeoUtils.PointToSegment(point, vId3, vId1);
+            return FloatF.Min(d1, FloatF.Min(d2, d3));
+        }
 
         // XZ 平面射线检测，返回三角形 id
-        public bool Raycast(Vector3F point, out int tId) {
+        public bool Raycast(Vector3F point, bool findNearest, out int tId) {
             tId = -1;
             int row = (int)((point - min).x / size.x);
             int col = (int)((point - min).z / size.z);
-            if (row < 0 || row >= MaxAABBCount || col < 0 || col >= MaxAABBCount) {
-                return false;
-            }
-            for (int i = 0; i < aabbGrids[row][col].Count; i++) {
-                int triId = aabbGrids[row][col][i];
-                if (PointInTriangle(point, triId)) {
-                    tId = triId;
-                    return true;
+            List<Tuple<int, int>> AABBIndex = new List<Tuple<int, int>>();
+            AABBIndex.Add(Tuple.Create(row, col));
+            // 三角形内
+            foreach (var (r, c) in AABBIndex) {
+                if (r < 0 || r >= MaxAABBCount || c < 0 || c >= MaxAABBCount) {
+                    continue;
+                }
+                for (int i = 0; i < aabbGrids[r][c].Count; i++) {
+                    int triId = aabbGrids[r][c][i];
+                    if (PointInTriangle(point, triId)) {
+                        tId = triId;
+                        return true;
+                    }
                 }
             }
-            for (int i = 0; i < data.indices.Count / 3; i++) {
-                if (PointInTriangle(point, i)) {
-                    tId = i;
-                    return true;
+            if (findNearest) {
+                AABBIndex.Add(Tuple.Create(row - 1, col - 1));
+                AABBIndex.Add(Tuple.Create(row - 1, col));
+                AABBIndex.Add(Tuple.Create(row, col - 1));
+                AABBIndex.Add(Tuple.Create(row, col + 1));
+                AABBIndex.Add(Tuple.Create(row + 1, col));
+                AABBIndex.Add(Tuple.Create(row + 1, col + 1));
+                AABBIndex.Add(Tuple.Create(row - 1, col + 1));
+                AABBIndex.Add(Tuple.Create(row + 1, col - 1));
+                // 最近三角形
+                FloatF minDis = FloatF.max;
+                foreach (var (r, c) in AABBIndex) {
+                    if (r < 0 || r >= MaxAABBCount || c < 0 || c >= MaxAABBCount) {
+                        continue;
+                    }
+                    for (int i = 0; i < aabbGrids[r][c].Count; i++) {
+                        int triId = aabbGrids[r][c][i];
+                        FloatF dis = PointToTriangleDistance(point, triId);
+                        if (dis < minDis) {
+                            tId = triId;
+                            minDis = dis;
+                        }
+                    }
                 }
+                return tId != -1;
             }
+            
+            // for (int i = 0; i < data.indices.Count / 3; i++) {
+            //     if (PointInTriangle(point, i)) {
+            //         tId = i;
+            //         return true;
+            //     }
+            // }
             return false;
         }
     }

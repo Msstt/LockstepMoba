@@ -27,7 +27,11 @@ public class FindPathTest {
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) {
                     if (point != null) {
                         Debug.Log($"{point.Value} -> {hit.point}");
-                        NavmeshUtils.FindPath(Vector3F.FromVector3(point.Value), Vector3F.FromVector3(hit.point), (path) => {
+                        Vector3 start = point.Value;
+                        Vector3 end = hit.point;
+                        // Vector3 start = new Vector3(21.42f, 5.00f, 11.82f);
+                        // Vector3 end = new Vector3(19.58f, 5.00f, 17.83f);
+                        NavmeshUtils.FindPath(Vector3F.FromVector3(start), Vector3F.FromVector3(end), (path) => {
                             Debug.Log($"path Count: {path.Count}");
                             for (int i = 0; i + 1 < path.Count; i++) {
                                 DebugUtils.DrawLine(path[i], path[i + 1], Color.red, 2, 0.05f);

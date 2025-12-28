@@ -85,9 +85,9 @@ namespace Combat.Actor {
 
         private void CalcPath(Vector3F pos, bool force = true) {
             NavmeshUtils.FindPath(Actor.Pos, pos, (path) => { // TODO radius
-                for (int i = 0; i < path.Count - 1; i++) {
-                    DebugUtils.DrawLine(path[i], path[i + 1]);
-                }
+                // for (int i = 0; i < path.Count - 1; i++) {
+                //     DebugUtils.DrawLine(path[i], path[i + 1]);
+                // }
                 path.RemoveAt(0);
                 this.path = path;
             }, force);

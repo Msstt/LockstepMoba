@@ -5,12 +5,12 @@ using Navmesh;
 public static class NavmeshUtils {
     public static NavmeshMapInfo Config => GameMgr.Instance.GetSystem<INavmesh>().MapInfo;
     
-    public static bool Raycast(Vector3F point, out int tId) {
-        return GameMgr.Instance.GetSystem<INavmesh>().Raycast(0, point, out tId);
+    public static bool IsReachable(Vector3F point) {
+        return GameMgr.Instance.GetSystem<INavmesh>().IsReachable(0, point);
     }
     
-    public static bool RaycastByRadius(FloatF radius, Vector3F point, out int tId) {
-        return GameMgr.Instance.GetSystem<INavmesh>().Raycast(radius, point, out tId);
+    public static bool IsReachableByRadius(FloatF radius, Vector3F point) {
+        return GameMgr.Instance.GetSystem<INavmesh>().IsReachable(radius, point);
     }
     
     public static void FindPath(Vector3F start, Vector3F end, Action<List<Vector3F>> callback, bool force = false) {

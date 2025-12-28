@@ -101,11 +101,10 @@ namespace Navmesh {
 
         #region 射线检测
         
-        public bool Raycast(FloatF radius, Vector3F point, out int tId) {
-            tId = -1;
+        public bool IsReachable(FloatF radius, Vector3F point) {
             foreach (var r in allRadius) {
                 if (radius <= r) {
-                    return layers[r].raycaster.Raycast(point, out tId);
+                    return layers[r].raycaster.Raycast(point, false, out _);
                 }
             }
             return false;

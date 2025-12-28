@@ -1026,7 +1026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surfaceData: {fileID: 4900000, guid: e4ea7c08da0e9425d9c008ee8f744c0d, type: 3}
-  DrawDebugTriangle: 0
+  DrawDebugTriangle: 1
   DrawDebugConnection: 0
 --- !u!114 &4285976220866836964
 MonoBehaviour:
@@ -3604,7 +3604,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2662665081684943250}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 

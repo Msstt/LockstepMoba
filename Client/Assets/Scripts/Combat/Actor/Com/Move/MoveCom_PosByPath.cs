@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Combat.Actor.Move {
     public class PosByPath : MoveCom.MoveComStatus {
         private int index = 0;
@@ -28,12 +30,11 @@ namespace Combat.Actor.Move {
                 FloatF dis = Vector3F.Distance(Actor.Pos, com.Path[index]);
                 Actor.SetDir(com.Path[index] - Actor.Pos);
                 if (remDis >= dis) {
-                    remDis -= dis;
                     Actor.SetPos(com.Path[index]);
                     index++;
+                    remDis -= dis;
                 } else {
-                    Vector3F dir = (com.Path[index] - Actor.Pos).Normalized();
-                    Actor.SetPos(Actor.Pos + dir * remDis);
+                   Actor.SetPos(Actor.Pos + (com.Path[index] - Actor.Pos) * (remDis / dis));
                     remDis = 0;
                 }
             }

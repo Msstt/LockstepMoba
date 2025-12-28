@@ -168,6 +168,9 @@ namespace Navmesh {
                         queue.Enqueue(info.tId, GetF(info.tId));
                         
                         FloatF h = GetH(info.tId);
+                        if (info.tId == endId) {
+                            h = FloatF.zero;
+                        }
                         if (h < nearestDis) {
                             nearestId = info.tId;
                             nearestDis = h;

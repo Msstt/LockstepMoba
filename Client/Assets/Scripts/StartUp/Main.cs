@@ -1,6 +1,7 @@
 using Combat.Actor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Main : MonoBehaviour {
     [LabelText("本地调试模式")]
@@ -29,12 +30,16 @@ public class Main : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Map"))) {
                 MoveCom com = GameMgr.Instance.GetSystem<IActorSystem>().SelfChampion.GetComponent<MoveCom>();
+                AnimCom ani = GameMgr.Instance.GetSystem<IActorSystem>().SelfChampion.GetComponent<AnimCom>();
                 com.ForceFail();
+                ani.PlayAnim("Run");
                 com.MoveToPosByPath(Vector3F.FromVector3(hit.point),
                     () => {
+                        ani.PlayAnim("Idle");
                         Debug.Log("Move finished");
                     },
                     () => {
+                        ani.PlayAnim("Idle");
                         Debug.Log("Move failed");
                     });
             }

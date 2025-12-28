@@ -10,6 +10,7 @@ using UnityEngine;
 public struct FloatF : IComparable<FloatF> {
     public static FloatF eps = new FloatF(3, true);
     public static FloatF zero = new FloatF(0, true);
+    public static FloatF max = new FloatF(long.MaxValue, true);
     
     public const long scale = 1_000_000;
     

@@ -1332,18 +1332,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 212588825}
-    - target: {fileID: 2133362505522742770, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: DrawDebugTriangle
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2662665081684943250, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2987348575707063166, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3004068146920950643, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_originalMesh
       value: 
@@ -1352,6 +1340,10 @@ PrefabInstance:
       propertyPath: m_simplifiedMesh
       value: 
       objectReference: {fileID: 212588825}
+    - target: {fileID: 3702246372538125861, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6508610243314606421, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_Mesh
       value: 

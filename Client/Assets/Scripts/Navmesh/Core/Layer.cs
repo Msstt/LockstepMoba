@@ -53,8 +53,8 @@ namespace Navmesh {
         public List<Vector3F> FindPath(Vector3F start, Vector3F end) {
             List<Vector3F> path = new List<Vector3F> { start };
             
-            if (!raycaster.Raycast(start, out int startTId)) return path;
-            if (!raycaster.Raycast(end, out int endTId)) endTId = -1;
+            if (!raycaster.Raycast(start, true, out int startTId)) return path;
+            if (!raycaster.Raycast(end, false, out int endTId)) endTId = -1;
 
             List<Connection.Info> connectionList = connection.GetPath(start, end, startTId, endTId);
 
@@ -68,13 +68,14 @@ namespace Navmesh {
             return path;
         }
         
-        public void DrawTriangle(int tId, float duration = 2f) {
+        public void DrawTriangle(int tId, float duration = 2f, Color color = default) {
+            if (color == default) color = Color.black;
             int vId1 = data.indices[tId * 3];
             int vId2 = data.indices[tId * 3 + 1];
             int vId3 = data.indices[tId * 3 + 2];
-            DebugUtils.DrawLine(data.vertices[vId1], data.vertices[vId2], Color.black, duration, 0.8f);
-            DebugUtils.DrawLine(data.vertices[vId2], data.vertices[vId3], Color.black, duration, 0.8f);
-            DebugUtils.DrawLine(data.vertices[vId3], data.vertices[vId1], Color.black, duration, 0.8f);
+            DebugUtils.DrawLine(data.vertices[vId1], data.vertices[vId2], color, duration, 0.8f);
+            DebugUtils.DrawLine(data.vertices[vId2], data.vertices[vId3], color, duration, 0.8f);
+            DebugUtils.DrawLine(data.vertices[vId3], data.vertices[vId1], color, duration, 0.8f);
         }
         
         public Vector3F GetCentroid(int tId) {

@@ -8,7 +8,7 @@ namespace Combat.Actor {
             ChampionConfig config = Config.Champion[championId];
             GameObject go = new GameObject("Champion_" + championId);
             go.transform.SetParent(system.TransRoot);
-            GoUtils.NewGo(config.prefabName, go.transform, true);
+            GoUtils.NewGo(config.prefabName, go.transform, true).name = "Prefab";
             
             Champion actor = new Champion(system.GetUid(), go);
             return actor;
@@ -18,6 +18,7 @@ namespace Combat.Actor {
             Type = ActorType.Champion;
             
             AddComponent<MoveCom>();
+            AddComponent<AnimCom>();
         }
     }
 }
