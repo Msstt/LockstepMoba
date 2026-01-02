@@ -28,3 +28,5 @@ MonoBehaviour:
     - level: 5
       value:
         value: 1400000
+  moveSpeed:
+    value: 30000000

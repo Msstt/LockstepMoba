@@ -11,6 +11,7 @@ namespace Combat.Actor {
             GoUtils.NewGo(config.prefabName, go.transform, true).name = "Prefab";
             
             Champion actor = new Champion(system.GetUid(), go);
+            actor.Stats.MoveSpeed = config.moveSpeed;
             return actor;
         }
         

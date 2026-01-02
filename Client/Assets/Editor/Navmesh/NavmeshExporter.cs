@@ -30,7 +30,7 @@ namespace Editor.Network {
                 }
                 var instance = NavMesh.AddNavMeshData(data);
                 var settings = NavMesh.GetSettingsByID(int.Parse(Path.GetFileNameWithoutExtension(file)));
-                surfaces[FloatF.FromFloat(settings.agentRadius)] = ExportNavmeshData();
+                surfaces[settings.agentRadius.ToFloatF()] = ExportNavmeshData();
                 NavMesh.RemoveNavMeshData(instance);
             }
             if (!JsonHelper.SaveToFile(surfaces, assetPath + "navmesh_surfaces.json")) {
@@ -49,11 +49,10 @@ namespace Editor.Network {
             var tri = NavMesh.CalculateTriangulation();
             List<int> mapping = new List<int>();
             foreach (var vertice in tri.vertices) {
-                var point = new Vector3F(FloatF.FromFloat(vertice.x), FloatF.FromFloat(vertice.y),
-                    FloatF.FromFloat(vertice.z));
+                var point = new Vector3F(vertice.x.ToFloatF(), vertice.y.ToFloatF(), vertice.z.ToFloatF());
                 bool has = false;
                 for (int i = 0; i < surface.vertices.Count; i++) {
-                    if (Vector3F.IsEqualInEps(surface.vertices[i], point, FloatF.FromFloat(0.001f))) {
+                    if (Vector3F.IsEqualInEps(surface.vertices[i], point, 0.001f.ToFloatF())) {
                         has = true;
                         mapping.Add(i);
                         break;

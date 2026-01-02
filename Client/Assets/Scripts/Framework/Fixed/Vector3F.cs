@@ -19,7 +19,6 @@ public struct Vector3F {
         this.z = z;
     }
     
-    public static Vector3F FromVector3(Vector3 v) => new Vector3F(FloatF.FromFloat(v.x), FloatF.FromFloat(v.y), FloatF.FromFloat(v.z));
     public Vector3 ToVector3() => new Vector3(x.ToFloat(), y.ToFloat(), z.ToFloat());
     
     public static Vector3F operator+(Vector3F a, Vector3F b) => new Vector3F(a.x + b.x, a.y + b.y, a.z + b.z);
@@ -82,6 +81,8 @@ public struct Vector3F {
         }
         return new Vector3F(x / len, y / len, z / len);
     }
+    
+    public Network.vector_f ToProto() => new Network.vector_f { X = x.ToProto(), Y = y.ToProto(), Z = z.ToProto() };
 }
 
 public class Vector3FDrawer : OdinValueDrawer<Vector3F> {
@@ -102,4 +103,10 @@ public class Vector3FDrawer : OdinValueDrawer<Vector3F> {
 
         ValueEntry.SmartValue = v;
     }
+}
+
+public static class Vector3FProtoExtensions {
+    public static Vector3F ToVector3F(this Network.vector_f msg) => new Vector3F(msg.X.ToFloatF(), msg.Y.ToFloatF(), msg.Z.ToFloatF());
+    
+    public static Vector3F ToVector3F(this Vector3 vector) => new Vector3F(vector.x.ToFloatF(), vector.y.ToFloatF(), vector.z.ToFloatF());
 }

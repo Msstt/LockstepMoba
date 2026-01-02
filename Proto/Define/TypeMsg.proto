@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package Network;
+
+message float_f {
+  int64 value = 1;
+}
+
+message vector_f {
+  float_f x = 1;
+  float_f y = 2;
+  float_f z = 3;
+}

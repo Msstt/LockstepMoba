@@ -15,16 +15,14 @@ namespace Network {
         public static void RegisterCollector<T>(MessageDef id, Func<T> collector) where T : IMessage, new() {
             GameMgr.Instance.GetSystem<ILockStep>().RegisterCollector(id, collector);
         }
-        public static void RemoveCollector<T>(MessageDef id, Func<T> collector) where T : IMessage, new() {
-            GameMgr.Instance.GetSystem<ILockStep>().RemoveCollector(id, collector);
+        public static void UnRegisterCollector<T>(MessageDef id, Func<T> collector) where T : IMessage, new() {
+            GameMgr.Instance.GetSystem<ILockStep>().UnRegisterCollector(id, collector);
         }
         public static void RegisterHandler<T>(MessageDef id, Action<SortedDictionary<Uid, T>> handler) where T : IMessage {
             GameMgr.Instance.GetSystem<ILockStep>().RegisterHandler(id, handler);
-            
         }
-        public static void RemoveHandler<T>(MessageDef id, Action<SortedDictionary<Uid, T>> handler) where T : IMessage {
-            GameMgr.Instance.GetSystem<ILockStep>().RemoveHandler(id, handler);
-            
+        public static void UnRegisterHandler<T>(MessageDef id, Action<SortedDictionary<Uid, T>> handler) where T : IMessage {
+            GameMgr.Instance.GetSystem<ILockStep>().UnRegisterHandler(id, handler);
         }
         
         public static bool CheckMessageType(MessageDef msgId, Type type) {

@@ -50,7 +50,7 @@ namespace Network {
             inputCollectors[id].Add(collector);
         }
         
-        public void RemoveCollector<T>(MessageDef id, Func<T> collector) where T : IMessage, new() {
+        public void UnRegisterCollector<T>(MessageDef id, Func<T> collector) where T : IMessage, new() {
             if (!NetworkUtils.CheckMessageType(id, typeof(T))) {
                 return;
             }
@@ -105,7 +105,7 @@ namespace Network {
             inputHandlers[id].Add(handler);
         }
         
-        public void RemoveHandler<T>(MessageDef id, Action<SortedDictionary<Uid, T>> handler) where T : IMessage {
+        public void UnRegisterHandler<T>(MessageDef id, Action<SortedDictionary<Uid, T>> handler) where T : IMessage {
             if (!NetworkUtils.CheckMessageType(id, typeof(T))) {
                 return;
             }

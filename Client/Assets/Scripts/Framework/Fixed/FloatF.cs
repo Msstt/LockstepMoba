@@ -27,13 +27,8 @@ public struct FloatF : IComparable<FloatF> {
     
     public static implicit operator FloatF(long f) => new FloatF(f);
     public static explicit operator int(FloatF f) => (int)(f.value / scale);
-
-    public static FloatF FromFloat(double f) {
-        return new FloatF((long)(f * scale), true);
-    }
-    public float ToFloat() {
-        return 1.0f * value / scale;
-    }
+    
+    public float ToFloat() => 1.0f * value / scale;
     public static implicit operator FloatF(string s) {
         FloatF? f = Parse(s);
         if (f.HasValue) {
@@ -116,6 +111,10 @@ public struct FloatF : IComparable<FloatF> {
     public static int FloorInt(FloatF x) {
         return (int)(x.value / scale);
     }
+    
+    public Network.float_f ToProto() {
+        return new Network.float_f { Value = value };
+    }
 }
 
 #region Json Converter
@@ -161,3 +160,10 @@ public class FloatFPropertyDrawer : OdinValueDrawer<FloatF> {
 }
 
 #endregion
+
+public static class FloatFProtoExtensions {
+    public static FloatF ToFloatF(this Network.float_f msg) => new FloatF(msg.Value, true);
+    
+    public static FloatF ToFloatF(this double f) => new FloatF((long)(f * FloatF.scale), true);
+    public static FloatF ToFloatF(this float f) => new FloatF((long)(f * FloatF.scale), true);
+}

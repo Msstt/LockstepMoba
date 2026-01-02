@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Combat;
-using Combat.Actor;
 using Framework;
-using Framework.Network;
 using Network;
 using UnityEngine;
 
@@ -37,11 +34,12 @@ public class GameMgr : Singleton<GameMgr> {
         }
         
         // 注册顺序即为更新顺序
-        Register<INetwork, Framework.Network.Network>();
+        Register<InputSystem.IInputSystem, InputSystem.InputSystem>();
+        Register<Framework.Network.INetwork, Framework.Network.Network>();
         Register<ILockStep, LockStep>();
         Register<Navmesh.INavmesh, Navmesh.Navmesh>();
-        Register<ICombatSystem, CombatSystem>();
-        Register<IActorSystem, ActorSystem>();
+        Register<Combat.ICombatSystem, Combat.CombatSystem>();
+        Register<Combat.Actor.IActorSystem, Combat.Actor.ActorSystem>();
 
         if (driver == null) {
             RegisterSystem<IFrameDriver>(new MockLockStep());
@@ -121,7 +119,7 @@ public class GameMgr : Singleton<GameMgr> {
             Uid = 1,
             ChampionId = 1,
         });
-        GetSystem<ICombatSystem>().Init(msg);
+        GetSystem<Combat.ICombatSystem>().Init(msg);
         Start();
     }
     

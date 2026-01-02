@@ -2,10 +2,27 @@ syntax = "proto3";
 
 package Network;
 
+import "Define/TypeMsg.proto";
+
 message battle_input {
   test_input test = 1;
+  skill_input skill = 2;
 }
 
 message test_input {
   int32 count = 1;
+}
+
+message skill_param {
+  vector_f pos = 1;
+}
+
+message skill_info {
+  // 0 move 1 attack 2-5 skill
+  int32 slot = 1;
+  skill_param param = 2;
+}
+
+message skill_input {
+  repeated skill_info info = 1;
 }

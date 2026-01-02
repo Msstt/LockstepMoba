@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Combat.Actor.Skill;
 using Framework;
+using Network;
 using UnityEngine;
 
 namespace Combat.Actor {
@@ -9,10 +11,14 @@ namespace Combat.Actor {
         private int maxUid = 0;
         
         private SortedDictionary<int, Actor> actors = new SortedDictionary<int, Actor>();
-        public Champion SelfChampion { get; private set; }
+        private Dictionary<Uid, Actor> champion = new Dictionary<Uid, Actor>();
         
         public void Init() {
             TransRoot = new GameObject("[Actor]").transform;
+            
+            EventMgr.Instance.Register<EventType.OnLockStepStart>(() => {
+                NetworkUtils.RegisterHandler<skill_input>(MessageDef.skill_input, SkillHandler);
+            });
         }
         
         public void Start() {
@@ -40,14 +46,39 @@ namespace Combat.Actor {
                 actor.SetPos(combat.MapConfig.spawnPoint[index++], true);
                 actor.SetDir(new Vector3F( 1, 0, 0), true);
                 actors[actor.Uid] = actor;
-                if (uid == combat.SelfUid) {
-                    SelfChampion = actor;
-                }
+                champion[uid] = actor;
             }
         }
 
         public int GetUid() {
             return ++maxUid;
+        }
+
+        public Actor GetChampion(Uid uid) {
+            return champion[uid];
+        }
+        
+        private void SkillHandler(SortedDictionary<Uid, skill_input> inputs) {
+            foreach (var (uid, input) in inputs) {
+                Actor actor = GetChampion(uid);
+                foreach (var info in input.Info) {
+                    if (info.Slot == (int)SkillSlot.Move) { // TODO 技能树
+                        MoveCom com = actor.GetComponent<MoveCom>();
+                        AnimCom ani = actor.GetComponent<AnimCom>();
+                        com.ForceFail();
+                        ani.PlayAnim("Run");
+                        com.MoveToPosByPath(info.Param.Pos.ToVector3F(),
+                            () => {
+                                ani.PlayAnim("Idle");
+                                Debug.Log("Move finished");
+                            },
+                            () => {
+                                ani.PlayAnim("Idle");
+                                Debug.Log("Move failed");
+                            });
+                    }
+                }
+            }
         }
     }
 }
