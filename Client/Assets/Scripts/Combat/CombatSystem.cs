@@ -26,7 +26,7 @@ namespace Combat {
             }
         }
         
-        public void Init(battle_start_s2c msg) {
+        public void SetStartInfo(battle_start_s2c msg) {
             SelfUid = msg.SelfUid;
             playerUid.Clear();
             championId.Clear();

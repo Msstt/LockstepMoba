@@ -52,7 +52,7 @@ namespace Combat.Actor {
             Quaternion targetRot = Quaternion.LookRotation(Actor.Dir.ToVector3());
             Actor.Go.transform.rotation = Quaternion.Slerp(Actor.Go.transform.rotation, targetRot, smoothDirSpeed * Time.deltaTime);
             
-            UpdateHeight();
+            // UpdateHeight();
         }
         
         // 表现层的 y，不需要同步，所以直接用 Unity

@@ -1,11 +1,13 @@
 using Google.Protobuf;
+using Google.Protobuf.Collections;
 using Network;
 
 namespace Battle {
     public class InputMerge {
         private delegate IMessage MergeFunc(IMessage lastInput, IMessage input);
         private static readonly Dictionary<string, MergeFunc> mergeFunc = new Dictionary<string, MergeFunc>() {
-            { "test", Bind<test_input>(Test) }
+            { "test", Bind<test_input>(Test) },
+            { "skill", Bind<skill_input>(Skill) },
         };
 
         private static MergeFunc Bind<T>(Func<T, T, T> func) where  T : class, IMessage {
@@ -37,6 +39,37 @@ namespace Battle {
             return new test_input {
                 Count = lastInput.Count + input.Count,
             };
+        }
+        
+        // 移动、普攻只保留一次输入
+        private static skill_input Skill(skill_input lastInput, skill_input input) {
+            bool[] skillSlot = new bool[Enum.GetValues(typeof(SkillSlot)).Length];
+            List<skill_info> infos = new List<skill_info>();
+
+            void Add(RepeatedField<skill_info> info) {
+                for (int i = info.Count - 1; i >= 0; i--) {
+                    int slot = info[i].Slot;
+                    if (slot < 0 || slot >= skillSlot.Length) {
+                        continue;
+                    }
+
+                    if ((slot == (int)SkillSlot.Move || slot == (int)SkillSlot.Attack) && skillSlot[slot]) {
+                        continue;
+                    }
+                    skillSlot[slot] = true;
+                    infos.Add(info[i]);
+                }
+            }
+            
+            Add(input.Info);
+            Add(lastInput.Info);
+
+            infos.Reverse();
+            skill_input msg = new skill_input();
+            foreach (var info in infos) {
+                msg.Info.Add(info);
+            }
+            return msg;
         }
     }
 }

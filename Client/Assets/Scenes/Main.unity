@@ -1300,7 +1300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba5af7f941049b38a7bea314f291812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsLocalDebug: 1
+  IsLocalDebug: 0
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1343,6 +1343,34 @@ PrefabInstance:
     - target: {fileID: 3702246372538125861, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046517490186815428, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046517490186815428, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: spawnPoint.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: spawnPoint.Array.data[0].y.value
+      value: 125000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: spawnPoint.Array.data[1].x.value
+      value: 500000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: spawnPoint.Array.data[1].y.value
+      value: 125000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: spawnPoint.Array.data[1].z.value
+      value: 1360000000
       objectReference: {fileID: 0}
     - target: {fileID: 6508610243314606421, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_Mesh

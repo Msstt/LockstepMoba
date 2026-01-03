@@ -8,7 +8,7 @@ namespace Combat {
         public IReadOnlyList<Uid> PlayerUid { get; }
         public MapConfig MapConfig { get; }
 
-        public void Init(battle_start_s2c msg);
+        public void SetStartInfo(battle_start_s2c msg);
         public int GetChampionId(Uid uid);
     }
 }

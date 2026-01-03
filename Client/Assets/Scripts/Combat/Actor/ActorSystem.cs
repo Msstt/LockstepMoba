@@ -43,10 +43,12 @@ namespace Combat.Actor {
             foreach (var uid in combat.PlayerUid) {
                 var championId = combat.GetChampionId(uid);
                 Champion actor = Champion.Create(championId);
-                actor.SetPos(combat.MapConfig.spawnPoint[index++], true);
+                actor.SetPos(combat.MapConfig.spawnPoint[index], true);
                 actor.SetDir(new Vector3F( 1, 0, 0), true);
+                actor.Go.transform.position = new Vector3(actor.Go.transform.position.x, combat.MapConfig.spawnPoint[index].y.ToFloat(), actor.Go.transform.position.z);
                 actors[actor.Uid] = actor;
                 champion[uid] = actor;
+                index++;
             }
         }
 

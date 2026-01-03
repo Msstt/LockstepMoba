@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Framework;
 using Network;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class GameMgr : Singleton<GameMgr> {
     private Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
@@ -63,17 +64,20 @@ public class GameMgr : Singleton<GameMgr> {
         if (frameHasStarted && driver != null && driver.FrameReady()) {
             FrameUpdate();
         }
-        
+        Profiler.BeginSample("GameMgr.Update");
         foreach (var system in systemList) {
             (system as IUpdateSystem)?.Update();
         }
+        Profiler.EndSample();
         UpdateLocalDebug();
     }
     
     public void FrameUpdate() {
+        Profiler.BeginSample("GameMgr.FrameUpdate");
         foreach (var system in systemList) {
             (system as IFrameUpdateSystem)?.FrameUpdate(Frame);
         }
+        Profiler.EndSample();
     }
     
     private void RegisterSystem<T>(T system) where T : ISystem {
@@ -119,7 +123,7 @@ public class GameMgr : Singleton<GameMgr> {
             Uid = 1,
             ChampionId = 1,
         });
-        GetSystem<Combat.ICombatSystem>().Init(msg);
+        GetSystem<Combat.ICombatSystem>().SetStartInfo(msg);
         Start();
     }
     
