@@ -68,6 +68,7 @@
     <Compile Include="Assets/Scripts/Framework/Tools/UnityEventMgr.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/LevelNumber.cs" />
     <Compile Include="Assets/Scripts/Input/Command/ICommand.cs" />
+    <Compile Include="Assets/Scripts/StartUp/GMTool.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Actor.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />

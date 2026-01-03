@@ -21,6 +21,7 @@ namespace Network {
 
         private float frameTime = 0;
         private float collectTime = 0;
+        private float outTime = 0;
         private bool isCollectingInput = false;
         private int frameMaxDelay = 0;
         
@@ -36,6 +37,7 @@ namespace Network {
 
             frameTime = 1000f / Config.instance.Network.frame_per_second;
             collectTime = frameTime * Config.instance.Network.input_collect_window;
+            outTime = Config.instance.Network.frame_timeout * 1000;
             frameMaxDelay = Config.instance.Network.frame_max_delay;
             lastFrameTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         }
@@ -49,9 +51,20 @@ namespace Network {
             if (!isCollectingInput && nowTime - lastFrameTime >= frameTime) {
                 NextFrame();
             }
-            if (isCollectingInput && nowTime - lastFrameTime >= collectTime) {
-                FinishCollectInput();
+            
+            if (isCollectingInput) {
+                List<Uid> uids = NetworkUtils.GetAllClientUid();
+                if (inputs.Count >= uids.Count) {
+                    FinishCollectInput();
+                } else if (nowTime - lastFrameTime >= outTime) {
+                    // 断线重连时可能会有玩家丢 start_frame_s2c,先这样处理一下
+                    frame--;
+                    NextFrame();
+                }
             }
+            // if (isCollectingInput && nowTime - lastFrameTime >= collectTime) {
+            //     FinishCollectInput();
+            // }
         }
 
         public void AddInput(int frame, Uid uid, battle_input input) {
@@ -71,9 +84,14 @@ namespace Network {
             lastFrameTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             
             // 广播收集玩家输入
-            NetworkUtils.Broadcast(MessageDef.frame_start_s2c, new frame_start_s2c {
-                Frame = frame,
-            });
+            List<Uid> uids = NetworkUtils.GetAllClientUid();
+            foreach (var uid in uids) {
+                if (!inputs.ContainsKey(uid)) {
+                    NetworkUtils.Send(uid, MessageDef.frame_start_s2c, new frame_start_s2c {
+                        Frame = frame,
+                    });
+                }
+            }
             isCollectingInput = true;
         }
 

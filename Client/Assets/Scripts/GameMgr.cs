@@ -13,6 +13,8 @@ public class GameMgr : Singleton<GameMgr> {
     private bool frameHasStarted = false;
     
     public bool IsRunning => frameHasStarted;
+    
+    public GMTool GMTool { get; set; }
 
     public int Frame {
         get {

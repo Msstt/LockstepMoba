@@ -7,5 +7,7 @@ public class NetworkConfig {
     
     public int frame_max_delay;
     
+    public int frame_timeout;
+    
     public int auto_start_count;
 };

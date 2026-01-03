@@ -1,20 +1,18 @@
-using Combat.Actor;
-using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Main : MonoBehaviour {
-    [LabelText("本地调试模式")]
-    public bool IsLocalDebug = false;
+    private GMTool gmTool;
 
     public void Awake() {
+        gmTool = GetComponent<GMTool>();
+        GameMgr.Instance.GMTool = gmTool;
         GameMgr.Instance.RegisterSystem();
     }
 
     public void Start() {
         GameMgr.Instance.Init();
 
-        if (IsLocalDebug) {
+        if (gmTool.IsLocalDebug) {
             GameMgr.Instance.StartLocalDebug();
         }
     }

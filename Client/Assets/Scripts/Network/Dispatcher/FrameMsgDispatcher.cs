@@ -7,11 +7,10 @@ public class FrameMsgDispatcher : MsgDispatcher {
     }
     
     private static void frame_start_s2c(frame_start_s2c msg) {
-        // 延迟 5 帧，发给服务器也会被丢掉，暂时写死
-        if (msg.Frame - (GameMgr.Instance.Frame + 1) > 5) {
-            return;
+        // 客户端应该模拟到 msg.Frame - 1，但 frame_input_s2c 和 frame_start_s2c 可能会在同一帧收到，所以加了一帧的容错
+        if (msg.Frame - 1 <= GameMgr.Instance.Frame + 1) {
+            NetworkUtils.Send(MessageDef.frame_input_c2s, GameMgr.Instance.GetSystem<ILockStep>().GetInputMsg());
         }
-        NetworkUtils.Send(MessageDef.frame_input_c2s, GameMgr.Instance.GetSystem<ILockStep>().GetInputMsg());
     }
     
     private static void frame_input_s2c(frame_input_s2c msg) {

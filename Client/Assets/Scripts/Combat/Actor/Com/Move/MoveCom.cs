@@ -32,13 +32,11 @@ namespace Combat.Actor {
         }
 
         public override void Update(int frame) {
-            Vector3F lastPos = Actor.Pos;
-            
             if (curType != MoveType.None) {
                 typeToStatus[curType].Update(frame);
             }
 
-            FloatF dis = Vector3F.Distance(Actor.Pos, lastPos);
+            FloatF dis = Vector3F.Distance(Actor.Pos, Actor.Go.transform.position.ToVector3F());
             if (dis == FloatF.zero) {
                 smoothPosSpeed = 0;
             } else {

@@ -5,6 +5,8 @@
   "input_collect_window": 0.4,
   
   "frame_max_delay": 5,
+  
+  "frame_timeout": 1,
 
-  "auto_start_count": 2
+  "auto_start_count": 1
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Framework;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Combat.Actor {
     public enum ActorType {
@@ -23,10 +25,18 @@ namespace Combat.Actor {
         public Stats Stats;
         
         public readonly EventHub Event = new EventHub();
+
+        private GameObject debugPoint;
         
         protected Actor(int uid, GameObject go) {
             Uid = uid;
             this.go = go;
+
+            debugPoint = GoUtils.NewGo("Role/Other/DebugPoint", DebugMgr.Instance.transform);
+            var renderer = debugPoint.GetComponent<Renderer>();
+            renderer.material = new Material(Shader.Find("Standard"));
+            renderer.material.color = new Color(Random.value, Random.value, Random.value);
+            debugPoint.SetActive(GameMgr.Instance.GMTool.ShowUnitRealPos);
         }
 
         public Vector3F Pos => pos;
@@ -85,6 +95,8 @@ namespace Combat.Actor {
             if (updateGo && go != null) {
                 go.transform.position = new Vector3(pos.x.ToFloat(), go.transform.position.y, pos.z.ToFloat());
             }
+
+            debugPoint.transform.position = pos.ToVector3();
         }
         
         public void SetDir(Vector3F dir, bool updateGo = false) {
