@@ -1,3 +1,5 @@
+// Warning：请勿在 MsgHandler 中 RegisterHandler 或 UnRegisterHandler 事件
+
 using System;
 using System.Collections.Generic;
 using Google.Protobuf;

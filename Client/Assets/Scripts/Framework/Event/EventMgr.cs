@@ -7,15 +7,15 @@ using UnityEngine;
 namespace Framework {
     public class EventMgr : Singleton<EventMgr> {
         
-        private Dictionary<Type, Delegate> eventListeners = new Dictionary<Type, Delegate>();
-        private Dictionary<Type, Delegate> noParamEventListeners = new Dictionary<Type, Delegate>();
+        private Dictionary<Type, ISafeEvent> eventListeners = new Dictionary<Type, ISafeEvent>();
+        private Dictionary<Type, ISafeEvent> noParamEventListeners = new Dictionary<Type, ISafeEvent>();
         
         public void Register<T>(Action listener) where T : struct {
             Type type = typeof(T);
             if (!noParamEventListeners.ContainsKey(type)) {
-                noParamEventListeners.Add(type, null);
+                noParamEventListeners.Add(type, new SafeEvent());
             }
-            noParamEventListeners[type] = Delegate.Combine(noParamEventListeners[type], listener);
+            (noParamEventListeners[type] as SafeEvent)?.Register(listener);
         }
         
         public void UnRegister<T>(Action listener) where T : struct {
@@ -23,15 +23,15 @@ namespace Framework {
             if (!noParamEventListeners.ContainsKey(type)) {
                 return;
             }
-            noParamEventListeners[type] = Delegate.Remove(noParamEventListeners[type], listener);
+            (noParamEventListeners[type] as SafeEvent)?.UnRegister(listener);
         }
         
         public void Register<T>(Action<T> listener) where T : struct {
             Type type = typeof(T);
             if (!eventListeners.ContainsKey(type)) {
-                eventListeners.Add(type, null);
+                eventListeners.Add(type, new  SafeEvent<T>());
             }
-            eventListeners[type] = Delegate.Combine(eventListeners[type], listener);
+            (eventListeners[type] as SafeEvent<T>)?.Register(listener);
         }
         
         public void UnRegister<T>(Action<T> listener) where T : struct {
@@ -39,22 +39,22 @@ namespace Framework {
             if (!eventListeners.ContainsKey(type)) {
                 return;
             }
-            eventListeners[type] = Delegate.Remove(eventListeners[type], listener);
+            (eventListeners[type] as SafeEvent<T>)?.UnRegister(listener);
         }
         
         public void Send<T>(T param) where T : struct {
             Type type = typeof(T);
-            Action<T> listener = null;
-            Action noParamListener = null;
+            SafeEvent<T> listener = null;
+            SafeEvent noParamListener = null;
             if (eventListeners.ContainsKey(type)) {
-                listener = eventListeners[type] as Action<T>;
+                listener = eventListeners[type] as SafeEvent<T>;
             }
             if (noParamEventListeners.ContainsKey(type)) {
-                noParamListener = noParamEventListeners[type] as Action;
+                noParamListener = noParamEventListeners[type] as SafeEvent;
             }
             try {
-                noParamListener?.Invoke();
-                listener?.Invoke(param);
+                noParamListener?.Send();
+                listener?.Send(param);
             } catch (Exception e) {
                 Debug.LogError($"[EventMgr] Error calling {param.ToString()}: {e}");
             }

@@ -104,6 +104,7 @@
     <Compile Include="Assets/Scripts/Navmesh/Core/Raycaster.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/GameObject/GameObjectExtensions.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Log.cs" />
+    <Compile Include="Assets/Scripts/Framework/Event/SafeEvent.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom_PosByPath.cs" />
     <Compile Include="Assets/Scripts/Input/Command/MoveCommand.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/InputMsg.cs" />
