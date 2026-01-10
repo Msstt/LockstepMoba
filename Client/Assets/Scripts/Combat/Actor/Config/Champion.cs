@@ -13,6 +13,9 @@ namespace Combat.Actor {
         [LabelText("生命值")]
         public LevelNumber<int> health;
         
+        [LabelText("攻击力")]
+        public LevelNumber<int> attack;
+        
         [LabelText("攻击速度")]
         public LevelNumber<FloatF> attackSpeed;
         

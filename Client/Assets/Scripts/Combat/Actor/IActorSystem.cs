@@ -5,6 +5,8 @@ namespace Combat.Actor {
         public Transform TransRoot { get; }
         
         public int GetUid();
-        public Actor GetChampion(Uid uid);
+        public Actor GetActor(int uid);
+        
+        public void RemoveActor(int uid);
     }
 }

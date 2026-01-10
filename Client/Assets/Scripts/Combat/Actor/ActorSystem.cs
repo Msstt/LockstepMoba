@@ -10,8 +10,9 @@ namespace Combat.Actor {
 
         private int maxUid = 0;
         
+        // 玩家 uid 与 角色系统 uid 一致
         private SortedDictionary<int, Actor> actors = new SortedDictionary<int, Actor>();
-        private Dictionary<Uid, Actor> champion = new Dictionary<Uid, Actor>();
+        private List<int> toRemove = new List<int>();
         
         public void Init() {
             TransRoot = new GameObject("[Actor]").transform;
@@ -26,8 +27,15 @@ namespace Combat.Actor {
         }
         
         public void FrameUpdate(int frame) {
+            toRemove.Clear();
             foreach (var actor in actors.Values) {
                 actor.Update(frame);
+            }
+            foreach (var uid in toRemove) {
+                if (actors.TryGetValue(uid, out Actor actor)) {
+                    actor.Clear();
+                    actors.Remove(uid);
+                }
             }
         }
 
@@ -47,7 +55,6 @@ namespace Combat.Actor {
                 actor.SetDir(new Vector3F( 1, 0, 0), true);
                 actor.Go.transform.position = new Vector3(actor.Go.transform.position.x, combat.MapConfig.spawnPoint[index].y.ToFloat(), actor.Go.transform.position.z);
                 actors[actor.Uid] = actor;
-                champion[uid] = actor;
                 index++;
             }
         }
@@ -56,13 +63,18 @@ namespace Combat.Actor {
             return ++maxUid;
         }
 
-        public Actor GetChampion(Uid uid) {
-            return champion[uid];
+        public Actor GetActor(int uid) {
+            return actors.GetValueOrDefault(uid, null);
+        }
+
+        // 异步删除
+        public void RemoveActor(int uid) {
+            toRemove.Add(uid);
         }
         
         private void SkillHandler(SortedDictionary<Uid, skill_input> inputs) {
             foreach (var (uid, input) in inputs) {
-                Actor actor = GetChampion(uid);
+                Actor actor = GetActor(uid);
                 foreach (var info in input.Info) {
                     if (info.Slot == (int)SkillSlot.Move) { // TODO 技能树
                         MoveCom com = actor.GetComponent<MoveCom>();

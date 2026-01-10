@@ -49,5 +49,19 @@ namespace Combat {
         private void RefreshValue() {
             curValue = FloatF.Clamp(curValue, FloatF.zero, maxValue.Value);
         }
+
+        public static LimitedPriority operator+(LimitedPriority p, FloatF value) {
+            LimitedPriority ret = p;
+            ret.curValue += value;
+            ret.RefreshValue();
+            return ret;
+        }
+        
+        public static LimitedPriority operator-(LimitedPriority p, FloatF value) {
+            LimitedPriority ret = p;
+            ret.curValue -= value;
+            ret.RefreshValue();
+            return ret;
+        }
     }
 }

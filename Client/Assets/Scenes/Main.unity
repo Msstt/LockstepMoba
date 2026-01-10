@@ -1224,7 +1224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50819f4a67724ff88d9778d38fbac69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsLocalDebug: 0
+  IsLocalDebug: 1
   ShowUnitRealPos: 1
 --- !u!114 &854225744
 MonoBehaviour:

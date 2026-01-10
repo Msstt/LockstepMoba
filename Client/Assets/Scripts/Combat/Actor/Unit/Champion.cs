@@ -11,7 +11,7 @@ namespace Combat.Actor {
             GoUtils.NewGo(config.prefabName, go.transform, true).name = "Prefab";
             
             Champion actor = new Champion(system.GetUid(), go);
-            actor.Stats.MoveSpeed = config.moveSpeed;
+            actor.SetStatusByConfig(config);
             return actor;
         }
         
@@ -21,6 +21,14 @@ namespace Combat.Actor {
             AddComponent<MoveCom>();
             AddComponent<AnimCom>();
             AddComponent<SlotCom>();
+            AddComponent<LevelCom>();
+        }
+
+        private void SetStatusByConfig(ChampionConfig config) {
+            Stats.Health = new LimitedPriority(config.health[1]);
+            Stats.Attack = new Priority(config.attack[1]);
+            Stats.AttackSpeed = new Priority(config.attackSpeed[1]);
+            Stats.MoveSpeed = new Priority(config.moveSpeed);
         }
     }
 }

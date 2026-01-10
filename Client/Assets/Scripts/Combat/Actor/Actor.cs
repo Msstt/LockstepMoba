@@ -9,7 +9,7 @@ namespace Combat.Actor {
         Champion,
     }
     
-    public abstract class Actor {
+    public abstract partial class Actor {
         public int Uid { get; private set; }
         public ActorType Type { get; protected set; }
         
@@ -33,9 +33,6 @@ namespace Combat.Actor {
             this.go = go;
 
             debugPoint = GoUtils.NewGo("Role/Other/DebugPoint", DebugMgr.Instance.transform);
-            var renderer = debugPoint.GetComponent<Renderer>();
-            renderer.material = new Material(Shader.Find("Standard"));
-            renderer.material.color = new Color(Random.value, Random.value, Random.value);
             debugPoint.SetActive(GameMgr.Instance.GMTool.ShowUnitRealPos);
         }
 
@@ -67,6 +64,14 @@ namespace Combat.Actor {
             coms[typeof(T)].Destroy();
             comList.Remove(coms[typeof(T)]);
             coms.Remove(typeof(T));
+        }
+        
+        public void RemoveAllComponent() {
+            foreach (var com in comList) {
+                com.Destroy();
+            }
+            comList.Clear();
+            coms.Clear();
         }
         
         public T GetComponent<T>() where T : Com {
@@ -109,6 +114,24 @@ namespace Combat.Actor {
             if (updateGo && go != null) {
                 go.transform.forward = dir.ToVector3();
             }
+        }
+
+        public int Level {
+            get {
+                LevelCom com = GetComponent<LevelCom>();
+                return com?.Level ?? 1;
+            }
+        }
+
+        private void OnDead() {
+            IActorSystem system = GameMgr.Instance.GetSystem<IActorSystem>();
+            system?.RemoveActor(Uid);
+        }
+        
+        public void Clear() {
+            RemoveAllComponent();
+            GameObject.Destroy(go);
+            GameObject.Destroy(debugPoint);
         }
     }
 }

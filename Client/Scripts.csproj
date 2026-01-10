@@ -49,6 +49,7 @@
     <Compile Include="Assets/Scripts/Navmesh/Core/PathSmoother.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Log.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Writer.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Actor.OnHit.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/TypeMsg.cs" />
     <Compile Include="Assets/Scripts/Input/InputUtils.cs" />
     <Compile Include="Assets/Scripts/Tools/Camera/CameraCom.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SlotCom.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/LevelCom.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/UnityEventMgr.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/LevelNumber.cs" />
     <Compile Include="Assets/Scripts/Input/Command/ICommand.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Assets/Scripts/Tools/TimeUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/FrameMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Fixed/Vector3F.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/HitInfo.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/TestMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Json/JsonHelper.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Network.cs" />
@@ -95,6 +98,7 @@
     <Compile Include="Assets/Scripts/Combat/MapConfig.cs" />
     <Compile Include="Assets/Scripts/Navmesh/INavmesh.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Layer.cs" />
+    <Compile Include="Assets/Scripts/Tools/Debug/RandomColor.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Skill/Define.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/IMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Reader.cs" />
@@ -121,11 +125,11 @@
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
-    <Compile Include="Assets/Scripts/Tools/DebugUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
     <Compile Include="Assets/Scripts/Combat/Common/Priority.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/INetwork.cs" />
     <Compile Include="Assets/Scripts/Combat/Common/LimitedPriority.cs" />
+    <Compile Include="Assets/Scripts/Tools/Debug/DebugUtils.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Define.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/GameObject/GoUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/BattleMsgDispatcher.cs" />
