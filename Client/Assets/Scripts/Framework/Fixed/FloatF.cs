@@ -10,6 +10,7 @@ using UnityEngine;
 public struct FloatF : IComparable<FloatF> {
     public static FloatF eps = new FloatF(3, true);
     public static FloatF zero = new FloatF(0, true);
+    public static FloatF one = new FloatF(1);
     public static FloatF max = new FloatF(long.MaxValue, true);
     
     public const long scale = 1_000_000;
@@ -51,8 +52,15 @@ public struct FloatF : IComparable<FloatF> {
     public int CompareTo(FloatF other) => value.CompareTo(other.value);
     public static FloatF Max(FloatF a, FloatF b) => a > b ? a : b;
     public static FloatF Min(FloatF a, FloatF b) => a < b ? a : b;
-    
-    public override bool Equals(object obj) => obj is FloatF f && f.value == value;
+
+    public override bool Equals(object obj) {
+        if (obj is FloatF f) return f.value == value;
+        if (obj is byte or sbyte or ushort or int or uint or long or ulong) {
+            long v = Convert.ToInt64(obj);
+            return v * scale == value;
+        }
+        return false;
+    }
     public override int GetHashCode() => value.GetHashCode();
 
     public override string ToString() {
@@ -114,6 +122,10 @@ public struct FloatF : IComparable<FloatF> {
     
     public Network.float_f ToProto() {
         return new Network.float_f { Value = value };
+    }
+
+    public static FloatF Clamp(FloatF value, FloatF min, FloatF max) {
+        return Min(Max(value, min), max);
     }
 }
 

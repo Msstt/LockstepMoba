@@ -123,7 +123,9 @@
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
     <Compile Include="Assets/Scripts/Tools/DebugUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
+    <Compile Include="Assets/Scripts/Combat/Common/Priority.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/INetwork.cs" />
+    <Compile Include="Assets/Scripts/Combat/Common/LimitedPriority.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Define.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/GameObject/GoUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/BattleMsgDispatcher.cs" />
