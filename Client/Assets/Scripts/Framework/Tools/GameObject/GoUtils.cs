@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class GoUtils {
     public static GameObject NewGo(string prefabName, Transform parent, bool isInit = false) {
-        GameObject prefab = Resources.Load<GameObject>(prefabName);
+        GameObject prefab = ResUtils.Load<GameObject>(prefabName);
         if (prefab == null) {
             Debug.LogError(prefabName + " is missing!");
             return null;

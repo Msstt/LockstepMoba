@@ -8,4 +8,12 @@ public static class GameObjectExtensions {
         }
         return com;
     }
+    
+    public static T EnsureComponent<T>(this Transform go) where T : Component {
+        var com = go.GetComponent<T>();
+        if (com == null) {
+            com = go.gameObject.AddComponent<T>();
+        }
+        return com;
+    }
 }

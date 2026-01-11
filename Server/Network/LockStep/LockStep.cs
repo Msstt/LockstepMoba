@@ -1,5 +1,4 @@
 using Framework;
-using Framework.Network;
 
 namespace Network {
     public class LockStep : Singleton<LockStep> {
