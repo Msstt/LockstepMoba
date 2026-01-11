@@ -20,6 +20,8 @@ MonoBehaviour:
       value: 300
     - level: 10
       value: 500
+  attack:
+    datas: []
   attackSpeed:
     datas:
     - level: 1

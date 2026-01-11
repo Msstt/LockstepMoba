@@ -7,7 +7,7 @@ namespace Navmesh {
         
         public static WType wType = WType.edgeMidDis;
 
-        public static int FindPathMaxIterationCount = 1000;
+        public static int FindPathMaxIterationCount = 100;
         public static int FindPathMaxQueryPerFrame = 10;
     }
 }

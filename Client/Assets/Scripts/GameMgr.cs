@@ -133,7 +133,7 @@ public class GameMgr : Singleton<GameMgr> {
     public void UpdateLocalDebug() {
         if (!isLocalDebug) return;
         
-        if (Time.time - lastTick < 0.033f) return;
+        if (Time.time - lastTick < 0.016f) return;
         lastTick = Time.time;
         frame++;
 

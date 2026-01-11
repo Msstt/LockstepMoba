@@ -5,7 +5,6 @@ namespace Battle {
     public class Match : Singleton<Match> {
         public void Start() {
             // 广播玩家信息
-            List<Uid> uids = NetworkUtils.GetAllClientUid();
             NetworkUtils.Broadcast(MessageDef.battle_start_s2c, GetStartMsg);
             
             Network.LockStep.Instance.Start();

@@ -26,6 +26,8 @@ namespace Combat.Actor {
         public IReadOnlyList<Vector3F> Path => path;
         
         private Action finishCallback, failCallback;
+        
+        public float SmoothPosSpeed => smoothPosSpeed;
 
         public override void Awake() {
             typeToStatus[MoveType.PosByPath] = new PosByPath(this);
