@@ -66,6 +66,7 @@
     <Compile Include="Assets/Scripts/Framework/Event/EventMgr.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SlotCom.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
+    <Compile Include="Assets/Scripts/Tools/Debug/FPSDrawer.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/Log.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/LevelCom.cs" />
