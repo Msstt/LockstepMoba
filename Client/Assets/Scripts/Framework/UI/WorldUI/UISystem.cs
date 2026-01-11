@@ -4,6 +4,10 @@ using UnityEngine;
 namespace Framework.UI {
     public partial class UISystem : IUISystem {
         public void BindingUI(UIDef def, Transform transform, IUIParam param = null) {
+            if (transform == null) {
+                Log.Error("BindingUI transform is null: " + def);
+                return;
+            }
             BindingUISource source = transform.EnsureComponent<BindingUISource>();
             UIPanel panel = source.GetPanel(def);
             if (panel == null) {
@@ -14,7 +18,7 @@ namespace Framework.UI {
                     Log.Error("BindingUI only support World Layer: " + def);
                     return;
                 }
-                panel = CreatePanel(def, config, transform);
+                panel = CreatePanel(def, config, worldCanvas);
                 if (panel == null) {
                     return;
                 }
@@ -24,7 +28,11 @@ namespace Framework.UI {
             ExecuteOnShow(panel, param);
         }
         
-        public void UnbindingUI(UIDef def, Transform transform) {
+        public void UnBindingUI(UIDef def, Transform transform) {
+            if (transform == null) {
+                Log.Error("UnBindingUI transform is null: " + def);
+                return;
+            }
             BindingUISource source = transform.EnsureComponent<BindingUISource>();
             UIPanel panel = source.GetPanel(def);
             if (panel == null) {

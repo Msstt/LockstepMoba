@@ -10,6 +10,7 @@ namespace Framework.UI {
         private Transform backCanvas;
         private Transform topCanvas;
         private Transform worldCanvas;
+        private Camera mainCamera;
         
         Dictionary<UIDef, UIPanel> panels = new Dictionary<UIDef, UIPanel>();
         
@@ -17,6 +18,7 @@ namespace Framework.UI {
             backCanvas = GameObject.Find("UIRoot/Back").transform;
             topCanvas = GameObject.Find("UIRoot/Top").transform;
             worldCanvas = GameObject.Find("UIRoot/World").transform;
+            mainCamera = Camera.main;
 
             if (backCanvas == null || topCanvas == null || worldCanvas == null) {
                 throw new UIException("UISystem canvas not found");
@@ -63,7 +65,7 @@ namespace Framework.UI {
         }
 
         private UIPanel CreatePanel(UIDef def, UIConfig.Info config, Transform parent) {
-            GameObject panelGo = GoUtils.NewGo(config.prefab, parent, true);
+            GameObject panelGo = GoUtils.NewGo(config.prefab, parent);
             if (panelGo == null) {
                 Log.Error("UISystem panel prefab not found: " + config.prefab);
                 return null;

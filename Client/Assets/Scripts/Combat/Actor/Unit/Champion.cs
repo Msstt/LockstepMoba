@@ -22,6 +22,7 @@ namespace Combat.Actor {
             AddComponent<AnimCom>();
             AddComponent<SlotCom>();
             AddComponent<LevelCom>();
+            // AddComponent<StatsBarCom>();
         }
 
         private void SetStatusByConfig(ChampionConfig config) {

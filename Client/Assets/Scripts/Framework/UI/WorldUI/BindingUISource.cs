@@ -8,6 +8,7 @@ namespace Framework.UI {
     public class BindingUISource : MonoBehaviour {
         private readonly Dictionary<UIDef, UIPanel> panels = new Dictionary<UIDef, UIPanel>();
         private Vector3 lastPos;
+        private Vector3 cameraForward;
 
         public UIPanel GetPanel(UIDef def) {
             return panels.GetValueOrDefault(def, null);
@@ -27,23 +28,26 @@ namespace Framework.UI {
 
         private void RefreshPanel(UIPanel panel) {
             panel.Transform.position = transform.position;
+            panel.Transform.forward = UIUtils.UICamera.transform.forward;
         }
 
-        public void Update() {
-            if (transform.position == lastPos) {
+        public void LateUpdate() {
+            if (transform.position == lastPos && UIUtils.UICamera.transform.forward == cameraForward) {
                 return;
             }
             lastPos = transform.position;
+            cameraForward = UIUtils.UICamera.transform.forward;
             foreach (var panel in panels.Values) {
                 RefreshPanel(panel);
             }
         }
-
+        
         public void OnDestroy() {
-            foreach (var panel in panels.Values) {
-                UIUtils.UnbindingUI(panel.Def, transform);
+            while (panels.Count > 0) {
+                var panel = panels.Values.GetEnumerator();
+                panel.MoveNext();
+                UIUtils.UnBindingUI(panel.Current.Def, transform);
             }
-            panels.Clear();
         }
     }
 }

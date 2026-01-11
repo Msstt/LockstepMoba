@@ -3,6 +3,8 @@ using UI;
 using UnityEngine;
 
 public static class UIUtils {
+    public static Camera UICamera => GameMgr.Instance.GetSystem<IUISystem>()?.UICamera;
+
     public static void ShowUI(UIDef def, IUIParam param = null) {
         GameMgr.Instance.GetSystem<IUISystem>()?.ShowUI(def, param);
     }
@@ -15,8 +17,8 @@ public static class UIUtils {
         GameMgr.Instance.GetSystem<IUISystem>()?.BindingUI(def, transform, param);
     }
 
-    public static void UnbindingUI(UIDef def, Transform transform) {
-        GameMgr.Instance.GetSystem<IUISystem>()?.UnbindingUI(def, transform);
+    public static void UnBindingUI(UIDef def, Transform transform) {
+        GameMgr.Instance.GetSystem<IUISystem>()?.UnBindingUI(def, transform);
         
     }
 }

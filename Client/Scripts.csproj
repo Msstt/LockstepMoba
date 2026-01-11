@@ -58,7 +58,7 @@
     <Compile Include="Assets/Scripts/GameMgr.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkDef.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Singleton.cs" />
-    <Compile Include="Assets/Scripts/Combat/Actor/Com/StatusBarCom.cs" />
+    <Compile Include="Assets/Scripts/Framework/UI/UISystem.Camera.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/IActorSystem.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/MockLockStep.cs" />
@@ -105,6 +105,7 @@
     <Compile Include="Assets/Scripts/Framework/UI/WorldUI/UISystem.cs" />
     <Compile Include="Assets/Scripts/Navmesh/INavmesh.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Layer.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/StatsBarCom.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/RandomColor.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Skill/Define.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/IMsgDispatcher.cs" />

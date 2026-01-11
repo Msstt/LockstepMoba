@@ -43,6 +43,7 @@
   <ItemGroup>
     <None Include="Assets/Test/Scenes/NavmeshTest/NavmeshData/navmesh_surfaces.json" />
     <None Include="Assets/Scenes/NavmeshData/navmesh_surfaces.json" />
+    <None Include="Assets/Material/Shader/BarWithTick.shader" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
