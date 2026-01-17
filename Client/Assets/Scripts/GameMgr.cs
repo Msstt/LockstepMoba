@@ -125,6 +125,7 @@ public class GameMgr : Singleton<GameMgr> {
         msg.Players.Add(new battle_start_s2c.Types.player_info {
             Uid = 1,
             ChampionId = 1,
+            Camp = 0,
         });
         GetSystem<Combat.ICombatSystem>().SetStartInfo(msg);
         Start();

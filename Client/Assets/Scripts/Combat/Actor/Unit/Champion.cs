@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Combat.Actor {
     public class Champion : Actor {
-        public static Champion Create(int championId) {
+        public static Champion Create(int championId, CampType camp) {
             IActorSystem system = GameMgr.Instance.GetSystem<IActorSystem>();
             
             ChampionConfig config = Config.Champion[championId];
@@ -10,19 +10,15 @@ namespace Combat.Actor {
             go.transform.SetParent(system.TransRoot);
             GoUtils.NewGo(config.prefabName, go.transform, true).name = "Prefab";
             
-            Champion actor = new Champion(system.GetUid(), go);
+            Champion actor = new Champion(system.GetUid(), go, camp);
             actor.SetStatusByConfig(config);
+            actor.BindCom();
             return actor;
         }
         
-        public Champion(int uid, GameObject go) : base(uid, go) {
+        private Champion(int uid, GameObject go, CampType camp) : base(uid, go, camp) {
             Type = ActorType.Champion;
             
-            AddComponent<MoveCom>();
-            AddComponent<AnimCom>();
-            AddComponent<SlotCom>();
-            AddComponent<LevelCom>();
-            AddComponent<StatsBarCom>();
         }
 
         private void SetStatusByConfig(ChampionConfig config) {
@@ -30,6 +26,14 @@ namespace Combat.Actor {
             Stats.Attack = new Priority(config.attack[1]);
             Stats.AttackSpeed = new Priority(config.attackSpeed[1]);
             Stats.MoveSpeed = new Priority(config.moveSpeed);
+        }
+        
+        private void BindCom() {
+            AddComponent<MoveCom>();
+            AddComponent<AnimCom>();
+            AddComponent<SlotCom>();
+            AddComponent<LevelCom>();
+            AddComponent<StatsBarCom>();
         }
     }
 }

@@ -6,7 +6,7 @@ using UI.Actor;
 namespace UI {
     public enum UIDef {
         None,
-        StatsBarPanel,
+        ChampionStatsBarPanel,
     }
     
     public enum UILayer {
@@ -18,10 +18,10 @@ namespace UI {
     
     public static class UIConfig {
         public static readonly Dictionary<UIDef, Info> config = new Dictionary<UIDef, Info>() {
-            { UIDef.StatsBarPanel, new Info {
+            { UIDef.ChampionStatsBarPanel, new Info {
                 prefab = "UI/Actor/StatsBarPanel",
                 layer = UILayer.World,
-                creator = () => new StatsBarPanel(),
+                creator = () => new ChampionStatsBarPanel(),
             } }
         };
             

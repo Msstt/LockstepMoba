@@ -1,3 +1,7 @@
+using System;
+using Framework;
+using UnityEngine;
+
 namespace Combat {
     public struct LimitedPriority {
         public enum ModifierType {
@@ -8,15 +12,23 @@ namespace Combat {
         
         private Priority maxValue;
         private FloatF curValue;
+        
+        private SafeEvent<FloatF, FloatF> onValueChanged;
+        public event Action<FloatF, FloatF> OnValueChanged {
+            add {
+                value?.Invoke(curValue, maxValue.Value);
+                onValueChanged?.Register(value);
+            }
+            remove { onValueChanged?.UnRegister(value); }
+        }
 
-        public LimitedPriority(FloatF maxValue) {
-            this.maxValue = new Priority(maxValue);
-            curValue = maxValue;
+        public LimitedPriority(FloatF maxValue) : this(maxValue, maxValue) {
         }
         
         public LimitedPriority(FloatF maxValue, FloatF value) {
             this.maxValue = new Priority(maxValue);
             curValue = value;
+            onValueChanged = new SafeEvent<FloatF, FloatF>();
             RefreshValue();
         }
 
@@ -48,6 +60,7 @@ namespace Combat {
         
         private void RefreshValue() {
             curValue = FloatF.Clamp(curValue, FloatF.zero, maxValue.Value);
+            onValueChanged.Send(curValue, maxValue.Value);
         }
 
         public static LimitedPriority operator+(LimitedPriority p, FloatF value) {

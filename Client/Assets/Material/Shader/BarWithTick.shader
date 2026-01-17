@@ -5,8 +5,8 @@ Shader "UI/BarWithTick"
         _MainTex("Texture", 2D) = "white" {}
         _FillAmount("Fill Amount", Range(0,1)) = 1
         _TickRange("Tick Range", Float) = 5
-        _TickWidth("Tick Width", Float) = 2
-        _TickColor("Tick Color", Color) = (1,1,1,1)
+        _TickWidth("Tick Width", Float) = 0.005
+        _TickColor("Tick Color", Color) = (0,0,0,1)
         _BarColor("Bar Color", Color) = (0,1,0,1)
         _BackgroundColor("Background Color", Color) = (0.3,0.3,0.3,1)
     }
@@ -60,11 +60,11 @@ Shader "UI/BarWithTick"
                 float2 uv = i.uv;
 
                 // 背景
-                float4 col = _BackgroundColor;
+                float4 col = _BarColor;
 
                 // 血条 fill
-                if (uv.x <= _FillAmount)
-                    col = _BarColor;
+                // if (uv.x <= _FillAmount)
+                //     col = _BarColor;
                 
                 // 刻度
                 for (int t = 1000; t <= _TickRange + 500; t += 1000)

@@ -9,11 +9,15 @@ public static class GameObjectExtensions {
         return com;
     }
     
-    public static T EnsureComponent<T>(this Transform go) where T : Component {
-        var com = go.GetComponent<T>();
+    public static T EnsureComponent<T>(this Transform trans) where T : Component {
+        var com = trans.GetComponent<T>();
         if (com == null) {
-            com = go.gameObject.AddComponent<T>();
+            com = trans.gameObject.AddComponent<T>();
         }
         return com;
+    }
+    
+    public static T GetComponent<T>(this Transform trans, string path) where T : Component {
+        return trans?.Find(path)?.GetComponent<T>();
     }
 }

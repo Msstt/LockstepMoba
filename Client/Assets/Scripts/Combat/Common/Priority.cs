@@ -1,3 +1,6 @@
+using System;
+using Framework;
+
 namespace Combat {
     public struct Priority {
         public enum ModifierType {
@@ -8,18 +11,28 @@ namespace Combat {
         
         private static readonly FloatF f100 = new FloatF(100);
         
-        private FloatF baseValue;
+        private readonly FloatF baseValue;
         private FloatF finalValue;
         private FloatF addValue;
         private FloatF addPercent;
         private FloatF multValue;
         
-        public Priority(FloatF baseValue) {
+        private SafeEvent<FloatF> onValueChanged;
+        public event Action<FloatF> OnValueChanged {
+            add {
+                value?.Invoke(finalValue);
+                onValueChanged?.Register(value);
+            }
+            remove { onValueChanged?.UnRegister(value); }
+        }
+        
+        public Priority(FloatF baseValue, bool noEvent = false) {
             this.baseValue = baseValue;
             finalValue = baseValue;
             addValue = FloatF.zero;
             addPercent = FloatF.zero;
             multValue = FloatF.one;
+            onValueChanged = noEvent ? new SafeEvent<FloatF>() : null;
         }
         
         public FloatF Value => finalValue;
@@ -48,6 +61,7 @@ namespace Combat {
 
         private void RefreshValue() {
             finalValue = (baseValue + addValue) * (1 + addPercent / f100) * multValue;
+            onValueChanged?.Send(finalValue);
         }
     }
 }

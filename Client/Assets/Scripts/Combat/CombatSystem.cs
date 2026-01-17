@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using Codice.Client.BaseCommands;
 using Combat.Actor;
-using Framework;
-using Navmesh;
 using Network;
 using UnityEngine;
 
@@ -14,7 +11,7 @@ namespace Combat {
         private List<Uid> playerUid = new List<Uid>();
         public IReadOnlyList<Uid> PlayerUid => playerUid;
         
-        private Dictionary<Uid, int> championId = new Dictionary<Uid, int>();
+        private Dictionary<Uid, battle_start_s2c.Types.player_info> playerInfo = new Dictionary<Uid, battle_start_s2c.Types.player_info>();
         
         public MapConfig MapConfig { get; private set; }
 
@@ -29,19 +26,20 @@ namespace Combat {
         public void SetStartInfo(battle_start_s2c msg) {
             SelfUid = msg.SelfUid;
             playerUid.Clear();
-            championId.Clear();
+            playerInfo.Clear();
             foreach (var player in msg.Players) {
                 playerUid.Add(player.Uid);
-                championId[player.Uid] = player.ChampionId;
+                playerInfo[player.Uid] = player;
             }
             playerUid.Sort();
         }
         
         public int GetChampionId(Uid uid) {
-            if (!championId.ContainsKey(uid)) {
-                return -1;
-            }
-            return championId[uid];
+            return playerInfo.TryGetValue(uid, out var info) ? info.ChampionId : -1;
+        }
+
+        public CampType GetCamp(Uid uid) {
+            return playerInfo.TryGetValue(uid, out var info) ? (CampType)info.Camp : CampType.UnKnown;
         }
     }
 }

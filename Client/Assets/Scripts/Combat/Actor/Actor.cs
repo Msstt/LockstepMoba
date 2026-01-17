@@ -19,6 +19,9 @@ namespace Combat.Actor {
         private Vector3F pos;
         private Vector3F dir;
 
+        public CampType Camp => camp;
+        private CampType camp;
+
         public GameObject Go => go;
         private GameObject go;
 
@@ -28,9 +31,10 @@ namespace Combat.Actor {
 
         private GameObject debugPoint;
         
-        protected Actor(int uid, GameObject go) {
+        protected Actor(int uid, GameObject go, CampType camp) {
             Uid = uid;
             this.go = go;
+            this.camp = camp;
 
             debugPoint = GoUtils.NewGo("Role/Other/DebugPoint", DebugMgr.Instance.transform);
             debugPoint.SetActive(GameMgr.Instance.GMTool.ShowUnitRealPos);

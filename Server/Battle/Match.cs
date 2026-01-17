@@ -3,6 +3,8 @@ using Network;
 
 namespace Battle {
     public class Match : Singleton<Match> {
+        private battle_start_s2c? start_msg = null;
+        
         public void Start() {
             // 广播玩家信息
             NetworkUtils.Broadcast(MessageDef.battle_start_s2c, GetStartMsg);
@@ -26,18 +28,24 @@ namespace Battle {
         }
         
         private battle_start_s2c GetStartMsg(Uid selfUid) {
-            battle_start_s2c msg = new battle_start_s2c {
+            if (start_msg != null) {
+                return start_msg;
+            }
+            start_msg = new battle_start_s2c {
                 SelfUid = selfUid,
             };
             List<Uid> uids = NetworkUtils.GetAllClientUid();
+            int camp = 0;
             foreach (var uid in uids) {
-                msg.Players.Add(
+                start_msg.Players.Add(
                     new battle_start_s2c.Types.player_info {
                         Uid = uid,
                         ChampionId = 1,
+                        Camp = camp,
                     });
+                camp ^= 1;
             }
-            return msg;
+            return start_msg;
         }
     }
 }

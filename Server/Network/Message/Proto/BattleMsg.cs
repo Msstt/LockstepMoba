@@ -24,15 +24,15 @@ namespace Network {
     static BattleMsgReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChZEZWZpbmUvQmF0dGxlTXNnLnByb3RvEgdOZXR3b3JrIo0BChBiYXR0bGVf",
+            "ChZEZWZpbmUvQmF0dGxlTXNnLnByb3RvEgdOZXR3b3JrIpsBChBiYXR0bGVf",
             "c3RhcnRfczJjEhAKCHNlbGZfdWlkGAEgASgFEjYKB3BsYXllcnMYAiADKAsy",
-            "JS5OZXR3b3JrLmJhdHRsZV9zdGFydF9zMmMucGxheWVyX2luZm8aLwoLcGxh",
-            "eWVyX2luZm8SCwoDdWlkGAEgASgFEhMKC2NoYW1waW9uX2lkGAIgASgFYgZw",
-            "cm90bzM="));
+            "JS5OZXR3b3JrLmJhdHRsZV9zdGFydF9zMmMucGxheWVyX2luZm8aPQoLcGxh",
+            "eWVyX2luZm8SCwoDdWlkGAEgASgFEhMKC2NoYW1waW9uX2lkGAIgASgFEgwK",
+            "BGNhbXAYAyABKAViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c), global::Network.battle_start_s2c.Parser, new[]{ "SelfUid", "Players" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c.Types.player_info), global::Network.battle_start_s2c.Types.player_info.Parser, new[]{ "Uid", "ChampionId" }, null, null, null)})
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c), global::Network.battle_start_s2c.Parser, new[]{ "SelfUid", "Players" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c.Types.player_info), global::Network.battle_start_s2c.Types.player_info.Parser, new[]{ "Uid", "ChampionId", "Camp" }, null, null, null)})
           }));
     }
     #endregion
@@ -220,6 +220,7 @@ namespace Network {
         public player_info(player_info other) : this() {
           uid_ = other.uid_;
           championId_ = other.championId_;
+          camp_ = other.camp_;
           _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
         }
 
@@ -250,6 +251,17 @@ namespace Network {
           }
         }
 
+        /// <summary>Field number for the "camp" field.</summary>
+        public const int CampFieldNumber = 3;
+        private int camp_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int Camp {
+          get { return camp_; }
+          set {
+            camp_ = value;
+          }
+        }
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as player_info);
@@ -265,6 +277,7 @@ namespace Network {
           }
           if (Uid != other.Uid) return false;
           if (ChampionId != other.ChampionId) return false;
+          if (Camp != other.Camp) return false;
           return Equals(_unknownFields, other._unknownFields);
         }
 
@@ -273,6 +286,7 @@ namespace Network {
           int hash = 1;
           if (Uid != 0) hash ^= Uid.GetHashCode();
           if (ChampionId != 0) hash ^= ChampionId.GetHashCode();
+          if (Camp != 0) hash ^= Camp.GetHashCode();
           if (_unknownFields != null) {
             hash ^= _unknownFields.GetHashCode();
           }
@@ -294,6 +308,10 @@ namespace Network {
             output.WriteRawTag(16);
             output.WriteInt32(ChampionId);
           }
+          if (Camp != 0) {
+            output.WriteRawTag(24);
+            output.WriteInt32(Camp);
+          }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(output);
           }
@@ -307,6 +325,9 @@ namespace Network {
           }
           if (ChampionId != 0) {
             size += 1 + pb::CodedOutputStream.ComputeInt32Size(ChampionId);
+          }
+          if (Camp != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(Camp);
           }
           if (_unknownFields != null) {
             size += _unknownFields.CalculateSize();
@@ -325,6 +346,9 @@ namespace Network {
           if (other.ChampionId != 0) {
             ChampionId = other.ChampionId;
           }
+          if (other.Camp != 0) {
+            Camp = other.Camp;
+          }
           _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
         }
 
@@ -342,6 +366,10 @@ namespace Network {
               }
               case 16: {
                 ChampionId = input.ReadInt32();
+                break;
+              }
+              case 24: {
+                Camp = input.ReadInt32();
                 break;
               }
             }

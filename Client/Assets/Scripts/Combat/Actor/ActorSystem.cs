@@ -13,6 +13,8 @@ namespace Combat.Actor {
         // 玩家 uid 与 角色系统 uid 一致
         private SortedDictionary<int, Actor> actors = new SortedDictionary<int, Actor>();
         private List<int> toRemove = new List<int>();
+
+        private Dictionary<int, CampType> camp = new Dictionary<int, CampType>();
         
         public void Init() {
             TransRoot = new GameObject("[Actor]").transform;
@@ -47,10 +49,13 @@ namespace Combat.Actor {
         
         private void CreateChampion() {
             ICombatSystem combat = GameMgr.Instance.GetSystem<ICombatSystem>();
+            foreach (var uid in combat.PlayerUid) {
+                camp[uid] = combat.GetCamp(uid);
+            }
             int index = 0;
             foreach (var uid in combat.PlayerUid) {
                 var championId = combat.GetChampionId(uid);
-                Champion actor = Champion.Create(championId);
+                Champion actor = Champion.Create(championId, combat.GetCamp(uid));
                 actor.SetPos(combat.MapConfig.spawnPoint[index], true);
                 actor.SetDir(new Vector3F( 1, 0, 0), true);
                 actor.Go.transform.position = new Vector3(actor.Go.transform.position.x, combat.MapConfig.spawnPoint[index].y.ToFloat(), actor.Go.transform.position.z);
@@ -93,6 +98,10 @@ namespace Combat.Actor {
                     }
                 }
             }
+        }
+
+        public bool IsSameCamp(int aUid, int bUid) {
+            return camp.GetValueOrDefault(aUid, CampType.UnKnown) == camp.GetValueOrDefault(bUid, CampType.UnKnown);
         }
     }
 }

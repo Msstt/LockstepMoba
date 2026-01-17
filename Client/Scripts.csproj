@@ -58,9 +58,12 @@
     <Compile Include="Assets/Scripts/GameMgr.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkDef.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Singleton.cs" />
+    <Compile Include="Assets/Scripts/UI/Actor/ChampionStatsBarPanel.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.Camera.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Define/CampType.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/IActorSystem.cs" />
+    <Compile Include="Assets/Scripts/Framework/Tools/StringExtensions.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/MockLockStep.cs" />
     <Compile Include="Assets/Scripts/StartUp/Main.cs" />
     <Compile Include="Assets/Scripts/Framework/Event/EventMgr.cs" />
@@ -83,6 +86,7 @@
     <Compile Include="Assets/Scripts/Navmesh/Define.cs" />
     <Compile Include="Assets/Scripts/Framework/Res/ResMgr.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventType.cs" />
+    <Compile Include="Assets/Scripts/Combat/CombatUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Uid.cs" />
     <Compile Include="Assets/Scripts/Tools/TimeUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/FrameMsg.cs" />
@@ -97,7 +101,6 @@
     <Compile Include="Assets/Scripts/ISystem.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/BattleMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/DebugMgr.cs" />
-    <Compile Include="Assets/Scripts/UI/Actor/StatsBarPanel.cs" />
     <Compile Include="Assets/Scripts/Tools/ResUtils.cs" />
     <Compile Include="Assets/Scripts/Input/IInputSystem.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/ThreadMgr.cs" />
@@ -136,6 +139,7 @@
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
+    <Compile Include="Assets/Scripts/UI/Com/UIBarCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
     <Compile Include="Assets/Scripts/Combat/Common/Priority.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/INetwork.cs" />
