@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Framework;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Combat.Actor {
     public enum ActorType {

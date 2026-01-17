@@ -1,4 +1,5 @@
 using Combat;
+using Combat.Actor;
 using Framework.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +28,7 @@ namespace UI.Actor {
                 return;
             }
             actor = param.actor;
-            healthMat.SetColor("_BarColor", CombatUtils.IsSameCamp(actor.Uid) ? "5DD322".ToColor() : "9B2720".ToColor());
+            healthMat.SetColor("_BarColor", ActorUtils.IsSameCamp(actor.Uid) ? "5DD322".ToColor() : "9B2720".ToColor());
             
             actor.Stats.Health.OnValueChanged += RefreshHealth;
         }

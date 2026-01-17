@@ -9,7 +9,7 @@ namespace InputSystem.Command {
         public void Update() {
             if (Input.GetMouseButtonDown(1)) {
                 int? uid = InputUtils.GetMouseActorUid();
-                if (uid.HasValue && !CombatUtils.IsSameCamp(uid.Value)) {
+                if (uid.HasValue && !ActorUtils.IsSameCamp(uid.Value)) {
                     targetUid = uid;
                 }
             }

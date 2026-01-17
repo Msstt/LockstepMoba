@@ -36,7 +36,7 @@ namespace UnityEngine {
                 return;
             }
             int uid = hitInfo.collider?.transform.GetComponent<ActorRaycasterCom>()?.Uid ?? -1;
-            if (CombatUtils.IsSameCamp(uid)) {
+            if (ActorUtils.IsSameCamp(uid)) {
                 return;
             }
             lastHighlight = hitInfo.collider?.transform.parent.Find("Meshes")?.EnsureComponent<cakeslice.Outline>();

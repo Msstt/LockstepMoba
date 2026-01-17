@@ -96,6 +96,26 @@ namespace Combat.Actor {
                                 Debug.Log("Move failed");
                             });
                     } else if (info.Slot == (int)SkillSlot.Attack) {
+                        MoveCom com = actor.GetComponent<MoveCom>();
+                        AnimCom ani = actor.GetComponent<AnimCom>();
+                        com.ForceFail();
+                        ani.PlayAnim("Run");
+                        com.MoveToActorByPath(info.Param.Uid,
+                            () => {
+                                ani.PlayAnim("Attack1");
+                                Actor target = GetActor(info.Param.Uid);
+                                if (target != null) {
+                                    target.OnHit(new HitInfo {
+                                        attacker = uid,
+                                        damage = new Damage {
+                                            physical = actor.Stats.Attack.Value,
+                                        },
+                                    });
+                                }
+                            },
+                            () => {
+                                ani.PlayAnim("Idle");
+                            });
                     }
                 }
             }

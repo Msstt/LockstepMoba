@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Combat.Actor.Skill;
 using Framework;
 using InputSystem.Command;
@@ -30,15 +31,25 @@ namespace InputSystem {
 
         private skill_input Collector() {
             var msg = new skill_input();
-            for (int i = 0; i < commands.Length; i++) {
+            SortedDictionary<SkillSlot, skill_info> infos = new SortedDictionary<SkillSlot, skill_info>();
+            for (int i = commands.Length - 1; i >= 0; i--) {
                 var command = commands[i];
                 var param = command?.GetProto();
                 if (param != null) {
-                    msg.Info.Add(new skill_info {
+                    infos[(SkillSlot)i] = new skill_info {
                         Slot = i,
                         Param = param,
-                    });
+                    };
                 }
+            }
+
+            // Move Attack 特殊处理，因为都绑定右键，所以在这里去重
+            if (infos.ContainsKey(SkillSlot.Attack)) {
+                infos.Remove(SkillSlot.Move);
+            }
+
+            foreach (var info in infos.Values) {
+                msg.Info.Add(info);
             }
             return msg;
         }

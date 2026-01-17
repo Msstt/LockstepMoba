@@ -2,16 +2,16 @@
 
 using System;
 using System.Collections.Generic;
-using Combat.Actor.Move;
 using UnityEngine;
 
 namespace Combat.Actor {
     public enum MoveType {
         None,
         PosByPath,
+        ActorByPath,
     }
     
-    public class MoveCom : Com {
+    public partial class MoveCom : Com {
         private MoveType curType = MoveType.None;
         
         private float smoothPosSpeed = 0f;
@@ -21,6 +21,8 @@ namespace Combat.Actor {
         
         private Vector3F targetPos;
         public Vector3F TargetPos => targetPos;
+        private int targetUid;
+        public int TargetUid => targetUid;
         
         private List<Vector3F> path = new List<Vector3F>();
         public IReadOnlyList<Vector3F> Path => path;
@@ -31,6 +33,7 @@ namespace Combat.Actor {
 
         public override void Awake() {
             typeToStatus[MoveType.PosByPath] = new PosByPath(this);
+            typeToStatus[MoveType.ActorByPath] = new ActorByPath(this);
         }
 
         public override void Update(int frame) {
@@ -93,35 +96,29 @@ namespace Combat.Actor {
             }, force);
         }
         
-        public abstract class MoveComStatus {
-            protected MoveCom com;
-            protected MoveComStatus(MoveCom com) {
-                this.com = com;
-            }
-        
-            protected Actor Actor => com.Actor;
-        
-            public virtual void Enter() { }
-            public virtual void Update(int frame) { }
-            public virtual void Exit() { }
-
-            protected void Finish() => com.Finish();
-            protected void Fail() => com.Fail();
-            protected void CalcPath(Vector3F pos, bool force = true) => com.CalcPath(pos, force);
-        }
-        
         #region 接口
 
         public void ForceFail() {
             Fail();
         }
         
-        public void MoveToPosByPath(Vector3F target, Action finish = null, Action fail = null) {
+        public void MoveToPosByPath(Vector3F pos, Action finish = null, Action fail = null) {
             if (curType != MoveType.None) {
                 return;
             }
             curType = MoveType.PosByPath;
-            targetPos = target;
+            targetPos = pos;
+            finishCallback = finish;
+            failCallback = fail;
+            typeToStatus[curType].Enter();
+        }
+        
+        public void MoveToActorByPath(int uid, Action finish = null, Action fail = null) {
+            if (curType != MoveType.None) {
+                return;
+            }
+            curType = MoveType.ActorByPath;
+            targetUid = uid;
             finishCallback = finish;
             failCallback = fail;
             typeToStatus[curType].Enter();

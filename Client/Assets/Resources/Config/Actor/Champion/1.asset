@@ -17,18 +17,22 @@ MonoBehaviour:
   health:
     datas:
     - level: 1
-      value: 300
-    - level: 10
-      value: 500
+      value: 645
+    - level: 2
+      value: 753
   attack:
-    datas: []
+    datas:
+    - level: 1
+      value: 66
+    - level: 2
+      value: 70
   attackSpeed:
     datas:
     - level: 1
       value:
-        value: 1200000
-    - level: 5
+        value: 650000
+    - level: 2
       value:
-        value: 1400000
+        value: 670000
   moveSpeed:
-    value: 30000000
+    value: 34500000
