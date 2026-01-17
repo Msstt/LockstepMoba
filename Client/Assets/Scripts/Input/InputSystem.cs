@@ -15,6 +15,7 @@ namespace InputSystem {
         
         public void Start() {
             ChangeCommand(SkillSlot.Move, new MoveCommand());
+            ChangeCommand(SkillSlot.Attack, new AttackCommand());
         }
 
         public void Update() {

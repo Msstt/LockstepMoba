@@ -767,14 +767,14 @@
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Core.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.Core.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
@@ -843,6 +843,10 @@
     <ProjectReference Include="Scripts.csproj">
       <Project>{e8edfcb1-94ef-5247-6486-ca3030a098c4}</Project>
       <Name>Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="OEBIF.csproj">
+      <Project>{191582db-989d-dfc3-8dd7-203ae2e2b786}</Project>
+      <Name>OEBIF</Name>
     </ProjectReference>
     <ProjectReference Include="Plugins.csproj">
       <Project>{b7057248-8898-b7fe-9ecb-7feff9d4d038}</Project>

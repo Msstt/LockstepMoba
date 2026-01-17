@@ -15,6 +15,7 @@ message test_input {
 
 message skill_param {
   vector_f pos = 1;
+  int32 uid = 2;
 }
 
 message skill_info {

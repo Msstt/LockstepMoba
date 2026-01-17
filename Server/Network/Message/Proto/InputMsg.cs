@@ -27,17 +27,17 @@ namespace Network {
             "ChVEZWZpbmUvSW5wdXRNc2cucHJvdG8SB05ldHdvcmsaFERlZmluZS9UeXBl",
             "TXNnLnByb3RvIlYKDGJhdHRsZV9pbnB1dBIhCgR0ZXN0GAEgASgLMhMuTmV0",
             "d29yay50ZXN0X2lucHV0EiMKBXNraWxsGAIgASgLMhQuTmV0d29yay5za2ls",
-            "bF9pbnB1dCIbCgp0ZXN0X2lucHV0Eg0KBWNvdW50GAEgASgFIi0KC3NraWxs",
-            "X3BhcmFtEh4KA3BvcxgBIAEoCzIRLk5ldHdvcmsudmVjdG9yX2YiPwoKc2tp",
-            "bGxfaW5mbxIMCgRzbG90GAEgASgFEiMKBXBhcmFtGAIgASgLMhQuTmV0d29y",
-            "ay5za2lsbF9wYXJhbSIwCgtza2lsbF9pbnB1dBIhCgRpbmZvGAEgAygLMhMu",
-            "TmV0d29yay5za2lsbF9pbmZvYgZwcm90bzM="));
+            "bF9pbnB1dCIbCgp0ZXN0X2lucHV0Eg0KBWNvdW50GAEgASgFIjoKC3NraWxs",
+            "X3BhcmFtEh4KA3BvcxgBIAEoCzIRLk5ldHdvcmsudmVjdG9yX2YSCwoDdWlk",
+            "GAIgASgFIj8KCnNraWxsX2luZm8SDAoEc2xvdBgBIAEoBRIjCgVwYXJhbRgC",
+            "IAEoCzIULk5ldHdvcmsuc2tpbGxfcGFyYW0iMAoLc2tpbGxfaW5wdXQSIQoE",
+            "aW5mbxgBIAMoCzITLk5ldHdvcmsuc2tpbGxfaW5mb2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Network.TypeMsgReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_input), global::Network.battle_input.Parser, new[]{ "Test", "Skill" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.test_input), global::Network.test_input.Parser, new[]{ "Count" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_param), global::Network.skill_param.Parser, new[]{ "Pos" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_param), global::Network.skill_param.Parser, new[]{ "Pos", "Uid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_info), global::Network.skill_info.Parser, new[]{ "Slot", "Param" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_input), global::Network.skill_input.Parser, new[]{ "Info" }, null, null, null)
           }));
@@ -370,6 +370,7 @@ namespace Network {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public skill_param(skill_param other) : this() {
       pos_ = other.pos_ != null ? other.pos_.Clone() : null;
+      uid_ = other.uid_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -389,6 +390,17 @@ namespace Network {
       }
     }
 
+    /// <summary>Field number for the "uid" field.</summary>
+    public const int UidFieldNumber = 2;
+    private int uid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Uid {
+      get { return uid_; }
+      set {
+        uid_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as skill_param);
@@ -403,6 +415,7 @@ namespace Network {
         return true;
       }
       if (!object.Equals(Pos, other.Pos)) return false;
+      if (Uid != other.Uid) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -410,6 +423,7 @@ namespace Network {
     public override int GetHashCode() {
       int hash = 1;
       if (pos_ != null) hash ^= Pos.GetHashCode();
+      if (Uid != 0) hash ^= Uid.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -427,6 +441,10 @@ namespace Network {
         output.WriteRawTag(10);
         output.WriteMessage(Pos);
       }
+      if (Uid != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Uid);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -437,6 +455,9 @@ namespace Network {
       int size = 0;
       if (pos_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
+      }
+      if (Uid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Uid);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -455,6 +476,9 @@ namespace Network {
         }
         Pos.MergeFrom(other.Pos);
       }
+      if (other.Uid != 0) {
+        Uid = other.Uid;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -471,6 +495,10 @@ namespace Network {
               Pos = new global::Network.vector_f();
             }
             input.ReadMessage(Pos);
+            break;
+          }
+          case 16: {
+            Uid = input.ReadInt32();
             break;
           }
         }

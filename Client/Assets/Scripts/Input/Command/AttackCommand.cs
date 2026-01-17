@@ -1,0 +1,29 @@
+using Combat;
+using Network;
+using UnityEngine;
+
+namespace InputSystem.Command {
+    public class AttackCommand : ICommand {
+        private int? targetUid;
+        
+        public void Update() {
+            if (Input.GetMouseButtonDown(1)) {
+                int? uid = InputUtils.GetMouseActorUid();
+                if (uid.HasValue && !CombatUtils.IsSameCamp(uid.Value)) {
+                    targetUid = uid;
+                }
+            }
+        }
+
+        public skill_param GetProto() {
+            if (!targetUid.HasValue) {
+                return null;
+            }
+            var msg = new skill_param {
+                Uid = targetUid.Value,
+            };
+            targetUid = null;
+            return msg;
+        }
+    }
+}

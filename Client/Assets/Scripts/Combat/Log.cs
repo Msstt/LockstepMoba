@@ -14,4 +14,8 @@ namespace Combat {
             Debug.LogError("[Combat] [Error] " + string.Format(message, args));
         }
     }
+    
+    public class CombatException : System.Exception {
+        public CombatException(string message) : base(message) { }
+    }
 }

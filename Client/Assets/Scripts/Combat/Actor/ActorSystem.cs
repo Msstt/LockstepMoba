@@ -95,6 +95,7 @@ namespace Combat.Actor {
                                 ani.PlayAnim("Idle");
                                 Debug.Log("Move failed");
                             });
+                    } else if (info.Slot == (int)SkillSlot.Attack) {
                     }
                 }
             }

@@ -38,6 +38,12 @@ namespace Combat.Actor {
 
             debugPoint = GoUtils.NewGo("Role/Other/DebugPoint", DebugMgr.Instance.transform);
             debugPoint.SetActive(GameMgr.Instance.GMTool.ShowUnitRealPos);
+            
+            Transform collider = go.transform.Find("Prefab/Collider");
+            if (collider == null) {
+                throw new CombatException("Actor must have Collider child");
+            }
+            collider.gameObject.AddComponent<ActorRaycasterCom>().Uid = uid;
         }
 
         public Vector3F Pos => pos;
