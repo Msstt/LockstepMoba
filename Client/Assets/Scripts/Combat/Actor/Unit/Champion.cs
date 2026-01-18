@@ -23,8 +23,11 @@ namespace Combat.Actor {
 
         private void SetStatusByConfig(ChampionConfig config) {
             Stats.Health = new LimitedPriority(config.health[1]);
+            
             Stats.Attack = new Priority(config.attack[1]);
             Stats.AttackSpeed = new Priority(config.attackSpeed[1]);
+            Stats.AttackDistance = new Priority(config.attackDistance);
+            
             Stats.MoveSpeed = new Priority(config.moveSpeed);
         }
         

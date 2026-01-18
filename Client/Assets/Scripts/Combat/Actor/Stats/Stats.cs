@@ -4,6 +4,7 @@ namespace Combat.Actor {
         
         public Priority Attack;
         public Priority AttackSpeed;
+        public Priority AttackDistance;
         
         public Priority MoveSpeed;
     }

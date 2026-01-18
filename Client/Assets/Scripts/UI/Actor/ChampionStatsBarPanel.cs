@@ -28,7 +28,8 @@ namespace UI.Actor {
                 return;
             }
             actor = param.actor;
-            healthMat.SetColor("_BarColor", ActorUtils.IsSameCamp(actor.Uid) ? "5DD322".ToColor() : "9B2720".ToColor());
+            healthMat.SetColor("_BarColor", GetHealthBarColor(actor.Uid));
+            Transform.Find("Health/Fade").GetComponent<Image>().color = GetHealthBarFadeColor(actor.Uid);
             
             actor.Stats.Health.OnValueChanged += RefreshHealth;
         }
@@ -47,6 +48,26 @@ namespace UI.Actor {
         private void RefreshHealth(FloatF curValue, FloatF maxValue) {
             healthMat?.SetFloat("_TickRange", maxValue.ToFloat());
             health.Value = curValue.ToFloat() / maxValue.ToFloat();
+        }
+
+        private Color GetHealthBarColor(int uid) {
+            if (uid == CombatUtils.SelfUid) {
+                return "5DD322".ToColor();
+            } else if (ActorUtils.IsSameCamp(actor.Uid)) {
+                return "408CB3".ToColor();
+            } else {
+                return "9B2720".ToColor();
+            }
+        }
+        
+        private Color GetHealthBarFadeColor(int uid) {
+            if (uid == CombatUtils.SelfUid) {
+                return "5F171D".ToColor();
+            } else if (ActorUtils.IsSameCamp(actor.Uid)) {
+                return "5F171D".ToColor();
+            } else {
+                return "E7CD30".ToColor();
+            }
         }
     }
 }

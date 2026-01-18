@@ -2,13 +2,15 @@ using UnityEngine;
 
 namespace Combat.Actor {
     public class AnimCom : Com {
-        private static float walkAnimSpeedFactor = 0.02f;
+        public readonly static float walkAnimSpeedFactor = 0.02f;
+        public readonly static float attackAnimSpeedFactor = 1f;
         
         private Animator animator;
         
         private string lastAnim = "Idle";
         private string curAnim = "Idle";
         private float smoothPosSpeed = 0f;
+        private FloatF attackSpeed = FloatF.zero;
         
         public override void Awake() {
             animator = Actor.Go.transform.Find("Prefab").GetComponent<Animator>();
@@ -18,7 +20,7 @@ namespace Combat.Actor {
         }
 
         public override void RenderUpdate() {
-            UpdateWalkAnimSpeed();
+            UpdateAnimSpeed();
             
             if (lastAnim != curAnim) {
                 animator.SetTrigger(curAnim);
@@ -26,11 +28,16 @@ namespace Combat.Actor {
             lastAnim = curAnim;
         }
 
-        private void UpdateWalkAnimSpeed() {
+        private void UpdateAnimSpeed() {
             MoveCom moveCom = Actor.GetComponent<MoveCom>();
-            if (smoothPosSpeed != moveCom.SmoothPosSpeed) {
+            if (Mathf.Abs(smoothPosSpeed - moveCom.SmoothPosSpeed) >= 1e-3f) {
                 smoothPosSpeed = moveCom.SmoothPosSpeed;
                 animator.SetFloat("MoveSpeed", smoothPosSpeed * walkAnimSpeedFactor);
+            }
+
+            if (attackSpeed != Actor.Stats.AttackSpeed) {
+                attackSpeed = Actor.Stats.AttackSpeed;
+                animator.SetFloat("AttackSpeed", attackSpeed.ToFloat() * attackAnimSpeedFactor);
             }
         }
 

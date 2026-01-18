@@ -12,7 +12,7 @@ namespace Combat.Actor {
             }
 
             public override void Update(int frame) {
-                FloatF remDis = Actor.Stats.MoveSpeed.Value * GameMgr.Instance.DeltaTime;
+                FloatF remDis = Actor.Stats.MoveSpeed * GameMgr.Instance.DeltaTime;
                 while (remDis > 0) {
                     CheckIsReach();
 
@@ -61,7 +61,7 @@ namespace Combat.Actor {
                     return;
                 }
                 
-                if (Vector3F.Distance(Actor.Pos, actor.Pos) < 10) { // TODO radius
+                if (Vector3F.Distance(Actor.Pos, actor.Pos) < com.TargetDis) {
                     Finish();
                 }
             }

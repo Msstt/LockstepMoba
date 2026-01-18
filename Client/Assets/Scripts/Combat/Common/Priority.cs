@@ -36,6 +36,7 @@ namespace Combat {
         }
         
         public FloatF Value => finalValue;
+        public static implicit operator FloatF(Priority p) => p.Value;
 
         public void AddModifier(ModifierType type, FloatF value) {
             if (type == ModifierType.Add) {

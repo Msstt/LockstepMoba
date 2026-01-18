@@ -16,7 +16,7 @@ namespace Combat {
         private SafeEvent<FloatF, FloatF> onValueChanged;
         public event Action<FloatF, FloatF> OnValueChanged {
             add {
-                value?.Invoke(curValue, maxValue.Value);
+                value?.Invoke(curValue, maxValue);
                 onValueChanged?.Register(value);
             }
             remove { onValueChanged?.UnRegister(value); }
@@ -33,34 +33,35 @@ namespace Combat {
         }
 
         public FloatF Value => curValue;
+        public static implicit operator FloatF(LimitedPriority p) => p.Value;
 
         public void AddModifier(Priority.ModifierType type, FloatF value, ModifierType limitedType) {
-            FloatF lastMaxValue = maxValue.Value;
+            FloatF lastMaxValue = maxValue;
             maxValue.AddModifier(type, value);
             if (limitedType == ModifierType.Constant) {
             } else if (limitedType == ModifierType.PercentFollow) {
-                curValue = maxValue.Value * (curValue / lastMaxValue);
+                curValue = maxValue * (curValue / lastMaxValue);
             } else if (limitedType == ModifierType.Follow) {
-                curValue = curValue + (maxValue.Value - lastMaxValue);
+                curValue = curValue + (maxValue - lastMaxValue);
             }
             RefreshValue();
         }
         
         public void RemoveModifier(Priority.ModifierType type, FloatF value, ModifierType limitedType) {
-            FloatF lastMaxValue = maxValue.Value;
+            FloatF lastMaxValue = maxValue;
             maxValue.RemoveModifier(type, value);
             if (limitedType == ModifierType.Constant) {
             } else if (limitedType == ModifierType.PercentFollow) {
-                curValue = maxValue.Value * (curValue / lastMaxValue);
+                curValue = maxValue * (curValue / lastMaxValue);
             } else if (limitedType == ModifierType.Follow) {
-                curValue = curValue + (maxValue.Value - lastMaxValue);
+                curValue = curValue + (maxValue - lastMaxValue);
             }
             RefreshValue();
         }
         
         private void RefreshValue() {
-            curValue = FloatF.Clamp(curValue, FloatF.zero, maxValue.Value);
-            onValueChanged.Send(curValue, maxValue.Value);
+            curValue = FloatF.Clamp(curValue, FloatF.zero, maxValue);
+            onValueChanged.Send(curValue, maxValue);
         }
 
         public static LimitedPriority operator+(LimitedPriority p, FloatF value) {

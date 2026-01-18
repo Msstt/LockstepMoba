@@ -29,7 +29,6 @@ namespace Combat.Actor {
         }
         
         public void FrameUpdate(int frame) {
-            toRemove.Clear();
             foreach (var actor in actors.Values) {
                 actor.Update(frame);
             }
@@ -39,6 +38,7 @@ namespace Combat.Actor {
                     actors.Remove(uid);
                 }
             }
+            toRemove.Clear();
         }
 
         public void Update() {
@@ -100,17 +100,12 @@ namespace Combat.Actor {
                         AnimCom ani = actor.GetComponent<AnimCom>();
                         com.ForceFail();
                         ani.PlayAnim("Run");
-                        com.MoveToActorByPath(info.Param.Uid,
+                        com.MoveToActorByPath(info.Param.Uid, actor.Stats.AttackDistance, // TODO radius
                             () => {
                                 ani.PlayAnim("Attack1");
                                 Actor target = GetActor(info.Param.Uid);
                                 if (target != null) {
-                                    target.OnHit(new HitInfo {
-                                        attacker = uid,
-                                        damage = new Damage {
-                                            physical = actor.Stats.Attack.Value,
-                                        },
-                                    });
+                                    target.OnHit(actor.CreateAttackHitInfo());
                                 }
                             },
                             () => {

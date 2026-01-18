@@ -23,6 +23,8 @@ namespace Combat.Actor {
         public Vector3F TargetPos => targetPos;
         private int targetUid;
         public int TargetUid => targetUid;
+        private FloatF targetDis;
+        public FloatF TargetDis => targetDis;
         
         private List<Vector3F> path = new List<Vector3F>();
         public IReadOnlyList<Vector3F> Path => path;
@@ -113,12 +115,13 @@ namespace Combat.Actor {
             typeToStatus[curType].Enter();
         }
         
-        public void MoveToActorByPath(int uid, Action finish = null, Action fail = null) {
+        public void MoveToActorByPath(int uid, FloatF dis, Action finish = null, Action fail = null) {
             if (curType != MoveType.None) {
                 return;
             }
             curType = MoveType.ActorByPath;
             targetUid = uid;
+            targetDis = dis;
             finishCallback = finish;
             failCallback = fail;
             typeToStatus[curType].Enter();

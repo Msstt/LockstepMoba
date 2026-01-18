@@ -1411,6 +1411,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 212588825}
+    - target: {fileID: 2133362505522742770, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: DrawDebugTriangle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3004068146920950643, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_originalMesh
       value: 

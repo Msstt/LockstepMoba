@@ -40,6 +40,7 @@ namespace Framework.UI {
             }
             ExecuteOnHide(panel);
             ExecuteOnDestroy(panel);
+            GameObject.Destroy(panel.Transform.gameObject);
             source.RemovePanel(def);
         }
     }
