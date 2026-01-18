@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Combat.Actor.Skill;
+using Combat.Skill;
 using Framework;
 using InputSystem.Command;
 using Network;

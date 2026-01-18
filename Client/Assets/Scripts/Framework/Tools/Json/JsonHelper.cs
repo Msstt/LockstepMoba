@@ -47,5 +47,22 @@ namespace Framework {
             }
             return true;
         }
+        
+        public static bool LoadFromRes<T>(string path, out T ret) {
+            ret = default;
+            try {
+                TextAsset asset = Resources.Load<TextAsset>(path);
+                if (asset == null) {
+                    Debug.LogError($"[JsonHelper.LoadFromRes] {path} not exists");
+                    return false;
+                }
+                
+                ret = JsonConvert.DeserializeObject<T>(asset.text);
+                return true;
+            } catch (Exception e) {
+                Debug.LogError($"[JsonHelper.LoadFromRes] parse failed, {e}");
+                return false;
+            }
+        }
     }
 }

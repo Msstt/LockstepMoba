@@ -1,4 +1,4 @@
-using Combat.Actor.Skill;
+using Combat.Skill;
 using InputSystem.Command;
 
 namespace InputSystem {

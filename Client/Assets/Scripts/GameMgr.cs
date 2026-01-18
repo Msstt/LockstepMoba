@@ -43,6 +43,7 @@ public class GameMgr : Singleton<GameMgr> {
         Register<Navmesh.INavmesh, Navmesh.Navmesh>();
         Register<Combat.ICombatSystem, Combat.CombatSystem>();
         Register<Combat.Actor.IActorSystem, Combat.Actor.ActorSystem>();
+        Register<Combat.Skill.ISkillSystem, Combat.Skill.SkillSystem>();
         Register<Framework.UI.IUISystem, Framework.UI.UISystem>();
 
         if (driver == null) {
