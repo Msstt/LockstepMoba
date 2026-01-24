@@ -1,5 +1,5 @@
 namespace Combat.Actor {
-    public struct Stats {
+    public class Stats {
         public LimitedPriority Health;
         
         public Priority Attack;
@@ -7,5 +7,9 @@ namespace Combat.Actor {
         public Priority AttackDistance;
         
         public Priority MoveSpeed;
+    }
+    
+    public partial class Const {
+        public readonly FloatF AttackWindupRatio;
     }
 }

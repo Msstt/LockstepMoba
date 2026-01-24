@@ -1,3 +1,4 @@
+using Combat.Skill;
 using Network;
 using UnityEngine;
 
@@ -18,9 +19,9 @@ namespace InputSystem.Command {
             if (!targetPos.HasValue) {
                 return null;
             }
-            var msg = new skill_param {
-                Pos = targetPos.Value.ToProto(),
-            };
+
+            var msg = SkillParam.CreateProto();
+            msg.Pos = targetPos.Value.ToProto();
             targetPos = null;
             return msg;
         }

@@ -17,6 +17,8 @@ namespace Combat.Actor {
         public LevelNumber<int> attack;
         [LabelText("攻击速度")]
         public LevelNumber<FloatF> attackSpeed;
+        [LabelText("攻击前摇百分比")]
+        public FloatF attackWindupRatio;
         [LabelText("攻击距离")]
         public FloatF attackDistance;
         

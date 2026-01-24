@@ -1,0 +1,61 @@
+{
+  "Id": 2,
+  "SkillType": 2,
+  "CanAbortSelf": false,
+  "Node" : {
+    "Type": 3,
+    "Params": {
+      "SkillList": 3
+    },
+    "Child" : [
+      {
+        "Type": 2,
+        "Params": {
+          "AnimName": "Run"
+        },
+        "Child" : [
+          {
+            "Type" : 4,
+            "Params": {
+            },
+            "Child": [
+              {
+                "Type" : 2,
+                "Params": {
+                  "AnimName": "Attack"
+                },
+                "Child": [
+                  {
+                    "Type" : 8,
+                    "Params": {
+                    },
+                    "Child": [
+                      {
+                        "Type" : 6,
+                        "Params": {
+                          "Physical": {
+                            "Value": "0",
+                            "AttackScale": "1"
+                          }
+                        },
+                        "Child": [
+                          {
+                            "Type" : 9,
+                            "Params": {
+                            },
+                            "Child": [
+
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }]
+  }
+}

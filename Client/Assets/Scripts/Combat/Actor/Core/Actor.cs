@@ -24,7 +24,8 @@ namespace Combat.Actor {
         public GameObject Go => go;
         private GameObject go;
 
-        public Stats Stats;
+        public Stats Stats = new Stats();
+        public Const Const;
         
         public readonly EventHub Event = new EventHub();
 

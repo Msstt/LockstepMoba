@@ -1,4 +1,4 @@
-using Combat;
+using Combat.Skill;
 using Network;
 using UnityEngine;
 
@@ -19,9 +19,8 @@ namespace InputSystem.Command {
             if (!targetUid.HasValue) {
                 return null;
             }
-            var msg = new skill_param {
-                Uid = targetUid.Value,
-            };
+            var msg = SkillParam.CreateProto();
+            msg.Uid = targetUid.Value;
             targetUid = null;
             return msg;
         }

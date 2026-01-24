@@ -12,6 +12,7 @@ namespace Combat.Actor {
             
             Champion actor = new Champion(system.GetUid(), go, camp);
             actor.SetStatusByConfig(config);
+            actor.Const = new Const(config);
             actor.BindCom();
             actor.GetComponent<SkillCom>()?.SetSkillId(config);
             return actor;
@@ -19,7 +20,6 @@ namespace Combat.Actor {
         
         private Champion(int uid, GameObject go, CampType camp) : base(uid, go, camp) {
             Type = ActorType.Champion;
-            
         }
 
         private void SetStatusByConfig(ChampionConfig config) {
@@ -39,6 +39,12 @@ namespace Combat.Actor {
             AddComponent<LevelCom>();
             AddComponent<SkillCom>();
             AddComponent<StatsBarCom>();
+        }
+    }
+    
+    public partial class Const {
+        public Const(ChampionConfig config) {
+            AttackWindupRatio = config.attackWindupRatio;
         }
     }
 }

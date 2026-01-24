@@ -1,0 +1,46 @@
+using Newtonsoft.Json.Linq;
+
+namespace Combat.Skill.SkillNode {
+    public class WaitForTime : Node {
+        private class Param {
+            public FloatF Time;
+        }
+        private Param param;
+        private bool isAttackSpeed;
+        private bool isWindup;
+        
+        public WaitForTime(bool isWindup) {
+            isAttackSpeed = true;
+            this.isWindup = isWindup;
+        }
+
+        public WaitForTime(JToken json) {
+            isAttackSpeed = false;
+            param = ParseParam<Param>(json);
+        }
+
+        public override NodeState OnEnter(Context context) {
+            Actor.Actor actor = ActorUtils.GetActor(context.ActorUid);
+            if (actor == null) {
+                return NodeState.Fail;
+            }
+            FloatF time;
+            if (isAttackSpeed) {
+                if (isWindup) {
+                    time = FloatF.one / actor.Stats.AttackSpeed * actor.Const.AttackWindupRatio;
+                } else {
+                    time = FloatF.one / actor.Stats.AttackSpeed * (1 - actor.Const.AttackWindupRatio);
+                }
+            } else {
+                time = param.Time;
+            }
+            SetValue(context, "EndFrame", TimeUtils.GetFrame(time));
+            return NodeState.Continue;   
+        }
+
+        public override NodeState OnUpdate(Context context) {
+            int endFrame = GetValueOrDefault(context, "EndFrame", -1);
+            return GameMgr.Instance.Frame >= endFrame ? NodeState.Finish : NodeState.Continue;
+        }
+    }
+}

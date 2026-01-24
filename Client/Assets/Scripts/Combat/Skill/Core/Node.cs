@@ -27,13 +27,14 @@ namespace Combat.Skill {
         protected void SetValue<T>(Context context, string key, T value) => context.SetValue(Id, key, value);
         protected T GetValue<T>(Context context, string key) => context.GetValue<T>(Id, key);
         protected T GetValueOrDefault<T>(Context context, string key, T defaultValue) => context.GetValueOrDefault(Id, key, defaultValue);
-        protected void SetGlobalValue<T>(Context context, string key, T value) => context.SetValue(key, value);
-        protected T GetGlobalValue<T>(Context context, string key) => context.GetValue<T>(key);
-        protected T GetGlobalValueOrDefault<T>(Context context, string key, T defaultValue) => context.GetValueOrDefault(key, defaultValue);
+        protected static void SetGlobalValue<T>(Context context, string key, T value) => context.SetValue(key, value);
+        protected static T GetGlobalValue<T>(Context context, string key) => context.GetValue<T>(key);
+        protected static T GetGlobalValueOrDefault<T>(Context context, string key, T defaultValue) => context.GetValueOrDefault(key, defaultValue);
         
-        protected T GetCom<T>(Context context) where T : Com => ActorUtils.GetCom<T>(context.ActorUid);
+        protected static T GetCom<T>(Context context) where T : Com => ActorUtils.GetCom<T>(context.ActorUid);
+        protected static Stats GetStats(Context context) => ActorUtils.GetActor(context.ActorUid)?.Stats;
 
-        protected T ParseParam<T>(JToken json) {
+        protected static T ParseParam<T>(JToken json) {
             T param = json.ToObject<T>();
             if (param == null) {
                 throw new CombatException($"Node ParseParam {typeof(T).Name} is null");

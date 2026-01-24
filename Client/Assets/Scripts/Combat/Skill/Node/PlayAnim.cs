@@ -4,16 +4,14 @@ using Combat.Actor;
 using Newtonsoft.Json.Linq;
 
 namespace Combat.Skill.SkillNode {
-    public class PlayAnimParam {
-        public string AnimName;
-    }
-    
     public class PlayAnim : Node {
-        private readonly string animName;
+        private class Param {
+            public string AnimName;
+        }
+        private readonly Param param;
         
         public PlayAnim(JToken json) {
-            PlayAnimParam param = ParseParam<PlayAnimParam>(json);
-            animName = param.AnimName;
+            param = ParseParam<Param>(json);
         }
         
         public override NodeState OnEnter(Context context) {
@@ -21,7 +19,8 @@ namespace Combat.Skill.SkillNode {
             if (com == null) {
                 return NodeState.Fail;
             }
-            com.PlayAnim(animName);
+            
+            com.PlayAnim(param.AnimName);
             return NodeState.Finish;
         }
         
