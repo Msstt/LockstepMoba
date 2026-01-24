@@ -1,3 +1,5 @@
+using System;
+
 namespace Combat.Skill {
     public enum SkillSlot {
         Move = 0,
@@ -8,6 +10,7 @@ namespace Combat.Skill {
         Skill4 = 5,
     }
     
+    [Flags]
     public enum SkillType {
         Move = 1 << 0,
         NormalAttack = 1 << 1,

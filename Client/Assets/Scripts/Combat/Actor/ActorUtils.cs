@@ -13,8 +13,16 @@ public static class ActorUtils {
     public static Actor GetActor(int uid) {
         return GameMgr.Instance.GetSystem<IActorSystem>()?.GetActor(uid);
     }
+
+    public static Actor GetActor() => GetActor(CombatUtils.SelfUid);
     
-    public static Actor GetActor() {
-        return GameMgr.Instance.GetSystem<IActorSystem>()?.GetActor(CombatUtils.SelfUid);
+    public static T GetCom<T>(int uid) where T : Com {
+        Actor actor = GetActor(uid);
+        if (actor == null) {
+            return null;
+        }
+        return actor.GetComponent<T>();
     }
+
+    public static T GetCom<T>() where T : Com => GetCom<T>(CombatUtils.SelfUid);
 }

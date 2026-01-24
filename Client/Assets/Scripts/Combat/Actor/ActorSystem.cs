@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Combat.Skill;
 using Framework;
 using Network;
@@ -80,38 +81,44 @@ namespace Combat.Actor {
         private void SkillHandler(SortedDictionary<Uid, skill_input> inputs) {
             foreach (var (uid, input) in inputs) {
                 Actor actor = GetActor(uid);
+                SkillCom com = actor.GetComponent<SkillCom>();
+                if (com == null) {
+                    Log.Warning("Actor " + uid + " has no SkillCom");
+                    continue;
+                }
                 foreach (var info in input.Info) {
-                    if (info.Slot == (int)SkillSlot.Move) { // TODO 技能树
-                        MoveCom com = actor.GetComponent<MoveCom>();
-                        AnimCom ani = actor.GetComponent<AnimCom>();
-                        com.ForceFail();
-                        ani.PlayAnim("Run");
-                        com.MoveToPosByPath(info.Param.Pos.ToVector3F(),
-                            () => {
-                                ani.PlayAnim("Idle");
-                                Debug.Log("Move finished");
-                            },
-                            () => {
-                                ani.PlayAnim("Idle");
-                                Debug.Log("Move failed");
-                            });
-                    } else if (info.Slot == (int)SkillSlot.Attack) {
-                        MoveCom com = actor.GetComponent<MoveCom>();
-                        AnimCom ani = actor.GetComponent<AnimCom>();
-                        com.ForceFail();
-                        ani.PlayAnim("Run");
-                        com.MoveToActorByPath(info.Param.Uid, actor.Stats.AttackDistance, // TODO radius
-                            () => {
-                                ani.PlayAnim("Attack1");
-                                Actor target = GetActor(info.Param.Uid);
-                                if (target != null) {
-                                    target.OnHit(actor.CreateAttackHitInfo());
-                                }
-                            },
-                            () => {
-                                ani.PlayAnim("Idle");
-                            });
-                    }
+                    com.ExecuteSkill((SkillSlot)info.Slot, new SkillParam(info.Param));
+                    // if (info.Slot == (int)SkillSlot.Move) { // TODO 技能树
+                    //     MoveCom com = actor.GetComponent<MoveCom>();
+                    //     AnimCom ani = actor.GetComponent<AnimCom>();
+                    //     com.ForceFail();
+                    //     ani.PlayAnim("Run");
+                    //     com.MoveToPosByPath(info.Param.Pos.ToVector3F(),
+                    //         () => {
+                    //             ani.PlayAnim("Idle");
+                    //             Debug.Log("Move finished");
+                    //         },
+                    //         () => {
+                    //             ani.PlayAnim("Idle");
+                    //             Debug.Log("Move failed");
+                    //         });
+                    // } else if (info.Slot == (int)SkillSlot.Attack) {
+                    //     MoveCom com = actor.GetComponent<MoveCom>();
+                    //     AnimCom ani = actor.GetComponent<AnimCom>();
+                    //     com.ForceFail();
+                    //     ani.PlayAnim("Run");
+                    //     com.MoveToActorByPath(info.Param.Uid, actor.Stats.AttackDistance, // TODO radius
+                    //         () => {
+                    //             ani.PlayAnim("Attack1");
+                    //             Actor target = GetActor(info.Param.Uid);
+                    //             if (target != null) {
+                    //                 target.OnHit(actor.CreateAttackHitInfo());
+                    //             }
+                    //         },
+                    //         () => {
+                    //             ani.PlayAnim("Idle");
+                    //         });
+                    // }
                 }
             }
         }

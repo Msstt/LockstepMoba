@@ -1,3 +1,5 @@
+using Combat.Actor;
+using Newtonsoft.Json.Linq;
 
 namespace Combat.Skill {
     public enum NodeState {
@@ -22,11 +24,21 @@ namespace Combat.Skill {
         public virtual void OnFinish(Context context) { }
         public virtual void OnFail(Context context) { }
         
-        public void SetValue<T>(Context context, string key, T value) => context.SetValue(Id, key, value);
-        public T GetValue<T>(Context context, string key) => context.GetValue<T>(Id, key);
-        public T GetValueOrDefault<T>(Context context, string key, T defaultValue) => context.GetValueOrDefault(Id, key, defaultValue);
-        public void SetGlobalValue<T>(Context context, string key, T value) => context.SetValue(key, value);
-        public T GetGlobalValue<T>(Context context, string key) => context.GetValue<T>(key);
-        public T GetGlobalValueOrDefault<T>(Context context, string key, T defaultValue) => context.GetValueOrDefault(key, defaultValue);
+        protected void SetValue<T>(Context context, string key, T value) => context.SetValue(Id, key, value);
+        protected T GetValue<T>(Context context, string key) => context.GetValue<T>(Id, key);
+        protected T GetValueOrDefault<T>(Context context, string key, T defaultValue) => context.GetValueOrDefault(Id, key, defaultValue);
+        protected void SetGlobalValue<T>(Context context, string key, T value) => context.SetValue(key, value);
+        protected T GetGlobalValue<T>(Context context, string key) => context.GetValue<T>(key);
+        protected T GetGlobalValueOrDefault<T>(Context context, string key, T defaultValue) => context.GetValueOrDefault(key, defaultValue);
+        
+        protected T GetCom<T>(Context context) where T : Com => ActorUtils.GetCom<T>(context.ActorUid);
+
+        protected T ParseParam<T>(JToken json) {
+            T param = json.ToObject<T>();
+            if (param == null) {
+                throw new CombatException($"Node ParseParam {typeof(T).Name} is null");
+            }
+            return param;
+        }
     }
 }

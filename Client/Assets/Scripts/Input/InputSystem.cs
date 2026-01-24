@@ -6,7 +6,7 @@ using Network;
 
 namespace InputSystem {
     public class InputSystem : IInputSystem {
-        private ICommand[] commands = new ICommand[6];
+        private ICommand[] commands = new ICommand[SkillUtils.SkillSlotCount];
 
         public void Init() {
             EventMgr.Instance.Register<EventType.OnLockStepStart>(() => {

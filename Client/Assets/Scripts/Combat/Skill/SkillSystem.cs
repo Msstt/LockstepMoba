@@ -3,10 +3,11 @@ using Framework;
 
 namespace Combat.Skill {
     public class SkillSystem : ISkillSystem {
+        private static readonly int InvalidSkillId = -1;
         private static readonly string configPath = "Config/Skill/Json/";
         
-        private Dictionary<int, Tree> trees = new Dictionary<int, Tree>();
-        private Dictionary<int, List<Context>> contexts = new Dictionary<int, List<Context>>();
+        private SortedDictionary<int, Tree> trees = new SortedDictionary<int, Tree>();
+        private SortedDictionary<int, List<Context>> contexts = new SortedDictionary<int, List<Context>>();
         private List<Context> toRemove = new List<Context>();
         
         public void FrameUpdate(int frame) {
@@ -27,8 +28,11 @@ namespace Combat.Skill {
         public void Execute(int actorUid, int skillId, SkillParam param) {
             CreateTree(skillId);
             if (GetContext(actorUid, skillId) != null) {
-                Log.Warning("Actor " + actorUid + " is already executing skill " + skillId);
-                return;
+                if (trees[skillId].CanAbortSelf) {
+                    Abort(actorUid, skillId);
+                } else {
+                    return;
+                }
             }
 
             Context context = new Context(actorUid, skillId, param);
@@ -45,12 +49,25 @@ namespace Combat.Skill {
             }
         }
 
+        public void Abort(int actorUid, SkillType typeList) => Abort(actorUid, typeList, InvalidSkillId);
+
+        public void Abort(int actorUid, SkillType typeList, int excludeSkillId) {
+            foreach (var tree in trees.Values) {
+                if (tree.Id == excludeSkillId) {
+                    continue;
+                }
+                if (IsContainType(typeList, tree.Type)) {
+                    Abort(actorUid, tree.Id);
+                }
+            }
+        }
+
         private void CreateTree(int skillId) {
             if (trees.ContainsKey(skillId)) {
                 return;
             }
 
-            if (!JsonHelper.LoadFromFile(configPath + skillId, out SkillConfig config)) {
+            if (!JsonHelper.LoadFromRes(configPath + skillId, out SkillConfig config)) {
                 throw new CombatException("Skill Config not found: " + skillId);
             }
             trees[skillId] = new Tree(config);
@@ -78,5 +95,7 @@ namespace Combat.Skill {
             }
             return trees[skillId].Type;
         }
+
+        private bool IsContainType(SkillType list, SkillType type) => (list & type) != 0;
     }
 }

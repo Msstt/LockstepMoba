@@ -50,6 +50,7 @@
     <Compile Include="Assets/Scripts/Framework/Network/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/SkillParam.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Writer.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/SkillCom.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/TypeMsg.cs" />
     <Compile Include="Assets/Scripts/Input/InputUtils.cs" />
     <Compile Include="Assets/Scripts/Tools/Camera/CameraCom.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Assets/Scripts/Input/Command/ICommand.cs" />
     <Compile Include="Assets/Scripts/StartUp/GMTool.cs" />
     <Compile Include="Assets/Scripts/UI/UIUtils.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/SkillUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkUtils.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.cs" />
@@ -115,8 +117,10 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.OnHit.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/ThreadMgr.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/LockStep.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/PlayAnim.cs" />
     <Compile Include="Assets/Scripts/Combat/MapConfig.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/WorldUI/UISystem.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/AbortSkill.cs" />
     <Compile Include="Assets/Scripts/Navmesh/INavmesh.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Layer.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Context.cs" />

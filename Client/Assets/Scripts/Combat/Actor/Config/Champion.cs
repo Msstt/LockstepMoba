@@ -22,5 +22,8 @@ namespace Combat.Actor {
         
         [LabelText("移速")]
         public FloatF moveSpeed;
+        
+        [LabelText("技能")]
+        public int[] skillIds = new int[SkillUtils.SkillSlotCount];
     }
 }

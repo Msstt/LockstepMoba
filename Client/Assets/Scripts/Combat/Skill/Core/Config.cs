@@ -11,6 +11,7 @@ namespace Combat.Skill {
     public class SkillConfig {
         public int Id;
         public int SkillType;
+        public bool CanAbortSelf;
         public NodeConfig Node;
     }
 }

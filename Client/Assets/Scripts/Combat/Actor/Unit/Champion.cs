@@ -13,6 +13,7 @@ namespace Combat.Actor {
             Champion actor = new Champion(system.GetUid(), go, camp);
             actor.SetStatusByConfig(config);
             actor.BindCom();
+            actor.GetComponent<SkillCom>()?.SetSkillId(config);
             return actor;
         }
         
@@ -36,6 +37,7 @@ namespace Combat.Actor {
             AddComponent<AnimCom>();
             AddComponent<SlotCom>();
             AddComponent<LevelCom>();
+            AddComponent<SkillCom>();
             AddComponent<StatsBarCom>();
         }
     }
