@@ -3,7 +3,8 @@ using Newtonsoft.Json.Linq;
 
 namespace Combat.Skill.SkillNode {
     public class DamageToSingle : Node {
-        private class Param {
+        [System.Serializable]
+        public class Param {
             public StatScaler Physical;
         }
         private Param param;

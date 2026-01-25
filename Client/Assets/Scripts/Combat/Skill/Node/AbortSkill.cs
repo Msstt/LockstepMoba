@@ -1,9 +1,12 @@
 using Combat.Actor;
 using Newtonsoft.Json.Linq;
+using Sirenix.OdinInspector;
 
 namespace Combat.Skill.SkillNode {
     public class AbortSkill : Node {
-        private class Param {
+        [System.Serializable]
+        public class Param {
+            [DrawWithUnity]
             public SkillType SkillList;
         }
         private Param param;

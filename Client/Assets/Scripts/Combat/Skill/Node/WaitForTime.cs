@@ -2,7 +2,8 @@ using Newtonsoft.Json.Linq;
 
 namespace Combat.Skill.SkillNode {
     public class WaitForTime : Node {
-        private class Param {
+        [System.Serializable]
+        public class Param {
             public FloatF Time;
         }
         private Param param;

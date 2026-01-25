@@ -62,8 +62,8 @@
     <Compile Include="Assets/Scripts/UI/Actor/ChampionStatsBarPanel.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.Camera.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Define/CampType.cs" />
-    <Compile Include="Assets/Scripts/Combat/Skill/Core/SelectNode.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorUtils.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Core/SelectNode.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/IActorSystem.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/StringExtensions.cs" />

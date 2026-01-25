@@ -5,7 +5,8 @@ using Newtonsoft.Json.Linq;
 
 namespace Combat.Skill.SkillNode {
     public class MoveToActorByPath : MoveNode {
-        private class Param {
+        [System.Serializable]
+        public class Param {
             public FloatF Distance;
         }
         private readonly Param param;

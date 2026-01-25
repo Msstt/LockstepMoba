@@ -1,4 +1,5 @@
 namespace Combat.Actor {
+    [System.Serializable]
     public class StatScaler {
         public FloatF Value;
         public FloatF AttackScale;

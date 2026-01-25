@@ -45,9 +45,17 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Editor/Skill/Node/Time.cs" />
+    <Compile Include="Assets/Editor/Skill/Core/SkillNode.cs" />
+    <Compile Include="Assets/Editor/Skill/Core/SkillGraph.cs" />
+    <Compile Include="Assets/Editor/Skill/Node/Damage.cs" />
     <Compile Include="Assets/Editor/Tools/MultiLaunchCreator.cs" />
     <Compile Include="Assets/Editor/Tools/CombineMesh.cs" />
+    <Compile Include="Assets/Editor/Skill/Core/SkillConnection.cs" />
+    <Compile Include="Assets/Editor/Skill/Node/Move.cs" />
+    <Compile Include="Assets/Editor/Skill/Node/Anim.cs" />
     <Compile Include="Assets/Editor/Navmesh/NavmeshExporter.cs" />
+    <Compile Include="Assets/Editor/Skill/Node/Normal.cs" />
     <Compile Include="Assets/Editor/Network/GenerateMessageCode.cs" />
     <None Include="Assets/Editor/Network/Template/MessageDef.txt" />
     <Reference Include="UnityEngine">
@@ -752,11 +760,20 @@
     <Reference Include="Unity.AI.Navigation">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.AI.Navigation.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ResourceManager">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.ResourceManager.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ScriptableBuildPipeline">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Localization.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Localization.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
@@ -775,6 +792,9 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Localization">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Localization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
@@ -809,6 +829,9 @@
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Addressables.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Addressables.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
     </Reference>
@@ -830,15 +853,29 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ScriptableBuildPipeline.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Addressables">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj">
       <Project>{68bd7c1e-3065-7e76-511a-7f84c9c91529}</Project>
       <Name>Sirenix.OdinInspector.CompatibilityLayer.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="ParadoxNotion.csproj">
+      <Project>{759587de-a727-ad2b-93af-24751e2aa7ba}</Project>
+      <Name>ParadoxNotion</Name>
+    </ProjectReference>
     <ProjectReference Include="Sirenix.OdinInspector.CompatibilityLayer.csproj">
       <Project>{f9915a1b-8fee-545a-be3e-0bed3e51cf02}</Project>
       <Name>Sirenix.OdinInspector.CompatibilityLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="RedStudio.OdinTreeNodeCanvas.csproj">
+      <Project>{ff5aee3b-3455-98b2-c6a3-1036a975f0f7}</Project>
+      <Name>RedStudio.OdinTreeNodeCanvas</Name>
     </ProjectReference>
     <ProjectReference Include="Scripts.csproj">
       <Project>{e8edfcb1-94ef-5247-6486-ca3030a098c4}</Project>
@@ -847,6 +884,10 @@
     <ProjectReference Include="OEBIF.csproj">
       <Project>{191582db-989d-dfc3-8dd7-203ae2e2b786}</Project>
       <Name>OEBIF</Name>
+    </ProjectReference>
+    <ProjectReference Include="NodeCanvas.OdinTree.csproj">
+      <Project>{27f0e4de-3713-5194-4b95-a4e1b9863fda}</Project>
+      <Name>NodeCanvas.OdinTree</Name>
     </ProjectReference>
     <ProjectReference Include="Plugins.csproj">
       <Project>{b7057248-8898-b7fe-9ecb-7feff9d4d038}</Project>

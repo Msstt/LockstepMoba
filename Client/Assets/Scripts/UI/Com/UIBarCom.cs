@@ -1,5 +1,4 @@
-using UI;
-using UnityEditor;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace UI {
@@ -9,6 +8,7 @@ namespace UI {
     }
     
     public class UIBarCom : MonoBehaviour {
+        [DrawWithUnity]
         public BarType type = BarType.LeftToRight;
         public float fadeSpeed = 0.5f;
         
@@ -47,15 +47,6 @@ namespace UI {
                 fadeValue -= Time.deltaTime * fadeSpeed;
                 Refresh(0, fadeValue);
             }
-        }
-    }
-    
-    [CustomEditor(typeof(UIBarCom))]
-    public class UIBarComEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
         }
     }
 }

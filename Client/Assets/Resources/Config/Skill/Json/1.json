@@ -2,25 +2,25 @@
   "Id": 1,
   "SkillType": 1,
   "CanAbortSelf": true,
-  "Node" : {
+  "Node": {
     "Type": 3,
     "Params": {
-      "SkillList": 3
+      "SkillList": -1
     },
-    "Child" : [
+    "Child": [
       {
         "Type": 2,
         "Params": {
           "AnimName": "Run"
         },
-        "Child" : [
+        "Child": [
           {
-            "Type" : 1,
-            "Params": {
-            },
+            "Type": 1,
+            "Params": null,
             "Child": []
           }
         ]
-      }]
+      }
+    ]
   }
 }

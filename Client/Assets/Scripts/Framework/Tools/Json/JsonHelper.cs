@@ -42,7 +42,7 @@ namespace Framework {
                 });
                 File.WriteAllText(path, json);
             } catch (Exception e) {
-                Debug.LogError($"[JsonHelper.LoadFromFile] parse failed, {e}");
+                Debug.LogError($"[JsonHelper.LoadFromFile] serialize failed, {e}");
                 return false;
             }
             return true;
@@ -62,6 +62,19 @@ namespace Framework {
             } catch (Exception e) {
                 Debug.LogError($"[JsonHelper.LoadFromRes] parse failed, {e}");
                 return false;
+            }
+        }
+        
+        public static string GetString<T>(T data) {
+            try {
+                string json = JsonConvert.SerializeObject(data, new JsonSerializerSettings {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    Formatting = Formatting.Indented
+                });
+                return json;
+            } catch (Exception e) {
+                Debug.LogError($"[JsonHelper.GetString] serialize failed, {e}");
+                return "";
             }
         }
     }

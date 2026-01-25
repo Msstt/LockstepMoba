@@ -5,7 +5,8 @@ using Newtonsoft.Json.Linq;
 
 namespace Combat.Skill.SkillNode {
     public class PlayAnim : Node {
-        private class Param {
+        [System.Serializable]
+        public class Param {
             public string AnimName;
         }
         private readonly Param param;
