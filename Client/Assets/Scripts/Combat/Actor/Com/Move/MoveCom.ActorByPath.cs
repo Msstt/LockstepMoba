@@ -7,6 +7,10 @@ namespace Combat.Actor {
             public ActorByPath(MoveCom com) : base(com) { }
 
             public override void Enter() {
+                if (CheckIsReach()) {
+                    return;
+                }
+                
                 index = 0;
                 CalcPath();
             }
@@ -14,7 +18,9 @@ namespace Combat.Actor {
             public override void Update(int frame) {
                 FloatF remDis = Actor.Stats.MoveSpeed * GameMgr.Instance.DeltaTime;
                 while (remDis > 0) {
-                    CheckIsReach();
+                    if (CheckIsReach()) {
+                        return;
+                    }
 
                     if (index >= com.Path.Count) {
                         index = 0;
@@ -54,16 +60,19 @@ namespace Combat.Actor {
                 CalcPath(actor.Pos);
             }
             
-            private void CheckIsReach() {
+            private bool CheckIsReach() {
                 Actor actor = ActorUtils.GetActor(com.TargetUid);
                 if (actor == null) {
                     Fail();
-                    return;
+                    return true;
                 }
                 
                 if (Vector3F.Distance(Actor.Pos, actor.Pos) < com.TargetDis) {
                     Finish();
+                    return true;
                 }
+
+                return false;
             }
         }
     }

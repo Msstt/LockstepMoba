@@ -17,7 +17,7 @@ namespace Combat.Skill.SkillNode {
             param = ParseParam<Param>(json);
         }
         
-        public override NodeState OnEnter(Context context) {
+        protected override NodeState OnEnter(Context context) {
             AnimCom com = GetCom<AnimCom>(context);
             if (com == null) {
                 return NodeState.Fail;
@@ -27,13 +27,13 @@ namespace Combat.Skill.SkillNode {
             return NodeState.Finish;
         }
         
-        public override NodeState OnUpdate(Context context) => NodeState.Finish;
+        protected override NodeState OnUpdate(Context context) => NodeState.Finish;
         
-        public override void OnFinish(Context context) {
+        protected override void OnFinish(Context context) {
             GetCom<AnimCom>(context).PlayAnim("Idle");
         }
 
-        public override void OnFail(Context context) {
+        protected override void OnFail(Context context) {
             GetCom<AnimCom>(context).PlayAnim("Idle");
         }
     }

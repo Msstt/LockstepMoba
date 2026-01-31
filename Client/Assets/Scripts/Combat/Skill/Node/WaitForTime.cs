@@ -22,7 +22,7 @@ namespace Combat.Skill.SkillNode {
             param = ParseParam<Param>(json);
         }
 
-        public override NodeState OnEnter(Context context) {
+        protected override NodeState OnEnter(Context context) {
             Actor.Actor actor = ActorUtils.GetActor(context.ActorUid);
             if (actor == null) {
                 return NodeState.Fail;
@@ -41,7 +41,7 @@ namespace Combat.Skill.SkillNode {
             return NodeState.Continue;   
         }
 
-        public override NodeState OnUpdate(Context context) {
+        protected override NodeState OnUpdate(Context context) {
             int endFrame = GetValueOrDefault(context, "EndFrame", -1);
             return GameMgr.Instance.Frame >= endFrame ? NodeState.Finish : NodeState.Continue;
         }

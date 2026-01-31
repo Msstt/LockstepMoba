@@ -27,9 +27,13 @@ namespace Combat.Actor {
             }
             system.Execute(Actor.Uid, skillId[(int)slot], param);
         }
+        
+        public void ExecuteSkillAsync(int skillId, SkillParam param) {
+            system.ExecuteAsync(Actor.Uid, skillId, param);
+        }
 
         public void AbortSkill(SkillType typeList, int excludeSkillId) {
-            system.Abort(Actor.Uid, typeList, excludeSkillId);
+            system.AbortAsync(Actor.Uid, typeList, excludeSkillId);
         }
     }
 }

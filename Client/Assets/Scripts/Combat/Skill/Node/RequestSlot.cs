@@ -18,7 +18,7 @@ namespace Combat.Skill.SkillNode {
             param = ParseParam<Param>(json);
         }
         
-        public override NodeState OnEnter(Context context) {
+        protected override NodeState OnEnter(Context context) {
             SlotCom com = GetCom<SlotCom>(context);
             if (com == null) {
                 return NodeState.Fail;
@@ -35,7 +35,7 @@ namespace Combat.Skill.SkillNode {
             return NodeState.Continue;
         }
 
-        public override NodeState OnUpdate(Context context) {
+        protected override NodeState OnUpdate(Context context) {
             int res = GetValueOrDefault<int>(context, "Res", -1);
             switch (res) {
                 case -1:
@@ -49,12 +49,12 @@ namespace Combat.Skill.SkillNode {
             }
         }
         
-        public override void OnFinish(Context context) {
+        protected override void OnFinish(Context context) {
             var releaseFunc = GetValue<Action>(context, "ReleaseFunc");
             releaseFunc?.Invoke();
         }
 
-        public override void OnFail(Context context) {
+        protected override void OnFail(Context context) {
             int res = GetValue<int>(context, "Res");
             long requestId = GetValue<long>(context, "RequestId");
             if (res == -1) {

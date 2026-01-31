@@ -12,6 +12,7 @@ namespace Combat.Skill {
         WaitForAttackWindup = 8,
         WaitForAttackBackswing = 9,
         RequestSlot = 10,
+        RepeatSkill = 11,
     }
     
     public static class NodeFactory {
@@ -37,6 +38,8 @@ namespace Combat.Skill {
                     return new WaitForTime(false);
                 case NodeType.RequestSlot:
                     return new RequestSlot(config.Params);
+                case NodeType.RepeatSkill:
+                    return new RepeatSkill();
                 default:
                     throw new CombatException("Node type doesn't exist: " + config.Type);
             }

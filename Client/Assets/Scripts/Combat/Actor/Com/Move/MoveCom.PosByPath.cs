@@ -8,6 +8,11 @@ namespace Combat.Actor {
             public PosByPath(MoveCom com) : base(com) { }
 
             public override void Enter() {
+                if (Vector3F.Distance(Actor.Pos, com.TargetPos) < 1) { // TODO radius
+                    Finish();
+                    return;
+                }
+                
                 index = 0;
                 CalcPath(com.TargetPos);
             }

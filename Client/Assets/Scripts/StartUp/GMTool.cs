@@ -7,4 +7,7 @@ public class GMTool : MonoBehaviour {
     
     [LabelText("显示单位真实位置")]
     public bool ShowUnitRealPos = false;
+    
+    [LabelText("打印技能树")]
+    public bool PrintSkillTree = false;
 }

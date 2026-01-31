@@ -6,14 +6,14 @@
   "Node": {
     "Type": 3,
     "Params": {
-      "SkillList": 2
+      "SkillList": -1
     },
     "Child": [
       {
         "Type": 10,
         "Params": {
           "Slot": -1,
-          "WaitTime": "2"
+          "WaitTime": "0.3"
         },
         "Child": [
           {
@@ -48,7 +48,13 @@
                               {
                                 "Type": 9,
                                 "Params": null,
-                                "Child": []
+                                "Child": [
+                                  {
+                                    "Type": 11,
+                                    "Params": null,
+                                    "Child": []
+                                  }
+                                ]
                               }
                             ]
                           }

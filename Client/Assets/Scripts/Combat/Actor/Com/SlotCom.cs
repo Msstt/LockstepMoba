@@ -27,6 +27,35 @@ namespace Combat.Actor {
         List<long> delRequestIds = new List<long>();
 
         public override void Update(int frame) {
+            HandleRequests(frame);
+        }
+
+        private void Occupy(int slot) {
+            curOccupancy |= slot;
+        }
+        
+        private void Release(int slot) {
+            curOccupancy &= ~slot;
+        }
+
+        private bool IsOccupy(int slot) {
+            return (curOccupancy & slot) != 0;
+        }
+        
+        private Action GetReleaseFunc(int slot) {
+            bool isReleased = false;
+            return () => {
+                if (isReleased) {
+                    return;
+                }
+                isReleased = true;
+                Release(slot);
+                
+                HandleRequests(GameMgr.Instance.Frame);
+            };
+        }
+
+        private void HandleRequests(int frame) {
             int requestSlot = 0;
             foreach (var id in requestsList) {
                 RequestInfo info = requests[id];
@@ -50,30 +79,6 @@ namespace Combat.Actor {
             delRequestIds.Clear();
         }
 
-        private void Occupy(int slot) {
-            curOccupancy |= slot;
-        }
-        
-        private void Release(int slot) {
-            curOccupancy &= ~slot;
-        }
-
-        private bool IsOccupy(int slot) {
-            return (curOccupancy & slot) != 0;
-        }
-        
-        private Action GetReleaseFunc(int slot) {
-            bool isReleased = false;
-            return () => {
-                if (isReleased) {
-                    return;
-                }
-                isReleased = true;
-                Release(slot);
-                Update(GameMgr.Instance.Frame);
-            };
-        }
-
         #region 接口
 
         // 返回 requestId，取消请求使用 Cancel(requestId)
@@ -87,6 +92,9 @@ namespace Combat.Actor {
                 failCallback = failCallback,
             };
             requestsList.Add(id);
+            
+            HandleRequests(GameMgr.Instance.Frame);
+            
             return id;
         }
         

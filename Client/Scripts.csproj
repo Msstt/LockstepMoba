@@ -89,6 +89,7 @@
     <Compile Include="Assets/Scripts/UI/UIUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/RepeatSkill.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkUtils.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Define.cs" />

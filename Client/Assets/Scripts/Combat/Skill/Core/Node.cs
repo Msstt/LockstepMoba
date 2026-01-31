@@ -1,5 +1,6 @@
 using Combat.Actor;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 namespace Combat.Skill {
     public enum NodeState {
@@ -10,19 +11,55 @@ namespace Combat.Skill {
     }
     
     public abstract class Node {
+        private static bool PrintSkillTree = false;
         private static int globalId = 0;
         
         public int Id { get; private set; }
 
         protected Node() {
             Id = globalId++;
+
+            PrintSkillTree = GameMgr.Instance.GMTool.PrintSkillTree;
         }
         
-        public virtual NodeState OnEnter(Context context) => NodeState.NoKnow;
-        public virtual NodeState OnUpdate(Context context) => NodeState.NoKnow;
-        public virtual void OnExit(Context context) { }
-        public virtual void OnFinish(Context context) { }
-        public virtual void OnFail(Context context) { }
+        protected virtual NodeState OnEnter(Context context) => NodeState.NoKnow;
+        protected virtual NodeState OnUpdate(Context context) => NodeState.NoKnow;
+        protected virtual void OnExit(Context context) { }
+        protected virtual void OnFinish(Context context) { }
+        protected virtual void OnFail(Context context) { }
+
+        public NodeState Enter(Context context) {
+            Log("Enter", context);
+            return OnEnter(context);
+        }
+        
+        public NodeState Update(Context context) {
+            return OnUpdate(context);
+        }
+
+        public void Exit(Context context) {
+            Log("Exit", context);
+            OnExit(context);
+        }
+
+        public void Finish(Context context) {
+            Log("Finish", context);
+            OnFinish(context);
+        }
+
+        public void Fail(Context context) {
+            Log("Fail", context);
+            OnFail(context);
+        }
+
+        private void Log(string message, Context context) {
+            if (PrintSkillTree) {
+                Debug.Log("[SkillTree] " + GameMgr.Instance.Frame + ": " + message + 
+                          " Node: " + GetType().Name + 
+                          " TreeId: " + context.TreeId + 
+                          " ActorUid: " + context.ActorUid);
+            }
+        }
         
         protected void SetValue<T>(Context context, string key, T value) => context.SetValue(Id, key, value);
         protected T GetValue<T>(Context context, string key) => context.GetValue<T>(Id, key);

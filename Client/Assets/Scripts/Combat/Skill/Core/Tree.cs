@@ -22,10 +22,10 @@ namespace Combat.Skill {
             if (curNode == null) {
                 curNode = root;
                 context.ChangeNode(this, curNode);
-                curNode.OnEnter(context);
+                curNode.Enter(context);
             }
             while (curNode != null) {
-                NodeState ret = curNode.OnUpdate(context);
+                NodeState ret = curNode.Update(context);
                 if (ret == NodeState.Continue) {
                     return NodeState.Continue;
                 } else if (ret == NodeState.Fail) {
@@ -37,7 +37,7 @@ namespace Combat.Skill {
                     return NodeState.Fail;
                 }
                 
-                curNode.OnExit(context);
+                curNode.Exit(context);
                 
                 if (curNode is SelectNode select) {
                     curNode = GetNextNode(curNode, select.Select(context));
@@ -47,7 +47,7 @@ namespace Combat.Skill {
 
                 if (curNode != null) {
                     context.ChangeNode(this, curNode);
-                    curNode.OnEnter(context);
+                    curNode.Enter(context);
                 }
             }
 
@@ -65,7 +65,7 @@ namespace Combat.Skill {
         private void Finish(Context context) {
             Node curNode = context.CurNode;
             while (curNode != null) {
-                curNode.OnFinish(context);
+                curNode.Finish(context);
                 curNode = parent.GetValueOrDefault(curNode, null);
             }
         }
@@ -73,7 +73,7 @@ namespace Combat.Skill {
         public void Fail(Context context) {
             Node curNode = context.CurNode;
             while (curNode != null) {
-                curNode.OnFail(context);
+                curNode.Fail(context);
                 curNode = parent.GetValueOrDefault(curNode, null);
             }
         }

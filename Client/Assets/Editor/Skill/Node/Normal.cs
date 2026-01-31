@@ -14,4 +14,10 @@ namespace Editor.Skill {
         [OdinTree] public Combat.Skill.SkillNode.RequestSlot.Param param;
         protected override object Params => param;
     }
+    
+    [Category("通用/重复此技能")]
+    public class RepeatSkill : EffectNode {
+        public override string name => "重复此技能";
+        protected override object Params => null;
+    }
 }

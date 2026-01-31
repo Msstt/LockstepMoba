@@ -4,7 +4,7 @@ namespace Combat.Skill.SkillNode {
     public abstract class MoveNode : Node {
         protected abstract NodeState Move(Context context, MoveCom com);
         
-        public override NodeState OnEnter(Context context) {
+        protected override NodeState OnEnter(Context context) {
             MoveCom com = GetCom<MoveCom>(context);
             if (com == null) {
                 return NodeState.Fail;
@@ -14,7 +14,7 @@ namespace Combat.Skill.SkillNode {
             return Move(context, com);
         }
 
-        public override NodeState OnUpdate(Context context) {
+        protected override NodeState OnUpdate(Context context) {
             int res = GetValueOrDefault<int>(context, "Res", -1);
             switch (res) {
                 case -1:
@@ -28,7 +28,7 @@ namespace Combat.Skill.SkillNode {
             }
         }
 
-        public override void OnFail(Context context) {
+        protected override void OnFail(Context context) {
             GetCom<MoveCom>(context)?.ForceFail();
         }
 

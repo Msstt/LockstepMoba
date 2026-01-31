@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Framework;
@@ -9,31 +10,41 @@ namespace Combat.Skill {
         
         private SortedDictionary<int, Tree> trees = new SortedDictionary<int, Tree>();
         private SortedDictionary<int, List<Context>> contexts = new SortedDictionary<int, List<Context>>();
-        private Queue<Context> toRemove = new Queue<Context>();
-        private List<Context> toUpdate = new List<Context>();
+        private List<Context> toRemove = new List<Context>();
+        private Queue<Tuple<int, int, SkillParam>> toExecuteAsync = new Queue<Tuple<int, int, SkillParam>>();
+        private Queue<Tuple<int, SkillType, int>> toAbortAsync = new Queue<Tuple<int, SkillType, int>>();
+        
+        private bool lockTree = false;
         
         public void FrameUpdate(int frame) {
-            while (toRemove.Any()) {
-                var context = toRemove.Dequeue();
-                contexts[context.TreeId].Remove(context);
+            while (toExecuteAsync.Any()) {
+                var (actorUid, skillId, param) = toExecuteAsync.Dequeue();
+                Execute(actorUid, skillId, param);
             }
             
-            toUpdate.Clear();
-            foreach (var list in contexts.Values) {
+            while (toAbortAsync.Any()) {
+                var (actorUid, typeList, excludeSkillId) = toAbortAsync.Dequeue();
+                Abort(actorUid, typeList, excludeSkillId);
+            }
+
+            lockTree = true;
+            foreach (var (skillId, list) in contexts) {
+                toRemove.Clear();
                 foreach (var context in list) {
-                    toUpdate.Add(context);
+                    NodeState ret = trees[skillId].Execute(context);
+                    if (ret != NodeState.Continue) {
+                        toRemove.Add(context);
+                    }
+                }
+                foreach (var context in toRemove) {
+                    list.Remove(context);
                 }
             }
-            toUpdate.Sort((a, b) => a.StartFrame.CompareTo(b.StartFrame));
-            foreach (var context in toUpdate) {
-                NodeState ret = trees[context.TreeId].Execute(context);
-                if (ret != NodeState.Continue) {
-                    toRemove.Enqueue(context);
-                }
-            }
+            lockTree = false;
         }
 
         public void Execute(int actorUid, int skillId, SkillParam param) {
+            CheckLock();
             CreateTree(skillId);
             if (GetContext(actorUid, skillId) != null) {
                 if (trees[skillId].CanAbortSelf) {
@@ -49,11 +60,12 @@ namespace Combat.Skill {
         }
 
         public void Abort(int actorUid, int skillId) {
+            CheckLock();
             CreateTree(skillId);
             Context context = GetContext(actorUid, skillId);
             if (context != null) {
                 trees[skillId].Fail(context);
-                toRemove.Enqueue(context);
+                contexts[skillId].Remove(context);
             }
         }
 
@@ -68,6 +80,14 @@ namespace Combat.Skill {
                     Abort(actorUid, tree.Id);
                 }
             }
+        }
+        
+        public void ExecuteAsync(int actorUid, int skillId, SkillParam param) {
+            toExecuteAsync.Enqueue(new Tuple<int, int, SkillParam>(actorUid, skillId, param));
+        }
+        
+        public void AbortAsync(int actorUid, SkillType typeList, int excludeSkillId) {
+            toAbortAsync.Enqueue(new Tuple<int, SkillType, int>(actorUid, typeList, excludeSkillId));
         }
 
         private void CreateTree(int skillId) {
@@ -105,5 +125,11 @@ namespace Combat.Skill {
         }
 
         private bool IsContainType(SkillType list, SkillType type) => (list & type) != 0;
+
+        private void CheckLock() {
+            if (lockTree) {
+                throw new CombatException("SkillSystem Tree is locked");
+            }
+        }
     }
 }
