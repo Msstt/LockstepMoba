@@ -11,6 +11,8 @@ namespace Editor.Skill {
         public string Name;
         public SkillType Type;
         
+        public SkillData() { }
+        
         public SkillData(int id) {
             Id = id;
         }

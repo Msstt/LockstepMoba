@@ -11,6 +11,7 @@ namespace Combat.Skill {
         WaitForTime = 7,
         WaitForAttackWindup = 8,
         WaitForAttackBackswing = 9,
+        RequestSlot = 10,
     }
     
     public static class NodeFactory {
@@ -34,6 +35,8 @@ namespace Combat.Skill {
                     return new WaitForTime(true);
                 case NodeType.WaitForAttackBackswing:
                     return new WaitForTime(false);
+                case NodeType.RequestSlot:
+                    return new RequestSlot(config.Params);
                 default:
                     throw new CombatException("Node type doesn't exist: " + config.Type);
             }

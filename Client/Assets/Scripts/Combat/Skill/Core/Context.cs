@@ -7,11 +7,13 @@ namespace Combat.Skill {
         public int TreeId { get; private set; }
         public Node CurNode { get; private set; }
         public SkillParam Param { get; private set; }
+        public int StartFrame { get; private set; }
 
-        public Context(int actorUid, int treeId, SkillParam param) {
+        public Context(int actorUid, int treeId, SkillParam param, int startFrame) {
             ActorUid = actorUid;
             TreeId = treeId;
             Param = param;
+            StartFrame = startFrame;
         }
         
         private readonly VariantMap variants = new VariantMap();

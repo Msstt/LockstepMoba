@@ -2,11 +2,13 @@
 
 using Combat.Actor;
 using Newtonsoft.Json.Linq;
+using Sirenix.OdinInspector;
 
 namespace Combat.Skill.SkillNode {
     public class PlayAnim : Node {
         [System.Serializable]
         public class Param {
+            [LabelText("动画名")]
             public string AnimName;
         }
         private readonly Param param;

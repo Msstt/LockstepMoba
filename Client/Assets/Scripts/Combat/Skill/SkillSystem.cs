@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Framework;
 
 namespace Combat.Skill {
@@ -8,19 +9,26 @@ namespace Combat.Skill {
         
         private SortedDictionary<int, Tree> trees = new SortedDictionary<int, Tree>();
         private SortedDictionary<int, List<Context>> contexts = new SortedDictionary<int, List<Context>>();
-        private List<Context> toRemove = new List<Context>();
+        private Queue<Context> toRemove = new Queue<Context>();
+        private List<Context> toUpdate = new List<Context>();
         
         public void FrameUpdate(int frame) {
-            foreach (var (skillId, list) in contexts) {
-                toRemove.Clear();
+            while (toRemove.Any()) {
+                var context = toRemove.Dequeue();
+                contexts[context.TreeId].Remove(context);
+            }
+            
+            toUpdate.Clear();
+            foreach (var list in contexts.Values) {
                 foreach (var context in list) {
-                    NodeState ret = trees[skillId].Execute(context);
-                    if (ret != NodeState.Continue) {
-                        toRemove.Add(context);
-                    }
+                    toUpdate.Add(context);
                 }
-                foreach (var context in toRemove) {
-                    list.Remove(context);
+            }
+            toUpdate.Sort((a, b) => a.StartFrame.CompareTo(b.StartFrame));
+            foreach (var context in toUpdate) {
+                NodeState ret = trees[context.TreeId].Execute(context);
+                if (ret != NodeState.Continue) {
+                    toRemove.Enqueue(context);
                 }
             }
         }
@@ -35,7 +43,7 @@ namespace Combat.Skill {
                 }
             }
 
-            Context context = new Context(actorUid, skillId, param);
+            Context context = new Context(actorUid, skillId, param, GameMgr.Instance.Frame);
             contexts[skillId].Add(context);
             trees[skillId].Execute(context);
         }
@@ -45,7 +53,7 @@ namespace Combat.Skill {
             Context context = GetContext(actorUid, skillId);
             if (context != null) {
                 trees[skillId].Fail(context);
-                contexts[skillId].Remove(context);
+                toRemove.Enqueue(context);
             }
         }
 

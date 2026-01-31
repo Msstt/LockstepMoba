@@ -2,17 +2,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 
 namespace Combat.Actor {
     public class SlotCom : Com {
+        [Flags]
         public enum Slot {
-            Upper = 1,
-            Lower = 2,
+            None = 0,
+            Upper = 1 << 1,
+            Lower = 1 << 2,
         }
-
-        public readonly int slotCount = Enum.GetNames(typeof(Slot)).Length;
 
         private class RequestInfo {
             public int slot;
@@ -72,6 +70,7 @@ namespace Combat.Actor {
                 }
                 isReleased = true;
                 Release(slot);
+                Update(GameMgr.Instance.Frame);
             };
         }
 

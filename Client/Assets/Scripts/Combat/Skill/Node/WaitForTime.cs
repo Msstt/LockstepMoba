@@ -1,9 +1,11 @@
 using Newtonsoft.Json.Linq;
+using Sirenix.OdinInspector;
 
 namespace Combat.Skill.SkillNode {
     public class WaitForTime : Node {
         [System.Serializable]
         public class Param {
+            [LabelText("等待时间")]
             public FloatF Time;
         }
         private Param param;

@@ -10,15 +10,24 @@
     },
     "Child": [
       {
-        "Type": 2,
+        "Type": 10,
         "Params": {
-          "AnimName": "Run"
+          "Slot": 4,
+          "WaitTime": "0.3"
         },
         "Child": [
           {
-            "Type": 1,
-            "Params": null,
-            "Child": []
+            "Type": 2,
+            "Params": {
+              "AnimName": "Run"
+            },
+            "Child": [
+              {
+                "Type": 1,
+                "Params": null,
+                "Child": []
+              }
+            ]
           }
         ]
       }

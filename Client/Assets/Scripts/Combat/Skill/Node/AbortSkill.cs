@@ -7,6 +7,7 @@ namespace Combat.Skill.SkillNode {
         [System.Serializable]
         public class Param {
             [DrawWithUnity]
+            [LabelText("技能类型")]
             public SkillType SkillList;
         }
         private Param param;

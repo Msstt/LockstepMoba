@@ -6,42 +6,51 @@
   "Node": {
     "Type": 3,
     "Params": {
-      "SkillList": -1
+      "SkillList": 2
     },
     "Child": [
       {
-        "Type": 2,
+        "Type": 10,
         "Params": {
-          "AnimName": "Run"
+          "Slot": -1,
+          "WaitTime": "2"
         },
         "Child": [
           {
-            "Type": 4,
-            "Params": null,
+            "Type": 2,
+            "Params": {
+              "AnimName": "Run"
+            },
             "Child": [
               {
-                "Type": 2,
-                "Params": {
-                  "AnimName": "Attack"
-                },
+                "Type": 4,
+                "Params": null,
                 "Child": [
                   {
-                    "Type": 8,
-                    "Params": null,
+                    "Type": 2,
+                    "Params": {
+                      "AnimName": "Attack"
+                    },
                     "Child": [
                       {
-                        "Type": 6,
-                        "Params": {
-                          "Physical": {
-                            "Value": "0",
-                            "AttackScale": "1"
-                          }
-                        },
+                        "Type": 8,
+                        "Params": null,
                         "Child": [
                           {
-                            "Type": 9,
-                            "Params": null,
-                            "Child": []
+                            "Type": 6,
+                            "Params": {
+                              "Physical": {
+                                "Value": "0",
+                                "AttackScale": "1"
+                              }
+                            },
+                            "Child": [
+                              {
+                                "Type": 9,
+                                "Params": null,
+                                "Child": []
+                              }
+                            ]
                           }
                         ]
                       }

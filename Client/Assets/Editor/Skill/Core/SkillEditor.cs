@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Combat.Skill;
 using Framework;
-using NodeCanvas.Framework;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -44,11 +43,14 @@ namespace Editor.Skill {
 
         private void DrawHeader() {
             GUILayout.BeginHorizontal(EditorStyles.toolbar);
-                if (GUILayout.Button("新建技能", GUILayout.Width(100))) {
+                if (GUILayout.Button("新建技能", GUILayout.Width(80))) {
                     CreateSkill();
                 }
                 if (GUILayout.Button("刷新", GUILayout.Width(50))) {
-                    data = SkillDefineUtils.Refresh();
+                    Refresh();
+                }
+                if (GUILayout.Button("全量导出", GUILayout.Width(80))) {
+                    ExportAll();
                 }
             GUILayout.EndHorizontal();
             
@@ -170,6 +172,19 @@ namespace Editor.Skill {
             }
             data.Add(new SkillData(config));
             SkillDefineUtils.Export(data);
+        }
+
+        private void Refresh() {
+            data = SkillDefineUtils.Refresh();
+        }
+        
+        private void ExportAll() {
+            foreach (var skillData in data) {
+                var graph = AssetDatabase.LoadAssetAtPath<SkillGraph>(SkillGraph.ImportRelaPath + skillData.Id + ".asset");
+                graph.Export();
+            }
+
+            Refresh();
         }
     }
 }

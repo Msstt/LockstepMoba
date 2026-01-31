@@ -7,4 +7,11 @@ namespace Editor.Skill {
         [OdinTree] public Combat.Skill.SkillNode.AbortSkill.Param param;
         protected override object Params => param;
     }
+    
+    [Category("通用/请求槽位")]
+    public class RequestSlot : EffectNode {
+        public override string name => "请求槽位";
+        [OdinTree] public Combat.Skill.SkillNode.RequestSlot.Param param;
+        protected override object Params => param;
+    }
 }

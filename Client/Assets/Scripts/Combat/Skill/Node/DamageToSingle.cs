@@ -1,10 +1,12 @@
 using Combat.Actor;
 using Newtonsoft.Json.Linq;
+using Sirenix.OdinInspector;
 
 namespace Combat.Skill.SkillNode {
     public class DamageToSingle : Node {
         [System.Serializable]
         public class Param {
+            [LabelText("物理伤害")]
             public StatScaler Physical;
         }
         private Param param;
