@@ -1,5 +1,6 @@
 {
   "Id": 1,
+  "Name": "通用移动",
   "SkillType": 1,
   "CanAbortSelf": true,
   "Node": {

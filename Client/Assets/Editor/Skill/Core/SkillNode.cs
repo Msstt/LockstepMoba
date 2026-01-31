@@ -1,9 +1,7 @@
 using System;
-using System.Runtime.CompilerServices;
 using Combat.Skill;
 using Newtonsoft.Json.Linq;
 using ParadoxNotion;
-using UnityEngine;
 using Node = NodeCanvas.Framework.Node;
 
 namespace Editor.Skill {
@@ -45,10 +43,9 @@ namespace Editor.Skill {
         public override int maxOutConnections => 1;
         public override bool allowAsPrime => true;
         public override string name => "Root";
-
-        public int Id;
-        public SkillType SkillType;
-        public bool CanAbortSelf;
+        
+        [OdinTree]
+        public NormalConfig config = new NormalConfig();
 
         protected override object Params => throw new NotImplementedException();
     }

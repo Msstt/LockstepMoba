@@ -12,7 +12,9 @@ using Node = NodeCanvas.Framework.Node;
 namespace Editor.Skill {
     [CreateAssetMenu(menuName = "Skill/SkillGraph")]
     public class SkillGraph : Graph {
-        private static readonly string ExportPath = Application.dataPath + "/Resources/Config/Skill/Json/";
+        public static readonly string ImportRelaPath = "Assets/Resources/Config/Skill/Node/";
+        public static readonly string ImportPath = Application.dataPath + "/Resources/Config/Skill/Node/";
+        public static readonly string ExportPath = Application.dataPath + "/Resources/Config/Skill/Json/";
         
         public override Type baseNodeType => typeof(SkillNode);
         public override bool requiresAgent => false;
@@ -27,7 +29,7 @@ namespace Editor.Skill {
             }
         }
         
-        public void Export() {
+        public void Export(bool noCheckNode = false) {
             RootNode root = null;
             foreach (var node in allNodes) {
                 if (node is RootNode rootNode) {
@@ -46,16 +48,21 @@ namespace Editor.Skill {
             }
             
             SkillConfig config = new SkillConfig();
-            config.Id = root.Id;
-            config.SkillType = (int)root.SkillType;
-            config.CanAbortSelf = root.CanAbortSelf;
+            config.Id = root.config.Id;
+            config.Name = root.config.Name;
+            config.SkillType = (int)root.config.SkillType;
+            config.CanAbortSelf = root.config.CanAbortSelf;
             if (!root.GetChildNodes().Any()) {
-                ExportError("Root节点缺少子节点");
-                return;
+                if (!noCheckNode) {
+                    ExportError("Root节点缺少子节点");
+                    return;
+                }
+            } else {
+                config.Node = ExportNode(root.GetChildNodes().First() as SkillNode);
             }
-            config.Node = ExportNode(root.GetChildNodes().First() as SkillNode);
 
             JsonHelper.SaveToFile(config, ExportPath + config.Id + ".json");
+            AssetDatabase.Refresh();
             
             Debug.Log("技能导出成功: " + config.Id);
         }

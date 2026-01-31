@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Editor/Skill/Node/Time.cs" />
+    <Compile Include="Assets/Editor/Skill/Core/SkillDefine.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillNode.cs" />
+    <Compile Include="Assets/Editor/Skill/Core/NormalConfig.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillGraph.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Damage.cs" />
     <Compile Include="Assets/Editor/Tools/MultiLaunchCreator.cs" />
@@ -57,7 +59,9 @@
     <Compile Include="Assets/Editor/Navmesh/NavmeshExporter.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Normal.cs" />
     <Compile Include="Assets/Editor/Network/GenerateMessageCode.cs" />
+    <Compile Include="Assets/Editor/Skill/Core/SkillEditor.cs" />
     <None Include="Assets/Editor/Network/Template/MessageDef.txt" />
+    <None Include="Assets/Editor/Skill/Data/SkillDefine.json" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -850,11 +854,11 @@
     <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.ScriptableBuildPipeline.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Addressables">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>

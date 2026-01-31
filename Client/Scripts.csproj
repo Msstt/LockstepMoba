@@ -124,14 +124,14 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Node/AbortSkill.cs" />
     <Compile Include="Assets/Scripts/Navmesh/INavmesh.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Layer.cs" />
-    <Compile Include="Assets/Scripts/Combat/Skill/Core/Context.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/WaitForTime.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Core/Context.cs" />
     <Compile Include="Assets/Scripts/Input/Com/ActorRaycasterCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/StatsBarCom.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/RandomColor.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/IMsgDispatcher.cs" />
-    <Compile Include="Assets/Scripts/Framework/Network/Reader.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/AnimCom.cs" />
+    <Compile Include="Assets/Scripts/Framework/Network/Reader.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/FrameMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/HitInfo.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Event/EventHub.cs" />

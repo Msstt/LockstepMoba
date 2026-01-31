@@ -1,5 +1,6 @@
 {
   "Id": 2,
+  "Name": "通用近战普通攻击",
   "SkillType": 2,
   "CanAbortSelf": false,
   "Node": {

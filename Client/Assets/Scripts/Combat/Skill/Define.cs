@@ -12,6 +12,7 @@ namespace Combat.Skill {
     
     [Flags] [Serializable]
     public enum SkillType {
+        None = 0,
         Move = 1 << 0,
         NormalAttack = 1 << 1,
     }
