@@ -22,6 +22,8 @@ namespace Editor.Skill {
         public override bool isTree => true;
         public override bool allowBlackboardOverrides => false;
         public override bool canAcceptVariableDrops => true;
+        
+        public Action OnExportEnd;
 
         protected override void OnGraphEditorToolbar() {
             if (GUILayout.Button("Export")) {
@@ -63,6 +65,8 @@ namespace Editor.Skill {
 
             JsonHelper.SaveToFile(config, ExportPath + config.Id + ".json");
             AssetDatabase.Refresh();
+            
+            OnExportEnd?.Invoke();
             
             Debug.Log("技能导出成功: " + config.Id);
         }

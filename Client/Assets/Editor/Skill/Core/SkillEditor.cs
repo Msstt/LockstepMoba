@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Combat.Skill;
+using Framework;
 using NodeCanvas.Framework;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
@@ -42,7 +45,7 @@ namespace Editor.Skill {
         private void DrawHeader() {
             GUILayout.BeginHorizontal(EditorStyles.toolbar);
                 if (GUILayout.Button("新建技能", GUILayout.Width(100))) {
-                    CreateNewSkill();
+                    CreateSkill();
                 }
                 if (GUILayout.Button("刷新", GUILayout.Width(50))) {
                     data = SkillDefineUtils.Refresh();
@@ -77,8 +80,11 @@ namespace Editor.Skill {
                 GUILayout.FlexibleSpace();
 
                 if (GUILayout.Button("编辑", GUILayout.Width(50))) {
-                    var graph = AssetDatabase.LoadAssetAtPath<Graph>(SkillGraph.ImportRelaPath + skill.Id + ".asset");
-                    NodeCanvas.Editor.GraphEditor.OpenWindow(graph);
+                    EditSkill(i);
+                }
+                
+                if (GUILayout.Button("复制", GUILayout.Width(50))) {
+                    CopySkill(skill.Id);
                 }
 
                 if (GUILayout.Button("删除", GUILayout.Width(50))) {
@@ -95,23 +101,17 @@ namespace Editor.Skill {
 
                 GUILayout.EndHorizontal();
             }
-
-            if (toRemove.Count > 0) {
-                foreach (var i in toRemove) {
-                    File.Delete(SkillGraph.ImportPath + data[i].Id + ".asset");
-                    File.Delete(SkillGraph.ExportPath + data[i].Id + ".json");
-                }
-                foreach (var i in toRemove) {
-                    data.RemoveAt(i);
-                }
-                SkillDefineUtils.Export(data);
-            }
+            DeleteSkill(toRemove);
             
             GUILayout.EndScrollView();
         }
 
-        private void CreateNewSkill() {
-            int id = data.Count > 0 ? data[data.Count - 1].Id + 1 : 1;
+        private int GenerateId() {
+            return data.Count > 0 ? data[data.Count - 1].Id + 1 : 1;
+        }
+
+        private void CreateSkill() {
+            int id = GenerateId();
             SkillGraph graph = ScriptableObject.CreateInstance<SkillGraph>();
             RootNode root = graph.AddNode<RootNode>();
             root.config.Id = id;
@@ -120,9 +120,55 @@ namespace Editor.Skill {
             
             graph.Export(true);
             
-            data.Add(new SkillData {
-                Id = id,
-            });
+            data.Add(new SkillData(id));
+            SkillDefineUtils.Export(data);
+        }
+
+        private void DeleteSkill(List<int> toRemove) {
+            if (!toRemove.Any()) {
+                return;
+            }
+            foreach (var i in toRemove) {
+                File.Delete(SkillGraph.ImportPath + data[i].Id + ".asset");
+                File.Delete(SkillGraph.ExportPath + data[i].Id + ".json");
+            }
+            foreach (var i in toRemove) {
+                data.RemoveAt(i);
+            }
+            SkillDefineUtils.Export(data);
+        }
+
+        private void EditSkill(int index) {
+            int id = data[index].Id;
+            var graph = AssetDatabase.LoadAssetAtPath<SkillGraph>(SkillGraph.ImportRelaPath + id + ".asset");
+            graph.OnExportEnd = () => {
+                if (!JsonHelper.LoadFromFile<SkillConfig>(SkillGraph.ExportPath + id + ".json", out var config)) {
+                    return;
+                }
+                data[index] = new SkillData(config);
+                SkillDefineUtils.Export(data);
+            };
+            NodeCanvas.Editor.GraphEditor.OpenWindow(graph);
+        }
+
+        private void CopySkill(int targetId) {
+            int id = GenerateId();
+            File.Copy(SkillGraph.ImportPath + targetId + ".asset", SkillGraph.ImportPath + id + ".asset");
+            AssetDatabase.Refresh();
+            var graph = AssetDatabase.LoadAssetAtPath<SkillGraph>(SkillGraph.ImportRelaPath + id + ".asset");
+            if (!graph.GetAllNodesOfType<RootNode>().Any()) {
+                SkillGraph.ExportError("缺少Root节点");
+                return;
+            }
+            var node = graph.GetAllNodesOfType<RootNode>().First();
+            node.config.Id = id;
+            
+            graph.Export();
+            
+            if (!JsonHelper.LoadFromFile<SkillConfig>(SkillGraph.ExportPath + id + ".json", out var config)) {
+                return;
+            }
+            data.Add(new SkillData(config));
             SkillDefineUtils.Export(data);
         }
     }

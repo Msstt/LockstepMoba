@@ -10,6 +10,16 @@ namespace Editor.Skill {
         public int Id;
         public string Name;
         public SkillType Type;
+        
+        public SkillData(int id) {
+            Id = id;
+        }
+
+        public SkillData(SkillConfig config) {
+            Id = config.Id;
+            Name = config.Name;
+            Type = (SkillType)config.SkillType;
+        }
     }
     
     public static class SkillDefineUtils {
@@ -29,14 +39,10 @@ namespace Editor.Skill {
 
         public static List<SkillData> Refresh() {
             var define = new List<SkillData>();
-            var skillFiles = Directory.GetFiles(Application.dataPath + "/Resources/Config/Skill/Json/", "*.json", SearchOption.AllDirectories);
+            var skillFiles = Directory.GetFiles(SkillGraph.ExportPath, "*.json", SearchOption.AllDirectories);
             foreach (var file in skillFiles) {
                 if (JsonHelper.LoadFromFile<SkillConfig>(file, out var config)) {
-                    define.Add(new SkillData {
-                        Id = config.Id, 
-                        Name = config.Name,
-                        Type = (SkillType)config.SkillType,
-                    });
+                    define.Add(new SkillData(config));
                 }
             }
             define.Sort((a, b) => a.Id.CompareTo(b.Id));
