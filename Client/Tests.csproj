@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Assets/Test/EditTest/Framework/FixedTest.cs" />
     <Compile Include="Assets/Test/EditTest/Framework/PriorityQueueTest.cs" />
+    <Compile Include="Assets/Test/EditTest/Geo/GeoTest.cs" />
     <Compile Include="Assets/Test/EditTest/Combat/PriorityTest.cs" />
     <None Include="Assets/Test/EditTest/Tests.asmdef" />
     <Reference Include="UnityEngine">

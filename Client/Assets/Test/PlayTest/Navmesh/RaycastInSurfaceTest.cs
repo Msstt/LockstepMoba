@@ -1,19 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Navmesh;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-public class FindPathTest {
+public class RaycastInSurfaceTest {
     [SetUp]
     public void Setup() {
-        Navmesh.FindPathConfig.FindPathMaxIterationCount = 1000;
         SceneManager.LoadScene("NavmeshTest", LoadSceneMode.Single);
         SceneManager.sceneLoaded += (scene, mode) => {
-            GameMgr.Instance.RegisterSystem(new HashSet<Type> { typeof(Navmesh.INavmesh) });
+            GameMgr.Instance.RegisterSystem(new HashSet<Type> { typeof(INavmesh) });
             GameMgr.Instance.Init();
         };
     }
@@ -29,22 +29,13 @@ public class FindPathTest {
                         Debug.Log($"{point.Value} -> {hit.point}");
                         Vector3 start = point.Value;
                         Vector3 end = hit.point;
-                        // Vector3 start = new Vector3(21.42f, 5.00f, 11.82f);
-                        // Vector3 end = new Vector3(19.58f, 5.00f, 17.83f);
-                        NavmeshUtils.FindPath(start.ToVector3F(), end.ToVector3F(), (path) => {
-                            Debug.Log($"path Count: {path.Count}");
-                            for (int i = 0; i + 1 < path.Count; i++) {
-                                DebugUtils.DrawLine(path[i], path[i + 1], Color.red, 2, 0.05f);
-                            }
-                        });
                         
-                        NavMeshPath sysPath = new NavMeshPath();
-                        bool hasPath = NavMesh.CalculatePath(point.Value, hit.point, NavMesh.AllAreas, sysPath);
-                        if (hasPath) {
-                            for (int i = 0; i + 1 < sysPath.corners.Length; i++) {
-                                DebugUtils.DrawLine(sysPath.corners[i], sysPath.corners[i + 1], Color.blue, 2, 0.05f);
-                            }
-                        }
+                        // start = new Vector3(21.66f, 5.00f, 12.80f);
+                        // end = new Vector3(22.09f, 6.03f, 14.96f);
+                        
+                        DebugUtils.DrawLine(start, end, Color.blue, 2, 0.05f);
+                        Vector3F ret = NavmeshUtils.RaycastInSurface(start.ToVector3F(), end.ToVector3F());
+                        DebugUtils.DrawDot(ret, Color.red, 2, 0.3f);
                         
                         point = null;
                     } else {

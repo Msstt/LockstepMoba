@@ -104,10 +104,19 @@ namespace Navmesh {
         public bool IsReachable(FloatF radius, Vector3F point) {
             foreach (var r in allRadius) {
                 if (radius <= r) {
-                    return layers[r].raycaster.Raycast(point, false, out _);
+                    return layers[r].raycaster.GetTIdByPoint(point, false, out _);
                 }
             }
             return false;
+        }
+        
+        public Vector3F RaycastInSurface(FloatF radius, Vector3F start, Vector3F end) {
+            foreach (var r in allRadius) {
+                if (radius <= r) {
+                    return layers[r].raycaster.RaycastInSurface(start, end);
+                }
+            }
+            return start;
         }
 
         #endregion

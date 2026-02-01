@@ -53,8 +53,8 @@ namespace Navmesh {
         public List<Vector3F> FindPath(Vector3F start, Vector3F end) {
             List<Vector3F> path = new List<Vector3F> { start };
             
-            if (!raycaster.Raycast(start, true, out int startTId)) return path;
-            if (!raycaster.Raycast(end, false, out int endTId)) endTId = -1;
+            if (!raycaster.GetTIdByPoint(start, true, out int startTId)) return path;
+            if (!raycaster.GetTIdByPoint(end, false, out int endTId)) endTId = -1;
 
             List<Connection.Info> connectionList = connection.GetPath(start, end, startTId, endTId);
 

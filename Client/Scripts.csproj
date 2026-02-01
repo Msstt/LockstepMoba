@@ -77,6 +77,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SlotCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/RequestSlot.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/Raycast/RaycastInSurface.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/FPSDrawer.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/Log.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/PriorityQueue.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Node/PlayAnim.cs" />
     <Compile Include="Assets/Scripts/Combat/MapConfig.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/MoveNode.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/Raycast/GetTIdByPoint.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/WorldUI/UISystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/AbortSkill.cs" />
     <Compile Include="Assets/Scripts/Navmesh/INavmesh.cs" />

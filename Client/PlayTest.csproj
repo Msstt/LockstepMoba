@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Test/PlayTest/Navmesh/FindPathTest.cs" />
+    <Compile Include="Assets/Test/PlayTest/Navmesh/RaycastInSurfaceTest.cs" />
     <Compile Include="Assets/Test/PlayTest/Network/EchoTest.cs" />
     <Compile Include="Assets/Test/PlayTest/Network/LockstepTest.cs" />
     <None Include="Assets/Test/PlayTest/PlayTest.asmdef" />

@@ -1,13 +1,15 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Tools.Debug {
     public class FPSDrawer : MonoBehaviour {
         private readonly float UPDATE_INTERVAL = 1f;
-
-        private float lastTime = 0f;
-        private int lastFrame = 0;
+        private readonly float RECORD_INTERVAL = 10f;
+        
+        private LinkedList<Tuple<float, int>> record = new LinkedList<Tuple<float, int>>();
 
         private Text text;
 
@@ -16,10 +18,16 @@ namespace Tools.Debug {
         }
 
         public void Update() {
-            if (Time.realtimeSinceStartup - lastTime > UPDATE_INTERVAL) {
-                text.text = "FPS: " + Mathf.RoundToInt((GameMgr.Instance.Frame - lastFrame) / (Time.realtimeSinceStartup - lastTime));
-                lastTime = Time.realtimeSinceStartup;
-                lastFrame = GameMgr.Instance.Frame;
+            record.AddLast(Tuple.Create(Time.realtimeSinceStartup, GameMgr.Instance.Frame));
+            while (record.Any() && record.First.Value.Item1 < Time.realtimeSinceStartup - RECORD_INTERVAL) {
+                record.RemoveFirst();
+            }
+            if (record.Any() && record.Last.Value.Item1 - record.First.Value.Item1 > 0) {
+                var First = record.First.Value;
+                var Last = record.Last.Value;
+                text.text = "FPS: " + Mathf.RoundToInt((Last.Item2 - First.Item2) / (Last.Item1 - First.Item1));
+            } else {
+                text.text = "FPS: 0";
             }
         }
     }

@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Navmesh {
-    public class Raycaster {
+    public partial class Raycaster {
         private static int MaxAABBCount = 10;
         
         private NavmeshSurface data;
@@ -49,7 +48,7 @@ namespace Navmesh {
             }
         }
         
-        bool TriangleInAABB(int row, int col, int tId) {
+        private bool TriangleInAABB(int row, int col, int tId) {
             Vector3F p1 = min + new Vector3F(row * size.x, 0, col * size.z);
             Vector3F p2 = min + new Vector3F(row * size.x, 0, (col + 1) * size.z);
             Vector3F p3 = min + new Vector3F((row + 1) * size.x, 0, col * size.z);
@@ -69,10 +68,10 @@ namespace Navmesh {
             if (InAABB(t1) || InAABB(t2) || InAABB(t3)) return true;
 
             bool Intersect(Vector3F a, Vector3F b) {
-                return GeoUtils.LineIsIntersectInXZ(a, b, p1, p2) || 
-                       GeoUtils.LineIsIntersectInXZ(a, b, p2, p4) ||
-                       GeoUtils.LineIsIntersectInXZ(a, b, p4, p3) ||
-                       GeoUtils.LineIsIntersectInXZ(a, b, p3, p1);
+                return GeoUtils.LineIsIntersect(a, b, p1, p2) || 
+                       GeoUtils.LineIsIntersect(a, b, p2, p4) ||
+                       GeoUtils.LineIsIntersect(a, b, p4, p3) ||
+                       GeoUtils.LineIsIntersect(a, b, p3, p1);
             }
             
             if (Intersect(t1, t2) || Intersect(t2, t3) || Intersect(t3, t1)) return true;
@@ -80,7 +79,7 @@ namespace Navmesh {
             return false;
         }
         
-        bool PointInTriangle(Vector3F point, int tId) {
+        private bool PointInTriangle(Vector3F point, int tId) {
             Vector3F vId1 = data.vertices[data.indices[tId * 3]];
             Vector3F vId2 = data.vertices[data.indices[tId * 3 + 1]];
             Vector3F vId3 = data.vertices[data.indices[tId * 3 + 2]];
@@ -92,7 +91,7 @@ namespace Navmesh {
             return !(hasNeg && hasPos);
         }
         
-        FloatF PointToTriangleDistance(Vector3F point, int tId) {
+        private FloatF PointToTriangleDistance(Vector3F point, int tId) {
             Vector3F vId1 = data.vertices[data.indices[tId * 3]];
             Vector3F vId2 = data.vertices[data.indices[tId * 3 + 1]];
             Vector3F vId3 = data.vertices[data.indices[tId * 3 + 2]];
@@ -101,61 +100,11 @@ namespace Navmesh {
             FloatF d3 = GeoUtils.PointToSegment(point, vId3, vId1);
             return FloatF.Min(d1, FloatF.Min(d2, d3));
         }
-
-        // XZ 平面射线检测，返回三角形 id
-        public bool Raycast(Vector3F point, bool findNearest, out int tId) {
-            tId = -1;
+        
+        private (int, int) GetAABBIndex(Vector3F point) {
             int row = (int)((point - min).x / size.x);
             int col = (int)((point - min).z / size.z);
-            List<Tuple<int, int>> AABBIndex = new List<Tuple<int, int>>();
-            AABBIndex.Add(Tuple.Create(row, col));
-            // 三角形内
-            foreach (var (r, c) in AABBIndex) {
-                if (r < 0 || r >= MaxAABBCount || c < 0 || c >= MaxAABBCount) {
-                    continue;
-                }
-                for (int i = 0; i < aabbGrids[r][c].Count; i++) {
-                    int triId = aabbGrids[r][c][i];
-                    if (PointInTriangle(point, triId)) {
-                        tId = triId;
-                        return true;
-                    }
-                }
-            }
-            if (findNearest) {
-                AABBIndex.Add(Tuple.Create(row - 1, col - 1));
-                AABBIndex.Add(Tuple.Create(row - 1, col));
-                AABBIndex.Add(Tuple.Create(row, col - 1));
-                AABBIndex.Add(Tuple.Create(row, col + 1));
-                AABBIndex.Add(Tuple.Create(row + 1, col));
-                AABBIndex.Add(Tuple.Create(row + 1, col + 1));
-                AABBIndex.Add(Tuple.Create(row - 1, col + 1));
-                AABBIndex.Add(Tuple.Create(row + 1, col - 1));
-                // 最近三角形
-                FloatF minDis = FloatF.max;
-                foreach (var (r, c) in AABBIndex) {
-                    if (r < 0 || r >= MaxAABBCount || c < 0 || c >= MaxAABBCount) {
-                        continue;
-                    }
-                    for (int i = 0; i < aabbGrids[r][c].Count; i++) {
-                        int triId = aabbGrids[r][c][i];
-                        FloatF dis = PointToTriangleDistance(point, triId);
-                        if (dis < minDis) {
-                            tId = triId;
-                            minDis = dis;
-                        }
-                    }
-                }
-                return tId != -1;
-            }
-            
-            // for (int i = 0; i < data.indices.Count / 3; i++) {
-            //     if (PointInTriangle(point, i)) {
-            //         tId = i;
-            //         return true;
-            //     }
-            // }
-            return false;
+            return (row, col);
         }
     }
 }
