@@ -1,12 +1,15 @@
 using System.Collections.Generic;
+using Combat;
 using Combat.Skill;
 using Framework;
 using InputSystem.Command;
 using Network;
+using UnityEngine;
 
 namespace InputSystem {
     public class InputSystem : IInputSystem {
-        private ICommand[] commands = new ICommand[SkillUtils.SkillSlotCount];
+        private Command.Command[] commands = new Command.Command[SkillUtils.SkillSlotCount];
+        private bool[] isEnable = new bool[SkillUtils.SkillSlotCount];
 
         public void Init() {
             EventMgr.Instance.Register<EventType.OnLockStepStart>(() => {
@@ -15,8 +18,8 @@ namespace InputSystem {
         }
         
         public void Start() {
-            ChangeCommand(SkillSlot.Move, new MoveCommand());
-            ChangeCommand(SkillSlot.Attack, new AttackCommand());
+            commands[(int)SkillSlot.Move] = new Move();
+            commands[(int)SkillSlot.Attack] = new Attack();
         }
 
         public void Update() {
@@ -25,10 +28,35 @@ namespace InputSystem {
             }
         }
 
-        public void ChangeCommand(SkillSlot slot, ICommand command) {
-            commands[(int)slot] = command;
+        public void ChangeCommand(SkillSlot slot, CommandType type) {
+            if (slot is SkillSlot.Move or SkillSlot.Attack) {
+                return;
+            }
+            
+            commands[(int)slot]?.OnSuspend();
+            
+            isEnable[(int)slot] = true;
+            KeyCode key = Config.Key[slot];
+            switch (type) {
+                case CommandType.None:
+                    commands[(int)slot] = new None(); break;
+                case CommandType.SinglePos:
+                    commands[(int)slot] = new SinglePos(key); break;
+                default:
+                    Log.Error("InputSystem ChangeCommand Unknown CommandType"); break;
+            }
         }
 
+        public void EnableCommand(SkillSlot slot, bool enable) {
+            if (isEnable[(int)slot] == enable) {
+                return;
+            }
+            isEnable[(int)slot] = enable;
+            if (!enable) {
+                commands[(int)slot].OnSuspend();
+            }
+        }
+        
         private skill_input Collector() {
             var msg = new skill_input();
             SortedDictionary<SkillSlot, skill_info> infos = new SortedDictionary<SkillSlot, skill_info>();

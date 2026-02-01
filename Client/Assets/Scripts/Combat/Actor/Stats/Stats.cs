@@ -8,8 +8,4 @@ namespace Combat.Actor {
         
         public Priority MoveSpeed;
     }
-    
-    public partial class Const {
-        public readonly FloatF AttackWindupRatio;
-    }
 }

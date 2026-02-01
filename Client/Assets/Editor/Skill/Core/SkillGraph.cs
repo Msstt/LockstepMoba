@@ -49,11 +49,7 @@ namespace Editor.Skill {
                 return;
             }
             
-            SkillConfig config = new SkillConfig();
-            config.Id = root.config.Id;
-            config.Name = root.config.Name;
-            config.SkillType = (int)root.config.SkillType;
-            config.CanAbortSelf = root.config.CanAbortSelf;
+            SkillConfig config = root.config.Export();
             if (!root.GetChildNodes().Any()) {
                 if (!noCheckNode) {
                     ExportError("Root节点缺少子节点");

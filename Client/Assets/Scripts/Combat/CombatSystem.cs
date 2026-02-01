@@ -41,5 +41,12 @@ namespace Combat {
         public CampType GetCamp(Uid uid) {
             return playerInfo.TryGetValue(uid, out var info) ? (CampType)info.Camp : CampType.UnKnown;
         }
+        
+        public (int, int) GetSummonerSkill(Uid uid) {
+            if (playerInfo.TryGetValue(uid, out var info) && info.Skill.Count >= 2) {
+                return (info.Skill[0], info.Skill[1]);
+            }
+            return (-1, -1);
+        }
     }
 }

@@ -42,8 +42,10 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="Assets/Test/Scenes/NavmeshTest/NavmeshData/navmesh_surfaces.json" />
+    <None Include="Assets/Resources/Config/Skill/Json/4.json" />
     <None Include="Assets/Scenes/NavmeshData/navmesh_surfaces.json" />
     <None Include="Assets/Material/Shader/BarWithTick.shader" />
+    <None Include="Assets/Resources/Config/Skill/Json/3.json" />
     <None Include="Assets/Resources/Config/Skill/Json/1.json" />
     <None Include="Assets/Resources/Config/Skill/Json/2.json" />
     <Reference Include="UnityEngine">

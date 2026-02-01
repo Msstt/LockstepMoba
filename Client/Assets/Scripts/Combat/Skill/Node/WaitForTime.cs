@@ -3,7 +3,6 @@ using Sirenix.OdinInspector;
 
 namespace Combat.Skill.SkillNode {
     public class WaitForTime : Node {
-        [System.Serializable]
         public class Param {
             [LabelText("等待时间")]
             public FloatF Time;
@@ -27,12 +26,13 @@ namespace Combat.Skill.SkillNode {
             if (actor == null) {
                 return NodeState.Fail;
             }
+            FloatF ratio = Config.Champion[actor.Id].attackWindupRatio;
             FloatF time;
             if (isAttackSpeed) {
                 if (isWindup) {
-                    time = FloatF.one / actor.Stats.AttackSpeed * actor.Const.AttackWindupRatio;
+                    time = FloatF.one / actor.Stats.AttackSpeed * ratio;
                 } else {
-                    time = FloatF.one / actor.Stats.AttackSpeed * (1 - actor.Const.AttackWindupRatio);
+                    time = FloatF.one / actor.Stats.AttackSpeed * (1 - ratio);
                 }
             } else {
                 time = param.Time;

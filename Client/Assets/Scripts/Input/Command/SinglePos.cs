@@ -3,11 +3,16 @@ using Network;
 using UnityEngine;
 
 namespace InputSystem.Command {
-    public class MoveCommand : ICommand {
+    public class SinglePos : Command {
+        private KeyCode key;
         private Vector3F? targetPos;
         
-        public void Update() {
-            if (Input.GetMouseButtonDown(1)) {
+        public SinglePos(KeyCode key) {
+            this.key = key;
+        }
+
+        public override void Update() {
+            if (Input.GetKeyDown(key)) {
                 Vector3F? pos = InputUtils.GetMousePos();
                 if (pos.HasValue) {
                     targetPos = pos;
@@ -15,7 +20,7 @@ namespace InputSystem.Command {
             }
         }
 
-        public skill_param GetProto() {
+        public override skill_param GetProto() {
             if (!targetPos.HasValue) {
                 return null;
             }

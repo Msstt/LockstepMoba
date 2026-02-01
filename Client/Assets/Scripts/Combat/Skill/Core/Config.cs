@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using InputSystem;
 using Newtonsoft.Json.Linq;
 
 namespace Combat.Skill {
@@ -11,7 +12,8 @@ namespace Combat.Skill {
     public class SkillConfig {
         public int Id;
         public string Name;
-        public int SkillType;
+        public SkillType SkillType;
+        public CommandType InputType;
         public bool CanAbortSelf;
         public NodeConfig Node;
     }

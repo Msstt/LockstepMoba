@@ -46,7 +46,7 @@ namespace UI.Actor {
         }
 
         private void RefreshHealth(FloatF curValue, FloatF maxValue) {
-            healthMat?.SetFloat("_TickRange", maxValue.ToFloat());
+            healthMat?.SetFloat("_TickRange", curValue.ToFloat());
             health.Value = curValue.ToFloat() / maxValue.ToFloat();
         }
 

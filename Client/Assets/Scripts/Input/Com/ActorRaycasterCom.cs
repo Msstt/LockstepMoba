@@ -1,7 +1,6 @@
-using Combat;
-using UnityEngine.UI;
+using UnityEngine;
 
-namespace UnityEngine {
+namespace InputSystem {
     public class ActorRaycasterCom : MonoBehaviour {
         private int? uid;
         private static bool hasRay = false;

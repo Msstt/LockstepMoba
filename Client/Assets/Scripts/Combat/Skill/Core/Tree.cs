@@ -12,7 +12,7 @@ namespace Combat.Skill {
 
         public Tree(SkillConfig config) {
             Id = config.Id;
-            Type = (SkillType)config.SkillType;
+            Type = config.SkillType;
             CanAbortSelf = config.CanAbortSelf;
             root = InitNode(config.Node);
         }

@@ -11,5 +11,7 @@ namespace Combat {
         public void SetStartInfo(battle_start_s2c msg);
         public int GetChampionId(Uid uid);
         public Actor.CampType GetCamp(Uid uid);
+
+        public (int, int) GetSummonerSkill(Uid uid);
     }
 }

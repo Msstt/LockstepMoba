@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Framework;
+using InputSystem;
 using UnityEngine;
 
 namespace Combat.Actor {
@@ -9,6 +10,7 @@ namespace Combat.Actor {
     }
     
     public abstract partial class Actor {
+        public int Id { get; private set; }
         public int Uid { get; private set; }
         public ActorType Type { get; protected set; }
         
@@ -25,13 +27,13 @@ namespace Combat.Actor {
         private GameObject go;
 
         public Stats Stats = new Stats();
-        public Const Const;
         
         public readonly EventHub Event = new EventHub();
 
         private GameObject debugPoint;
         
-        protected Actor(int uid, GameObject go, CampType camp) {
+        protected Actor(int id, int uid, GameObject go, CampType camp) {
+            Id = id;
             Uid = uid;
             this.go = go;
             this.camp = camp;

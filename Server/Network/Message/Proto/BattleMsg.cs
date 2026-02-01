@@ -24,15 +24,15 @@ namespace Network {
     static BattleMsgReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChZEZWZpbmUvQmF0dGxlTXNnLnByb3RvEgdOZXR3b3JrIpsBChBiYXR0bGVf",
+            "ChZEZWZpbmUvQmF0dGxlTXNnLnByb3RvEgdOZXR3b3JrIqoBChBiYXR0bGVf",
             "c3RhcnRfczJjEhAKCHNlbGZfdWlkGAEgASgFEjYKB3BsYXllcnMYAiADKAsy",
-            "JS5OZXR3b3JrLmJhdHRsZV9zdGFydF9zMmMucGxheWVyX2luZm8aPQoLcGxh",
+            "JS5OZXR3b3JrLmJhdHRsZV9zdGFydF9zMmMucGxheWVyX2luZm8aTAoLcGxh",
             "eWVyX2luZm8SCwoDdWlkGAEgASgFEhMKC2NoYW1waW9uX2lkGAIgASgFEgwK",
-            "BGNhbXAYAyABKAViBnByb3RvMw=="));
+            "BGNhbXAYAyABKAUSDQoFc2tpbGwYBCADKAViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c), global::Network.battle_start_s2c.Parser, new[]{ "SelfUid", "Players" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c.Types.player_info), global::Network.battle_start_s2c.Types.player_info.Parser, new[]{ "Uid", "ChampionId", "Camp" }, null, null, null)})
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c), global::Network.battle_start_s2c.Parser, new[]{ "SelfUid", "Players" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c.Types.player_info), global::Network.battle_start_s2c.Types.player_info.Parser, new[]{ "Uid", "ChampionId", "Camp", "Skill" }, null, null, null)})
           }));
     }
     #endregion
@@ -221,6 +221,7 @@ namespace Network {
           uid_ = other.uid_;
           championId_ = other.championId_;
           camp_ = other.camp_;
+          skill_ = other.skill_.Clone();
           _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
         }
 
@@ -243,6 +244,9 @@ namespace Network {
         /// <summary>Field number for the "champion_id" field.</summary>
         public const int ChampionIdFieldNumber = 2;
         private int championId_;
+        /// <summary>
+        /// 英雄
+        /// </summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int ChampionId {
           get { return championId_; }
@@ -254,12 +258,28 @@ namespace Network {
         /// <summary>Field number for the "camp" field.</summary>
         public const int CampFieldNumber = 3;
         private int camp_;
+        /// <summary>
+        /// 阵营
+        /// </summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int Camp {
           get { return camp_; }
           set {
             camp_ = value;
           }
+        }
+
+        /// <summary>Field number for the "skill" field.</summary>
+        public const int SkillFieldNumber = 4;
+        private static readonly pb::FieldCodec<int> _repeated_skill_codec
+            = pb::FieldCodec.ForInt32(34);
+        private readonly pbc::RepeatedField<int> skill_ = new pbc::RepeatedField<int>();
+        /// <summary>
+        /// 召唤师技能
+        /// </summary>
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public pbc::RepeatedField<int> Skill {
+          get { return skill_; }
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -278,6 +298,7 @@ namespace Network {
           if (Uid != other.Uid) return false;
           if (ChampionId != other.ChampionId) return false;
           if (Camp != other.Camp) return false;
+          if(!skill_.Equals(other.skill_)) return false;
           return Equals(_unknownFields, other._unknownFields);
         }
 
@@ -287,6 +308,7 @@ namespace Network {
           if (Uid != 0) hash ^= Uid.GetHashCode();
           if (ChampionId != 0) hash ^= ChampionId.GetHashCode();
           if (Camp != 0) hash ^= Camp.GetHashCode();
+          hash ^= skill_.GetHashCode();
           if (_unknownFields != null) {
             hash ^= _unknownFields.GetHashCode();
           }
@@ -312,6 +334,7 @@ namespace Network {
             output.WriteRawTag(24);
             output.WriteInt32(Camp);
           }
+          skill_.WriteTo(output, _repeated_skill_codec);
           if (_unknownFields != null) {
             _unknownFields.WriteTo(output);
           }
@@ -329,6 +352,7 @@ namespace Network {
           if (Camp != 0) {
             size += 1 + pb::CodedOutputStream.ComputeInt32Size(Camp);
           }
+          size += skill_.CalculateSize(_repeated_skill_codec);
           if (_unknownFields != null) {
             size += _unknownFields.CalculateSize();
           }
@@ -349,6 +373,7 @@ namespace Network {
           if (other.Camp != 0) {
             Camp = other.Camp;
           }
+          skill_.Add(other.skill_);
           _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
         }
 
@@ -370,6 +395,11 @@ namespace Network {
               }
               case 24: {
                 Camp = input.ReadInt32();
+                break;
+              }
+              case 34:
+              case 32: {
+                skill_.AddEntriesFrom(input, _repeated_skill_codec);
                 break;
               }
             }

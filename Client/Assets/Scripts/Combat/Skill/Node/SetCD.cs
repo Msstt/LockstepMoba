@@ -3,15 +3,14 @@ using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 
 namespace Combat.Skill.SkillNode {
-    public class AbortSkill : Node {
+    public class SetCD : Node {
         public class Param {
-            [DrawWithUnity]
-            [LabelText("技能类型")]
-            public SkillType SkillList;
+            [LabelText("冷却时间")]
+            public FloatF CD;
         }
-        private Param param;
+        private readonly Param param;
         
-        public AbortSkill(JToken json) {
+        public SetCD(JToken json) {
             param = ParseParam<Param>(json);
         }
         
@@ -21,7 +20,7 @@ namespace Combat.Skill.SkillNode {
                 return NodeState.Fail;
             }
             
-            com.AbortSkill(param.SkillList, context.TreeId);
+            com.StartCD(context.TreeId, param.CD);
             return NodeState.Finish;
         }
         

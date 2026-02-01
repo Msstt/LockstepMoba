@@ -81,6 +81,9 @@ namespace Combat.Actor {
         private void SkillHandler(SortedDictionary<Uid, skill_input> inputs) {
             foreach (var (uid, input) in inputs) {
                 Actor actor = GetActor(uid);
+                if (actor == null) {
+                    continue;
+                }
                 SkillCom com = actor.GetComponent<SkillCom>();
                 if (com == null) {
                     Log.Warning("Actor " + uid + " has no SkillCom");

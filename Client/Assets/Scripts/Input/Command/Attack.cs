@@ -3,10 +3,10 @@ using Network;
 using UnityEngine;
 
 namespace InputSystem.Command {
-    public class AttackCommand : ICommand {
+    public class Attack : Command {
         private int? targetUid;
         
-        public void Update() {
+        public override void Update() {
             if (Input.GetMouseButtonDown(1)) {
                 int? uid = InputUtils.GetMouseActorUid();
                 if (uid.HasValue && !ActorUtils.IsSameCamp(uid.Value)) {
@@ -15,7 +15,7 @@ namespace InputSystem.Command {
             }
         }
 
-        public skill_param GetProto() {
+        public override skill_param GetProto() {
             if (!targetUid.HasValue) {
                 return null;
             }

@@ -1,0 +1,14 @@
+{
+  "Id": 3,
+  "Name": "闪现",
+  "SkillType": 0,
+  "InputType": 0,
+  "CanAbortSelf": false,
+  "Node": {
+    "Type": 3,
+    "Params": {
+      "SkillList": 0
+    },
+    "Child": []
+  }
+}

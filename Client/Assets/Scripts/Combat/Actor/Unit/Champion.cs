@@ -10,15 +10,13 @@ namespace Combat.Actor {
             go.transform.SetParent(system.TransRoot);
             GoUtils.NewGo(config.prefabName, go.transform, true).name = "Prefab";
             
-            Champion actor = new Champion(system.GetUid(), go, camp);
+            Champion actor = new Champion(championId, system.GetUid(), go, camp);
             actor.SetStatusByConfig(config);
-            actor.Const = new Const(config);
             actor.BindCom();
-            actor.GetComponent<SkillCom>()?.SetSkillId(config);
             return actor;
         }
         
-        private Champion(int uid, GameObject go, CampType camp) : base(uid, go, camp) {
+        private Champion(int id, int uid, GameObject go, CampType camp) : base(id, uid, go, camp) {
             Type = ActorType.Champion;
         }
 
@@ -39,12 +37,6 @@ namespace Combat.Actor {
             AddComponent<LevelCom>();
             AddComponent<SkillCom>();
             AddComponent<StatsBarCom>();
-        }
-    }
-    
-    public partial class Const {
-        public Const(ChampionConfig config) {
-            AttackWindupRatio = config.attackWindupRatio;
         }
     }
 }

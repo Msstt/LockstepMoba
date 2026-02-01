@@ -60,6 +60,7 @@
     <Compile Include="Assets/Editor/Skill/Node/Normal.cs" />
     <Compile Include="Assets/Editor/Network/GenerateMessageCode.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillEditor.cs" />
+    <Compile Include="Assets/Editor/Skill/Node/Cost.cs" />
     <None Include="Assets/Editor/Network/Template/MessageDef.txt" />
     <None Include="Assets/Editor/Skill/Data/SkillDefine.json" />
     <Reference Include="UnityEngine">

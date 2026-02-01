@@ -6,7 +6,6 @@ using Framework;
 namespace Combat.Skill {
     public class SkillSystem : ISkillSystem {
         private static readonly int InvalidSkillId = -1;
-        private static readonly string configPath = "Config/Skill/Json/";
         
         private SortedDictionary<int, Tree> trees = new SortedDictionary<int, Tree>();
         private SortedDictionary<int, List<Context>> contexts = new SortedDictionary<int, List<Context>>();
@@ -94,11 +93,8 @@ namespace Combat.Skill {
             if (trees.ContainsKey(skillId)) {
                 return;
             }
-
-            if (!JsonHelper.LoadFromRes(configPath + skillId, out SkillConfig config)) {
-                throw new CombatException("Skill Config not found: " + skillId);
-            }
-            trees[skillId] = new Tree(config);
+            
+            trees[skillId] = new Tree(Config.Skill[skillId]);
             contexts[skillId] = new List<Context>();
         }
         
