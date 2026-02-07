@@ -75,12 +75,14 @@
     <Compile Include="Assets/Scripts/Network/LockStep/MockLockStep.cs" />
     <Compile Include="Assets/Scripts/StartUp/Main.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.ActorByPath.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/NodeUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/NodeDefine.cs" />
     <Compile Include="Assets/Scripts/Framework/Event/EventMgr.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Com.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SlotCom.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Raycast/RaycastInSurface.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/TeleportToPos.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/FPSDrawer.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/Log.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/PriorityQueue.cs" />

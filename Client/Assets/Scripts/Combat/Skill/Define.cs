@@ -17,6 +17,7 @@ namespace Combat.Skill {
         None = 0,
         Move = 1 << 0,
         NormalAttack = 1 << 1,
+        Flash = 1 << 2,
     }
 
     public static class Field {

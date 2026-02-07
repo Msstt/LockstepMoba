@@ -1225,7 +1225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsLocalDebug: 1
-  ShowUnitRealPos: 1
+  ShowUnitRealPos: 0
   PrintSkillTree: 0
 --- !u!114 &854225744
 MonoBehaviour:
@@ -1408,18 +1408,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
-    - target: {fileID: 625123939767696657, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 664419354171141670, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 212588825}
-    - target: {fileID: 2133362505522742770, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: DrawDebugTriangle
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3004068146920950643, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_originalMesh
       value: 
@@ -1428,38 +1420,6 @@ PrefabInstance:
       propertyPath: m_simplifiedMesh
       value: 
       objectReference: {fileID: 212588825}
-    - target: {fileID: 3702246372538125861, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4046517490186815428, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4046517490186815428, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: spawnPoint.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: spawnPoint.Array.data[0].y.value
-      value: 125000000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: spawnPoint.Array.data[1].x.value
-      value: 500000000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: spawnPoint.Array.data[1].y.value
-      value: 125000000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: spawnPoint.Array.data[1].z.value
-      value: 1360000000
-      objectReference: {fileID: 0}
     - target: {fileID: 6508610243314606421, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_Mesh
       value: 

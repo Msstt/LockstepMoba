@@ -14,6 +14,7 @@ namespace Combat.Skill {
         RequestSlot = 10,
         RepeatSkill = 11,
         SetCD = 12,
+        TeleportToPos = 13,
     }
     
     public static class NodeFactory {
@@ -43,6 +44,8 @@ namespace Combat.Skill {
                     return new RepeatSkill();
                 case NodeType.SetCD:
                     return new SetCD();
+                case NodeType.TeleportToPos:
+                    return new TeleportToPos(config.Params);
                 default:
                     throw new CombatException("Node type doesn't exist: " + config.Type);
             }

@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Framework;
 
 namespace Combat.Skill {
     public class SkillSystem : ISkillSystem {
@@ -55,7 +53,7 @@ namespace Combat.Skill {
 
             Context context = new Context(actorUid, skillId, level, param, GameMgr.Instance.Frame);
             contexts[skillId].Add(context);
-            trees[skillId].Execute(context);
+            // trees[skillId].Execute(context);
         }
 
         public void Abort(int actorUid, int skillId) {

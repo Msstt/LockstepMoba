@@ -1,14 +1,36 @@
 {
   "Id": 3,
   "Name": "闪现",
-  "SkillType": 0,
-  "InputType": 0,
+  "SkillType": 4,
+  "InputType": 1,
+  "CD": {
+    "datas": [
+      {
+        "level": 1,
+        "value": "2"
+      }
+    ]
+  },
   "CanAbortSelf": false,
   "Node": {
     "Type": 3,
     "Params": {
-      "SkillList": 0
+      "SkillList": 3
     },
-    "Child": []
+    "Child": [
+      {
+        "Type": 12,
+        "Params": null,
+        "Child": [
+          {
+            "Type": 13,
+            "Params": {
+              "MaxDistance": "42.5"
+            },
+            "Child": []
+          }
+        ]
+      }
+    ]
   }
 }

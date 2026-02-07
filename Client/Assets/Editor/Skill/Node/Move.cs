@@ -1,4 +1,3 @@
-using Framework;
 using ParadoxNotion.Design;
 
 namespace Editor.Skill {
@@ -15,5 +14,10 @@ namespace Editor.Skill {
     [Category("移动/沿路经移动到参数目标")]
     public class MoveToActorByPathInDistance : ParamNode<Combat.Skill.SkillNode.MoveToActorByPath.Param> {
         public override string name => "沿路经移动到参数目标";
+    }
+    
+    [Category("移动/瞬移到参数位置")]
+    public class TeleportToPos : ParamNode<Combat.Skill.SkillNode.TeleportToPos.Param> {
+        public override string name => "瞬移到参数位置";
     }
 }

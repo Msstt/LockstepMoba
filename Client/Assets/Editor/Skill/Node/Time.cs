@@ -1,4 +1,3 @@
-using Framework;
 using ParadoxNotion.Design;
 
 namespace Editor.Skill {

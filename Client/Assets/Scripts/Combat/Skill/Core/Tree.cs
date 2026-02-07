@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Combat.Skill {
     public class Tree {
+        private static bool PrintSkillTree;
+        
         private Node root;
         private readonly Dictionary<Node, List<Node>> nodes = new Dictionary<Node, List<Node>>();
         private readonly Dictionary<Node, Node> parent = new Dictionary<Node, Node>();
@@ -15,6 +18,7 @@ namespace Combat.Skill {
             Type = config.SkillType;
             CanAbortSelf = config.CanAbortSelf;
             root = InitNode(config.Node);
+            PrintSkillTree = GameMgr.Instance.GMTool.PrintSkillTree;
         }
 
         public NodeState Execute(Context context) {
@@ -62,6 +66,11 @@ namespace Combat.Skill {
         }
         
         private void Finish(Context context) {
+            if (PrintSkillTree) {
+                Debug.Log("[SkillTree] " + GameMgr.Instance.Frame + ":   " +
+                          " ActorUid: " + context.ActorUid +
+                          " Finish Tree: " + context.TreeId);
+            }
             Node curNode = context.CurNode;
             while (curNode != null) {
                 curNode.Finish(context);

@@ -3,12 +3,14 @@
   "Name": "通用近战普通攻击",
   "SkillType": 2,
   "InputType": 0,
-  "CD": null,
+  "CD": {
+    "datas": []
+  },
   "CanAbortSelf": false,
   "Node": {
     "Type": 3,
     "Params": {
-      "SkillList": -1
+      "SkillList": 3
     },
     "Child": [
       {

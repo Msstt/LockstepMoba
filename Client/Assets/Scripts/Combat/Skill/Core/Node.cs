@@ -10,7 +10,7 @@ namespace Combat.Skill {
         Fail,
     }
     
-    public abstract class Node {
+    public abstract partial class Node {
         private static bool PrintSkillTree = false;
         private static int globalId = 0;
         
@@ -67,9 +67,6 @@ namespace Combat.Skill {
         protected static void SetGlobalValue<T>(Context context, string key, T value) => context.SetValue(key, value);
         protected static T GetGlobalValue<T>(Context context, string key) => context.GetValue<T>(key);
         protected static T GetGlobalValueOrDefault<T>(Context context, string key, T defaultValue) => context.GetValueOrDefault(key, defaultValue);
-        
-        protected static T GetCom<T>(Context context) where T : Com => ActorUtils.GetCom<T>(context.ActorUid);
-        protected static Stats GetStats(Context context) => ActorUtils.GetActor(context.ActorUid)?.Stats;
 
         protected static T ParseParam<T>(JToken json) {
             T param = json.ToObject<T>();
@@ -78,7 +75,5 @@ namespace Combat.Skill {
             }
             return param;
         }
-
-        protected static T GetLevelNumber<T>(Context context, LevelNumber<T> levelNumber) => levelNumber[context.Level];
     }
 }
