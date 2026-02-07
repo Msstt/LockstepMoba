@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Combat.Actor;
 using InputSystem;
 using Newtonsoft.Json.Linq;
 
@@ -14,6 +15,7 @@ namespace Combat.Skill {
         public string Name;
         public SkillType SkillType;
         public CommandType InputType;
+        public LevelNumber<FloatF> CD;
         public bool CanAbortSelf;
         public NodeConfig Node;
     }

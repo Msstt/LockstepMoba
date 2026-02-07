@@ -19,20 +19,19 @@ namespace Combat.Skill {
 
         public NodeState Execute(Context context) {
             Node curNode = context.CurNode;
+            NodeState ret = NodeState.Continue;
             if (curNode == null) {
                 curNode = root;
                 context.ChangeNode(this, curNode);
-                curNode.Enter(context);
+                ret = curNode.Enter(context);
             }
             while (curNode != null) {
-                NodeState ret = curNode.Update(context);
+                if (ret == NodeState.Continue) {
+                    ret = curNode.Update(context);
+                }
                 if (ret == NodeState.Continue) {
                     return NodeState.Continue;
                 } else if (ret == NodeState.Fail) {
-                    Fail(context);
-                    return NodeState.Fail;
-                } else if (ret == NodeState.NoKnow) {
-                    Log.Error("Tree :" + context.TreeId + " Node OnUpdate returned NodeState.NoKnow");
                     Fail(context);
                     return NodeState.Fail;
                 }
@@ -47,7 +46,7 @@ namespace Combat.Skill {
 
                 if (curNode != null) {
                     context.ChangeNode(this, curNode);
-                    curNode.Enter(context);
+                    ret = curNode.Enter(context);
                 }
             }
 

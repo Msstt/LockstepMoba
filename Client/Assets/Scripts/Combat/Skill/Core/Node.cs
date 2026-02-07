@@ -78,5 +78,7 @@ namespace Combat.Skill {
             }
             return param;
         }
+
+        protected static T GetLevelNumber<T>(Context context, LevelNumber<T> levelNumber) => levelNumber[context.Level];
     }
 }

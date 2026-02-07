@@ -10,12 +10,12 @@ namespace Navmesh {
             }
             var (row1, col1) = GetAABBIndex(start);
             var (row2, col2) = GetAABBIndex(end);
-            List<Tuple<int, int>> AABBIndex = new List<Tuple<int, int>>();
+            List<(int, int)> AABBIndex = new List<(int, int)>();
             if (row1 > row2) (row1, row2) = (row2, row1);
             if (col1 > col2) (col1, col2) = (col2, col1);
             for (int i = row1; i <= row2; i++) {
                 for (int j = col1; j <= col2; j++) {
-                    AABBIndex.Add(Tuple.Create(i, j));
+                    AABBIndex.Add((i, j));
                 }
             }
 

@@ -6,12 +6,14 @@ namespace Combat.Skill {
         public int ActorUid { get; private set; }
         public int TreeId { get; private set; }
         public Node CurNode { get; private set; }
+        public int Level { get; private set; }
         public SkillParam Param { get; private set; }
         public int StartFrame { get; private set; }
 
-        public Context(int actorUid, int treeId, SkillParam param, int startFrame) {
+        public Context(int actorUid, int treeId, int level, SkillParam param, int startFrame) {
             ActorUid = actorUid;
             TreeId = treeId;
+            Level = level;
             Param = param;
             StartFrame = startFrame;
         }

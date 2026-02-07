@@ -2,6 +2,8 @@
   "Id": 2,
   "Name": "通用近战普通攻击",
   "SkillType": 2,
+  "InputType": 0,
+  "CD": null,
   "CanAbortSelf": false,
   "Node": {
     "Type": 3,
@@ -40,8 +42,15 @@
                             "Type": 6,
                             "Params": {
                               "Physical": {
-                                "Value": "0",
-                                "AttackScale": "1"
+                                "datas": [
+                                  {
+                                    "level": 1,
+                                    "value": {
+                                      "Value": "0",
+                                      "AttackScale": "1"
+                                    }
+                                  }
+                                ]
                               }
                             },
                             "Child": [

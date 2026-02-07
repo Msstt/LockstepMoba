@@ -6,7 +6,7 @@ namespace Combat.Skill.SkillNode {
         protected override NodeState OnUpdate(Context context) => NodeState.Finish;
 
         protected override void OnFinish(Context context) {
-            GetCom<SkillCom>(context)?.ExecuteSkillAsync(context.TreeId, context.Param);
+            GetCom<SkillCom>(context)?.ExecuteSkillAsync(context.TreeId, context.Level, context.Param);
         }
     }
 }

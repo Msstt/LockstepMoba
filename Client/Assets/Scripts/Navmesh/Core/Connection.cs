@@ -16,7 +16,7 @@ namespace Navmesh {
         private Layer layer;
         
         private List<SortedDictionary<int, Info>> connections;
-        private Dictionary<Tuple<int, int, int>, FloatF> midDis;
+        private Dictionary<(int, int, int), FloatF> midDis;
         private List<Vector3F> centroid;
         
         public Connection(NavmeshSurface data, Layer layer) {
@@ -25,10 +25,9 @@ namespace Navmesh {
         }
         
         public bool Init() {
-            Dictionary<Tuple<int, int>, int> edges = new Dictionary<Tuple<int, int>, int>();
+            Dictionary<(int, int), int> edges = new Dictionary<(int, int), int>();
             void AddEdge(int index, int x, int y) {
-                var edge = Tuple.Create(x, y);
-                edges.TryAdd(edge, index);
+                edges.TryAdd((x, y), index);
             }
             for (int i = 0; i < data.indices.Count; i += 3) {
                 int p1 = data.indices[i], p2 = data.indices[i + 1], p3 = data.indices[i + 2];
@@ -52,8 +51,7 @@ namespace Navmesh {
                 centroid.Add(layer.GetCentroid(i));
             }
             foreach (var ((vId1, vId2), sTId) in edges) {
-                var revEdge = Tuple.Create(vId2, vId1);
-                if (edges.TryGetValue(revEdge, out int tTId)) {
+                if (edges.TryGetValue((vId2, vId1), out int tTId)) {
                     connections[sTId].TryAdd(tTId, new Info {
                         centroidDis = Vector3F.Distance(centroid[sTId], centroid[tTId]),
                         tId = tTId,
@@ -67,7 +65,7 @@ namespace Navmesh {
                 }
             }
 
-            midDis = new Dictionary<Tuple<int, int, int>, FloatF>();
+            midDis = new Dictionary<(int, int, int), FloatF>();
             for (int sTId = 0; sTId < data.indices.Count / 3; sTId++) {
                 foreach (var pTId in connections[sTId].Keys) {
                     foreach (var tTId in connections[sTId].Keys) {
@@ -76,7 +74,7 @@ namespace Navmesh {
                         }
                         Vector3F p1 = GetEdgeMidPoint(connections[pTId][sTId]);
                         Vector3F p2 = GetEdgeMidPoint(connections[sTId][tTId]);
-                        midDis[Tuple.Create(pTId, sTId, tTId)] = Vector3F.Distance(p1, p2);
+                        midDis[(pTId, sTId, tTId)] = Vector3F.Distance(p1, p2);
                         
                         if (NavmeshUtils.Config.DrawDebugConnection && FindPathConfig.wType == FindPathConfig.WType.edgeMidDis) {
                             DebugUtils.DrawLine(p1, p2, Color.green, 0);
@@ -127,7 +125,7 @@ namespace Navmesh {
                             Info info = connections[pTId][sTId];
                             return Vector3F.Distance(Vector3F.Mid(data.vertices[info.vId1], data.vertices[info.vId2]), end);
                         } else {
-                            return midDis[Tuple.Create(pTId, sTId, tTId)];
+                            return midDis[(pTId, sTId, tTId)];
                         }
                 }
                 return FloatF.zero;

@@ -6,7 +6,7 @@ namespace Combat.Skill.SkillNode {
     public class DamageToSingle : Node {
         public class Param {
             [LabelText("物理伤害")]
-            public StatScaler Physical;
+            public LevelNumber<StatScaler> Physical;
         }
         private Param param;
 
@@ -30,7 +30,7 @@ namespace Combat.Skill.SkillNode {
             HitInfo hitInfo = new HitInfo {
                 attacker = context.Param.Uid,
                 damage = new Damage {
-                    physical = StatsUtils.GetValue(stats, param.Physical),
+                    physical = StatsUtils.GetValue(stats, GetLevelNumber(context, param.Physical)),
                 }
             };
             actor.OnHit(hitInfo);

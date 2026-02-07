@@ -13,6 +13,7 @@ namespace Combat.Actor {
         // 技能冷却结束的帧
         private readonly Dictionary<int, int> cd = new Dictionary<int, int>();
         private readonly List<int> toFinish = new List<int>();
+        private int[] level = null;
         
         public override void Awake() {
             skillSystem = GameMgr.Instance.GetSystem<ISkillSystem>();
@@ -27,6 +28,10 @@ namespace Combat.Actor {
             }
 
             skillIds = new int[SkillUtils.SkillSlotCount];
+            level = new int[SkillUtils.SkillSlotCount];
+            for (int i = 0; i < SkillUtils.SkillSlotCount; i++) {
+                level[i] = 1;
+            }
             InitSkillId();
         }
 
@@ -56,6 +61,8 @@ namespace Combat.Actor {
             }
         }
 
+        #region 执行
+
         public void ExecuteSkill(SkillSlot slot, SkillParam param) {
             if (slot < 0 || (int)slot >= SkillUtils.SkillSlotCount || skillIds == null) {
                 Log.Error("Invalid skill slot: " + slot);
@@ -64,20 +71,24 @@ namespace Combat.Actor {
             if (InCD(slot)) {
                 return;
             }
-            skillSystem.Execute(Actor.Uid, skillIds[(int)slot], param);
+            skillSystem.Execute(Actor.Uid, skillIds[(int)slot], level[(int)slot], param);
         }
         
-        public void ExecuteSkillAsync(int skillId, SkillParam param) {
+        public void ExecuteSkillAsync(int skillId, int level, SkillParam param) {
             if (InCD(skillId)) {
                 return;
             }
-            skillSystem.ExecuteAsync(Actor.Uid, skillId, param);
+            skillSystem.ExecuteAsync(Actor.Uid, skillId, level, param);
         }
 
         public void AbortSkill(SkillType typeList, int excludeSkillId) {
             skillSystem.AbortAsync(Actor.Uid, typeList, excludeSkillId);
         }
-        
+
+        #endregion
+
+        #region 改变技能
+
         private void SetSkillId(SkillSlot slot, int skillId) {
             skillIds[(int)slot] = skillId;
             
@@ -92,6 +103,10 @@ namespace Combat.Actor {
             SetSkillId(slot, skillId);
         }
 
+        #endregion
+
+        #region CD
+        
         public void StartCD(int skillId, FloatF time) {
             cd[skillId] = TimeUtils.GetFrame(time);
             for (int i = 0; i < skillIds.Length; i++) {
@@ -103,5 +118,13 @@ namespace Combat.Actor {
 
         private bool InCD(SkillSlot slot) => cd.ContainsKey(skillIds[(int)slot]);
         private bool InCD(int skillId) => cd.ContainsKey(skillId);
+
+        #endregion
+
+        #region 等级
+        
+        
+
+        #endregion
     }
 }

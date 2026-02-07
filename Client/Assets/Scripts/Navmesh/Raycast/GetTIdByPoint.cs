@@ -7,8 +7,8 @@ namespace Navmesh {
         public bool GetTIdByPoint(Vector3F point, bool findNearest, out int tId) {
             tId = -1;
             var (row, col) = GetAABBIndex(point);
-            List<Tuple<int, int>> AABBIndex = new List<Tuple<int, int>>();
-            AABBIndex.Add(Tuple.Create(row, col));
+            List<(int, int)> AABBIndex = new List<(int, int)>();
+            AABBIndex.Add((row, col));
             // 三角形内
             foreach (var (r, c) in AABBIndex) {
                 if (r < 0 || r >= MaxAABBCount || c < 0 || c >= MaxAABBCount) {
@@ -22,14 +22,14 @@ namespace Navmesh {
                 }
             }
             if (findNearest) {
-                AABBIndex.Add(Tuple.Create(row - 1, col - 1));
-                AABBIndex.Add(Tuple.Create(row - 1, col));
-                AABBIndex.Add(Tuple.Create(row, col - 1));
-                AABBIndex.Add(Tuple.Create(row, col + 1));
-                AABBIndex.Add(Tuple.Create(row + 1, col));
-                AABBIndex.Add(Tuple.Create(row + 1, col + 1));
-                AABBIndex.Add(Tuple.Create(row - 1, col + 1));
-                AABBIndex.Add(Tuple.Create(row + 1, col - 1));
+                AABBIndex.Add((row - 1, col - 1));
+                AABBIndex.Add((row - 1, col));
+                AABBIndex.Add((row, col - 1));
+                AABBIndex.Add((row, col + 1));
+                AABBIndex.Add((row + 1, col));
+                AABBIndex.Add((row + 1, col + 1));
+                AABBIndex.Add((row - 1, col + 1));
+                AABBIndex.Add((row + 1, col - 1));
                 // 最近三角形
                 FloatF minDis = FloatF.max;
                 foreach (var (r, c) in AABBIndex) {

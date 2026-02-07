@@ -42,7 +42,7 @@ namespace Combat.Skill {
                 case NodeType.RepeatSkill:
                     return new RepeatSkill();
                 case NodeType.SetCD:
-                    return new SetCD(config.Params);
+                    return new SetCD();
                 default:
                     throw new CombatException("Node type doesn't exist: " + config.Type);
             }

@@ -10,15 +10,15 @@ namespace Combat.Skill {
         private SortedDictionary<int, Tree> trees = new SortedDictionary<int, Tree>();
         private SortedDictionary<int, List<Context>> contexts = new SortedDictionary<int, List<Context>>();
         private List<Context> toRemove = new List<Context>();
-        private Queue<Tuple<int, int, SkillParam>> toExecuteAsync = new Queue<Tuple<int, int, SkillParam>>();
-        private Queue<Tuple<int, SkillType, int>> toAbortAsync = new Queue<Tuple<int, SkillType, int>>();
+        private Queue<(int, int, int, SkillParam)> toExecuteAsync = new Queue<(int, int, int, SkillParam)>();
+        private Queue<(int, SkillType, int)> toAbortAsync = new Queue<(int, SkillType, int)>();
         
         private bool lockTree = false;
         
         public void FrameUpdate(int frame) {
             while (toExecuteAsync.Any()) {
-                var (actorUid, skillId, param) = toExecuteAsync.Dequeue();
-                Execute(actorUid, skillId, param);
+                var (actorUid, skillId, level, param) = toExecuteAsync.Dequeue();
+                Execute(actorUid, skillId, level, param);
             }
             
             while (toAbortAsync.Any()) {
@@ -42,7 +42,7 @@ namespace Combat.Skill {
             lockTree = false;
         }
 
-        public void Execute(int actorUid, int skillId, SkillParam param) {
+        public void Execute(int actorUid, int skillId, int level, SkillParam param) {
             CheckLock();
             CreateTree(skillId);
             if (GetContext(actorUid, skillId) != null) {
@@ -53,7 +53,7 @@ namespace Combat.Skill {
                 }
             }
 
-            Context context = new Context(actorUid, skillId, param, GameMgr.Instance.Frame);
+            Context context = new Context(actorUid, skillId, level, param, GameMgr.Instance.Frame);
             contexts[skillId].Add(context);
             trees[skillId].Execute(context);
         }
@@ -81,12 +81,12 @@ namespace Combat.Skill {
             }
         }
         
-        public void ExecuteAsync(int actorUid, int skillId, SkillParam param) {
-            toExecuteAsync.Enqueue(new Tuple<int, int, SkillParam>(actorUid, skillId, param));
+        public void ExecuteAsync(int actorUid, int skillId, int level, SkillParam param) {
+            toExecuteAsync.Enqueue((actorUid, skillId, level, param));
         }
         
         public void AbortAsync(int actorUid, SkillType typeList, int excludeSkillId) {
-            toAbortAsync.Enqueue(new Tuple<int, SkillType, int>(actorUid, typeList, excludeSkillId));
+            toAbortAsync.Enqueue((actorUid, typeList, excludeSkillId));
         }
 
         private void CreateTree(int skillId) {

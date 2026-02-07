@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Framework {
     public class PriorityQueue<TElement, TPriority> {
-        private List<Tuple<TElement, TPriority>> data = new List<Tuple<TElement, TPriority>>();
+        private List<(TElement, TPriority)> data = new List<(TElement, TPriority)>();
         private IComparer<TPriority> comparer;
 
         public int Count => data.Count;
@@ -13,7 +13,7 @@ namespace Framework {
         }
         
         public void Enqueue(TElement element, TPriority priority) {
-            data.Add(Tuple.Create(element, priority));
+            data.Add((element, priority));
             HeapUp(data.Count - 1);
         }
 

@@ -9,7 +9,7 @@ namespace Tools.Debug {
         private readonly float UPDATE_INTERVAL = 1f;
         private readonly float RECORD_INTERVAL = 10f;
         
-        private LinkedList<Tuple<float, int>> record = new LinkedList<Tuple<float, int>>();
+        private LinkedList<(float, int)> record = new LinkedList<(float, int)>();
 
         private Text text;
 
@@ -18,7 +18,7 @@ namespace Tools.Debug {
         }
 
         public void Update() {
-            record.AddLast(Tuple.Create(Time.realtimeSinceStartup, GameMgr.Instance.Frame));
+            record.AddLast((Time.realtimeSinceStartup, GameMgr.Instance.Frame));
             while (record.Any() && record.First.Value.Item1 < Time.realtimeSinceStartup - RECORD_INTERVAL) {
                 record.RemoveFirst();
             }

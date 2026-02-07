@@ -2,22 +2,17 @@ using ParadoxNotion.Design;
 
 namespace Editor.Skill {
     [Category("通用/中断技能")]
-    public class AbortSkill : EffectNode {
+    public class AbortSkill : ParamNode<Combat.Skill.SkillNode.AbortSkill.Param> {
         public override string name => "中断技能";
-        [OdinTree] public Combat.Skill.SkillNode.AbortSkill.Param param;
-        protected override object Params => param;
     }
     
     [Category("通用/请求槽位")]
-    public class RequestSlot : EffectNode {
+    public class RequestSlot : ParamNode<Combat.Skill.SkillNode.RequestSlot.Param> {
         public override string name => "请求槽位";
-        [OdinTree] public Combat.Skill.SkillNode.RequestSlot.Param param;
-        protected override object Params => param;
     }
     
     [Category("通用/重复此技能")]
-    public class RepeatSkill : EffectNode {
+    public class RepeatSkill : NoParamNode {
         public override string name => "重复此技能";
-        protected override object Params => null;
     }
 }
