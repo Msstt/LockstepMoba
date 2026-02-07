@@ -15,6 +15,8 @@ namespace Combat.Actor {
         private readonly List<int> toFinish = new List<int>();
         private int[] level = null;
         
+        private HashSet<int> hasExecuted = new HashSet<int>();
+        
         public override void Awake() {
             skillSystem = GameMgr.Instance.GetSystem<ISkillSystem>();
             inputSystem = GameMgr.Instance.GetSystem<IInputSystem>();
@@ -47,6 +49,13 @@ namespace Combat.Actor {
             }
         }
 
+        public override void Destroy() {
+            // 目前 SkillCom 没有管理技能的生命周期，所以这里粗糙的处理一下，不在执行的技能树 SkillSystem 会有容错处理
+            foreach (var skillId in hasExecuted) {
+                skillSystem.Abort(Actor.Uid, skillId);
+            }
+        }
+
         private void InitSkillId() {
             ChampionConfig config = Config.Champion[Actor.Id];
             for (int i = (int)SkillSlot.Move; i <= (int)SkillSlot.SkillR; i++) {
@@ -71,6 +80,8 @@ namespace Combat.Actor {
             if (InCD(slot)) {
                 return;
             }
+
+            hasExecuted.Add(skillIds[(int)slot]);
             skillSystem.Execute(Actor.Uid, skillIds[(int)slot], level[(int)slot], param);
         }
         
@@ -78,6 +89,8 @@ namespace Combat.Actor {
             if (InCD(skillId)) {
                 return;
             }
+            
+            hasExecuted.Add(skillId);
             skillSystem.ExecuteAsync(Actor.Uid, skillId, level, param);
         }
 

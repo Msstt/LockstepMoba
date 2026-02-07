@@ -4,14 +4,10 @@ using Sirenix.OdinInspector;
 
 namespace Combat.Skill.SkillNode {
     public class DamageToSingle : Node {
-        public class Param {
-            [LabelText("物理伤害")]
-            public LevelNumber<StatScaler> Physical;
-        }
-        private Param param;
+        private DamageInfo param;
 
         public DamageToSingle(JToken json) {
-            param = ParseParam<Param>(json);
+            param = ParseParam<DamageInfo>(json);
         }
         
         protected override NodeState OnEnter(Context context) {

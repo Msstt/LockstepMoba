@@ -19,7 +19,7 @@ namespace Combat.Skill {
     
     public static class NodeFactory {
         public static Node CreateNode(NodeConfig config) {
-            switch ((NodeType)config.Type) {
+            switch (config.Type) {
                 case NodeType.MoveToPosByPath:
                     return new MoveToPosByPath();
                 case NodeType.PlayAnim:

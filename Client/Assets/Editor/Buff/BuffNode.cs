@@ -1,18 +1,21 @@
 using System;
-using Combat.Skill;
+using Combat.Buff;
 using Newtonsoft.Json.Linq;
 using ParadoxNotion;
 using Node = NodeCanvas.Framework.Node;
+using NodeCanvas.Framework;
 
-namespace Editor.Skill {
-    public abstract class SkillNode : Node {
+namespace Editor.Buff {
+    public class BuffConnection : Connection { }
+    
+    public abstract class BuffNode : Node {
         public override Alignment2x2 commentsAlignment => Alignment2x2.Bottom;
         public override Alignment2x2 iconAlignment => Alignment2x2.Top;
         public override bool canSelfConnect => false;
-        public override Type outConnectionType => typeof(SkillConnection);
+        public override Type outConnectionType => typeof(BuffConnection);
         public override int maxInConnections => 1;
 
-        public NodeType Type => (NodeType)System.Enum.Parse(typeof(NodeType), this.GetType().Name);
+        public EffectType Type => (EffectType)System.Enum.Parse(typeof(EffectType), this.GetType().Name);
         protected abstract object Params { get; }
 
         public JToken Export() {
@@ -22,25 +25,24 @@ namespace Editor.Skill {
                 }
                 return JToken.FromObject(Params);
             } catch {
-                SkillGraph.ExportError("导出节点参数失败: " + name);
+                BuffGraph.ExportError("导出节点参数失败: " + name);
                 return null;
             }
         }
     }
     
-    public abstract class EffectNode : SkillNode {
-        public override int maxOutConnections => 1;
+    public abstract class EffectNode<T> : BuffNode {
+        public override int maxInConnections => 1;
+        public override int maxOutConnections => 0;
         public override bool allowAsPrime => false;
+        
+        [OdinTree] public T param;
+        protected override object Params => param;
     }
     
-    public abstract class SelectNode : SkillNode {
-        public override int maxOutConnections => -1;
-        public override bool allowAsPrime => false;
-    }
-    
-    public class RootNode : EffectNode {
+    public class RootNode : BuffNode {
         public override int maxInConnections => 0;
-        public override int maxOutConnections => 1;
+        public override int maxOutConnections => -1;
         public override bool allowAsPrime => true;
         public override string name => "Root";
         

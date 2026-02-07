@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Combat.Skill;
+using Combat.Buff;
 using Framework;
 using NodeCanvas.Framework;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor.Skill {
-    public class SkillGraph : Graph {
-        public static readonly string ImportRelaPath = "Assets/Resources/Config/Skill/Node/";
-        public static readonly string ImportPath = Application.dataPath + "/Resources/Config/Skill/Node/";
-        public static readonly string ExportPath = Application.dataPath + "/Resources/Config/Skill/Json/";
+namespace Editor.Buff {
+    [CreateAssetMenu(menuName = "Skill/SkillGraph")]
+    public class BuffGraph : Graph {
+        public static readonly string ImportRelaPath = "Assets/Resources/Config/Buff/Node/";
+        public static readonly string ImportPath = Application.dataPath + "/Resources/Config/Buff/Node/";
+        public static readonly string ExportPath = Application.dataPath + "/Resources/Config/Buff/Json/";
         
-        public override Type baseNodeType => typeof(SkillNode);
+        public override Type baseNodeType => typeof(BuffNode);
         public override bool requiresAgent => false;
         public override bool requiresPrimeNode => false;
         public override bool isTree => true;
@@ -46,14 +47,15 @@ namespace Editor.Skill {
                 return;
             }
             
-            SkillConfig config = root.config.Export();
-            if (!root.GetChildNodes().Any()) {
-                if (!noCheckNode) {
-                    ExportError("Root节点缺少子节点");
-                    return;
+            BuffConfig config = root.config.Export();
+            if (root.GetChildNodes().Any()) {
+                config.Effect = new List<EffectConfig>();
+                foreach (var node in root.GetChildNodes()) {
+                    EffectConfig effect = new EffectConfig();
+                    effect.Type = (node as BuffNode).Type;
+                    effect.Params = (node as BuffNode).Export();
+                    config.Effect.Add(effect);
                 }
-            } else {
-                config.Node = ExportNode(root.GetChildNodes().First() as SkillNode);
             }
 
             JsonHelper.SaveToFile(config, ExportPath + config.Id + ".json");
@@ -62,21 +64,6 @@ namespace Editor.Skill {
             OnExportEnd?.Invoke();
             
             Debug.Log("技能导出成功: " + config.Id);
-        }
-
-        private NodeConfig ExportNode(SkillNode node) {
-            if (node == null) {
-                return null;
-            }
-            
-            NodeConfig config = new NodeConfig();
-            config.Type = node.Type;
-            config.Params = node.Export();
-            config.Child = new List<NodeConfig>();
-            foreach (var child in node.GetChildNodes()) {
-                config.Child.Add(ExportNode(child as SkillNode));
-            }
-            return config;
         }
 
         public static void ExportError(string errorCode) {

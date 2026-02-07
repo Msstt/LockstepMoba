@@ -13,7 +13,8 @@ namespace Combat.Skill {
         public SkillType Type { get; private set; }
         public bool CanAbortSelf { get; private set; }
 
-        public Tree(SkillConfig config) {
+        public Tree(int skillId) {
+            SkillConfig config = Config.Skill[skillId];
             Id = config.Id;
             Type = config.SkillType;
             CanAbortSelf = config.CanAbortSelf;

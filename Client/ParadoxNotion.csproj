@@ -155,8 +155,8 @@
     <Compile Include="Assets/Plugins/ParadoxNotion/CanvasCore/Framework/Runtime/Tasks/Internal/MissingCondition.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/CanvasCore/Framework/Runtime/Tasks/ActionTask.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/CanvasCore/Framework/Runtime/Variables/SyncBlackboard.cs" />
-    <Compile Include="Assets/Plugins/ParadoxNotion/CanvasCore/Common/Runtime/Serialization/SerializedConstructorInfo.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Conditions/GameObject/CheckSpeed.cs" />
+    <Compile Include="Assets/Plugins/ParadoxNotion/CanvasCore/Common/Runtime/Serialization/SerializedConstructorInfo.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Conditions/GameObject/CheckDistanceToGameObjectAny.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Modules/BehaviourTrees/Nodes/Decorators/Optional.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/CanvasCore/Framework/Design/Editor/Windows/ExternalInspectorWindow.cs" />

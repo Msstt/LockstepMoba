@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Combat.Actor;
+using Combat.Buff;
 using Combat.Skill;
 using Framework;
 using UnityEngine;
@@ -37,5 +38,8 @@ namespace Combat {
         
         public static readonly ConfigCache<SkillConfig> Skill = new(
             (id) => JsonHelper.LoadFromRes("Config/Skill/Json/" + id, out SkillConfig config) ? config : null);
+        
+        public static readonly ConfigCache<BuffConfig> Buff = new(
+            (id) => JsonHelper.LoadFromRes("Config/Buff/Json/" + id, out BuffConfig config) ? config : null);
     }
 }

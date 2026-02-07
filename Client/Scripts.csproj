@@ -82,8 +82,10 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SlotCom.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Raycast/RaycastInSurface.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/EffectDefine.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/TeleportToPos.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/FPSDrawer.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/BuffCom.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/Log.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/PriorityQueue.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
@@ -94,9 +96,11 @@
     <Compile Include="Assets/Scripts/StartUp/GMTool.cs" />
     <Compile Include="Assets/Scripts/UI/UIUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillUtils.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/Effect/Damage.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/RepeatSkill.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkUtils.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/Core/Effect.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Define.cs" />
     <Compile Include="Assets/Scripts/Framework/Res/ResMgr.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="Assets/Scripts/Network/Dispatcher/IMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/AnimCom.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Reader.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/Core/Buff.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/FrameMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/HitInfo.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Event/EventHub.cs" />
@@ -170,11 +175,12 @@
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
-    <Compile Include="Assets/Scripts/UI/Com/UIBarCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Damage/DamageToSingle.cs" />
+    <Compile Include="Assets/Scripts/UI/Com/UIBarCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
     <Compile Include="Assets/Scripts/Combat/Common/Priority.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Cost/SetCD.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/Core/Config.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/INetwork.cs" />
     <Compile Include="Assets/Scripts/Combat/Common/LimitedPriority.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/DebugUtils.cs" />
@@ -185,8 +191,9 @@
     <Compile Include="Assets/Scripts/Network/Dispatcher/BattleMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/IUISystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/ISkillSystem.cs" />
-    <Compile Include="Assets/Scripts/Framework/Fixed/FloatF.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Stats/Info.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Attribute.cs" />
+    <Compile Include="Assets/Scripts/Framework/Fixed/FloatF.cs" />
     <None Include="Assets/Scripts/Scripts.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -875,6 +882,10 @@
     <ProjectReference Include="OEBIF.csproj">
       <Project>{191582db-989d-dfc3-8dd7-203ae2e2b786}</Project>
       <Name>OEBIF</Name>
+    </ProjectReference>
+    <ProjectReference Include="RedStudio.OdinTreeNodeCanvas.csproj">
+      <Project>{ff5aee3b-3455-98b2-c6a3-1036a975f0f7}</Project>
+      <Name>RedStudio.OdinTreeNodeCanvas</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

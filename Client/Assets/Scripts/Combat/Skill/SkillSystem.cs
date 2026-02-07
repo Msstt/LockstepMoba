@@ -92,7 +92,7 @@ namespace Combat.Skill {
                 return;
             }
             
-            trees[skillId] = new Tree(Config.Skill[skillId]);
+            trees[skillId] = new Tree(skillId);
             contexts[skillId] = new List<Context>();
         }
         

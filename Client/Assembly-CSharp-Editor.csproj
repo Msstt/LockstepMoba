@@ -45,12 +45,17 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Editor/Buff/BuffGraph.cs" />
+    <Compile Include="Assets/Editor/Buff/EffectNode.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Time.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillDefine.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillNode.cs" />
     <Compile Include="Assets/Editor/Skill/Core/NormalConfig.cs" />
+    <Compile Include="Assets/Editor/Buff/BuffNode.cs" />
+    <Compile Include="Assets/Editor/Buff/GenerateBuffDefine.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillGraph.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Damage.cs" />
+    <Compile Include="Assets/Editor/Buff/NormalConfig.cs" />
     <Compile Include="Assets/Editor/Tools/MultiLaunchCreator.cs" />
     <Compile Include="Assets/Editor/Tools/CombineMesh.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillConnection.cs" />
@@ -62,6 +67,7 @@
     <Compile Include="Assets/Editor/Skill/Core/SkillEditor.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Cost.cs" />
     <None Include="Assets/Editor/Network/Template/MessageDef.txt" />
+    <None Include="Assets/Editor/Buff/Template/EffectDefine.txt" />
     <None Include="Assets/Editor/Skill/Data/SkillDefine.json" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>

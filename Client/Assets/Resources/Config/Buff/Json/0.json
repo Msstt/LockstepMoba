@@ -1,0 +1,16 @@
+{
+  "Id": 0,
+  "Effect": [
+    {
+      "Type": 1,
+      "Params": {
+        "Damage": {
+          "Physical": {
+            "datas": []
+          }
+        },
+        "Interval": "0"
+      }
+    }
+  ]
+}

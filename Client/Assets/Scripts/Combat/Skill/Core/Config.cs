@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Combat.Skill {
     public class NodeConfig {
-        public int Type;
+        public NodeType Type;
         public JToken Params;
         public List<NodeConfig> Child;
     }
