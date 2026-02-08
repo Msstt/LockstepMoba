@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 
 namespace Combat.Skill.SkillNode {
-    public class RequestSlot : Node {
+    public class RequestSlot : ParamNode<RequestSlot.Param> {
         public class Param {
             [DrawWithUnity]
             [LabelText("槽位")]
@@ -12,11 +12,7 @@ namespace Combat.Skill.SkillNode {
             [LabelText("等待时间")]
             public FloatF WaitTime;
         }
-        private Param param;
-        
-        public RequestSlot(JToken json) {
-            param = ParseParam<Param>(json);
-        }
+        public RequestSlot(JToken json) : base(json) { }
         
         protected override NodeState OnEnter(Context context) {
             SlotCom com = GetCom<SlotCom>(context);

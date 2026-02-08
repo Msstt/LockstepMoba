@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Assets/Scripts/Navmesh/NavmeshUtils.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/PathSmoother.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/None.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/SkillParam.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Writer.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Assets/Scripts/Tools/Event/EventType.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.MoveComStatus.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatUtils.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Check/IsSameCamp.cs" />
     <Compile Include="Assets/Scripts/Combat/Uid.cs" />
     <Compile Include="Assets/Scripts/Tools/TimeUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/FrameMsg.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Assets/Scripts/Network/Message/Proto/TestMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Json/JsonHelper.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Network.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Buff/AddBuffToActor.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Stats/Stats.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Define.cs" />
@@ -181,6 +184,8 @@
     <Compile Include="Assets/Scripts/Combat/Common/Priority.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Cost/SetCD.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Config.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Check/IsInRange.cs" />
+    <Compile Include="Assets/Scripts/Input/Command/SingleUnit.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/INetwork.cs" />
     <Compile Include="Assets/Scripts/Combat/Common/LimitedPriority.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/DebugUtils.cs" />

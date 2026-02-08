@@ -1,14 +1,9 @@
 using Combat.Actor;
 using Newtonsoft.Json.Linq;
-using Sirenix.OdinInspector;
 
 namespace Combat.Skill.SkillNode {
-    public class DamageToSingle : Node {
-        private DamageInfo param;
-
-        public DamageToSingle(JToken json) {
-            param = ParseParam<DamageInfo>(json);
-        }
+    public class DamageToSingle : ParamNode<LevelNumber<DamageInfo>> {
+        public DamageToSingle(JToken json) : base(json) { }
         
         protected override NodeState OnEnter(Context context) {
             if (!context.Param.UidIsValid) {
@@ -26,7 +21,9 @@ namespace Combat.Skill.SkillNode {
             HitInfo hitInfo = new HitInfo {
                 attacker = context.Param.Uid,
                 damage = new Damage {
-                    physical = StatsUtils.GetValue(stats, GetLevelNumber(context, param.Physical)),
+                    physical = StatsUtils.GetValue(stats, GetLevelNumber(context, param).Physical),
+                    magic = StatsUtils.GetValue(stats, GetLevelNumber(context, param).Magic),
+                    @true = StatsUtils.GetValue(stats, GetLevelNumber(context, param).True),
                 }
             };
             actor.OnHit(hitInfo);

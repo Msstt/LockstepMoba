@@ -5,16 +5,13 @@ using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 
 namespace Combat.Skill.SkillNode {
-    public class PlayAnim : Node {
+    public class PlayAnim : ParamNode<PlayAnim.Param> {
         public class Param {
             [LabelText("动画名")]
             public string AnimName;
         }
-        private readonly Param param;
         
-        public PlayAnim(JToken json) {
-            param = ParseParam<Param>(json);
-        }
+        public PlayAnim(JToken json) : base(json) { }
         
         protected override NodeState OnEnter(Context context) {
             AnimCom com = GetCom<AnimCom>(context);

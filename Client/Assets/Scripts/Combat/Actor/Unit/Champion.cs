@@ -36,6 +36,7 @@ namespace Combat.Actor {
             AddComponent<SlotCom>();
             AddComponent<LevelCom>();
             AddComponent<SkillCom>();
+            AddComponent<BuffCom>();
             AddComponent<StatsBarCom>();
         }
     }

@@ -43,17 +43,25 @@
                           {
                             "Type": 6,
                             "Params": {
-                              "Physical": {
-                                "datas": [
-                                  {
-                                    "level": 1,
-                                    "value": {
+                              "datas": [
+                                {
+                                  "level": 0,
+                                  "value": {
+                                    "Physical": {
                                       "Value": "0",
                                       "AttackScale": "1"
+                                    },
+                                    "Magic": {
+                                      "Value": "0",
+                                      "AttackScale": "0"
+                                    },
+                                    "True": {
+                                      "Value": "0",
+                                      "AttackScale": "0"
                                     }
                                   }
-                                ]
-                              }
+                                }
+                              ]
                             },
                             "Child": [
                               {

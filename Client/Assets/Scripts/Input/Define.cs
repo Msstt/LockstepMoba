@@ -5,7 +5,10 @@ using UnityEngine;
 namespace InputSystem {
     public enum CommandType {
         None,
+        [InspectorName("单一位置")]
         SinglePos,
+        [InspectorName("单一目标")]
+        SingleUnit,
     }
     
     public static class Config {

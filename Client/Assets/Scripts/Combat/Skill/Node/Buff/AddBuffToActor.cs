@@ -3,22 +3,23 @@ using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 
 namespace Combat.Skill.SkillNode {
-    public class AbortSkill : ParamNode<AbortSkill.Param> {
+    public class AddBuffToActor : ParamNode<AddBuffToActor.Param> {
         public class Param {
-            [DrawWithUnity]
-            [LabelText("技能类型")]
-            public SkillType SkillList;
+            [LabelText("Buff")]
+            public int BuffId;
         }
         
-        public AbortSkill(JToken json) : base(json) { }
+        public AddBuffToActor(JToken json) : base(json) { }
         
         protected override NodeState OnEnter(Context context) {
-            SkillCom com = GetCom<SkillCom>(context);
+            if (!context.Param.UidIsValid) {
+                return NodeState.Fail;
+            }
+            BuffCom com = ActorUtils.GetCom<BuffCom>(context.Param.Uid);
             if (com == null) {
                 return NodeState.Fail;
             }
-            
-            com.AbortSkill(param.SkillList, context.TreeId);
+            com.AddBuff(param.BuffId, context.ActorUid, context.Level);
             return NodeState.Finish;
         }
         

@@ -1,20 +1,36 @@
 {
   "Id": 1,
-  "Name": null,
+  "Name": "引燃",
   "IsForever": false,
-  "Time": "0",
+  "Time": "5",
   "IsOnly": false,
-  "MaxCount": 0,
+  "MaxCount": 1,
   "Effect": [
     {
       "Type": 1,
       "Params": {
         "Damage": {
-          "Physical": {
-            "datas": []
-          }
+          "datas": [
+            {
+              "level": 1,
+              "value": {
+                "Physical": {
+                  "Value": "0",
+                  "AttackScale": "0"
+                },
+                "Magic": {
+                  "Value": "0",
+                  "AttackScale": "0"
+                },
+                "True": {
+                  "Value": "14",
+                  "AttackScale": "0"
+                }
+              }
+            }
+          ]
         },
-        "Interval": "0.5"
+        "Interval": "1"
       }
     }
   ]

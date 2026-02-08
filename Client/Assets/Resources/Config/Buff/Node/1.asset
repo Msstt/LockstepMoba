@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944a2fd9748f4168890f534ec3e7a832, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  _serializedGraph: '{"type":"Editor.Buff.BuffGraph","nodes":[{"config":{"Id":1},"_position":{"x":100.0,"y":100.0},"$type":"Editor.Buff.RootNode"}],"connections":[],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _serializedGraph: '{"type":"Editor.Buff.BuffGraph","nodes":[{"config":{"Id":1,"Name":"\u5f15\u71c3","Note":"\u53ec\u5524\u5e08\u6280\u80fd-\u5f15\u71c3","Time":{"value":5000000},"MaxCount":1},"_position":{"x":500.0,"y":59.0},"$type":"Editor.Buff.RootNode","$id":"0"},{"param":{"Damage":{"datas":[{"level":1,"value":{"Physical":{},"Magic":{},"True":{"Value":{"value":14000000}}}}]},"Interval":{"value":1000000}},"_position":{"x":509.0,"y":162.0},"$type":"Editor.Buff.Damage","$id":"1"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"Editor.Buff.BuffConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
   _objectReferences: []
   _graphSource:
     _version: 3.21
     _category: 
     _comments: 
-    _translation: {x: 0, y: 0}
+    _translation: {x: 89, y: 90}
     _zoomFactor: 1
   _haltSerialization: 0

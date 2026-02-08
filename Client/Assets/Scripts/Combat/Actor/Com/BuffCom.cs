@@ -58,6 +58,7 @@ namespace Combat.Actor {
                 toMerge.endFrame = GetEndFrame(config);
             } else {
                 Buff.Buff buff = new Buff.Buff(buffId, Actor.Uid, adderId, level);
+                buff.Init();
                 BuffInfo info = new BuffInfo {
                     buff = buff,
                     endFrame = GetEndFrame(config),

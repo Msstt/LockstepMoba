@@ -15,6 +15,10 @@ namespace Combat.Skill {
         RepeatSkill = 11,
         SetCD = 12,
         TeleportToPos = 13,
+        None = 14,
+        AddBuffToActor = 15,
+        IsSameCamp = 16,
+        IsInRange = 17,
     }
     
     public static class NodeFactory {
@@ -46,6 +50,14 @@ namespace Combat.Skill {
                     return new SetCD();
                 case NodeType.TeleportToPos:
                     return new TeleportToPos(config.Params);
+                case NodeType.None:
+                    return new None();
+                case NodeType.AddBuffToActor:
+                    return new AddBuffToActor(config.Params);
+                case NodeType.IsSameCamp:
+                    return new IsSameCamp();
+                case NodeType.IsInRange:
+                    return new IsInRange(config.Params);
                 default:
                     throw new CombatException("Node type doesn't exist: " + config.Type);
             }

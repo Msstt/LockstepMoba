@@ -44,7 +44,12 @@ namespace Combat.Skill {
                 curNode.Exit(context);
                 
                 if (curNode is SelectNode select) {
-                    curNode = GetNextNode(curNode, select.Select(context));
+                    int index = select.Select(context);
+                    if (index == SelectNode.InValidIndex) {
+                        Fail(context);
+                        return NodeState.Fail;
+                    }
+                    curNode = GetNextNode(curNode, index);
                 } else {
                     curNode = GetNextNode(curNode);
                 }

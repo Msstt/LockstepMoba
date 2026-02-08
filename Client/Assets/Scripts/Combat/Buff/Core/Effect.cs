@@ -1,16 +1,17 @@
+using Combat.Actor;
 using Newtonsoft.Json.Linq;
 
 namespace Combat.Buff {
     public interface IEffect {
-        public void OnCreate() { }
-        public void OnRefresh() { }
-        public void OnUpdate() { }
-        public void OnDestroy() { }
+        public void OnCreate();
+        public void OnRefresh();
+        public void OnUpdate();
+        public void OnDestroy();
     }
     
     public abstract class Effect<Param> : IEffect {
-        private Buff buff;
-        private Param param;
+        protected Buff buff;
+        protected Param param;
         
         protected Effect(Buff buff, JToken json) {
             this.buff = buff;
@@ -19,5 +20,12 @@ namespace Combat.Buff {
                 throw new CombatException($"Node ParseParam {typeof(Param).Name} is null");
             }
         }
+        
+        public virtual void OnCreate() { }
+        public virtual void OnRefresh() { }
+        public virtual void OnUpdate() { }
+        public virtual void OnDestroy() { }
+
+        protected T GetLevelNumber<T>(LevelNumber<T> levelNumber) => levelNumber[buff.Level];
     }
 }

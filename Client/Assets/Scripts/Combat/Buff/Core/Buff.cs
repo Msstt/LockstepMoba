@@ -23,6 +23,9 @@ namespace Combat.Buff {
             foreach (EffectConfig effect in config.Effect) {
                 effects.Add(EffectFactory.CreateEffect(this, effect));
             }
+        }
+
+        public void Init() {
             ExecuteEffect((effect) => effect.OnCreate());
             ExecuteEffect((effect) => effect.OnRefresh());
         }

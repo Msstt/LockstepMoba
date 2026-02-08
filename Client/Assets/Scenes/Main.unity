@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsLocalDebug: 1
   ShowUnitRealPos: 0
-  PrintSkillTree: 0
+  PrintSkillTree: 1
 --- !u!114 &854225744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1420,6 +1420,22 @@ PrefabInstance:
       propertyPath: m_simplifiedMesh
       value: 
       objectReference: {fileID: 212588825}
+    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: spawnPoint.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: spawnPoint.Array.data[2].x.value
+      value: 550000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: spawnPoint.Array.data[2].y.value
+      value: 125000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285976220866836964, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: spawnPoint.Array.data[2].z.value
+      value: 1400000000
+      objectReference: {fileID: 0}
     - target: {fileID: 6508610243314606421, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_Mesh
       value: 

@@ -47,4 +47,13 @@ namespace Editor.Skill {
         [OdinTree] public T param;
         protected override object Params => param;
     }
+    
+    public abstract class NoParamSelectNode : SelectNode {
+        protected override object Params => null;
+    }
+    
+    public abstract class ParamSelectNode<T> : SelectNode {
+        [OdinTree] public T param;
+        protected override object Params => param;
+    }
 }

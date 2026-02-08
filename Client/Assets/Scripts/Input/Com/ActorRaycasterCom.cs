@@ -4,7 +4,7 @@ namespace InputSystem {
     public class ActorRaycasterCom : MonoBehaviour {
         private int? uid;
         private static bool hasRay = false;
-        private cakeslice.Outline lastHighlight;
+        private static cakeslice.Outline lastHighlight;
 
         public int Uid {
             get => uid ?? -1;
@@ -25,7 +25,7 @@ namespace InputSystem {
             hasRay = false;
         }
 
-        private void HighlightActor() {
+        private static void HighlightActor() {
             if (lastHighlight != null) {
                 lastHighlight.eraseRenderer = true;
             }
@@ -35,11 +35,9 @@ namespace InputSystem {
                 return;
             }
             int uid = hitInfo.collider?.transform.GetComponent<ActorRaycasterCom>()?.Uid ?? -1;
-            if (ActorUtils.IsSameCamp(uid)) {
-                return;
-            }
             lastHighlight = hitInfo.collider?.transform.parent.Find("Meshes")?.EnsureComponent<cakeslice.Outline>();
             if (lastHighlight != null) {
+                lastHighlight.color = ActorUtils.IsSameCamp(uid) ? 1 : 0;
                 lastHighlight.eraseRenderer = false;
             }
         }

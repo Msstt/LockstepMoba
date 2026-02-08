@@ -15,4 +15,9 @@ namespace Editor.Skill {
     public class RepeatSkill : NoParamNode {
         public override string name => "重复此技能";
     }
+    
+    [Category("通用/空")]
+    public class None : NoParamNode {
+        public override string name => "";
+    }
 }

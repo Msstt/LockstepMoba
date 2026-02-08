@@ -49,6 +49,7 @@
     <Compile Include="Assets/Editor/Buff/EffectNode.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Time.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillDefine.cs" />
+    <Compile Include="Assets/Editor/Skill/Node/Check.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillNode.cs" />
     <Compile Include="Assets/Editor/Skill/Core/NormalConfig.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Assets/Editor/Buff/GenerateBuffDefine.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Buff.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillGraph.cs" />
+    <Compile Include="Assets/Editor/Skill/Node/Buff.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Damage.cs" />
     <Compile Include="Assets/Editor/Buff/NormalConfig.cs" />
     <Compile Include="Assets/Editor/Tools/MultiLaunchCreator.cs" />

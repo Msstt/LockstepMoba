@@ -1,0 +1,52 @@
+{
+  "Id": 4,
+  "Name": "引燃",
+  "SkillType": 8,
+  "InputType": 2,
+  "CD": {
+    "datas": [
+      {
+        "level": 1,
+        "value": "180"
+      }
+    ]
+  },
+  "CanAbortSelf": false,
+  "Node": {
+    "Type": 17,
+    "Params": {
+      "Distance": "60"
+    },
+    "Child": [
+      {
+        "Type": 16,
+        "Params": null,
+        "Child": [
+          {
+            "Type": 14,
+            "Params": null,
+            "Child": []
+          },
+          {
+            "Type": 12,
+            "Params": null,
+            "Child": [
+              {
+                "Type": 15,
+                "Params": {
+                  "BuffId": 1
+                },
+                "Child": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Type": 14,
+        "Params": null,
+        "Child": []
+      }
+    ]
+  }
+}

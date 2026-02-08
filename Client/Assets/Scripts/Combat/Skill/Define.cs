@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Combat.Skill {
     public enum SkillSlot {
@@ -14,10 +15,16 @@ namespace Combat.Skill {
     
     [Flags] [Serializable]
     public enum SkillType {
+        [InspectorName("无")]
         None = 0,
+        [InspectorName("移动")]
         Move = 1 << 0,
+        [InspectorName("普通攻击")]
         NormalAttack = 1 << 1,
+        [InspectorName("闪现")]
         Flash = 1 << 2,
+        [InspectorName("脱手")]
+        Sell = 1 << 3,
     }
 
     public static class Field {

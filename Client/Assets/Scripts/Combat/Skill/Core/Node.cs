@@ -76,4 +76,18 @@ namespace Combat.Skill {
             return param;
         }
     }
+
+    public abstract class ParamNode<T> : Node {
+        protected T param;
+        protected ParamNode(JToken json) {
+            param = ParseParam<T>(json);
+        }
+    }
+    
+    public abstract class ParamSelectNode<T> : SelectNode {
+        protected T param;
+        protected ParamSelectNode(JToken json) {
+            param = ParseParam<T>(json);
+        }
+    }
 }
