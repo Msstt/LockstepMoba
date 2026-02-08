@@ -63,7 +63,7 @@ namespace Editor.Buff {
             
             OnExportEnd?.Invoke();
             
-            Debug.Log("技能导出成功: " + config.Id);
+            Debug.Log("Buff导出成功: " + config.Id);
         }
 
         public static void ExportError(string errorCode) {

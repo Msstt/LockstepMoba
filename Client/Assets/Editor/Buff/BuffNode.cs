@@ -2,13 +2,12 @@ using System;
 using Combat.Buff;
 using Newtonsoft.Json.Linq;
 using ParadoxNotion;
-using Node = NodeCanvas.Framework.Node;
 using NodeCanvas.Framework;
 
 namespace Editor.Buff {
     public class BuffConnection : Connection { }
     
-    public abstract class BuffNode : Node {
+    public abstract class BuffNode : NodeCanvas.Framework.Node {
         public override Alignment2x2 commentsAlignment => Alignment2x2.Bottom;
         public override Alignment2x2 iconAlignment => Alignment2x2.Top;
         public override bool canSelfConnect => false;

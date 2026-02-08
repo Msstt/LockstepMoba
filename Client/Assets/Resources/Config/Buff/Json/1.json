@@ -1,5 +1,10 @@
 {
-  "Id": 0,
+  "Id": 1,
+  "Name": null,
+  "IsForever": false,
+  "Time": "0",
+  "IsOnly": false,
+  "MaxCount": 0,
   "Effect": [
     {
       "Type": 1,
@@ -9,7 +14,7 @@
             "datas": []
           }
         },
-        "Interval": "0"
+        "Interval": "0.5"
       }
     }
   ]

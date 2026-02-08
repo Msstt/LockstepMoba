@@ -774,7 +774,7 @@ namespace NodeCanvas.Framework
         }
 
         ///<summary>Get all nodes of a specific type</summary>
-        public IEnumerable<T> GetAllNodesOfType<T>() where T : Node {
+        public IEnumerable<T> GetAllNodesOfType<T>() {
             return allNodes.OfType<T>();
         }
 

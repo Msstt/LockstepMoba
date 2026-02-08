@@ -9,6 +9,8 @@ namespace Editor.Buff {
         
         [LabelText("名称")]
         public string Name;
+        [LabelText("备注")]
+        public string Note;
         
         [LabelText("是否是永久 BUFF")]
         public bool IsForever;

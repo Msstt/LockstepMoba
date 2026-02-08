@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944a2fd9748f4168890f534ec3e7a832, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  _serializedGraph: '{"type":"Editor.Buff.BuffGraph","nodes":[{"config":{},"_position":{"x":339.0,"y":129.0},"$type":"Editor.Buff.RootNode","$id":"0"},{"param":{"Damage":{"Physical":{"datas":[]}}},"_position":{"x":343.0,"y":221.0},"$type":"Editor.Buff.Damage","$id":"1"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"Editor.Buff.BuffConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _serializedGraph: '{"type":"Editor.Buff.BuffGraph","nodes":[{"config":{"Id":1},"_position":{"x":100.0,"y":100.0},"$type":"Editor.Buff.RootNode"}],"connections":[],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
   _objectReferences: []
   _graphSource:
     _version: 3.21

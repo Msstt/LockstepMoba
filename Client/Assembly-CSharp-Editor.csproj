@@ -51,8 +51,10 @@
     <Compile Include="Assets/Editor/Skill/Core/SkillDefine.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillNode.cs" />
     <Compile Include="Assets/Editor/Skill/Core/NormalConfig.cs" />
+    <Compile Include="Assets/Editor/NodeEditor/NodeEditor.cs" />
     <Compile Include="Assets/Editor/Buff/BuffNode.cs" />
     <Compile Include="Assets/Editor/Buff/GenerateBuffDefine.cs" />
+    <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Buff.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillGraph.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Damage.cs" />
     <Compile Include="Assets/Editor/Buff/NormalConfig.cs" />
@@ -62,9 +64,9 @@
     <Compile Include="Assets/Editor/Skill/Node/Move.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Anim.cs" />
     <Compile Include="Assets/Editor/Navmesh/NavmeshExporter.cs" />
+    <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Skill.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Normal.cs" />
     <Compile Include="Assets/Editor/Network/GenerateMessageCode.cs" />
-    <Compile Include="Assets/Editor/Skill/Core/SkillEditor.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Cost.cs" />
     <None Include="Assets/Editor/Network/Template/MessageDef.txt" />
     <None Include="Assets/Editor/Buff/Template/EffectDefine.txt" />

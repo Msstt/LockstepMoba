@@ -20,7 +20,7 @@ namespace Editor.Skill {
         public SkillData(SkillConfig config) {
             Id = config.Id;
             Name = config.Name;
-            Type = (SkillType)config.SkillType;
+            Type = config.SkillType;
         }
     }
     

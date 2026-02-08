@@ -10,7 +10,6 @@ namespace Editor.Skill {
         
         [LabelText("名称")]
         public string Name;
-        
         [LabelText("备注")]
         public string Note;
         
