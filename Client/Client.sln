@@ -15,9 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OEBIF", "OEBIF.csproj", "{1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeCanvas.OdinTree", "NodeCanvas.OdinTree.csproj", "{27f0e4de-3713-5194-4b95-a4e1b9863fda}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayTest", "PlayTest.csproj", "{d3f32805-4558-1f78-24d4-05a7b95f67a6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests.csproj", "{d378aee9-cea8-8001-3ac1-e1ca339482a9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayTest", "PlayTest.csproj", "{d3f32805-4558-1f78-24d4-05a7b95f67a6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedStudio.OdinTreeNodeCanvas", "RedStudio.OdinTreeNodeCanvas.csproj", "{ff5aee3b-3455-98b2-c6a3-1036a975f0f7}"
 EndProject
@@ -44,10 +44,10 @@ Global
 		{191582db-989d-dfc3-8dd7-203ae2e2b786}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27f0e4de-3713-5194-4b95-a4e1b9863fda}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27f0e4de-3713-5194-4b95-a4e1b9863fda}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{d3f32805-4558-1f78-24d4-05a7b95f67a6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{d3f32805-4558-1f78-24d4-05a7b95f67a6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{d378aee9-cea8-8001-3ac1-e1ca339482a9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{d378aee9-cea8-8001-3ac1-e1ca339482a9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d3f32805-4558-1f78-24d4-05a7b95f67a6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d3f32805-4558-1f78-24d4-05a7b95f67a6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ff5aee3b-3455-98b2-c6a3-1036a975f0f7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ff5aee3b-3455-98b2-c6a3-1036a975f0f7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{f9915a1b-8fee-545a-be3e-0bed3e51cf02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

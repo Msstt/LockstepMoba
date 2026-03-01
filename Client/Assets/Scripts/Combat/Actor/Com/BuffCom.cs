@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
 using Combat.Buff;
+using Framework;
 
 namespace Combat.Actor {
     public class BuffCom : Com {
@@ -11,39 +10,28 @@ namespace Combat.Actor {
             public int endFrame;
         }
         
-        private Dictionary<int, List<BuffInfo>> buffs = new Dictionary<int, List<BuffInfo>>();
-        private List<BuffInfo> toRemoveInfo = new List<BuffInfo>();
-        private List<int> toRemoveBuff = new List<int>();
+        private SafeDictionary<int, SafeList<BuffInfo>> buffs = new SafeDictionary<int, SafeList<BuffInfo>>();
         
         public override void Update(int frame) {
-            toRemoveBuff.Clear();
             foreach (var (buffId, list) in buffs) {
-                toRemoveInfo.Clear();
                 foreach (var info in list) {
                     if (info.endFrame != InValidEndFrame && info.endFrame <= frame) {
                         info.buff.Dispose();
-                        toRemoveInfo.Add(info);
+                        list.Remove(info);
                     }
                 }
-                foreach (var info in toRemoveInfo) {
-                    list.Remove(info);
-                }
-
-                if (!list.Any()) {
-                    toRemoveBuff.Add(buffId);
+                if (list.Count == 0) {
+                    buffs.Remove(buffId);
                 }
                 
                 foreach (var info in list) {
                     info.buff.Update();
                 }
             }
-            foreach (var id in toRemoveBuff) {
-                buffs.Remove(id);
-            }
         }
 
         public override void Destroy() {
-            foreach (var list in buffs.Values) {
+            foreach (var (_, list) in buffs) {
                 foreach (var info in list) {
                     info.buff.Dispose();
                 }
@@ -64,7 +52,7 @@ namespace Combat.Actor {
                     endFrame = GetEndFrame(config),
                 };
                 if (!buffs.ContainsKey(config.Id)) {
-                    buffs[config.Id] = new List<BuffInfo>();
+                    buffs[config.Id] = new SafeList<BuffInfo>();
                 }
                 buffs[config.Id].Add(info);
             }
@@ -72,7 +60,7 @@ namespace Combat.Actor {
 
         private BuffInfo GetToMerge(BuffConfig config, int adderId) {
             if (config.IsOnly) {
-                return buffs.TryGetValue(config.Id, out var list) ? list.First() : null;
+                return buffs.ContainsKey(config.Id) ? buffs[config.Id].First() : null;
             } else {
                 if (buffs.ContainsKey(config.Id)) {
                     foreach (var info in buffs[config.Id]) {

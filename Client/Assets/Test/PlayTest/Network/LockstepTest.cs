@@ -36,7 +36,7 @@ public class LockstepTest {
     }
     
     [UnityTest]
-    public IEnumerator LockstepTest1() {
+    public IEnumerator Test1() {
         while (true) {
             GameMgr.Instance.Update();
             yield return null;

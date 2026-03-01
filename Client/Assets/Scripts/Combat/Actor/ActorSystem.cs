@@ -12,8 +12,7 @@ namespace Combat.Actor {
         private int maxUid = 0;
         
         // 玩家 uid 与 角色系统 uid 一致
-        private SortedDictionary<int, Actor> actors = new SortedDictionary<int, Actor>();
-        private List<int> toRemove = new List<int>();
+        private SafeDictionary<int, Actor> actors = new SafeDictionary<int, Actor>();
 
         private Dictionary<int, CampType> camp = new Dictionary<int, CampType>();
         
@@ -30,20 +29,13 @@ namespace Combat.Actor {
         }
         
         public void FrameUpdate(int frame) {
-            foreach (var actor in actors.Values) {
+            foreach (var (_, actor) in actors) {
                 actor.Update(frame);
             }
-            foreach (var uid in toRemove) {
-                if (actors.TryGetValue(uid, out Actor actor)) {
-                    actor.Clear();
-                    actors.Remove(uid);
-                }
-            }
-            toRemove.Clear();
         }
 
         public void Update() {
-            foreach (var actor in actors.Values) {
+            foreach (var (_, actor) in actors) {
                 actor.RenderUpdate();
             }
         }
@@ -70,12 +62,14 @@ namespace Combat.Actor {
         }
 
         public Actor GetActor(int uid) {
-            return actors.GetValueOrDefault(uid, null);
+            return actors[uid];
         }
 
-        // 异步删除
         public void RemoveActor(int uid) {
-            toRemove.Add(uid);
+            if (!actors.ContainsKey(uid)) {
+                return;
+            }
+            actors.Remove(uid);
         }
         
         private void SkillHandler(SortedDictionary<Uid, skill_input> inputs) {

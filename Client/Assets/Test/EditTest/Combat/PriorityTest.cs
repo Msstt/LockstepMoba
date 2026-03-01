@@ -4,14 +4,14 @@ using NUnit.Framework;
 
 public class PriorityTest {
     [Test]
-    public void PriorityTest1() {
+    public void Test1() {
         Priority p1 = new Priority(10);
         p1.AddModifier(Priority.ModifierType.Add, 10);
         Assert.AreEqual(p1.Value, 20);
     }
     
     [Test]
-    public void PriorityTest2() {
+    public void Test2() {
         Priority p1 = new Priority(10);
         p1.AddModifier(Priority.ModifierType.PercentAdd, 10);
         p1.AddModifier(Priority.ModifierType.PercentAdd, 10);
@@ -19,7 +19,7 @@ public class PriorityTest {
     }
     
     [Test]
-    public void PriorityTest3() {
+    public void Test3() {
         Priority p1 = new Priority(10);
         p1.AddModifier(Priority.ModifierType.PercentMult, 100);
         p1.AddModifier(Priority.ModifierType.PercentMult, 100);
@@ -27,7 +27,7 @@ public class PriorityTest {
     }
     
     [Test]
-    public void PriorityTest4() {
+    public void Test4() {
         Priority p1 = new Priority(10);
         p1.AddModifier(Priority.ModifierType.PercentMult, 100);
         p1.AddModifier(Priority.ModifierType.Add, 10);
@@ -37,7 +37,7 @@ public class PriorityTest {
     }
     
     [Test]
-    public void PriorityTest5() {
+    public void Test5() {
         LimitedPriority p1 = new LimitedPriority(20);
         p1.AddModifier(Priority.ModifierType.Add, 20, LimitedPriority.ModifierType.Constant);
         Assert.AreEqual(p1.Value, 20);

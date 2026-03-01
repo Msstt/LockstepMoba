@@ -5,7 +5,7 @@ using Framework;
 
 public class PriorityQueueTest {
     [Test]
-    public void PriorityQueueTest1() {
+    public void Test1() {
         var queue = new PriorityQueue<string, int>();
         queue.Enqueue("2", 2);
         queue.Enqueue("4", 4);
@@ -27,7 +27,7 @@ public class PriorityQueueTest {
     }
     
     [Test]
-    public void PriorityQueueTest2() {
+    public void Test2() {
         var queue = new PriorityQueue<string, int>(Comparer<int>.Create((x, y) => y - x));
         queue.Enqueue("1", 1);
         queue.Enqueue("2", 2);
@@ -40,7 +40,7 @@ public class PriorityQueueTest {
     }
     
     [Test]
-    public void PriorityQueueTest3() {
+    public void Test3() {
         var queue = new PriorityQueue<string, int>();
         queue.Enqueue("1", 1);
         queue.Dequeue(out _, out _);

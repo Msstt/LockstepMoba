@@ -3,14 +3,14 @@ using NUnit.Framework;
 
 public class FixedTest {
     [Test]
-    public void FixedTest1() {
+    public void Test1() {
         float a = 1.2f, b = 3.4f;
         Assert.IsTrue(FloatF.Abs(a.ToFloatF() + b.ToFloatF() - (a + b).ToFloatF()) < FloatF.eps);
     }
     
     [Test]
-    public void FixedTest2() {
+    public void Test2() {
         float a = 123456.123456f;
-        Assert.IsTrue(FloatF.Abs(FloatF.Sqrt(a.ToFloatF() - Math.Sqrt(a).ToFloatF())) < FloatF.eps);
+        Assert.IsTrue(FloatF.Abs(FloatF.Sqrt(a.ToFloatF()) - Math.Sqrt(a).ToFloatF()) < FloatF.eps);
     }
 }

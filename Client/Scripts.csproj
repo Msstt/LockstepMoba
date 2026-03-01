@@ -96,6 +96,7 @@
     <Compile Include="Assets/Scripts/Input/Command/ICommand.cs" />
     <Compile Include="Assets/Scripts/StartUp/GMTool.cs" />
     <Compile Include="Assets/Scripts/UI/UIUtils.cs" />
+    <Compile Include="Assets/Scripts/Framework/DS/SafeDictionary.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Damage.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Assets/Scripts/Combat/CombatUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Check/IsSameCamp.cs" />
     <Compile Include="Assets/Scripts/Combat/Uid.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/SkillSystem2.cs" />
     <Compile Include="Assets/Scripts/Tools/TimeUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/FrameMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Fixed/Vector3F.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Assets/Scripts/Tools/Geo/GeoUtils.cs" />
     <Compile Include="Assets/Scripts/Navmesh/NavmeshMapInfo.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Navmesh.cs" />
+    <Compile Include="Assets/Scripts/Framework/DS/SafeList.cs" />
     <Compile Include="Assets/Scripts/Input/Define.cs" />
     <Compile Include="Assets/Scripts/Input/InputSystem.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/InputMsg.cs" />

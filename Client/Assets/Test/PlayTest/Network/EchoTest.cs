@@ -15,7 +15,7 @@ public class EchoTest {
     }
     
     [UnityTest]
-    public IEnumerator EchoTest1() {
+    public IEnumerator Test1() {
         int x = 1;
         while (true) {
             NetworkUtils.Send(MessageDef.echo_test_c2s, new echo_test_c2s() {

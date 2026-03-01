@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Framework;
 
 namespace Combat.Skill {
     public class SkillSystem : ISkillSystem {
         private static readonly int InvalidSkillId = -1;
         
         private SortedDictionary<int, Tree> trees = new SortedDictionary<int, Tree>();
-        private SortedDictionary<int, List<Context>> contexts = new SortedDictionary<int, List<Context>>();
-        private List<Context> toRemove = new List<Context>();
+        private SortedDictionary<int, SafeDictionary<int, Context>> contexts = new SortedDictionary<int, SafeDictionary<int, Context>>();
         private Queue<(int, int, int, SkillParam)> toExecuteAsync = new Queue<(int, int, int, SkillParam)>();
         private Queue<(int, SkillType, int)> toAbortAsync = new Queue<(int, SkillType, int)>();
         
@@ -25,16 +25,12 @@ namespace Combat.Skill {
             }
 
             lockTree = true;
-            foreach (var (skillId, list) in contexts) {
-                toRemove.Clear();
-                foreach (var context in list) {
+            foreach (var (skillId, dict) in contexts) {
+                foreach (var (uid, context) in dict) {
                     NodeState ret = trees[skillId].Execute(context);
                     if (ret != NodeState.Continue) {
-                        toRemove.Add(context);
+                        dict.Remove(uid);
                     }
-                }
-                foreach (var context in toRemove) {
-                    list.Remove(context);
                 }
             }
             lockTree = false;
@@ -52,7 +48,7 @@ namespace Combat.Skill {
             }
 
             Context context = new Context(actorUid, skillId, level, param, GameMgr.Instance.Frame);
-            contexts[skillId].Add(context);
+            contexts[skillId].Add(actorUid, context);
             // trees[skillId].Execute(context);
         }
 
@@ -62,7 +58,7 @@ namespace Combat.Skill {
             Context context = GetContext(actorUid, skillId);
             if (context != null) {
                 trees[skillId].Fail(context);
-                contexts[skillId].Remove(context);
+                contexts[skillId].Remove(context.ActorUid);
             }
         }
 
@@ -93,16 +89,11 @@ namespace Combat.Skill {
             }
             
             trees[skillId] = new Tree(skillId);
-            contexts[skillId] = new List<Context>();
+            contexts[skillId] = new SafeDictionary<int, Context>();
         }
         
         private Context GetContext(int actorUid, int skillId) {
-            foreach (var context in contexts[skillId]) {
-                if (context.ActorUid == actorUid) {
-                    return context;
-                }
-            }
-            return null;
+            return contexts[skillId][actorUid];
         }
 
         public SkillType GetSkillType(int actorUid, int skillId) {

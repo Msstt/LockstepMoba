@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e0f67aacdec4738b45b670bace48b6, type: 3}
   m_Name: 4
   m_EditorClassIdentifier: 
-  _serializedGraph: '{"type":"Editor.Skill.SkillGraph","nodes":[{"config":{"Id":4,"Name":"\u5f15\u71c3","Note":"\u53ec\u5524\u5e08\u6280\u80fd-\u5f15\u71c3","SkillType":8,"InputType":2,"CD":{"datas":[{"level":1,"value":{"value":180000000}}]}},"_position":{"x":448.0,"y":126.0},"$type":"Editor.Skill.RootNode","$id":"0"},{"_position":{"x":441.0,"y":195.0},"$type":"Editor.Skill.IsSameCamp","$id":"1"},{"_position":{"x":314.0,"y":268.0},"$type":"Editor.Skill.None","$id":"2"},{"param":{"BuffId":1},"_position":{"x":582.0,"y":268.0},"$type":"Editor.Skill.Buff+AddBuffToActor","$id":"3"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"3"},"$type":"Editor.Skill.SkillConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _serializedGraph: '{"type":"Editor.Skill.SkillGraph","nodes":[{"config":{"Id":4,"Name":"\u5f15\u71c3","Note":"\u53ec\u5524\u5e08\u6280\u80fd-\u5f15\u71c3","SkillType":8,"InputType":2,"CD":{"datas":[{"level":1,"value":{"value":180000000}}]}},"_position":{"x":448.0,"y":126.0},"$type":"Editor.Skill.RootNode","$id":"0"},{"param":{"Distance":{"value":60000000}},"_position":{"x":450.0,"y":183.0},"$type":"Editor.Skill.IsInRange","$id":"1"},{"_position":{"x":449.0,"y":242.0},"$type":"Editor.Skill.IsSameCamp","$id":"2"},{"_position":{"x":329.0,"y":242.0},"$type":"Editor.Skill.None","$id":"3"},{"_position":{"x":456.0,"y":321.0},"$type":"Editor.Skill.SetCD","$id":"4"},{"param":{"BuffId":1},"_position":{"x":450.0,"y":398.0},"$type":"Editor.Skill.Buff+AddBuffToActor","$id":"5"},{"_position":{"x":572.0,"y":182.0},"$type":"Editor.Skill.None","$id":"6"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"6"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"4"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"5"},"$type":"Editor.Skill.SkillConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
   _objectReferences: []
   _graphSource:
     _version: 3.21
     _category: 
     _comments: 
-    _translation: {x: 0, y: 0}
+    _translation: {x: -13, y: -81}
     _zoomFactor: 1
   _haltSerialization: 0

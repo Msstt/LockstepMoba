@@ -136,11 +136,12 @@ namespace Combat.Actor {
         }
 
         private void OnDead() {
+            Clear();
             IActorSystem system = GameMgr.Instance.GetSystem<IActorSystem>();
             system?.RemoveActor(Uid);
         }
         
-        public void Clear() {
+        private void Clear() {
             RemoveAllComponent();
             GameObject.Destroy(go);
             GameObject.Destroy(debugPoint);
