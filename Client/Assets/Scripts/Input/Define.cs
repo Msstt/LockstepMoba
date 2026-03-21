@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace InputSystem {
     public enum CommandType {
+        [InspectorName("空")]
         None,
         [InspectorName("单一位置")]
         SinglePos,

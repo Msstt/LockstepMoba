@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Combat.Actor;
+using Combat.Area;
 using Combat.Buff;
 using Combat.Skill;
 using Framework;
@@ -41,5 +42,8 @@ namespace Combat {
         
         public static readonly ConfigCache<BuffConfig> Buff = new(
             (id) => JsonHelper.LoadFromRes("Config/Buff/Json/" + id, out BuffConfig config) ? config : null);
+        
+        public static readonly ConfigCache<AreaConfig> Area = new(
+            (id) => JsonHelper.LoadFromRes("Config/Area/Json/" + id, out AreaConfig config) ? config : null);
     }
 }

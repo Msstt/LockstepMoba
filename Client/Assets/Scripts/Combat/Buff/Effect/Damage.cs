@@ -1,7 +1,6 @@
 using Combat.Actor;
 using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
-using UnityEngine;
 
 namespace Combat.Buff.Effect {
     public class Damage : Effect<Damage.Param> {

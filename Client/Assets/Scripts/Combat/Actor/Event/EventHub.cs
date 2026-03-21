@@ -3,6 +3,6 @@ using Framework;
 
 namespace Combat.Actor {
     public class EventHub {
-        public SafeEvent OnChangePos { get; private set; } = new SafeEvent();
+        public SafeEvent<Vector3F> OnChangePos { get; private set; } = new SafeEvent<Vector3F>();
     };
 }

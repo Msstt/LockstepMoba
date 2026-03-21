@@ -39,7 +39,7 @@ namespace InputSystem {
             KeyCode key = Config.Key[slot];
             switch (type) {
                 case CommandType.None:
-                    commands[(int)slot] = new None(); break;
+                    commands[(int)slot] = new None(key); break;
                 case CommandType.SinglePos:
                     commands[(int)slot] = new SinglePos(key); break;
                 case CommandType.SingleUnit:

@@ -1,0 +1,34 @@
+{
+  "Id": 5,
+  "Name": "治疗术",
+  "SkillType": 8,
+  "InputType": 0,
+  "CD": {
+    "datas": [
+      {
+        "level": 1,
+        "value": "0"
+      }
+    ]
+  },
+  "CanAbortSelf": false,
+  "Node": {
+    "Type": 12,
+    "Params": null,
+    "Child": [
+      {
+        "Type": 18,
+        "Params": {
+          "AreaId": 1,
+          "Offset": {
+            "x": "0",
+            "y": "0",
+            "z": "0"
+          },
+          "Direction": "0"
+        },
+        "Child": []
+      }
+    ]
+  }
+}

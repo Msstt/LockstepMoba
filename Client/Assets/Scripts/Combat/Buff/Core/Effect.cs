@@ -17,7 +17,7 @@ namespace Combat.Buff {
             this.buff = buff;
             param = json.ToObject<Param>();
             if (param == null) {
-                throw new CombatException($"Node ParseParam {typeof(Param).Name} is null");
+                throw new CombatException($"Buff Effect ParseParam {typeof(Param).Name} is null");
             }
         }
         

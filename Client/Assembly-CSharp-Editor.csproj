@@ -65,6 +65,7 @@
     <Compile Include="Assets/Editor/Skill/Core/SkillConnection.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Move.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Anim.cs" />
+    <Compile Include="Assets/Editor/Skill/Node/Area.cs" />
     <Compile Include="Assets/Editor/Navmesh/NavmeshExporter.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Skill.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Normal.cs" />

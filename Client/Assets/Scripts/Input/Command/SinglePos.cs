@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace InputSystem.Command {
     public class SinglePos : Command {
-        private KeyCode key;
+        private readonly KeyCode key;
         private Vector3F? targetPos;
         
         public SinglePos(KeyCode key) {

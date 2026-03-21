@@ -9,14 +9,5 @@ namespace Combat.Actor {
                 OnDead();
             }
         }
-
-        public HitInfo CreateAttackHitInfo() {
-            return new HitInfo {
-                attacker = Uid,
-                damage = new Damage {
-                    physical = Stats.Attack,
-                },
-            };
-        }
     }
 }

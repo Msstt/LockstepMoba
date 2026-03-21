@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace InputSystem.Command {
     public class SingleUnit : Command {
-        private KeyCode key;
+        private readonly KeyCode key;
         private int? targetUid;
         
         public SingleUnit(KeyCode key) {

@@ -1,0 +1,29 @@
+{
+  "Id": 1,
+  "Name": "治疗",
+  "Prefab": "",
+  "Time": "0",
+  "ShapeType": 1,
+  "ShapeParam": {
+    "radius": "85"
+  },
+  "Effect": [
+    {
+      "Type": 1,
+      "Params": {
+        "Heal": {
+          "datas": [
+            {
+              "level": 1,
+              "value": {
+                "Value": "50",
+                "AttackScale": "0"
+              }
+            }
+          ]
+        },
+        "Interval": "1"
+      }
+    }
+  ]
+}

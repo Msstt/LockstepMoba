@@ -1,3 +1,5 @@
+// 技能树节点：对单个目标造成伤害
+
 using Combat.Actor;
 using Newtonsoft.Json.Linq;
 

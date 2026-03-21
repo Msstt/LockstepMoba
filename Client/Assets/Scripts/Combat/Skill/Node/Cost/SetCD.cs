@@ -1,3 +1,5 @@
+// 技能树节点：设置技能CD
+
 using Combat.Actor;
 
 namespace Combat.Skill.SkillNode {

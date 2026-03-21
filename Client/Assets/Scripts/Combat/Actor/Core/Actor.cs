@@ -108,6 +108,7 @@ namespace Combat.Actor {
             if (updateGo && go != null) {
                 go.transform.position = new Vector3(pos.x.ToFloat(), go.transform.position.y, pos.z.ToFloat());
             }
+            Event.OnChangePos.Send(pos);
 
             debugPoint.transform.position = pos.ToVector3();
         }
@@ -141,6 +142,8 @@ namespace Combat.Actor {
             RemoveAllComponent();
             GameObject.Destroy(go);
             GameObject.Destroy(debugPoint);
+            
+            NavmeshUtils.UnRegisterUnit(Uid, Event.OnChangePos);
         }
     }
 }

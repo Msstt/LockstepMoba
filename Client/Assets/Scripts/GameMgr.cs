@@ -44,6 +44,7 @@ public class GameMgr : Singleton<GameMgr> {
         Register<Combat.ICombatSystem, Combat.CombatSystem>();
         Register<Combat.Actor.IActorSystem, Combat.Actor.ActorSystem>();
         Register<Combat.Skill.ISkillSystem, Combat.Skill.SkillSystem>();
+        Register<Combat.Area.IAreaSystem, Combat.Area.AreaSystem>();
         Register<Framework.UI.IUISystem, Framework.UI.UISystem>();
 
         if (driver == null) {
@@ -127,7 +128,7 @@ public class GameMgr : Singleton<GameMgr> {
             Uid = 1,
             ChampionId = 1,
             Camp = 0,
-            Skill = { 4, 3 },
+            Skill = { 5, 4 },
         });
         msg.Players.Add(new battle_start_s2c.Types.player_info {
             Uid = 2,

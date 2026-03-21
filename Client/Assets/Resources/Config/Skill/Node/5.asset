@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e0f67aacdec4738b45b670bace48b6, type: 3}
+  m_Name: 5
+  m_EditorClassIdentifier: 
+  _serializedGraph: '{"type":"Editor.Skill.SkillGraph","nodes":[{"config":{"Id":5,"Name":"\u6cbb\u7597\u672f","Note":"\u53ec\u5524\u5e08\u6280\u80fd-\u6cbb\u7597\u672f","SkillType":8,"CD":{"datas":[{"level":1,"value":{"value":180000000}}]}},"_position":{"x":492.0,"y":116.0},"$type":"Editor.Skill.RootNode","$id":"0"},{"param":{"AreaId":1},"_position":{"x":494.0,"y":199.0},"$type":"Editor.Skill.CreateAreaAtSelf","$id":"1"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"Editor.Skill.SkillConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _objectReferences: []
+  _graphSource:
+    _version: 3.21
+    _category: 
+    _comments: 
+    _translation: {x: 0, y: 0}
+    _zoomFactor: 1
+  _haltSerialization: 0

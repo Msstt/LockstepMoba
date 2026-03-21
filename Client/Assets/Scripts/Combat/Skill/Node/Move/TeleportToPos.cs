@@ -1,3 +1,5 @@
+// 技能树节点：瞬移到指定位置
+
 using Newtonsoft.Json.Linq;
 
 namespace Combat.Skill.SkillNode {

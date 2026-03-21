@@ -13,6 +13,8 @@ namespace Combat.Actor {
             Champion actor = new Champion(championId, system.GetUid(), go, camp);
             actor.SetStatusByConfig(config);
             actor.BindCom();
+            
+            NavmeshUtils.RegisterUnit(actor.Uid, (int)ActorType.Champion, actor.Pos, actor.Event.OnChangePos);
             return actor;
         }
         

@@ -75,6 +75,7 @@
     <Compile Include="Assets/Scripts/Framework/Tools/StringExtensions.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/MockLockStep.cs" />
     <Compile Include="Assets/Scripts/StartUp/Main.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/Core/Effect.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.ActorByPath.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/NodeUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/NodeDefine.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Assets/Scripts/Combat/Buff/EffectDefine.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/TeleportToPos.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/FPSDrawer.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/Shape/Circle.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/BuffCom.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/Log.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/PriorityQueue.cs" />
@@ -98,9 +100,12 @@
     <Compile Include="Assets/Scripts/UI/UIUtils.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/SafeDictionary.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillUtils.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/Core/Area.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Damage.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/AreaUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/RepeatSkill.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/Effect/Heal.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Effect.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.cs" />
@@ -112,6 +117,7 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Check/IsSameCamp.cs" />
     <Compile Include="Assets/Scripts/Combat/Uid.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillSystem2.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/Core/Config.cs" />
     <Compile Include="Assets/Scripts/Tools/TimeUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/FrameMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Fixed/Vector3F.cs" />
@@ -137,6 +143,7 @@
     <Compile Include="Assets/Scripts/Framework/Tools/ThreadMgr.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/LockStep.cs" />
     <Compile Include="Assets/Scripts/Combat/MapConfig.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/IAreaSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/MoveNode.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Raycast/GetTIdByPoint.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/WorldUI/UISystem.cs" />
@@ -150,15 +157,18 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Com/AnimCom.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Reader.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Buff.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.OnHeal.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/FrameMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/HitInfo.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Event/EventHub.cs" />
     <Compile Include="Assets/Scripts/Input/Command/SinglePos.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Raycaster.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/GameObject/GameObjectExtensions.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/ShapeType.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.cs" />
     <Compile Include="Assets/Scripts/Framework/Event/SafeEvent.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/Core/Shape.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UIPanel.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Tree.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Config.cs" />
@@ -169,6 +179,7 @@
     <Compile Include="Assets/Scripts/Framework/DS/SafeList.cs" />
     <Compile Include="Assets/Scripts/Input/Define.cs" />
     <Compile Include="Assets/Scripts/Input/InputSystem.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/EffectDefine.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/InputMsg.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Connection.cs" />
     <Compile Include="Assets/Scripts/Combat/ICombatSystem.cs" />
@@ -184,11 +195,13 @@
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Damage/DamageToSingle.cs" />
     <Compile Include="Assets/Scripts/UI/Com/UIBarCom.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Area/CreateAreaAtSelf.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
     <Compile Include="Assets/Scripts/Combat/Common/Priority.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Cost/SetCD.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Config.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Check/IsInRange.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/AreaSystem.cs" />
     <Compile Include="Assets/Scripts/Input/Command/SingleUnit.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/INetwork.cs" />
     <Compile Include="Assets/Scripts/Combat/Common/LimitedPriority.cs" />

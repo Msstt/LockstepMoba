@@ -1,3 +1,5 @@
+// 技能树节点：请求占用槽位
+
 using System;
 using Combat.Actor;
 using Newtonsoft.Json.Linq;

@@ -1,3 +1,5 @@
+// 技能树节点：给目标添加Buff
+
 using Combat.Actor;
 using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;

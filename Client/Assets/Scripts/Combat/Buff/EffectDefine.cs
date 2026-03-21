@@ -11,7 +11,7 @@ namespace Combat.Buff {
                 case EffectType.Damage:
                     return new Damage(buff, config.Params);
                 default:
-                    throw new CombatException("Effect type doesn't exist: " + config.Type);
+                    throw new CombatException("Buff Effect type doesn't exist: " + config.Type);
             }
         }
     }

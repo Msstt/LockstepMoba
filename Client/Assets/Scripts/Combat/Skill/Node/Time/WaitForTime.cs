@@ -1,3 +1,5 @@
+// 技能树节点：等待指定时间
+
 using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 

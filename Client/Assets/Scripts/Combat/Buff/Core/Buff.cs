@@ -42,8 +42,8 @@ namespace Combat.Buff {
         }
 
         public void Dispose() {
-            effects.Clear();
             ExecuteEffect((effect) => effect.OnDestroy());
+            effects.Clear();
         }
         
         private void ExecuteEffect(Action<IEffect> func) {
