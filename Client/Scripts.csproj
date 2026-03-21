@@ -129,6 +129,7 @@
     <Compile Include="Assets/Scripts/Network/Message/Proto/BattleMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/VariantMap.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/DebugMgr.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/Core/UnitRaycaster.cs" />
     <Compile Include="Assets/Scripts/Tools/ResUtils.cs" />
     <Compile Include="Assets/Scripts/Input/IInputSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.OnHit.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Assets/Scripts/Framework/Tools/GameObject/GoUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/BattleMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/IUISystem.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Unit/ActorType.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/ISkillSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Stats/Info.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Attribute.cs" />

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Framework;
 using Navmesh;
+using UnityEditor.IMGUI.Controls;
 
 public static class NavmeshUtils {
     public static NavmeshMapInfo Config => GameMgr.Instance.GetSystem<INavmesh>()?.MapInfo;
@@ -27,5 +29,24 @@ public static class NavmeshUtils {
     
     public static Vector3F RaycastInSurface(FloatF radius, Vector3F start, Vector3F end) {
         return GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInSurface(radius, start, end) ?? start;
+    }
+
+
+    public static void RegisterUnit(int id, int type, Vector3F pos, SafeEvent<Vector3F> onPosChange) {
+        GameMgr.Instance.GetSystem<INavmesh>()?.RegisterUnit(id, type, pos, onPosChange);
+    }
+
+    public static void UnRegisterUnit(int id, SafeEvent<Vector3F> onPosChange) {
+        GameMgr.Instance.GetSystem<INavmesh>()?.UnRegisterUnit(id, onPosChange);
+        
+    }
+
+    public static List<int> RaycastInCircle(int type, Vector3F center, FloatF radius) {
+        return GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInCircle(1 << type, center, radius) ?? new List<int>();
+    }
+    
+    private static int allTypeBitSet = (1 << UnitRaycaster.MaxTypeCount) - 1;
+    public static List<int> RaycastInCircle(Vector3F center, FloatF radius) {
+        return GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInCircle(allTypeBitSet, center, radius) ?? new List<int>();
     }
 }

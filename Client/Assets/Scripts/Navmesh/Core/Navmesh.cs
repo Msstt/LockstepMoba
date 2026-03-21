@@ -13,6 +13,8 @@ namespace Navmesh {
 
         public NavmeshMapInfo MapInfo => mapInfo;
 
+        private UnitRaycaster unitRaycaster = new UnitRaycaster();
+
         private struct FindPathQuery {
             public FloatF radius;
             public Vector3F start;
@@ -37,7 +39,10 @@ namespace Navmesh {
                 allRadius.Add(radius);
                 layers.Add(radius, layer);
             }
-            allRadius.Sort((a, b) => b.CompareTo(a) ); 
+            allRadius.Sort((a, b) => b.CompareTo(a) );
+            
+            var (min, max) = surfaces[allRadius[0]].GetBorder();
+            unitRaycaster.Init(min, max);
         }
 
         private bool LoadData() {
@@ -117,6 +122,22 @@ namespace Navmesh {
                 }
             }
             return start;
+        }
+
+        #endregion
+
+        #region 单位检测
+
+        public void RegisterUnit(int id, int type, Vector3F pos, SafeEvent<Vector3F> onPosChange) {
+            unitRaycaster.Register(id, type, pos, onPosChange);
+        }
+        
+        public void UnRegisterUnit(int id, SafeEvent<Vector3F> onPosChange) {
+            unitRaycaster.UnRegister(id, onPosChange);
+        }
+
+        public List<int> RaycastInCircle(int typeBitSet, Vector3F center, FloatF radius) {
+            return unitRaycaster.RaycastInCircle(typeBitSet, center, radius);
         }
 
         #endregion

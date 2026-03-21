@@ -19,5 +19,18 @@ namespace Navmesh {
         public List<Vector3F> vertices;
         // 三个为一组，表示一个三角形，索引 vertices
         public List<int> indices;
+
+        public (Vector3F, Vector3F) GetBorder() {
+            Vector3F min = vertices[0], max = vertices[0];
+            for (int i = 0; i < vertices.Count; i++) {
+                min.x = FloatF.Min(min.x, vertices[i].x);
+                min.y = FloatF.Min(min.y, vertices[i].y);
+                min.z = FloatF.Min(min.z, vertices[i].z);
+                max.x = FloatF.Max(max.x, vertices[i].x);
+                max.y = FloatF.Max(max.y, vertices[i].y);
+                max.z = FloatF.Max(max.z, vertices[i].z);
+            }
+            return (min, max);
+        }
     }
 }

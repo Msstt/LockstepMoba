@@ -44,9 +44,9 @@ namespace Combat.Actor {
                     }
                 }
 
-                if (frame - lastEventFrame > GameMgr.Instance.FramePerSecond) {
+                // if (frame - lastEventFrame > GameMgr.Instance.FramePerSecond) {
                     Actor.Event.OnChangePos.Send();
-                }
+                // }
             }
 
             public override void Exit() { }

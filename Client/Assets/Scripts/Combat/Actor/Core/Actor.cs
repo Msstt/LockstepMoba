@@ -5,10 +5,6 @@ using InputSystem;
 using UnityEngine;
 
 namespace Combat.Actor {
-    public enum ActorType {
-        Champion,
-    }
-    
     public abstract partial class Actor {
         public int Id { get; private set; }
         public int Uid { get; private set; }

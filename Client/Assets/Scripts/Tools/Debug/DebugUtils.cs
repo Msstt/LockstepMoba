@@ -23,4 +23,14 @@ public static class DebugUtils {
     public static void DrawDot(Vector3F point, Color color = default, float duration = 2f, float size = 2f) {
         DrawDot(point.ToVector3(), color, duration, size);
     }
+    
+    public static void DrawCircle(Vector3 center, float radius, float width = 1f, int seg = 32) {
+        Vector3 prev = center + Vector3.forward * radius;
+        for (int i = 1; i <= seg; i++) {
+            float angle = i * Mathf.PI * 2 / seg;
+            Vector3 next = center + new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * radius;
+            DrawLine(prev, next, Color.red, 2, width);
+            prev = next;
+        }
+    }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Navmesh {
@@ -7,7 +6,7 @@ namespace Navmesh {
         
         private NavmeshSurface data;
         
-        private List<List<List<int>>> aabbGrids;
+        private List<int>[][] aabbGrids;
 
         private Vector3F min, max;
         private Vector3F size;
@@ -17,22 +16,14 @@ namespace Navmesh {
         }
 
         public bool Init() {
-            min = max = data.vertices[0];
-            for (int i = 0; i < data.vertices.Count; i++) {
-                min.x = FloatF.Min(min.x, data.vertices[i].x);
-                min.y = FloatF.Min(min.y, data.vertices[i].y);
-                min.z = FloatF.Min(min.z, data.vertices[i].z);
-                max.x = FloatF.Max(max.x, data.vertices[i].x);
-                max.y = FloatF.Max(max.y, data.vertices[i].y);
-                max.z = FloatF.Max(max.z, data.vertices[i].z);
-            }
+            (min, max) = data.GetBorder();
             size = new Vector3F((max.x - min.x) / MaxAABBCount, (max.y - min.y) / MaxAABBCount, (max.z - min.z) / MaxAABBCount);
             
-            aabbGrids = new List<List<List<int>>>();
+            aabbGrids = new List<int>[MaxAABBCount][];
             for (int row = 0; row < MaxAABBCount; row++) {
-                aabbGrids.Add(new List<List<int>>());
+                aabbGrids[row] = new List<int>[MaxAABBCount];
                 for (int col = 0; col < MaxAABBCount; col++) {
-                    aabbGrids[row].Add(new List<int>());
+                    aabbGrids[row][col] = new List<int>();
                     InitAABB(row, col);
                 }
             }
