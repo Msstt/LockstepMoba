@@ -7,6 +7,7 @@ namespace Combat.Actor {
         public int GetUid();
         public Actor GetActor(int uid);
         
+        public Actor CreateActor(ActorCreator creator);
         public void RemoveActor(int uid);
         
         public bool IsSameCamp(int aUid, int bUid);

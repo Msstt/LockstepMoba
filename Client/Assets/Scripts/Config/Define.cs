@@ -1,0 +1,25 @@
+// TODO 预加载
+
+using Combat.Actor;
+using Combat.Area;
+using Combat.Buff;
+using Combat.Skill;
+using Framework;
+using UnityEngine;
+
+public static partial class Config {
+    public static readonly ConfigCache<ChampionConfig> Champion = new(
+        (id) => Resources.Load<ChampionConfig>("Config/Actor/Champion/" + id));
+    
+    public static readonly ConfigCache<SkillConfig> Skill = new(
+        (id) => JsonHelper.LoadFromRes("Config/Skill/Json/" + id, out SkillConfig config) ? config : null);
+    
+    public static readonly ConfigCache<BuffConfig> Buff = new(
+        (id) => JsonHelper.LoadFromRes("Config/Buff/Json/" + id, out BuffConfig config) ? config : null);
+    
+    public static readonly ConfigCache<AreaConfig> Area = new(
+        (id) => JsonHelper.LoadFromRes("Config/Area/Json/" + id, out AreaConfig config) ? config : null);
+    
+    public static readonly OtherConfig.Time Time = Resources.Load<OtherConfig.Time>("Config/Other/Time");
+    public static readonly OtherConfig.Map Map = Resources.Load<OtherConfig.Map>("Config/Other/Map");
+}

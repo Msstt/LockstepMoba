@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/Navmesh/NavmeshUtils.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Creator/ReviveChampion.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/PathSmoother.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/None.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Log.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Assets/Scripts/Network/NetworkDef.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/AbortSkill.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Singleton.cs" />
+    <Compile Include="Assets/Scripts/Config/Combat/Time.cs" />
     <Compile Include="Assets/Scripts/UI/Actor/ChampionStatsBarPanel.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.Camera.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Define/CampType.cs" />
@@ -70,7 +72,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/ActorUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/SelectNode.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatSystem.cs" />
-    <Compile Include="Assets/Scripts/Combat/Config.cs" />
+    <Compile Include="Assets/Scripts/Framework/DS/SimpleTransform.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/IActorSystem.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/StringExtensions.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/MockLockStep.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Assets/Scripts/Framework/Event/EventMgr.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Com.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SlotCom.cs" />
+    <Compile Include="Assets/Scripts/Config/Core/Config.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Raycast/RaycastInSurface.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/EffectDefine.cs" />
@@ -110,6 +113,7 @@
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Effect.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Define.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Creator/ActorCreator.cs" />
     <Compile Include="Assets/Scripts/Framework/Res/ResMgr.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventType.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.MoveComStatus.cs" />
@@ -138,11 +142,12 @@
     <Compile Include="Assets/Scripts/Navmesh/Core/UnitRaycaster.cs" />
     <Compile Include="Assets/Scripts/Tools/ResUtils.cs" />
     <Compile Include="Assets/Scripts/Input/IInputSystem.cs" />
+    <Compile Include="Assets/Scripts/Config/Define.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.OnHit.cs" />
     <Compile Include="Assets/Scripts/Input/Command/Attack.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/ThreadMgr.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/LockStep.cs" />
-    <Compile Include="Assets/Scripts/Combat/MapConfig.cs" />
+    <Compile Include="Assets/Scripts/Config/Combat/Map.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/IAreaSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/MoveNode.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Raycast/GetTIdByPoint.cs" />

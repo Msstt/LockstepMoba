@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Combat.Skill;
 using Framework;
 using Network;
@@ -17,6 +16,8 @@ namespace Combat.Actor {
         private Dictionary<int, CampType> camp = new Dictionary<int, CampType>();
         
         public void Init() {
+            // 玩家的主控会占 10 个
+            maxUid = 10;
             TransRoot = new GameObject("[Actor]").transform;
             
             EventMgr.Instance.Register<EventType.OnLockStepStart>(() => {
@@ -47,12 +48,7 @@ namespace Combat.Actor {
             }
             int index = 0;
             foreach (var uid in combat.PlayerUid) {
-                var championId = combat.GetChampionId(uid);
-                Champion actor = Champion.Create(championId, combat.GetCamp(uid));
-                actor.SetPos(combat.MapConfig.spawnPoint[index], true);
-                actor.SetDir(new Vector3F( 1, 0, 0), true);
-                actor.Go.transform.position = new Vector3(actor.Go.transform.position.x, combat.MapConfig.spawnPoint[index].y.ToFloat(), actor.Go.transform.position.z);
-                actors[actor.Uid] = actor;
+                CreateActor(new ReviveChampion(uid));
                 index++;
             }
         }
@@ -65,10 +61,28 @@ namespace Combat.Actor {
             return actors[uid];
         }
 
+        public Actor CreateActor(ActorCreator creator) {
+            GameObject go = new GameObject();
+            go.transform.SetParent(TransRoot);
+            GoUtils.NewGo(creator.PrefabName, go.transform, true).name = "Prefab";
+
+            Actor actor = creator.Create(go);
+            actors[actor.Uid] = actor;
+            go.name = actor.Type + "-" + actor.Uid;
+            actor.BindCom();
+            
+            NavmeshUtils.RegisterUnit(actor.Uid, (int)actor.Type, actor.Pos, actor.Event.OnChangePos);
+            return actor;
+        }
+        
         public void RemoveActor(int uid) {
             if (!actors.ContainsKey(uid)) {
                 return;
             }
+            Actor actor = actors[uid];
+            NavmeshUtils.UnRegisterUnit(actor.Uid, actor.Event.OnChangePos);
+            
+            actor.Dispose();
             actors.Remove(uid);
         }
         

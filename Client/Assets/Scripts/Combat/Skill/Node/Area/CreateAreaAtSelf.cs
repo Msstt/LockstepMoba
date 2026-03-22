@@ -9,14 +9,10 @@ namespace Combat.Skill.SkillNode {
             [LabelText("区域")]
             public int AreaId;
             [LabelText("偏移")]
-            public Vector3F Offset;
-            [LabelText("方向")]
-            public FloatF Direction;
+            public SimpleTransform Offset;
         }
 
-        public CreateAreaAtSelf(JToken json) : base(json) {
-            param.Direction = param.Direction / 180 * FloatF.pi;
-        }
+        public CreateAreaAtSelf(JToken json) : base(json) { }
         
         protected override NodeState OnEnter(Context context) {
             var actor = ActorUtils.GetActor(context.ActorUid);
@@ -25,11 +21,11 @@ namespace Combat.Skill.SkillNode {
             }
 
             Vector3F rightDir = new Vector3F(actor.Dir.z, actor.Dir.y, -actor.Dir.x);
-            Vector3F pos = actor.Pos + actor.Dir * param.Offset.x + rightDir * param.Offset.z;
-            pos.y += param.Offset.y;    
+            Vector3F pos = actor.Pos + actor.Dir * param.Offset.position.x + rightDir * param.Offset.position.z;
+            pos.y += param.Offset.position.y;    
             Vector3F dir = actor.Dir;
-            (dir.x, dir.z) = (dir.x * FloatF.Cos(param.Direction) - dir.z * FloatF.Sin(param.Direction),
-                dir.x * FloatF.Sin(param.Direction) + dir.z * FloatF.Cos(param.Direction));
+            (dir.x, dir.z) = (dir.x * FloatF.Cos(param.Offset.direction) - dir.z * FloatF.Sin(param.Offset.direction),
+                dir.x * FloatF.Sin(param.Offset.direction) + dir.z * FloatF.Cos(param.Offset.direction));
             AreaUtils.CreateArea(param.AreaId, context.ActorUid, context.Level, pos, dir);
             return NodeState.Finish;
         }

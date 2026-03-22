@@ -190,7 +190,7 @@ public class FloatFPropertyDrawer : OdinValueDrawer<FloatF> {
         }
 
         string input = EditorGUILayout.TextField(f.ToString());
-        f = FloatF.Parse(input)??f;
+        f = FloatF.Parse(input) ?? f;
 
         EditorGUILayout.EndHorizontal();
 

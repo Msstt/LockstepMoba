@@ -986,7 +986,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9174203575298893567}
   - component: {fileID: 2133362505522742770}
-  - component: {fileID: 4285976220866836964}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -1029,31 +1028,6 @@ MonoBehaviour:
   surfaceData: {fileID: 4900000, guid: e4ea7c08da0e9425d9c008ee8f744c0d, type: 3}
   DrawDebugTriangle: 0
   DrawDebugConnection: 0
---- !u!114 &4285976220866836964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625123939767696657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eba3235a624546acae539415ff0c5cb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoint:
-  - x:
-      value: 600000000
-    y:
-      value: 125000000
-    z:
-      value: 1360000000
-  - x:
-      value: 500000000
-    y:
-      value: 125000000
-    z:
-      value: 1360000000
 --- !u!1 &628492821913009138
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ namespace Combat.Skill.SkillNode {
                 return InValidIndex;
             }
 
-            return ActorUtils.IsSameCamp(context.ActorUid, context.Param.Uid) ? 1 : 2;
+            return ((int)actor.Type & (int)param.Type) != 0 ? 1 : 2;
         }
     }
 }

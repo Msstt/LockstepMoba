@@ -12,15 +12,8 @@ namespace Combat {
         public IReadOnlyList<Uid> PlayerUid => playerUid;
         
         private Dictionary<Uid, battle_start_s2c.Types.player_info> playerInfo = new Dictionary<Uid, battle_start_s2c.Types.player_info>();
-        
-        public MapConfig MapConfig { get; private set; }
 
         public void Init() {
-            MapConfig = GameObject.Find("Map")?.GetComponent<MapConfig>();
-            if (MapConfig == null) {
-                Log.Error("MapConfig not found");
-                return;
-            }
         }
         
         public void SetStartInfo(battle_start_s2c msg) {

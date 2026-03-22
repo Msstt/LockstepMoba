@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7426c542eaa4438da8f5f03f7ac4bc8c, type: 3}
+  m_Name: Map
+  m_EditorClassIdentifier: 
+  revivePos:
+  - position:
+      x:
+        value: 600000000
+      y:
+        value: 125000000
+      z:
+        value: 1360000000
+    direction:
+      value: 3141540
+  - position:
+      x:
+        value: 500000000
+      y:
+        value: 125000000
+      z:
+        value: 1360000000
+    direction:
+      value: 0
+  - position:
+      x:
+        value: 550000000
+      y:
+        value: 125000000
+      z:
+        value: 1400000000
+    direction:
+      value: 0

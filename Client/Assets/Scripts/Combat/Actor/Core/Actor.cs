@@ -5,7 +5,7 @@ using InputSystem;
 using UnityEngine;
 
 namespace Combat.Actor {
-    public abstract partial class Actor {
+    public abstract partial class Actor : IDisposable {
         public int Id { get; private set; }
         public int Uid { get; private set; }
         public ActorType Type { get; protected set; }
@@ -100,13 +100,15 @@ namespace Combat.Actor {
                 com.RenderUpdate();
             }
         }
+
+        public abstract void BindCom();
         
         #endregion
         
-        public void SetPos(Vector3F pos, bool updateGo = false) {
+        public void SetPos(Vector3F pos, bool updateGo = false, bool updateY = false) {
             this.pos = pos;
             if (updateGo && go != null) {
-                go.transform.position = new Vector3(pos.x.ToFloat(), go.transform.position.y, pos.z.ToFloat());
+                go.transform.position = new Vector3(pos.x.ToFloat(), updateY ? pos.y.ToFloat() : go.transform.position.y, pos.z.ToFloat());
             }
             Event.OnChangePos.Send(pos);
 
@@ -133,17 +135,14 @@ namespace Combat.Actor {
         }
 
         private void OnDead() {
-            Clear();
             IActorSystem system = GameMgr.Instance.GetSystem<IActorSystem>();
             system?.RemoveActor(Uid);
         }
         
-        private void Clear() {
+        public void Dispose() {
             RemoveAllComponent();
             GameObject.Destroy(go);
             GameObject.Destroy(debugPoint);
-            
-            NavmeshUtils.UnRegisterUnit(Uid, Event.OnChangePos);
         }
     }
 }
