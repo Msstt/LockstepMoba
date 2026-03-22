@@ -28,14 +28,27 @@
             "Child": []
           },
           {
-            "Type": 12,
-            "Params": null,
+            "Type": 19,
+            "Params": {
+              "Type": 1
+            },
             "Child": [
               {
-                "Type": 15,
-                "Params": {
-                  "BuffId": 1
-                },
+                "Type": 12,
+                "Params": null,
+                "Child": [
+                  {
+                    "Type": 15,
+                    "Params": {
+                      "BuffId": 1
+                    },
+                    "Child": []
+                  }
+                ]
+              },
+              {
+                "Type": 14,
+                "Params": null,
                 "Child": []
               }
             ]

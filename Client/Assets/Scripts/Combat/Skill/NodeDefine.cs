@@ -20,6 +20,7 @@ namespace Combat.Skill {
         IsSameCamp = 16,
         IsInRange = 17,
         CreateAreaAtSelf = 18,
+        IsActorType = 19,
     }
     
     public static class NodeFactory {
@@ -61,6 +62,8 @@ namespace Combat.Skill {
                     return new IsInRange(config.Params);
                 case NodeType.CreateAreaAtSelf:
                     return new CreateAreaAtSelf(config.Params);
+                case NodeType.IsActorType:
+                    return new IsActorType(config.Params);
                 default:
                     throw new CombatException("Node type doesn't exist: " + config.Type);
             }

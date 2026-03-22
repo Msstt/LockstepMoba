@@ -147,6 +147,7 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/MoveNode.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Raycast/GetTIdByPoint.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/WorldUI/UISystem.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Check/IsActorType.cs" />
     <Compile Include="Assets/Scripts/Navmesh/INavmesh.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Layer.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Context.cs" />

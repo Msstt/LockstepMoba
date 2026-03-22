@@ -48,10 +48,12 @@ namespace Editor.Skill {
     
     public abstract class NoParamSelectNode : SelectNode {
         protected override object Params => null;
+        public override string[] BranchName { get; } = new string[] { "是", "否" };
     }
     
     public abstract class ParamSelectNode<T> : SelectNode {
         [OdinTree] public T param;
         protected override object Params => param;
+        public override string[] BranchName { get; } = new string[] { "是", "否" };
     }
 }

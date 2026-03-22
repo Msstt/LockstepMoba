@@ -35,6 +35,8 @@ namespace Editor.Skill {
     public abstract class SelectNode : SkillNode {
         public override int maxOutConnections => -1;
         public override bool allowAsPrime => false;
+        public override Type outConnectionType => typeof(SelectConnection);
+        public abstract string[] BranchName { get; }
     }
     
     public class RootNode : EffectNode {
