@@ -8,7 +8,7 @@ using Framework;
 namespace Navmesh {
     public class UnitRaycaster {
         public static int MaxTypeCount = 10;
-        private static int MaxAABBCount = 10;
+        private static int MaxAABBCount = 100;
 
         private class UnitInfo {
             public int id;

@@ -39,5 +39,15 @@ namespace Combat.Area {
                 }
             }
         }
+        
+        protected void Raycast(int typeBitSet, Action<Actor.Actor> func) {
+            List<int> actors = area.Shape.Raycast(typeBitSet, area.Position, area.Direction);
+            for (int i = 0; i < actors.Count; i++) {
+                Actor.Actor actor = ActorUtils.GetActor(actors[i]);
+                if (actor != null) {
+                    func(actor);
+                }
+            }
+        }
     }
 }

@@ -8,7 +8,6 @@ using Sirenix.OdinInspector;
 namespace Combat.Skill.SkillNode {
     public class RequestSlot : ParamNode<RequestSlot.Param> {
         public class Param {
-            [DrawWithUnity]
             [LabelText("槽位")]
             public SlotCom.Slot Slot;
             [LabelText("等待时间")]

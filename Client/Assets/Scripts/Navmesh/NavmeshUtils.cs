@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Framework;
 using Navmesh;
-using UnityEditor.IMGUI.Controls;
 
 public static class NavmeshUtils {
     public static NavmeshMapInfo Config => GameMgr.Instance.GetSystem<INavmesh>()?.MapInfo;
@@ -32,8 +31,12 @@ public static class NavmeshUtils {
     }
 
 
-    public static void RegisterUnit(int id, int type, Vector3F pos, SafeEvent<Vector3F> onPosChange) {
-        GameMgr.Instance.GetSystem<INavmesh>()?.RegisterUnit(id, type, pos, onPosChange);
+    public static void RegisterUnit(int id, int typeBitSet, Vector3F pos, SafeEvent<Vector3F> onPosChange) {
+        for (int i = 0; i < UnitRaycaster.MaxTypeCount; i++) {
+            if (((typeBitSet >> i) & 1) != 0) {
+                GameMgr.Instance.GetSystem<INavmesh>()?.RegisterUnit(id, i, pos, onPosChange);
+            }
+        }
     }
 
     public static void UnRegisterUnit(int id, SafeEvent<Vector3F> onPosChange) {
@@ -41,8 +44,8 @@ public static class NavmeshUtils {
         
     }
 
-    public static List<int> RaycastInCircle(int type, Vector3F center, FloatF radius) {
-        return GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInCircle(1 << type, center, radius) ?? new List<int>();
+    public static List<int> RaycastInCircle(int typeBitSet, Vector3F center, FloatF radius) {
+        return GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInCircle(typeBitSet, center, radius) ?? new List<int>();
     }
     
     private static int allTypeBitSet = (1 << UnitRaycaster.MaxTypeCount) - 1;

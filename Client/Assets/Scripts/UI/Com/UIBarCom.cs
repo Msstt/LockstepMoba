@@ -2,13 +2,13 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace UI {
+    [DrawWithUnity]
     public enum BarType {
         LeftToRight,
         BottomToTop,
     }
     
     public class UIBarCom : MonoBehaviour {
-        [DrawWithUnity]
         public BarType type = BarType.LeftToRight;
         public float fadeSpeed = 0.5f;
         

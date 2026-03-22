@@ -5,6 +5,8 @@ using Sirenix.OdinInspector;
 namespace Combat.Area.Effect {
     public class Heal : Effect<Heal.Param> {
         public class Param {
+            [LabelText("单位类型")]
+            public ActorType Type;
             [LabelText("伤害")]
             public LevelNumber<StatScaler> Heal;
             [LabelText("触发间隔")]
@@ -35,10 +37,10 @@ namespace Combat.Area.Effect {
         }
 
         private void TakeHeal() {
-            Raycast((actor) => {
-                // if (ActorUtils.IsSameCamp(area.ActorId, actor.Uid)) {
+            Raycast((int)param.Type, (actor) => {
+                if (ActorUtils.IsSameCamp(area.ActorId, actor.Uid)) {
                     actor.OnHeal(heal);
-                // }
+                }
             });
         }
     }

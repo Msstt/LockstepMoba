@@ -7,7 +7,6 @@ using Sirenix.OdinInspector;
 namespace Combat.Skill.SkillNode {
     public class AbortSkill : ParamNode<AbortSkill.Param> {
         public class Param {
-            [DrawWithUnity]
             [LabelText("技能类型")]
             public SkillType SkillList;
         }

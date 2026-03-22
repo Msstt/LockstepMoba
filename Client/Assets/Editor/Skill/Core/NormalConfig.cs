@@ -13,11 +13,9 @@ namespace Editor.Skill {
         [LabelText("备注")]
         public string Note;
         
-        [DrawWithUnity]
         [LabelText("技能类型")]
         public SkillType SkillType;
         
-        [DrawWithUnity]
         [LabelText("输入类型")]
         public CommandType InputType;
         

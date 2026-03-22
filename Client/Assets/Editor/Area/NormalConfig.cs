@@ -18,7 +18,6 @@ namespace Editor.Area {
         [LabelText("持续时间")]
         public FloatF Time;
         
-        [DrawWithUnity]
         [LabelText("形状类型")]
         public ShapeType shape;
         

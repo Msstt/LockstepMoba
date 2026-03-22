@@ -12,8 +12,8 @@ namespace Combat.Area {
             return NavmeshUtils.RaycastInCircle(position, radius);
         }
 
-        public override List<int> Raycast(int type, Vector3F position, Vector3F direction) {
-            return NavmeshUtils.RaycastInCircle(type, position, radius);
+        public override List<int> Raycast(int typeBitSet, Vector3F position, Vector3F direction) {
+            return NavmeshUtils.RaycastInCircle(typeBitSet, position, radius);
         }
     }
 }

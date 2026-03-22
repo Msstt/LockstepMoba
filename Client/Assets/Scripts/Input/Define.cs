@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using Combat.Skill;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace InputSystem {
+    [DrawWithUnity]
     public enum CommandType {
         [InspectorName("空")]
         None,

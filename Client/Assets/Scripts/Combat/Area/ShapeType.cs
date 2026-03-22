@@ -1,6 +1,8 @@
 using Newtonsoft.Json.Linq;
+using Sirenix.OdinInspector;
 
 namespace Combat.Area {
+    [DrawWithUnity]
     public enum ShapeType {
         Circle = 1,
     }

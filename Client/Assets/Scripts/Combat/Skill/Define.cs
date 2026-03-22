@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Combat.Skill {
@@ -14,6 +15,7 @@ namespace Combat.Skill {
     }
     
     [Flags] [Serializable]
+    [DrawWithUnity]
     public enum SkillType {
         [InspectorName("无")]
         None = 0,

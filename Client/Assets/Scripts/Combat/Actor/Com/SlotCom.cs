@@ -2,10 +2,12 @@
 
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 namespace Combat.Actor {
     public class SlotCom : Com {
         [Flags]
+        [DrawWithUnity]
         public enum Slot {
             None = 0,
             Upper = 1 << 1,
