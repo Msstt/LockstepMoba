@@ -1,12 +1,12 @@
 {
   "Id": 1,
-  "Name": "治疗",
-  "Prefab": "",
-  "Time": "0",
+  "Name": "治疗术",
+  "Prefab": null,
   "ShapeType": 1,
   "ShapeParam": {
     "radius": "85"
   },
+  "Time": "0",
   "Effect": [
     {
       "Type": 1,
@@ -16,13 +16,13 @@
             {
               "level": 1,
               "value": {
-                "Value": "50",
+                "Value": "80",
                 "AttackScale": "0"
               }
             }
           ]
         },
-        "Interval": "1"
+        "Interval": "0"
       }
     }
   ]

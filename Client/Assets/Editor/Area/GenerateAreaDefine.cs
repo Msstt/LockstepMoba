@@ -3,10 +3,10 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor.Buff {
+namespace Editor.Area {
     public static class ExportDefine {
-        private static string ScriptPath = Application.dataPath + "/Scripts/Combat/Buff/";
-        private static string TemplatePath = Application.dataPath + "/Editor/Buff/Template/";
+        private static string ScriptPath = Application.dataPath + "/Scripts/Combat/Area/";
+        private static string TemplatePath = Application.dataPath + "/Editor/Area/Template/";
         
         private static bool GenerateEffectDefine(List<string> name) {
             if (!File.Exists(TemplatePath + "EffectDefine.txt")) {
@@ -19,7 +19,7 @@ namespace Editor.Buff {
             foreach (string effect in name) {
                 enumList += "        " + effect + " = " + ++index + ",";
                 factoryList += "                case EffectType." + effect + ":\n                    return new " +
-                               effect + "(buff, config.Params);";
+                               effect + "(area, config.Params);";
             }
 
             template = template.Replace("{EffectEnumList}", enumList);
@@ -29,7 +29,7 @@ namespace Editor.Buff {
             return true;
         }
         
-        [MenuItem("工具/技能/生成 Buff 配置文件")]
+        [MenuItem("工具/技能/生成 Area 配置文件")]
         public static void Execute() {
             if (!Directory.Exists(ScriptPath + "Effect/")) {
                 return;

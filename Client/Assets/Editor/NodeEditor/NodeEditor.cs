@@ -26,6 +26,7 @@ namespace Editor.Node {
         private static readonly string[] Type = new[] {
             "技能",
             "Buff",
+            "区域",
         };
 
         private Vector2 dataViewScroll = Vector2.zero;
@@ -33,6 +34,7 @@ namespace Editor.Node {
         private INodeEditor[] editors = new INodeEditor[] {
             new Skill(),
             new Buff(),
+            new Area(),
         };
         private int skillEditorType = 1;
 

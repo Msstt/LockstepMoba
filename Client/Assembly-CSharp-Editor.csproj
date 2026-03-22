@@ -49,6 +49,8 @@
     <Compile Include="Assets/Editor/Buff/EffectNode.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Time.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillDefine.cs" />
+    <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Area.cs" />
+    <Compile Include="Assets/Editor/Area/AreaGraph.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Check.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillNode.cs" />
     <Compile Include="Assets/Editor/Skill/Core/NormalConfig.cs" />
@@ -58,21 +60,26 @@
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Buff.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillGraph.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Buff.cs" />
+    <Compile Include="Assets/Editor/Area/NormalConfig.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Damage.cs" />
+    <Compile Include="Assets/Editor/Area/AreaNode.cs" />
     <Compile Include="Assets/Editor/Buff/NormalConfig.cs" />
     <Compile Include="Assets/Editor/Tools/MultiLaunchCreator.cs" />
     <Compile Include="Assets/Editor/Tools/CombineMesh.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillConnection.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Move.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Anim.cs" />
+    <Compile Include="Assets/Editor/Area/EffectNode.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Area.cs" />
     <Compile Include="Assets/Editor/Navmesh/NavmeshExporter.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Skill.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Normal.cs" />
+    <Compile Include="Assets/Editor/Area/GenerateAreaDefine.cs" />
     <Compile Include="Assets/Editor/Network/GenerateMessageCode.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Cost.cs" />
     <None Include="Assets/Editor/Network/Template/MessageDef.txt" />
     <None Include="Assets/Editor/Buff/Template/EffectDefine.txt" />
+    <None Include="Assets/Editor/Area/Template/EffectDefine.txt" />
     <None Include="Assets/Editor/Skill/Data/SkillDefine.json" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>

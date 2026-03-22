@@ -1,5 +1,4 @@
 using Combat.Buff;
-using ParadoxNotion;
 using Sirenix.OdinInspector;
 
 namespace Editor.Buff {
