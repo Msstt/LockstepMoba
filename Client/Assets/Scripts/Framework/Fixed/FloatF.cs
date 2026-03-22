@@ -1,6 +1,7 @@
 // 帧同步定点数，保留 6 位小数
 
 using System;
+using System.Diagnostics.Contracts;
 using Newtonsoft.Json;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
@@ -12,6 +13,7 @@ public struct FloatF : IComparable<FloatF> {
     public static FloatF zero = new FloatF(0, true);
     public static FloatF one = new FloatF(1);
     public static FloatF max = new FloatF(long.MaxValue, true);
+    public static FloatF pi = new FloatF(3141592, true);
     
     public const long scale = 1_000_000;
     
@@ -40,8 +42,10 @@ public struct FloatF : IComparable<FloatF> {
 
     public static FloatF operator+(FloatF a, FloatF b) => new FloatF(a.value + b.value, true);
     public static FloatF operator-(FloatF a, FloatF b) => new FloatF(a.value - b.value, true);
+    public static FloatF operator-(FloatF a) => new FloatF(-a.value, true);
     public static FloatF operator*(FloatF a, FloatF b) => new FloatF(a.value * b.value / scale, true);
     public static FloatF operator/(FloatF a, FloatF b) => new FloatF(a.value * scale / b.value, true);
+    public static FloatF operator%(FloatF a, FloatF b) => new FloatF(a.value % b.value, true);
     
     public static bool operator>(FloatF a, FloatF b) => a.value > b.value;
     public static bool operator<(FloatF a, FloatF b) => a.value < b.value;
@@ -126,6 +130,29 @@ public struct FloatF : IComparable<FloatF> {
 
     public static FloatF Clamp(FloatF value, FloatF min, FloatF max) {
         return Min(Max(value, min), max);
+    }
+
+    // TODO 精度可能还是不够
+    public static FloatF Sin(FloatF value) {
+        value %= 2 * pi;
+        if (value > pi) {
+            value -= 2 * pi;
+        } else if (value < -pi) {
+            value += 2 * pi;
+        }
+
+        if (value > pi / 2) {
+            value = pi - value;
+        } else if (value < -pi / 2) {
+            value = -pi - value;
+        }
+        
+        FloatF value2 = value * value;
+        return value - (value * value2) / 6 + (value * value2 * value2) / 120;
+    }
+
+    public static FloatF Cos(FloatF value) {
+        return Sin(value + pi / 2);
     }
 }
 

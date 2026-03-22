@@ -13,13 +13,17 @@ namespace Combat.Area {
         
         public GameObject GameObject { get; private set; }
 
+        private float rawY = 0;
+
         // TODO 表现平滑
         private Vector3F position;
         public Vector3F Position {
             get => position;
             set {
                 position = value;
-                GameObject.transform.position = value.ToVector3();
+                Vector3 rawPos = value.ToVector3();
+                rawPos.y += rawY;
+                GameObject.transform.position = rawPos;
             }
         }
         
@@ -40,9 +44,10 @@ namespace Combat.Area {
             
             GameObject = new GameObject("Area_" + areaId);
             GameObject.transform.SetParent(AreaUtils.TransRoot);
-            var prefab = GoUtils.NewGo(config.Prefab, GameObject.transform, true);
+            var prefab = GoUtils.NewGo(config.Prefab, GameObject.transform);
             if (prefab != null) {
                 prefab.name = "Prefab";
+                rawY = prefab.transform.localPosition.y;
             }
             Position = position;
             Direction = direction;
@@ -57,8 +62,9 @@ namespace Combat.Area {
         }
         
         public void Dispose() {
-            effects.Clear();
             ExecuteEffect((effect) => effect.OnDestroy());
+            effects.Clear();
+            GameObject.Destroy(GameObject);
         }
 
         public void Update() {

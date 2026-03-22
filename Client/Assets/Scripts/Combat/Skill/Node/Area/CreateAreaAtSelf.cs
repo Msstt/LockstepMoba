@@ -13,8 +13,10 @@ namespace Combat.Skill.SkillNode {
             [LabelText("方向")]
             public FloatF Direction;
         }
-        
-        public CreateAreaAtSelf(JToken json) : base(json) { }
+
+        public CreateAreaAtSelf(JToken json) : base(json) {
+            param.Direction = param.Direction / 180 * FloatF.pi;
+        }
         
         protected override NodeState OnEnter(Context context) {
             var actor = ActorUtils.GetActor(context.ActorUid);
@@ -22,12 +24,12 @@ namespace Combat.Skill.SkillNode {
                 return NodeState.Fail;
             }
 
-            Vector3F rightDir = new Vector3F(actor.Dir.z, actor.Dir.y, FloatF.zero - actor.Dir.x);
+            Vector3F rightDir = new Vector3F(actor.Dir.z, actor.Dir.y, -actor.Dir.x);
             Vector3F pos = actor.Pos + actor.Dir * param.Offset.x + rightDir * param.Offset.z;
-            pos.y += param.Offset.y;
+            pos.y += param.Offset.y;    
             Vector3F dir = actor.Dir;
-            // (dir.x, dir.y) = (dir.x * FloatF.Cos(param.Direction) - dir.z * FloatF.Sin(param.Direction),
-            //     dir.x * FloatF.Sin(param.Direction) + dir.z * FloatF.Cos(param.Direction));
+            (dir.x, dir.z) = (dir.x * FloatF.Cos(param.Direction) - dir.z * FloatF.Sin(param.Direction),
+                dir.x * FloatF.Sin(param.Direction) + dir.z * FloatF.Cos(param.Direction));
             AreaUtils.CreateArea(param.AreaId, context.ActorUid, context.Level, pos, dir);
             return NodeState.Finish;
         }

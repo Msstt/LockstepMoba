@@ -21,11 +21,11 @@
         "Params": {
           "AreaId": 1,
           "Offset": {
-            "x": "0",
+            "x": "30",
             "y": "0",
-            "z": "0"
+            "z": "60"
           },
-          "Direction": "0"
+          "Direction": "30"
         },
         "Child": []
       }

@@ -178,8 +178,8 @@
     <Compile Include="Assets/Scripts/Navmesh/Core/Navmesh.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/SafeList.cs" />
     <Compile Include="Assets/Scripts/Input/Define.cs" />
-    <Compile Include="Assets/Scripts/Input/InputSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/EffectDefine.cs" />
+    <Compile Include="Assets/Scripts/Input/InputSystem.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/InputMsg.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Connection.cs" />
     <Compile Include="Assets/Scripts/Combat/ICombatSystem.cs" />
