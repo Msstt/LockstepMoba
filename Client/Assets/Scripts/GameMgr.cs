@@ -37,14 +37,22 @@ public class GameMgr : Singleton<GameMgr> {
         }
         
         // 注册顺序即为更新顺序
+        Register<Data.IDataSystem, Data.DataSystem>();
+        
         Register<InputSystem.IInputSystem, InputSystem.InputSystem>();
+        
         Register<Framework.Network.INetwork, Framework.Network.Network>();
         Register<ILockStep, LockStep>();
+        
         Register<Navmesh.INavmesh, Navmesh.Navmesh>();
+        
         Register<Combat.ICombatSystem, Combat.CombatSystem>();
         Register<Combat.Actor.IActorSystem, Combat.Actor.ActorSystem>();
         Register<Combat.Skill.ISkillSystem, Combat.Skill.SkillSystem>();
         Register<Combat.Area.IAreaSystem, Combat.Area.AreaSystem>();
+        
+        Register<Combat.Actor.ISpawnSystem, Combat.Actor.SpawnSystem>();
+        
         Register<Framework.UI.IUISystem, Framework.UI.UISystem>();
 
         if (driver == null) {

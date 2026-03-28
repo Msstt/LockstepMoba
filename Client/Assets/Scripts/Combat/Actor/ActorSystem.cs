@@ -12,8 +12,6 @@ namespace Combat.Actor {
         
         // 玩家 uid 与 角色系统 uid 一致
         private SafeDictionary<int, Actor> actors = new SafeDictionary<int, Actor>();
-
-        private Dictionary<int, CampType> camp = new Dictionary<int, CampType>();
         
         public void Init() {
             // 玩家的主控会占 10 个
@@ -26,7 +24,6 @@ namespace Combat.Actor {
         }
         
         public void Start() {
-            CreateChampion();
         }
         
         public void FrameUpdate(int frame) {
@@ -38,18 +35,6 @@ namespace Combat.Actor {
         public void Update() {
             foreach (var (_, actor) in actors) {
                 actor.RenderUpdate();
-            }
-        }
-        
-        private void CreateChampion() {
-            ICombatSystem combat = GameMgr.Instance.GetSystem<ICombatSystem>();
-            foreach (var uid in combat.PlayerUid) {
-                camp[uid] = combat.GetCamp(uid);
-            }
-            int index = 0;
-            foreach (var uid in combat.PlayerUid) {
-                CreateActor(new ReviveChampion(uid));
-                index++;
             }
         }
 
@@ -103,8 +88,12 @@ namespace Combat.Actor {
             }
         }
 
+        private CampType GetCamp(int uid) {
+            return GetActor(uid)?.Camp ?? CampType.UnKnown;
+        }
+
         public bool IsSameCamp(int aUid, int bUid) {
-            return camp.GetValueOrDefault(aUid, CampType.UnKnown) == camp.GetValueOrDefault(bUid, CampType.UnKnown);
+            return GetCamp(aUid) == GetCamp(bUid);
         }
     }
 }

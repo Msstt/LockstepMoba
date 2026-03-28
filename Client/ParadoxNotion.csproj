@@ -114,8 +114,8 @@
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Actions/Blackboard/List Specific/SetListElement.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Conditions/Blackboard/CheckEnum.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Conditions/Utility/CheckEventValue.cs" />
-    <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Conditions/Blackboard/CheckUnityObject.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Conditions/Blackboard/Lists/ListIsEmpty.cs" />
+    <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Conditions/Blackboard/CheckUnityObject.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/CanvasCore/Framework/Design/PartialEditor/GraphEditorUtility.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Conditions/Blackboard/CheckBooleanTrigger.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Actions/GameObject/GetDistance.cs" />

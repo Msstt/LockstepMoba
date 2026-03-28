@@ -7,6 +7,10 @@ namespace Combat.Actor {
             
             if (Stats.Health <= FloatF.zero) {
                 OnDead();
+                EventUtils.Send(new EventType.ActorDead {
+                    Uid = Uid,
+                    KillerUid = info.attacker,
+                });
             }
         }
     }
