@@ -1,6 +1,6 @@
 using Combat;
-using Combat.Actor;
 using Framework.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,11 +12,14 @@ namespace UI.Actor {
     public class ChampionStatsBarPanel : UIPanel {
         private UIBarCom health;
         private Material healthMat;
+        private TMP_Text level;
 
         private Combat.Actor.Actor actor;
         
         public override void OnAwake() {
             health = Transform.GetComponent<UIBarCom>("Health");
+            
+            level = Transform.GetComponent<TMP_Text>("Level");
             
             healthMat = new Material(Shader.Find("UI/BarWithTick"));
             Image healthMax = Transform.Find("Health/Max").GetComponent<Image>();
@@ -32,6 +35,8 @@ namespace UI.Actor {
             Transform.Find("Health/Fade").GetComponent<Image>().color = GetHealthBarFadeColor(actor.Uid);
             
             actor.Stats.Health.OnValueChanged += RefreshHealth;
+
+            level.text = actor.Level.ToString();
         }
 
         public override void OnHide() {

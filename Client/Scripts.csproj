@@ -55,6 +55,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SkillCom.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/TypeMsg.cs" />
     <Compile Include="Assets/Scripts/Input/InputUtils.cs" />
+    <Compile Include="Assets/Scripts/Combat/Level/ILevelSystem.cs" />
     <Compile Include="Assets/Scripts/Tools/Camera/CameraCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Anim/PlayAnim.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Time/WaitForTime.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Assets/Scripts/Framework/Network/Connect.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/LevelCom.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/UnityEventMgr.cs" />
+    <Compile Include="Assets/Scripts/Config/Combat/Exp.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/LevelNumber.cs" />
     <Compile Include="Assets/Scripts/Input/Command/ICommand.cs" />
     <Compile Include="Assets/Scripts/StartUp/GMTool.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Assets/Scripts/Combat/Skill/SkillUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Core/Area.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Damage.cs" />
+    <Compile Include="Assets/Scripts/Combat/Level/Level.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/AreaUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/RepeatSkill.cs" />
@@ -129,6 +132,7 @@
     <Compile Include="Assets/Scripts/Network/Message/Proto/TestMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Json/JsonHelper.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Network.cs" />
+    <Compile Include="Assets/Scripts/Combat/Level/LevelUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Buff/AddBuffToActor.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Stats/Stats.cs" />
@@ -188,13 +192,14 @@
     <Compile Include="Assets/Scripts/Navmesh/NavmeshMapInfo.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Navmesh.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/SafeList.cs" />
-    <Compile Include="Assets/Scripts/Input/Define.cs" />
     <Compile Include="Assets/Scripts/Data/Core/IData.cs" />
+    <Compile Include="Assets/Scripts/Input/Define.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/EffectDefine.cs" />
     <Compile Include="Assets/Scripts/Input/InputSystem.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/InputMsg.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Connection.cs" />
     <Compile Include="Assets/Scripts/Combat/ICombatSystem.cs" />
+    <Compile Include="Assets/Scripts/Combat/Level/LevelSystem.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/ILockStep.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Message.cs" />
     <Compile Include="Assets/Scripts/Input/Command/None.cs" />
@@ -202,6 +207,7 @@
     <Compile Include="Assets/Scripts/UI/UIDef.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Stats/StatsUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/MoveToActorByPath.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Core/PersistentCom.cs" />
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
@@ -903,6 +909,9 @@
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/NetStandard/compat/2.1.0/shims/netfx/mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>

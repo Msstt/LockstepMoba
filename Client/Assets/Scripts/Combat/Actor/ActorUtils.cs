@@ -17,12 +17,18 @@ public static class ActorUtils {
     public static Actor GetActor() => GetActor(CombatUtils.SelfUid);
     
     public static T GetCom<T>(int uid) where T : Com {
-        Actor actor = GetActor(uid);
-        if (actor == null) {
-            return null;
+        T com = GameMgr.Instance.GetSystem<IActorSystem>()?.GetPersistentCom<T>(uid);
+        if (com != null) {
+            return com;
         }
-        return actor.GetComponent<T>();
+        return GetActor(uid)?.GetComponent<T>();
     }
 
     public static T GetCom<T>() where T : Com => GetCom<T>(CombatUtils.SelfUid);
+    
+    public static T GetPersistentCom<T>(int uid) where T : Com {
+        return GameMgr.Instance.GetSystem<IActorSystem>()?.GetPersistentCom<T>(uid);
+    }
+    
+    public static T GetPersistentCom<T>() where T : Com => GetPersistentCom<T>(CombatUtils.SelfUid);
 }

@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Time
   m_EditorClassIdentifier: 
   championReviveTime:
-    datas: []
+    datas:
+    - level: 1
+      value:
+        value: 3000000

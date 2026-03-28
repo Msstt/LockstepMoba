@@ -52,6 +52,7 @@ public class GameMgr : Singleton<GameMgr> {
         Register<Combat.Area.IAreaSystem, Combat.Area.AreaSystem>();
         
         Register<Combat.Actor.ISpawnSystem, Combat.Actor.SpawnSystem>();
+        Register<Combat.Actor.ILevelSystem, Combat.Actor.LevelSystem>();
         
         Register<Framework.UI.IUISystem, Framework.UI.UISystem>();
 

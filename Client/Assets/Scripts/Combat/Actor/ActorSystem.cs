@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Combat.Skill;
 using Framework;
@@ -12,6 +13,8 @@ namespace Combat.Actor {
         
         // 玩家 uid 与 角色系统 uid 一致
         private SafeDictionary<int, Actor> actors = new SafeDictionary<int, Actor>();
+        
+        private Dictionary<int, Dictionary<Type, PersistentCom>> persistentComs = new Dictionary<int, Dictionary<Type, PersistentCom>>();
         
         public void Init() {
             // 玩家的主控会占 10 个
@@ -55,6 +58,11 @@ namespace Combat.Actor {
             actors[actor.Uid] = actor;
             go.name = actor.Type + "-" + actor.Uid;
             actor.BindCom();
+            foreach (var com in actor.ComList) {
+                if (com is PersistentCom persistentCom) {
+                    RegisterPersistentCom(persistentCom);
+                }
+            }
             
             NavmeshUtils.RegisterUnit(actor.Uid, (int)actor.Type, actor.Pos, actor.Event.OnChangePos);
             return actor;
@@ -94,6 +102,22 @@ namespace Combat.Actor {
 
         public bool IsSameCamp(int aUid, int bUid) {
             return GetCamp(aUid) == GetCamp(bUid);
+        }
+
+        private void RegisterPersistentCom(PersistentCom com) {
+            if (!persistentComs.ContainsKey(com.Uid)) {
+                persistentComs[com.Uid] = new Dictionary<Type, PersistentCom>();
+            }
+            if (!persistentComs[com.Uid].ContainsKey(com.GetType())) {
+                persistentComs[com.Uid].Add(com.GetType(), com);
+            }
+        }
+
+        public T GetPersistentCom<T>(int uid) where T : Com {
+            if (persistentComs.TryGetValue(uid, out var comDict) && comDict.TryGetValue(typeof(T), out var com)) {
+                return com as T;
+            }
+            return GetActor(uid)?.GetComponent<T>();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Combat.Actor {
         
         private Dictionary<Type, Com> coms = new Dictionary<Type, Com>();
         private List<Com> comList = new List<Com>();
+        public IReadOnlyList<Com> ComList => comList;
         
         private Vector3F pos;
         private Vector3F dir;
@@ -56,8 +57,16 @@ namespace Combat.Actor {
                 return;
             }
 
-            T com = new T();
-            com.Actor = this;
+            // 先这样吧，感觉怪怪的
+            T com = ActorUtils.GetPersistentCom<T>(Uid);
+            if (com == null) {
+                com = new T();
+                if (com is PersistentCom persistentCom) {
+                    persistentCom.Uid = Uid;
+                } else {
+                    com.Actor = this;
+                }
+            }
             coms[typeof(T)] = com;
             comList.Add(com);
             coms[typeof(T)].Awake();

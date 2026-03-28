@@ -11,5 +11,7 @@ namespace Combat.Actor {
         public void RemoveActor(int uid);
         
         public bool IsSameCamp(int aUid, int bUid);
+
+        public T GetPersistentCom<T>(int uid) where T : Com;
     }
 }
