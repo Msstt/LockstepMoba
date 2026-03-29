@@ -1,3 +1,5 @@
+// 自动持久化的组件，所有逻辑都是无状态的，可在死亡后继续访问
+
 namespace Combat.Actor {
     public abstract class PersistentCom : Com {
         public new Actor Actor {

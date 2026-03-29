@@ -12,6 +12,8 @@ namespace Combat.Actor {
                     KillerUid = info.attacker,
                 });
             }
+            
+            Event.OnHit.Send(info.damage);
         }
     }
 }

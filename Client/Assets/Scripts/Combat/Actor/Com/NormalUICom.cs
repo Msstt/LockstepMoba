@@ -3,10 +3,10 @@ using UI.Actor;
 using UnityEngine;
 
 namespace Combat.Actor {
-    public class StatsBarCom : Com {
+    public class NormalUICom : Com {
         private Transform bindingGo;
 
-        private UIDef PanelDef {
+        private UIDef StatsPanelDef {
             get {
                 switch (Actor.Type) {
                     case ActorType.Champion:
@@ -19,13 +19,17 @@ namespace Combat.Actor {
         
         public override void Awake() {
             bindingGo = Actor.Go.transform.Find("Prefab/StatsBarBindingPoint");
-            UIUtils.BindingUI(PanelDef, bindingGo, new ChampionStatsBarPanelParam {
+            UIUtils.BindingUI(StatsPanelDef, bindingGo, new ChampionStatsBarPanelParam {
+                actor = Actor,
+            });
+            UIUtils.BindingUI(UIDef.FloatingNumberPanel, bindingGo, new FloatingNumberPanelParam {
                 actor = Actor,
             });
         }
 
         public override void Destroy() {
-            UIUtils.UnBindingUI(PanelDef, bindingGo);
+            UIUtils.UnBindingUI(StatsPanelDef, bindingGo);
+            UIUtils.UnBindingUI(UIDef.FloatingNumberPanel, bindingGo);
         }
     }
 }

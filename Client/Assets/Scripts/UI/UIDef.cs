@@ -7,6 +7,7 @@ namespace UI {
     public enum UIDef {
         None,
         ChampionStatsBarPanel,
+        FloatingNumberPanel,
     }
     
     public enum UILayer {
@@ -19,10 +20,15 @@ namespace UI {
     public static class UIConfig {
         public static readonly Dictionary<UIDef, Info> config = new Dictionary<UIDef, Info>() {
             { UIDef.ChampionStatsBarPanel, new Info {
-                prefab = "UI/Actor/StatsBarPanel",
+                prefab = "UI/Actor/ChampionStatsBarPanel",
                 layer = UILayer.World,
                 creator = () => new ChampionStatsBarPanel(),
-            } }
+            } },
+            { UIDef.FloatingNumberPanel, new Info {
+                    prefab = "UI/Actor/FloatingNumberPanel",
+                    layer = UILayer.World,
+                    creator = () => new FloatingNumberPanel(),
+            } },
         };
             
         public class Info {

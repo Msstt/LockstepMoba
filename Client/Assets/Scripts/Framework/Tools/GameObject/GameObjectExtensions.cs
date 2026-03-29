@@ -20,4 +20,8 @@ public static class GameObjectExtensions {
     public static T GetComponent<T>(this Transform trans, string path) where T : Component {
         return trans?.Find(path)?.GetComponent<T>();
     }
+    
+    public static GameObject GetGameObject(this Transform trans, string path) {
+        return trans?.Find(path)?.GetComponent<Transform>().gameObject;
+    }
 }

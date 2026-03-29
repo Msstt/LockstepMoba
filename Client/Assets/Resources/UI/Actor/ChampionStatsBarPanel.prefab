@@ -386,7 +386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8611625046233590739}
   m_Layer: 5
-  m_Name: StatsBarPanel
+  m_Name: ChampionStatsBarPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
