@@ -78,6 +78,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/IActorSystem.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/StringExtensions.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/NormalUICom.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/Effect/Stats/ChangeAttack.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/MockLockStep.cs" />
     <Compile Include="Assets/Scripts/StartUp/Main.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Core/Effect.cs" />
@@ -165,9 +166,11 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Check/IsActorType.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Raycast/GetTIdByPoint.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/WorldUI/UISystem.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/EquipmentCom.cs" />
     <Compile Include="Assets/Scripts/Navmesh/INavmesh.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Layer.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Context.cs" />
+    <Compile Include="Assets/Scripts/Combat/Equipment/Config/EquipmentConfig.cs" />
     <Compile Include="Assets/Scripts/Input/Com/ActorRaycasterCom.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/RandomColor.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/IMsgDispatcher.cs" />
@@ -185,6 +188,7 @@
     <Compile Include="Assets/Scripts/Combat/Area/ShapeType.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/Effect/Stats/ChangeStats.cs" />
     <Compile Include="Assets/Scripts/Framework/Event/SafeEvent.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Core/Shape.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UIPanel.cs" />

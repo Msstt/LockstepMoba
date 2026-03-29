@@ -58,6 +58,16 @@ namespace Combat.Actor {
             }
         }
 
+        public void RemoveBuff(int buffId, int adderId) {
+            BuffConfig config = Config.Buff[buffId];
+            BuffInfo buffInfo = GetToMerge(config, adderId);
+            if (buffInfo != null) {
+                if (buffInfo.buff.Reduce()) {
+                    buffs[config.Id].Remove(buffInfo);
+                }
+            }
+        }
+
         private BuffInfo GetToMerge(BuffConfig config, int adderId) {
             if (config.IsOnly) {
                 return buffs.ContainsKey(config.Id) ? buffs[config.Id].First() : null;

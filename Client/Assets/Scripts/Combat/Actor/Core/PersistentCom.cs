@@ -18,15 +18,25 @@ namespace Combat.Actor {
                 uid = value;
             }
         }
+
+        private bool isInited = false;
         
         public sealed override void Awake() {
+            if (isInited) {
+                isInited = true;
+                Init();
+            }
             ReLife();
         }
-        public virtual void ReLife() { }
+
+        protected virtual void Init() { }
+        protected virtual void ReLife() { }
 
         public sealed override void Destroy() {
             Dead();
         }
-        public virtual void Dead() { }
+        protected virtual void Dead() { }
+
+        public sealed override void RenderUpdate() { }
     }
 }

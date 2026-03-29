@@ -3,6 +3,7 @@
 using Combat.Actor;
 using Combat.Area;
 using Combat.Buff;
+using Combat.Equipment;
 using Combat.Skill;
 using Framework;
 using UnityEngine;
@@ -10,6 +11,9 @@ using UnityEngine;
 public static partial class Config {
     public static readonly ConfigCache<ChampionConfig> Champion = new(
         (id) => Resources.Load<ChampionConfig>("Config/Actor/Champion/" + id));
+    
+    public static readonly ConfigCache<EquipmentConfig> Equipment = new(
+        (id) => Resources.Load<EquipmentConfig>("Config/Equipment/" + id));
     
     public static readonly ConfigCache<SkillConfig> Skill = new(
         (id) => JsonHelper.LoadFromRes("Config/Skill/Json/" + id, out SkillConfig config) ? config : null);

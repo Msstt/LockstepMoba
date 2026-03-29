@@ -3,21 +3,22 @@ using Combat.Skill;
 using InputSystem;
 
 namespace Combat.Actor {
-    public class SkillCom : Com {
+    public class SkillCom : PersistentCom {
         private static readonly int InvalidCD = -1;
+        private static readonly int InvalidSkillId = 0;
         
         private ISkillSystem skillSystem;
         private IInputSystem inputSystem;
         
         private int[] skillIds = null;
-        // 技能冷却结束的帧
+        // 技能冷却结束的帧 [skillId, endFrame]
         private readonly Dictionary<int, int> cd = new Dictionary<int, int>();
         private readonly List<int> toFinish = new List<int>();
         private int[] level = null;
         
         private HashSet<int> hasExecuted = new HashSet<int>();
         
-        public override void Awake() {
+        protected override void Init() {
             skillSystem = GameMgr.Instance.GetSystem<ISkillSystem>();
             inputSystem = GameMgr.Instance.GetSystem<IInputSystem>();
             if (skillSystem == null || inputSystem == null) {
@@ -25,13 +26,14 @@ namespace Combat.Actor {
             }
 
             // 其他玩家改变技能不会影响输入方式
-            if (Actor.Uid != CombatUtils.SelfUid) {
+            if (Uid != CombatUtils.SelfUid) {
                 inputSystem = null;
             }
 
             skillIds = new int[SkillUtils.SkillSlotCount];
             level = new int[SkillUtils.SkillSlotCount];
             for (int i = 0; i < SkillUtils.SkillSlotCount; i++) {
+                skillIds[i] = InvalidSkillId;
                 level[i] = 1;
             }
             InitSkillId();
@@ -49,11 +51,12 @@ namespace Combat.Actor {
             }
         }
 
-        public override void Destroy() {
+        protected override void Dead() {
             // 目前 SkillCom 没有管理技能的生命周期，所以这里粗糙的处理一下，不在执行的技能树 SkillSystem 会有容错处理
             foreach (var skillId in hasExecuted) {
-                skillSystem.Abort(Actor.Uid, skillId);
+                skillSystem.Abort(Uid, skillId);
             }
+            hasExecuted.Clear();
         }
 
         private void InitSkillId() {
@@ -64,7 +67,7 @@ namespace Combat.Actor {
             
             ICombatSystem combat = GameMgr.Instance.GetSystem<ICombatSystem>();
             if (combat != null) {
-                var (skillD, skillF) = combat.GetSummonerSkill(Actor.Uid);
+                var (skillD, skillF) = combat.GetSummonerSkill(Uid);
                 SetSkillId(SkillSlot.SkillD, skillD);
                 SetSkillId(SkillSlot.SkillF, skillF);
             }
@@ -82,7 +85,7 @@ namespace Combat.Actor {
             }
 
             hasExecuted.Add(skillIds[(int)slot]);
-            skillSystem.Execute(Actor.Uid, skillIds[(int)slot], level[(int)slot], param);
+            skillSystem.Execute(Uid, skillIds[(int)slot], level[(int)slot], param);
         }
         
         public void ExecuteSkillAsync(int skillId, int level, SkillParam param) {
@@ -91,11 +94,11 @@ namespace Combat.Actor {
             }
             
             hasExecuted.Add(skillId);
-            skillSystem.ExecuteAsync(Actor.Uid, skillId, level, param);
+            skillSystem.ExecuteAsync(Uid, skillId, level, param);
         }
 
         public void AbortSkill(SkillType typeList, int excludeSkillId) {
-            skillSystem.AbortAsync(Actor.Uid, typeList, excludeSkillId);
+            skillSystem.AbortAsync(Uid, typeList, excludeSkillId);
         }
 
         #endregion
@@ -104,9 +107,13 @@ namespace Combat.Actor {
 
         private void SetSkillId(SkillSlot slot, int skillId) {
             skillIds[(int)slot] = skillId;
-            
-            inputSystem?.ChangeCommand(slot, Config.Skill[skillId].InputType);
-            inputSystem?.EnableCommand(slot, InCD(skillId));
+
+            if (skillId == InvalidSkillId) {
+                inputSystem?.EnableCommand(slot, false);
+            } else {
+                inputSystem?.ChangeCommand(slot, Config.Skill[skillId].InputType);
+                inputSystem?.EnableCommand(slot, InCD(skillId));
+            }
         }
         
         public void ChangeSkill(SkillSlot slot, int skillId) {
@@ -114,6 +121,11 @@ namespace Combat.Actor {
                 throw new CombatException("Move and Attack commands are fixed");
             }
             SetSkillId(slot, skillId);
+        }
+        
+        public void ChangeSkill(SkillSlot slot, int skillId, int finishFrame) {
+            ChangeSkill(slot, skillId);
+            cd.Add(skillId, finishFrame);
         }
 
         #endregion

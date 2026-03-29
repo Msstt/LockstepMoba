@@ -55,6 +55,7 @@
     <Compile Include="Assets/Editor/Skill/Core/SkillNode.cs" />
     <Compile Include="Assets/Editor/Skill/Core/NormalConfig.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.cs" />
+    <Compile Include="Assets/Editor/Buff/Effect/Stats.cs" />
     <Compile Include="Assets/Editor/Buff/BuffNode.cs" />
     <Compile Include="Assets/Editor/Buff/GenerateBuffDefine.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Buff.cs" />

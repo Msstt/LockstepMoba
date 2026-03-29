@@ -1,0 +1,24 @@
+{
+  "Id": 2,
+  "Name": "反曲之弓-属性",
+  "IsForever": true,
+  "Time": "0",
+  "IsOnly": true,
+  "MaxCount": 6,
+  "Effect": [
+    {
+      "Type": 2,
+      "Params": {
+        "Type": 0,
+        "Attack": {
+          "datas": [
+            {
+              "level": 1,
+              "value": "1"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

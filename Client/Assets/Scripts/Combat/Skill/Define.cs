@@ -12,6 +12,12 @@ namespace Combat.Skill {
         SkillR = 5,
         SkillD = 6,
         SkillF = 7,
+        Equipment1 = 8,
+        Equipment2 = 9,
+        Equipment3 = 10,
+        Equipment4 = 11,
+        Equipment5 = 12,
+        Equipment6 = 13,
     }
     
     [Flags] [Serializable]

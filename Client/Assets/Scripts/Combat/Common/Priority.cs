@@ -1,11 +1,17 @@
 using System;
 using Framework;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Combat {
     public struct Priority {
+        [DrawWithUnity]
         public enum ModifierType {
+            [InspectorName("+")]
             Add,
+            [InspectorName("+%")]
             PercentAdd,
+            [InspectorName("*")]
             PercentMult,
         }
         

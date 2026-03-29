@@ -22,6 +22,12 @@ namespace InputSystem {
             { SkillSlot.SkillR, KeyCode.R },
             { SkillSlot.SkillD, KeyCode.D },
             { SkillSlot.SkillF, KeyCode.F },
+            { SkillSlot.Equipment1, KeyCode.Alpha1 },
+            { SkillSlot.Equipment2, KeyCode.Alpha2 },
+            { SkillSlot.Equipment3, KeyCode.Alpha3 },
+            { SkillSlot.Equipment4, KeyCode.Alpha4 },
+            { SkillSlot.Equipment5, KeyCode.Alpha5 },
+            { SkillSlot.Equipment6, KeyCode.Alpha6 },
         };
     }
 }

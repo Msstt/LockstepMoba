@@ -13,6 +13,7 @@ namespace Combat.Actor {
             AddComponent<LevelCom>();
             AddComponent<SkillCom>();
             AddComponent<BuffCom>();
+            AddComponent<EquipmentCom>();
             AddComponent<NormalUICom>();
         }
     }

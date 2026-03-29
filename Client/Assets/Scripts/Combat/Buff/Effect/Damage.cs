@@ -11,7 +11,7 @@ namespace Combat.Buff.Effect {
             public FloatF Interval;
         }
         
-        public Damage(Buff buff, JToken json) : base(buff, json) {}
+        public Damage(Buff buff, JToken json) : base(buff, json) { }
 
         private int nextFrame;
         private HitInfo hitInfo;

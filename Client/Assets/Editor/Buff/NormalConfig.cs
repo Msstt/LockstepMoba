@@ -13,6 +13,7 @@ namespace Editor.Buff {
         
         [LabelText("是否是永久 BUFF")]
         public bool IsForever;
+        [ShowIf("@IsForever == false")]
         [LabelText("持续时间")]
         public FloatF Time;
         

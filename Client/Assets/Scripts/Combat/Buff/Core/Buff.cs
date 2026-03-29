@@ -37,6 +37,15 @@ namespace Combat.Buff {
             ExecuteEffect((effect) => effect.OnRefresh());
         }
         
+        public bool Reduce() {
+            Count = Math.Max(Count - 1, 0);
+            if (Count == 0) {
+                Dispose();
+                return true;
+            }
+            return false;
+        }
+        
         public void Update() {
             ExecuteEffect((effect) => effect.OnUpdate());
         }

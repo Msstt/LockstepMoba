@@ -33,6 +33,15 @@ namespace Combat.Actor {
             foreach (var (_, actor) in actors) {
                 actor.Update(frame);
             }
+
+            foreach (var (uid, coms) in persistentComs) {
+                if (GetActor(uid) != null) {
+                    continue;
+                }
+                foreach (var (_, com) in coms) {
+                    com.Update(frame);
+                }
+            }
         }
 
         public void Update() {
