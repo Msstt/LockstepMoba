@@ -125,6 +125,7 @@
     <Compile Include="Assets/Scripts/Tools/Event/EventType.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.MoveComStatus.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatUtils.cs" />
+    <Compile Include="Assets/Scripts/UI/Main/SkillPanel.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Check/IsSameCamp.cs" />
     <Compile Include="Assets/Scripts/Combat/Uid.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillSystem2.cs" />
@@ -518,6 +519,9 @@
     <Reference Include="Sirenix.OdinInspector.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/PackageCache/com.unity.collab-proxy@2.9.2/Lib/Editor/Unity.Plastic.Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -536,6 +540,9 @@
     <Reference Include="Sirenix.Utilities">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.dll</HintPath>
     </Reference>
+    <Reference Include="DOTween">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/PackageCache/com.unity.visualscripting@1.9.4/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
     </Reference>
@@ -547,12 +554,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/PackageCache/com.unity.visualscripting@1.9.4/Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTweenEditor">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

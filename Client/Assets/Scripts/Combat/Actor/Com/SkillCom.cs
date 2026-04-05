@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Codice.Client.Common.WebApi;
 using Combat.Skill;
 using InputSystem;
 
@@ -17,6 +18,12 @@ namespace Combat.Actor {
         private int[] level = null;
         
         private HashSet<int> hasExecuted = new HashSet<int>();
+
+        // TODO 分类型
+        private ChampionConfig GetChampionConfig() {
+            int championId = CombatUtils.GetChampionId(Uid);
+            return Config.Champion[championId];
+        }
         
         protected override void Init() {
             skillSystem = GameMgr.Instance.GetSystem<ISkillSystem>();
@@ -32,9 +39,10 @@ namespace Combat.Actor {
 
             skillIds = new int[SkillUtils.SkillSlotCount];
             level = new int[SkillUtils.SkillSlotCount];
+            ChampionConfig config = GetChampionConfig();
             for (int i = 0; i < SkillUtils.SkillSlotCount; i++) {
                 skillIds[i] = InvalidSkillId;
-                level[i] = 1;
+                level[i] = i < config.skill.Length ? config.skill[i].initLevel : 1;
             }
             InitSkillId();
         }
@@ -60,9 +68,9 @@ namespace Combat.Actor {
         }
 
         private void InitSkillId() {
-            ChampionConfig config = Config.Champion[Actor.Id];
+            ChampionConfig config = GetChampionConfig();
             for (int i = (int)SkillSlot.Move; i <= (int)SkillSlot.SkillR; i++) {
-                SetSkillId((SkillSlot)i, config.skillIds[i]);
+                SetSkillId((SkillSlot)i, config.skill[i].skillId);
             }
             
             ICombatSystem combat = GameMgr.Instance.GetSystem<ICombatSystem>();
@@ -147,8 +155,60 @@ namespace Combat.Actor {
         #endregion
 
         #region 等级
+
+        private List<int> skillRRequestLevel = Config.Exp.skillRRequestLevel;
+        public bool SkillCanLevelUp(SkillSlot slot) {
+            ChampionConfig config = GetChampionConfig();
+            if ((int)slot < config.skill.Length && level[(int)slot] >= config.skill[(int)slot].maxLevel) {
+                return false;
+            }
+
+            int actorLevel = ActorUtils.GetCom<LevelCom>().Level;
+            if (slot == SkillSlot.SkillR && config.skill[(int)slot].maxLevel == skillRRequestLevel.Count) {
+                if (actorLevel < skillRRequestLevel[level[(int)slot]]) {
+                    return false;
+                }
+            }
+            
+            int totalLevel = 0;
+            for (int i = (int)SkillSlot.SkillQ; i <= (int)SkillSlot.SkillR; i++) {
+                totalLevel += level[i];
+            }
+
+            if (totalLevel >= actorLevel) {
+                return false;
+            }
+
+            return true;
+        }
         
+        public bool SkillCanLevelUp() {
+            if (skillIds == null) {
+                return false;
+            }
+            for (int i = 0; i < skillIds.Length; i++) {
+                if (SkillCanLevelUp((SkillSlot)i)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void LevelUpSkill(SkillSlot slot) {
+            if (!SkillCanLevelUp(slot)) {
+            }
+            level[(int)slot]++;
+            EventUtils.Send(new EventType.ChampionSkillLevelUp {
+                Uid = Uid,
+                Slot = slot,
+                Level = level[(int)slot],
+            });
+        }
         
+        public int GetSkillLevel(SkillSlot slot) {
+            return level[(int)slot];
+        }
+
 
         #endregion
     }

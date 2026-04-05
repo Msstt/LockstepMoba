@@ -21,7 +21,21 @@ public static class GameObjectExtensions {
         return trans?.Find(path)?.GetComponent<T>();
     }
     
+    public static T GetComponent<T>(this GameObject trans, string path) where T : Component {
+        return trans?.transform.Find(path)?.GetComponent<T>();
+    }
+    
     public static GameObject GetGameObject(this Transform trans, string path) {
         return trans?.Find(path)?.GetComponent<Transform>().gameObject;
+    }
+    
+    public static GameObject GetGameObject(this GameObject trans, string path) {
+        return trans?.transform.Find(path)?.GetComponent<Transform>().gameObject;
+    }
+    
+    public static void DestroyAllChildren(this GameObject trans) {
+        for (int i = trans.transform.childCount - 1; i >= 0; i--) {
+            GameObject.Destroy(trans.transform.GetChild(i).gameObject);
+        }
     }
 }

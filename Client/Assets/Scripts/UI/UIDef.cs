@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using Framework.UI;
 using UI.Actor;
+using UI.Main;
 
 namespace UI {
     public enum UIDef {
         None,
         ChampionStatsBarPanel,
         FloatingNumberPanel,
+        SkillPanel,
     }
     
     public enum UILayer {
@@ -28,6 +30,11 @@ namespace UI {
                     prefab = "UI/Actor/FloatingNumberPanel",
                     layer = UILayer.World,
                     creator = () => new FloatingNumberPanel(),
+            } },
+            { UIDef.SkillPanel, new Info {
+                prefab = "UI/Main/SkillPanel",
+                layer = UILayer.Back,
+                creator = () => new SkillPanel(),
             } },
         };
             

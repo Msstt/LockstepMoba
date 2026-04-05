@@ -20,6 +20,11 @@ namespace Combat.Actor {
         private void Upgrade() {
             level += 1;
             needExp = Config.Exp.upgradeExp[level];
+            
+            EventUtils.Send(new EventType.ChampionLevelUp {
+                Uid = Uid,
+                Level = level,
+            });
         }
     }
 }

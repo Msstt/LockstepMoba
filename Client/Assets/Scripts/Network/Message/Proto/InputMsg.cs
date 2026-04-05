@@ -25,21 +25,26 @@ namespace Network {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChVEZWZpbmUvSW5wdXRNc2cucHJvdG8SB05ldHdvcmsaFERlZmluZS9UeXBl",
-            "TXNnLnByb3RvIlYKDGJhdHRsZV9pbnB1dBIhCgR0ZXN0GAEgASgLMhMuTmV0",
+            "TXNnLnByb3RvInsKDGJhdHRsZV9pbnB1dBIhCgR0ZXN0GAEgASgLMhMuTmV0",
             "d29yay50ZXN0X2lucHV0EiMKBXNraWxsGAIgASgLMhQuTmV0d29yay5za2ls",
-            "bF9pbnB1dCIbCgp0ZXN0X2lucHV0Eg0KBWNvdW50GAEgASgFIjoKC3NraWxs",
-            "X3BhcmFtEh4KA3BvcxgBIAEoCzIRLk5ldHdvcmsudmVjdG9yX2YSCwoDdWlk",
-            "GAIgASgFIj8KCnNraWxsX2luZm8SDAoEc2xvdBgBIAEoBRIjCgVwYXJhbRgC",
-            "IAEoCzIULk5ldHdvcmsuc2tpbGxfcGFyYW0iMAoLc2tpbGxfaW5wdXQSIQoE",
-            "aW5mbxgBIAMoCzITLk5ldHdvcmsuc2tpbGxfaW5mb2IGcHJvdG8z"));
+            "bF9pbnB1dBIjCgVsZXZlbBgDIAEoCzIULk5ldHdvcmsubGV2ZWxfaW5wdXQi",
+            "GwoKdGVzdF9pbnB1dBINCgVjb3VudBgBIAEoBSI6Cgtza2lsbF9wYXJhbRIe",
+            "CgNwb3MYASABKAsyES5OZXR3b3JrLnZlY3Rvcl9mEgsKA3VpZBgCIAEoBSI/",
+            "Cgpza2lsbF9pbmZvEgwKBHNsb3QYASABKAUSIwoFcGFyYW0YAiABKAsyFC5O",
+            "ZXR3b3JrLnNraWxsX3BhcmFtIjAKC3NraWxsX2lucHV0EiEKBGluZm8YASAD",
+            "KAsyEy5OZXR3b3JrLnNraWxsX2luZm8iIwoTc2tpbGxfbGV2ZWxfdXBfaW5m",
+            "bxIMCgRzbG90GAEgASgFIj0KC2xldmVsX2lucHV0Ei4KCGxldmVsX3VwGAEg",
+            "AygLMhwuTmV0d29yay5za2lsbF9sZXZlbF91cF9pbmZvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Network.TypeMsgReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_input), global::Network.battle_input.Parser, new[]{ "Test", "Skill" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_input), global::Network.battle_input.Parser, new[]{ "Test", "Skill", "Level" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.test_input), global::Network.test_input.Parser, new[]{ "Count" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_param), global::Network.skill_param.Parser, new[]{ "Pos", "Uid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_info), global::Network.skill_info.Parser, new[]{ "Slot", "Param" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_input), global::Network.skill_input.Parser, new[]{ "Info" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_input), global::Network.skill_input.Parser, new[]{ "Info" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_level_up_info), global::Network.skill_level_up_info.Parser, new[]{ "Slot" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.level_input), global::Network.level_input.Parser, new[]{ "LevelUp" }, null, null, null)
           }));
     }
     #endregion
@@ -73,6 +78,7 @@ namespace Network {
     public battle_input(battle_input other) : this() {
       test_ = other.test_ != null ? other.test_.Clone() : null;
       skill_ = other.skill_ != null ? other.skill_.Clone() : null;
+      level_ = other.level_ != null ? other.level_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -103,6 +109,17 @@ namespace Network {
       }
     }
 
+    /// <summary>Field number for the "level" field.</summary>
+    public const int LevelFieldNumber = 3;
+    private global::Network.level_input level_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Network.level_input Level {
+      get { return level_; }
+      set {
+        level_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as battle_input);
@@ -118,6 +135,7 @@ namespace Network {
       }
       if (!object.Equals(Test, other.Test)) return false;
       if (!object.Equals(Skill, other.Skill)) return false;
+      if (!object.Equals(Level, other.Level)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -126,6 +144,7 @@ namespace Network {
       int hash = 1;
       if (test_ != null) hash ^= Test.GetHashCode();
       if (skill_ != null) hash ^= Skill.GetHashCode();
+      if (level_ != null) hash ^= Level.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -147,6 +166,10 @@ namespace Network {
         output.WriteRawTag(18);
         output.WriteMessage(Skill);
       }
+      if (level_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Level);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -160,6 +183,9 @@ namespace Network {
       }
       if (skill_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Skill);
+      }
+      if (level_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Level);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -184,6 +210,12 @@ namespace Network {
         }
         Skill.MergeFrom(other.Skill);
       }
+      if (other.level_ != null) {
+        if (level_ == null) {
+          Level = new global::Network.level_input();
+        }
+        Level.MergeFrom(other.Level);
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -207,6 +239,13 @@ namespace Network {
               Skill = new global::Network.skill_input();
             }
             input.ReadMessage(Skill);
+            break;
+          }
+          case 26: {
+            if (level_ == null) {
+              Level = new global::Network.level_input();
+            }
+            input.ReadMessage(Level);
             break;
           }
         }
@@ -546,7 +585,7 @@ namespace Network {
     public const int SlotFieldNumber = 1;
     private int slot_;
     /// <summary>
-    /// 0 move 1 attack 2-5 skill
+    /// 0 move 1 attack 2-5 skill 6-11 equipment
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Slot {
@@ -786,6 +825,256 @@ namespace Network {
             break;
           case 10: {
             info_.AddEntriesFrom(input, _repeated_info_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class skill_level_up_info : pb::IMessage<skill_level_up_info> {
+    private static readonly pb::MessageParser<skill_level_up_info> _parser = new pb::MessageParser<skill_level_up_info>(() => new skill_level_up_info());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<skill_level_up_info> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Network.InputMsgReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public skill_level_up_info() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public skill_level_up_info(skill_level_up_info other) : this() {
+      slot_ = other.slot_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public skill_level_up_info Clone() {
+      return new skill_level_up_info(this);
+    }
+
+    /// <summary>Field number for the "slot" field.</summary>
+    public const int SlotFieldNumber = 1;
+    private int slot_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Slot {
+      get { return slot_; }
+      set {
+        slot_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as skill_level_up_info);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(skill_level_up_info other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Slot != other.Slot) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Slot != 0) hash ^= Slot.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Slot != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Slot);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Slot != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Slot);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(skill_level_up_info other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Slot != 0) {
+        Slot = other.Slot;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Slot = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class level_input : pb::IMessage<level_input> {
+    private static readonly pb::MessageParser<level_input> _parser = new pb::MessageParser<level_input>(() => new level_input());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<level_input> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Network.InputMsgReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public level_input() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public level_input(level_input other) : this() {
+      levelUp_ = other.levelUp_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public level_input Clone() {
+      return new level_input(this);
+    }
+
+    /// <summary>Field number for the "level_up" field.</summary>
+    public const int LevelUpFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Network.skill_level_up_info> _repeated_levelUp_codec
+        = pb::FieldCodec.ForMessage(10, global::Network.skill_level_up_info.Parser);
+    private readonly pbc::RepeatedField<global::Network.skill_level_up_info> levelUp_ = new pbc::RepeatedField<global::Network.skill_level_up_info>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Network.skill_level_up_info> LevelUp {
+      get { return levelUp_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as level_input);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(level_input other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!levelUp_.Equals(other.levelUp_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= levelUp_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      levelUp_.WriteTo(output, _repeated_levelUp_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += levelUp_.CalculateSize(_repeated_levelUp_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(level_input other) {
+      if (other == null) {
+        return;
+      }
+      levelUp_.Add(other.levelUp_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            levelUp_.AddEntriesFrom(input, _repeated_levelUp_codec);
             break;
           }
         }

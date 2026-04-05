@@ -22,7 +22,7 @@ namespace Combat.Actor {
         private bool isInited = false;
         
         public sealed override void Awake() {
-            if (isInited) {
+            if (!isInited) {
                 isInited = true;
                 Init();
             }

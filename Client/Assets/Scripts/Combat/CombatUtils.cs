@@ -5,6 +5,7 @@ namespace Combat {
         public static int SelfUid => GameMgr.Instance.GetSystem<ICombatSystem>()?.SelfUid ?? -1;
         
         public static int GetChampionId(Uid uid) => GameMgr.Instance.GetSystem<ICombatSystem>()?.GetChampionId(uid) ?? -1;
+        public static int GetChampionId() => GameMgr.Instance.GetSystem<ICombatSystem>()?.GetChampionId(SelfUid) ?? -1;
         public static CampType GetCamp(Uid uid) => GameMgr.Instance.GetSystem<ICombatSystem>()?.GetCamp(uid) ?? CampType.UnKnown;
     }
 }

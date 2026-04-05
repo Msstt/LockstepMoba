@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -26,6 +27,16 @@ namespace Combat.Actor {
         public FloatF moveSpeed;
         
         [LabelText("技能")]
-        public int[] skillIds = new int[SkillUtils.SkillSlotCount];
+        public SkillInfo[] skill = new SkillInfo[6];
+    }
+
+    [Serializable]
+    public class SkillInfo {
+        [LabelText("技能ID")]
+        public int skillId;
+        [LabelText("初始等级")]
+        public int initLevel;
+        [LabelText("最大等级")]
+        public int maxLevel;
     }
 }

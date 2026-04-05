@@ -7,6 +7,7 @@ import "Define/TypeMsg.proto";
 message battle_input {
   test_input test = 1;
   skill_input skill = 2;
+  level_input level = 3;
 }
 
 message test_input {
@@ -19,11 +20,19 @@ message skill_param {
 }
 
 message skill_info {
-  // 0 move 1 attack 2-5 skill
+  // 0 move 1 attack 2-5 skill 6-11 equipment
   int32 slot = 1;
   skill_param param = 2;
 }
 
 message skill_input {
   repeated skill_info info = 1;
+}
+
+message skill_level_up_info {
+  int32 slot = 1;
+}
+
+message level_input {
+  repeated skill_level_up_info level_up = 1;
 }

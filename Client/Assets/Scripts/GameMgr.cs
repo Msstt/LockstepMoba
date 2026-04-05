@@ -71,6 +71,7 @@ public class GameMgr : Singleton<GameMgr> {
         foreach (var system in systemList) {
             (system as IStartSystem)?.Start();
         }
+        EventUtils.Send(new EventType.OnGameStart());
         frameHasStarted = true;
     }
     

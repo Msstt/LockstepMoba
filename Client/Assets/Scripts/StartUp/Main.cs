@@ -1,5 +1,5 @@
-using Combat.Skill;
 using Framework;
+using UI;
 using UnityEngine;
 
 public class Main : MonoBehaviour {
@@ -13,6 +13,10 @@ public class Main : MonoBehaviour {
 
     public void Start() {
         GameMgr.Instance.Init();
+
+        EventMgr.Instance.Register<EventType.OnGameStart>(() => {
+            UIUtils.ShowUI(UIDef.SkillPanel);
+        });
 
         if (gmTool.IsLocalDebug) {
             GameMgr.Instance.StartLocalDebug();

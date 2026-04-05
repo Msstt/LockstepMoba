@@ -1,4 +1,3 @@
-using System;
 using Framework;
 
 namespace Combat.Actor {

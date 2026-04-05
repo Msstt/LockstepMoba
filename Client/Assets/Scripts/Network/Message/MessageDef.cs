@@ -13,6 +13,7 @@ namespace Network {
         battle_start_s2c = 11004,
         test_input = 20001,
         skill_input = 20002,
+        level_input = 20003,
 
     }
     
@@ -27,6 +28,7 @@ namespace Network {
             { MessageDef.battle_start_s2c, typeof(battle_start_s2c) },
             { MessageDef.test_input, typeof(test_input) },
             { MessageDef.skill_input, typeof(skill_input) },
+            { MessageDef.level_input, typeof(level_input) },
 
         };
     }
@@ -42,6 +44,7 @@ namespace Network {
             { MessageDef.battle_start_s2c, battle_start_s2c.Parser },
             { MessageDef.test_input, test_input.Parser },
             { MessageDef.skill_input, skill_input.Parser },
+            { MessageDef.level_input, level_input.Parser },
 
         };
     }

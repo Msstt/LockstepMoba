@@ -24,6 +24,9 @@ namespace Combat.Actor {
             EventMgr.Instance.Register<EventType.OnLockStepStart>(() => {
                 NetworkUtils.RegisterHandler<skill_input>(MessageDef.skill_input, SkillHandler);
             });
+            EventMgr.Instance.Register<EventType.OnLockStepStart>(() => {
+                NetworkUtils.RegisterHandler<level_input>(MessageDef.level_input, LevelHandler);
+            });
         }
         
         public void Start() {
@@ -101,6 +104,15 @@ namespace Combat.Actor {
                 }
                 foreach (var info in input.Info) {
                     com.ExecuteSkill((SkillSlot)info.Slot, new SkillParam(info.Param));
+                }
+            }
+        }
+
+        private void LevelHandler(SortedDictionary<Uid, level_input> inputs) {
+            foreach (var (uid, input) in inputs) {
+                SkillCom com = GetPersistentCom<SkillCom>(uid);
+                foreach (var info in input.LevelUp) {
+                    com?.LevelUpSkill((SkillSlot)info.Slot);
                 }
             }
         }

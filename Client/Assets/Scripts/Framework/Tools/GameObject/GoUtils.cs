@@ -19,4 +19,12 @@ public static class GoUtils {
         }
         return go;
     }
+
+    public static void SetGoActive(Transform go, string path, bool active) {
+        go?.Find(path)?.gameObject.SetActive(active);
+    }
+    
+    public static void SetGoActive(GameObject go, string path, bool active) {
+        go?.transform.Find(path)?.gameObject.SetActive(active);
+    }
 }

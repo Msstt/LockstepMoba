@@ -40,4 +40,22 @@ MonoBehaviour:
     value: 12500000
   moveSpeed:
     value: 34500000
-  skillIds: 010000000200000002000000020000000200000002000000
+  skill:
+  - skillId: 1
+    initLevel: 1
+    maxLevel: 1
+  - skillId: 2
+    initLevel: 1
+    maxLevel: 1
+  - skillId: 2
+    initLevel: 0
+    maxLevel: 5
+  - skillId: 2
+    initLevel: 0
+    maxLevel: 5
+  - skillId: 2
+    initLevel: 0
+    maxLevel: 5
+  - skillId: 2
+    initLevel: 0
+    maxLevel: 3
