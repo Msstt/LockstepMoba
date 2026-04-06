@@ -16,6 +16,7 @@ public class Main : MonoBehaviour {
 
         EventMgr.Instance.Register<EventType.OnGameStart>(() => {
             UIUtils.ShowUI(UIDef.SkillPanel);
+            UIUtils.ShowUI(UIDef.LevelPanel);
         });
 
         if (gmTool.IsLocalDebug) {

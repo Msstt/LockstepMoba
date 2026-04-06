@@ -34,7 +34,7 @@ namespace UI {
                     break;
                 default:
                     child.anchorMin = Vector2.zero;
-                    child.anchorMax = Vector2.one;
+                    child.anchorMax = new Vector2(1, v);
                     break;
             }
         }

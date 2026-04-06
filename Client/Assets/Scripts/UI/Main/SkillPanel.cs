@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using Combat;
 using Combat.Actor;
 using Combat.Skill;
-using Framework;
 using Framework.UI;
 using Network;
 using UnityEngine;

@@ -21,7 +21,7 @@ namespace Combat.Skill.SkillNode {
             }
 
             HitInfo hitInfo = new HitInfo {
-                attacker = context.Param.Uid,
+                attacker = context.ActorUid,
                 damage = new Damage {
                     physical = StatsUtils.GetValue(stats, GetLevelNumber(context, param).Physical),
                     magic = StatsUtils.GetValue(stats, GetLevelNumber(context, param).Magic),

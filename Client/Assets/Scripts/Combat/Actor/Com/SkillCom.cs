@@ -91,6 +91,9 @@ namespace Combat.Actor {
             if (InCD(slot)) {
                 return;
             }
+            if (level[(int)slot] <= 0) {
+                return;
+            }
 
             hasExecuted.Add(skillIds[(int)slot]);
             skillSystem.Execute(Uid, skillIds[(int)slot], level[(int)slot], param);

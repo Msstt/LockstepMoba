@@ -47,7 +47,7 @@ MonoBehaviour:
   - skillId: 2
     initLevel: 1
     maxLevel: 1
-  - skillId: 2
+  - skillId: 6
     initLevel: 0
     maxLevel: 5
   - skillId: 2

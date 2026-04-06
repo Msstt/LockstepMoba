@@ -20,3 +20,4 @@ MonoBehaviour:
     datas:
     - level: 1
       value: 210
+  skillRRequestLevel: 060000000b00000010000000
