@@ -52,4 +52,8 @@ public static class NavmeshUtils {
     public static List<int> RaycastInCircle(Vector3F center, FloatF radius) {
         return GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInCircle(allTypeBitSet, center, radius) ?? new List<int>();
     }
+
+    public static float GetHeight(float x, float y) {
+        return GameMgr.Instance.GetSystem<INavmesh>()?.GetHeight(x, y) ?? 0;
+    }
 }

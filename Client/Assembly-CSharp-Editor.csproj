@@ -51,6 +51,7 @@
     <Compile Include="Assets/Editor/Skill/Core/SkillDefine.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Area.cs" />
     <Compile Include="Assets/Editor/Area/AreaGraph.cs" />
+    <Compile Include="Assets/Editor/Navmesh/GenerateHeightMap.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Check.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillNode.cs" />
     <Compile Include="Assets/Editor/Skill/Core/NormalConfig.cs" />

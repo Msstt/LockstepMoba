@@ -17,7 +17,7 @@ namespace Navmesh {
 
         public bool Init() {
             (min, max) = data.GetBorder();
-            size = new Vector3F((max.x - min.x) / MaxAABBCount, (max.y - min.y) / MaxAABBCount, (max.z - min.z) / MaxAABBCount);
+            size = (max - min) / MaxAABBCount;
             
             aabbGrids = new List<int>[MaxAABBCount][];
             for (int row = 0; row < MaxAABBCount; row++) {

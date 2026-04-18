@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Editor.Network {
+namespace Editor.Navmesh {
     public class NavmeshExporter {
         [MenuItem("工具/Navmesh/导出 Navmesh 网格数据")]
         public static void Execute() {

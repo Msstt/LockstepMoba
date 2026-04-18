@@ -57,18 +57,23 @@ namespace Combat.Actor {
             Quaternion targetRot = Quaternion.LookRotation(Actor.Dir.ToVector3());
             Actor.Go.transform.rotation = Quaternion.Slerp(Actor.Go.transform.rotation, targetRot, smoothDirSpeed * Time.deltaTime);
             
-            // UpdateHeight();
+            UpdateHeight();
         }
         
         // 表现层的 y，不需要同步，所以直接用 Unity
         private void UpdateHeight() {
-            Vector3 pos = Actor.Go.transform.position;
-            Ray ray = new Ray(new Vector3(pos.x, 1000, pos.z), new Vector3(0, -2000, 0));
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, LayerMask.GetMask("Map"))) {
-                Actor.Go.transform.position = new Vector3(pos.x, hitInfo.point.y, pos.z);
-            } else {
-                Log.Warning("Actor Raycast for height failed: " + pos);
-            }
+            #if false
+                Vector3 pos = Actor.Go.transform.position;
+                Ray ray = new Ray(new Vector3(pos.x, 1000, pos.z), new Vector3(0, -2000, 0));
+                if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, LayerMask.GetMask("Map"))) {
+                    Actor.Go.transform.position = new Vector3(pos.x, hitInfo.point.y, pos.z);
+                } else {
+                    Log.Warning("Actor Raycast for height failed: " + pos);
+                }
+            #else
+                Vector3 pos = Actor.Go.transform.position;
+                Actor.Go.transform.position = new Vector3(pos.x, NavmeshUtils.GetHeight(pos.x, pos.z), pos.z);
+            #endif
         }
 
         private void Clear() {

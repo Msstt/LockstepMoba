@@ -89,6 +89,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Com.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SlotCom.cs" />
     <Compile Include="Assets/Scripts/Config/Core/Config.cs" />
+    <Compile Include="Assets/Scripts/Combat/Fog/FogSystem.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Raycast/RaycastInSurface.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Cache/GameObjectPool.cs" />
@@ -237,6 +238,8 @@
     <Compile Include="Assets/Scripts/Tools/Debug/DebugUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/MoveToPosByPath.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Define.cs" />
+    <Compile Include="Assets/Scripts/Navmesh/Core/HeightMap.cs" />
+    <Compile Include="Assets/Scripts/Combat/Fog/IFogSystem.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/WorldUI/BindingUISource.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/GameObject/GoUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/BattleMsgDispatcher.cs" />

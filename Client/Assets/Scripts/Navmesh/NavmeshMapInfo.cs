@@ -6,6 +6,8 @@ namespace Navmesh {
     public class NavmeshMapInfo : MonoBehaviour {
         [LabelText("Navmesh 网格数据")]
         public TextAsset surfaceData;
+        [LabelText("Navmesh 高度数据")]
+        public TextAsset heightMap;
         
         [FoldoutGroup("调试参数")]
         [LabelText("绘制网格三角形")]

@@ -8,6 +8,7 @@ namespace Navmesh {
         private NavmeshMapInfo mapInfo;
         private List<FloatF> allRadius;
         private Dictionary<FloatF, NavmeshSurface> surfaces;
+        private HeightMap heightMap;
         
         private Dictionary<FloatF, Layer> layers;
 
@@ -59,11 +60,19 @@ namespace Navmesh {
                 Log.Error("Navmesh SurfaceData parse failed");
                 return false;
             }
+            if (!JsonHelper.LoadFromString(mapInfo.heightMap.text, out heightMap)) {
+                Log.Error("Navmesh HeightMap parse failed");
+                return false;
+            }
             return true;
         }
         
         public void FrameUpdate(int frame) {
             HandleFindPathQueue();
+        }
+
+        public float GetHeight(float x, float y) {
+            return heightMap.Get(x, y);
         }
 
         #region 寻路

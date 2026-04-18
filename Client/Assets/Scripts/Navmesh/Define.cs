@@ -9,5 +9,7 @@ namespace Navmesh {
 
         public static int FindPathMaxIterationCount = 100;
         public static int FindPathMaxQueryPerFrame = 10;
+
+        public static int HeightMapCellCount = 256;
     }
 }
