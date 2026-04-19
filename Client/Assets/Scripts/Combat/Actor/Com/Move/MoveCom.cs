@@ -72,7 +72,8 @@ namespace Combat.Actor {
                 }
             #else
                 Vector3 pos = Actor.Go.transform.position;
-                Actor.Go.transform.position = new Vector3(pos.x, NavmeshUtils.GetHeight(pos.x, pos.z), pos.z);
+                float height = NavmeshUtils.GetHeight(pos.x, pos.z);
+                Actor.Go.transform.position = new Vector3(pos.x, height < 0.1f ? pos.y : height, pos.z);
             #endif
         }
 

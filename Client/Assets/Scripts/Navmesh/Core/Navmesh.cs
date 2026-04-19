@@ -56,13 +56,12 @@ namespace Navmesh {
                 Log.Error("Navmesh SurfaceData not found");
                 return false;
             }
-            if (!JsonHelper.LoadFromString(mapInfo.surfaceData.text, out surfaces)) {
+            if (mapInfo.surfaceData == null || !JsonHelper.LoadFromString(mapInfo.surfaceData.text, out surfaces)) {
                 Log.Error("Navmesh SurfaceData parse failed");
                 return false;
             }
-            if (!JsonHelper.LoadFromString(mapInfo.heightMap.text, out heightMap)) {
-                Log.Error("Navmesh HeightMap parse failed");
-                return false;
+            if (mapInfo.heightMap == null || !JsonHelper.LoadFromString(mapInfo.heightMap.text, out heightMap)) {
+                Log.Warning("Navmesh HeightMap parse failed");
             }
             return true;
         }
@@ -72,7 +71,7 @@ namespace Navmesh {
         }
 
         public float GetHeight(float x, float y) {
-            return heightMap.Get(x, y);
+            return heightMap?.Get(x, y) ?? 0;
         }
 
         #region 寻路

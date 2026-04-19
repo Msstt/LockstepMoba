@@ -12,6 +12,7 @@ public struct FloatF : IComparable<FloatF> {
     public static FloatF eps = new FloatF(3, true);
     public static FloatF zero = new FloatF(0, true);
     public static FloatF one = new FloatF(1);
+    public static FloatF two = new FloatF(2);
     public static FloatF max = new FloatF(long.MaxValue, true);
     public static FloatF pi = new FloatF(3141592, true);
     

@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Test/Scenes/NavmeshTest/NavmeshTest.unity
     guid: 004f8df6fd4ef40a4b97372589e5d070
+  - enabled: 1
+    path: Assets/Test/Scenes/FogTest/FogTest.unity
+    guid: 1b5dcc97874bb47c6ae11a8cb5468e7c
   m_configObjects: {}

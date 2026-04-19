@@ -45,11 +45,12 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Test/PlayTest/Navmesh/FindPathTest.cs" />
     <Compile Include="Assets/Test/PlayTest/Navmesh/UnitRaycastTest.cs" />
     <Compile Include="Assets/Test/PlayTest/Navmesh/RaycastInSurfaceTest.cs" />
-    <Compile Include="Assets/Test/PlayTest/Network/EchoTest.cs" />
     <Compile Include="Assets/Test/PlayTest/Network/LockstepTest.cs" />
+    <Compile Include="Assets/Test/PlayTest/Fog/FogTest.cs" />
+    <Compile Include="Assets/Test/PlayTest/Navmesh/FindPathTest.cs" />
+    <Compile Include="Assets/Test/PlayTest/Network/EchoTest.cs" />
     <None Include="Assets/Test/PlayTest/PlayTest.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>

@@ -8,6 +8,8 @@ namespace Navmesh {
         public TextAsset surfaceData;
         [LabelText("Navmesh 高度数据")]
         public TextAsset heightMap;
+        [LabelText("视野遮罩数据")]
+        public TextAsset visionBlockerMap;
         
         [FoldoutGroup("调试参数")]
         [LabelText("绘制网格三角形")]

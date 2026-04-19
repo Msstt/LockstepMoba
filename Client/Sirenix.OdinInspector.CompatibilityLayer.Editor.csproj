@@ -50,10 +50,10 @@
     <Compile Include="Assets/Plugins/Sirenix/Odin Inspector/Scripts/Editor/VectorIntDrawers.cs" />
     <Compile Include="Assets/Plugins/Sirenix/Odin Inspector/Scripts/Editor/VectorIntPropertyResolvers.cs" />
     <Compile Include="Assets/Plugins/Sirenix/Odin Inspector/Scripts/Editor/BuildAOTAutomation.cs" />
-    <Compile Include="Assets/Plugins/Sirenix/Odin Inspector/Scripts/Editor/SyncVarAttributeDrawer.cs" />
     <Compile Include="Assets/Plugins/Sirenix/Odin Inspector/Scripts/Editor/FixBrokenUnityObjectWrapperDrawer.cs" />
-    <Compile Include="Assets/Plugins/Sirenix/Odin Inspector/Scripts/Editor/EnsureOdinInspectorDefine.cs" />
     <Compile Include="Assets/Plugins/Sirenix/Odin Inspector/Scripts/Editor/AssemblyImportSettingsAutomation.cs" />
+    <Compile Include="Assets/Plugins/Sirenix/Odin Inspector/Scripts/Editor/SyncVarAttributeDrawer.cs" />
+    <Compile Include="Assets/Plugins/Sirenix/Odin Inspector/Scripts/Editor/EnsureOdinInspectorDefine.cs" />
     <None Include="Assets/Plugins/Sirenix/Odin Inspector/Scripts/Editor/Sirenix.OdinInspector.CompatibilityLayer.Editor.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -315,6 +315,9 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/PackageCache/com.unity.visualscripting@1.9.4/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/PackageCache/com.unity.collections@1.2.4/Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll</HintPath>
     </Reference>
     <Reference Include="ReportGeneratorMerged">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/PackageCache/com.unity.testtools.codecoverage@1.2.6/lib/ReportGenerator/ReportGeneratorMerged.dll</HintPath>

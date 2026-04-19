@@ -54,6 +54,8 @@ public class GameMgr : Singleton<GameMgr> {
         Register<Combat.Actor.ISpawnSystem, Combat.Actor.SpawnSystem>();
         Register<Combat.Actor.ILevelSystem, Combat.Actor.LevelSystem>();
         
+        Register<Combat.Fog.IFogSystem, Combat.Fog.FogSystem>();
+        
         Register<Framework.UI.IUISystem, Framework.UI.UISystem>();
 
         if (driver == null) {

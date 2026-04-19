@@ -1,5 +1,7 @@
+using System;
+
 namespace Combat.Fog {
-    public class IFogSystem : ISystem {
-        
+    public interface IFogSystem : ISystem, IInitSystem, IStartSystem, IUpdateSystem {
+        public Action AddVision(Vector3F position, FloatF radius);
     }
 }

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParadoxNotion", "ParadoxNotion.csproj", "{759587de-a727-ad2b-93af-24751e2aa7ba}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins", "Plugins.csproj", "{b7057248-8898-b7fe-9ecb-7feff9d4d038}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scripts", "Scripts.csproj", "{e8edfcb1-94ef-5247-6486-ca3030a098c4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{9cf74455-0653-9f90-c855-53d6959d5dfd}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scripts", "Scripts.csproj", "{e8edfcb1-94ef-5247-6486-ca3030a098c4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.CompatibilityLayer.Editor", "Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj", "{68bd7c1e-3065-7e76-511a-7f84c9c91529}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins", "Plugins.csproj", "{b7057248-8898-b7fe-9ecb-7feff9d4d038}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OEBIF", "OEBIF.csproj", "{191582db-989d-dfc3-8dd7-203ae2e2b786}"
 EndProject
@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedStudio.OdinTreeNodeCanva
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.CompatibilityLayer", "Sirenix.OdinInspector.CompatibilityLayer.csproj", "{f9915a1b-8fee-545a-be3e-0bed3e51cf02}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.Modules.UnityMathematics", "Sirenix.OdinInspector.Modules.UnityMathematics.csproj", "{ae1a9335-1f15-a1f6-38e2-06a13f57759f}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{8441f412-22a4-275f-22e6-507969043f15}"
 EndProject
 Global
@@ -32,14 +34,14 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{759587de-a727-ad2b-93af-24751e2aa7ba}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{759587de-a727-ad2b-93af-24751e2aa7ba}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{b7057248-8898-b7fe-9ecb-7feff9d4d038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{b7057248-8898-b7fe-9ecb-7feff9d4d038}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9cf74455-0653-9f90-c855-53d6959d5dfd}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9cf74455-0653-9f90-c855-53d6959d5dfd}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{e8edfcb1-94ef-5247-6486-ca3030a098c4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{e8edfcb1-94ef-5247-6486-ca3030a098c4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9cf74455-0653-9f90-c855-53d6959d5dfd}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9cf74455-0653-9f90-c855-53d6959d5dfd}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68bd7c1e-3065-7e76-511a-7f84c9c91529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{68bd7c1e-3065-7e76-511a-7f84c9c91529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{b7057248-8898-b7fe-9ecb-7feff9d4d038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{b7057248-8898-b7fe-9ecb-7feff9d4d038}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{191582db-989d-dfc3-8dd7-203ae2e2b786}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{191582db-989d-dfc3-8dd7-203ae2e2b786}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27f0e4de-3713-5194-4b95-a4e1b9863fda}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -52,6 +54,8 @@ Global
 		{ff5aee3b-3455-98b2-c6a3-1036a975f0f7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{f9915a1b-8fee-545a-be3e-0bed3e51cf02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{f9915a1b-8fee-545a-be3e-0bed3e51cf02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ae1a9335-1f15-a1f6-38e2-06a13f57759f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ae1a9335-1f15-a1f6-38e2-06a13f57759f}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8441f412-22a4-275f-22e6-507969043f15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8441f412-22a4-275f-22e6-507969043f15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection

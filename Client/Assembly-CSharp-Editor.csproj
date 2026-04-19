@@ -45,40 +45,41 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Editor/Buff/BuffGraph.cs" />
-    <Compile Include="Assets/Editor/Buff/EffectNode.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Time.cs" />
+    <Compile Include="Assets/Editor/Buff/EffectNode.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillDefine.cs" />
-    <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Area.cs" />
-    <Compile Include="Assets/Editor/Area/AreaGraph.cs" />
-    <Compile Include="Assets/Editor/Navmesh/GenerateHeightMap.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Check.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillNode.cs" />
     <Compile Include="Assets/Editor/Skill/Core/NormalConfig.cs" />
-    <Compile Include="Assets/Editor/NodeEditor/NodeEditor.cs" />
-    <Compile Include="Assets/Editor/Buff/Effect/Stats.cs" />
     <Compile Include="Assets/Editor/Buff/BuffNode.cs" />
-    <Compile Include="Assets/Editor/Buff/GenerateBuffDefine.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Buff.cs" />
-    <Compile Include="Assets/Editor/Skill/Core/SkillGraph.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Buff.cs" />
     <Compile Include="Assets/Editor/Area/NormalConfig.cs" />
-    <Compile Include="Assets/Editor/Skill/Node/Damage.cs" />
     <Compile Include="Assets/Editor/Area/AreaNode.cs" />
     <Compile Include="Assets/Editor/Buff/NormalConfig.cs" />
-    <Compile Include="Assets/Editor/Tools/MultiLaunchCreator.cs" />
-    <Compile Include="Assets/Editor/Tools/CombineMesh.cs" />
-    <Compile Include="Assets/Editor/Skill/Core/SkillConnection.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Move.cs" />
-    <Compile Include="Assets/Editor/Skill/Node/Anim.cs" />
-    <Compile Include="Assets/Editor/Area/EffectNode.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Area.cs" />
     <Compile Include="Assets/Editor/Navmesh/NavmeshExporter.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Skill.cs" />
+    <Compile Include="Assets/Editor/Navmesh/GenerateVisionBlockerMap.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Normal.cs" />
     <Compile Include="Assets/Editor/Area/GenerateAreaDefine.cs" />
-    <Compile Include="Assets/Editor/Network/GenerateMessageCode.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Cost.cs" />
+    <Compile Include="Assets/Editor/Buff/BuffGraph.cs" />
+    <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Area.cs" />
+    <Compile Include="Assets/Editor/Area/AreaGraph.cs" />
+    <Compile Include="Assets/Editor/Navmesh/GenerateHeightMap.cs" />
+    <Compile Include="Assets/Editor/NodeEditor/NodeEditor.cs" />
+    <Compile Include="Assets/Editor/Buff/Effect/Stats.cs" />
+    <Compile Include="Assets/Editor/Buff/GenerateBuffDefine.cs" />
+    <Compile Include="Assets/Editor/Skill/Core/SkillGraph.cs" />
+    <Compile Include="Assets/Editor/Skill/Node/Damage.cs" />
+    <Compile Include="Assets/Editor/Tools/MultiLaunchCreator.cs" />
+    <Compile Include="Assets/Editor/Tools/CombineMesh.cs" />
+    <Compile Include="Assets/Editor/Skill/Core/SkillConnection.cs" />
+    <Compile Include="Assets/Editor/Skill/Node/Anim.cs" />
+    <Compile Include="Assets/Editor/Area/EffectNode.cs" />
+    <Compile Include="Assets/Editor/Network/GenerateMessageCode.cs" />
     <None Include="Assets/Editor/Network/Template/MessageDef.txt" />
     <None Include="Assets/Editor/Buff/Template/EffectDefine.txt" />
     <None Include="Assets/Editor/Area/Template/EffectDefine.txt" />
@@ -343,6 +344,9 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/PackageCache/com.unity.visualscripting@1.9.4/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/PackageCache/com.unity.collections@1.2.4/Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll</HintPath>
     </Reference>
     <Reference Include="ReportGeneratorMerged">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/PackageCache/com.unity.testtools.codecoverage@1.2.6/lib/ReportGenerator/ReportGeneratorMerged.dll</HintPath>
@@ -782,8 +786,8 @@
     <Reference Include="UnityEngine.TestRunner">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
+    <Reference Include="Unity.2D.IK.Runtime">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Siccity.GLTFUtility.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Siccity.GLTFUtility.Editor.dll</HintPath>
@@ -791,8 +795,83 @@
     <Reference Include="Unity.AI.Navigation">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.AI.Navigation.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.ResourceManager">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.ResourceManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Common.Path.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Common.Path.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Localization.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Localization.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ScriptableBuildPipeline">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.PixelPerfect.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Aseprite.Common">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Aseprite.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Extras.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Collections">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Runtime">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.PixelPerfect">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Aseprite.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Aseprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="PsdPlugin">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
@@ -800,11 +879,8 @@
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.ScriptableBuildPipeline">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Localization.Editor">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Localization.Editor.dll</HintPath>
+    <Reference Include="Unity.Localization">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Localization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
@@ -815,59 +891,59 @@
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Animation.Runtime">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Extras">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Core.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Localization">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Localization.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEngineBridge.001">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Common.Runtime">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Siccity.GLTFUtility">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Siccity.GLTFUtility.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.AI.Navigation.Updater">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.AI.Navigation.Updater.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Addressables.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Addressables.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Siccity.GLTFUtility">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Siccity.GLTFUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InternalAPIEditorBridge.001">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Psdimporter.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Updater">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.AI.Navigation.Updater.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Common.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -878,17 +954,23 @@
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.ScriptableBuildPipeline.Editor">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    <Reference Include="Unity.2D.Tilemap.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Animation.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Addressables">
       <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.IK.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Editor">
+      <HintPath>/Users/msstt/Projects/Client/Moba/Client/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -908,10 +990,6 @@
       <Project>{ff5aee3b-3455-98b2-c6a3-1036a975f0f7}</Project>
       <Name>RedStudio.OdinTreeNodeCanvas</Name>
     </ProjectReference>
-    <ProjectReference Include="Scripts.csproj">
-      <Project>{e8edfcb1-94ef-5247-6486-ca3030a098c4}</Project>
-      <Name>Scripts</Name>
-    </ProjectReference>
     <ProjectReference Include="OEBIF.csproj">
       <Project>{191582db-989d-dfc3-8dd7-203ae2e2b786}</Project>
       <Name>OEBIF</Name>
@@ -923,6 +1001,14 @@
     <ProjectReference Include="Plugins.csproj">
       <Project>{b7057248-8898-b7fe-9ecb-7feff9d4d038}</Project>
       <Name>Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="Sirenix.OdinInspector.Modules.UnityMathematics.csproj">
+      <Project>{ae1a9335-1f15-a1f6-38e2-06a13f57759f}</Project>
+      <Name>Sirenix.OdinInspector.Modules.UnityMathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="Scripts.csproj">
+      <Project>{e8edfcb1-94ef-5247-6486-ca3030a098c4}</Project>
+      <Name>Scripts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

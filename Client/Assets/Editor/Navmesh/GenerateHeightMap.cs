@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace Editor.Navmesh {
-    public class GenerateHeightMap {
+    public static class GenerateHeightMap {
         [MenuItem("工具/Navmesh/生成高度图")]
         public static void Execute() {
             Dictionary<FloatF, NavmeshSurface> surface = null;
@@ -50,6 +50,7 @@ namespace Editor.Navmesh {
             if (!JsonHelper.SaveToFile(map, Path.GetDirectoryName(path) + "/height_map.json")) {
                 return;
             }
+            AssetDatabase.Refresh();
             Log.Info("生成高度图完成");
         }
     }
