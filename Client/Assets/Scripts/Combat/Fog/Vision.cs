@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Framework;
 using UnityEditor;
 
@@ -40,7 +41,7 @@ namespace Combat.Fog {
         }
 
         private bool IsBlocked(int x, int y) {
-            if (blockerMap != null && blockerMap.Blocker.Length > x && blockerMap.Blocker[x].Length > y) {
+            if (blockerMap != null && x >= 0 && blockerMap.Blocker.Length > x && y >= 0 && blockerMap.Blocker[x].Length > y) {
                 return blockerMap.Blocker[x][y];
             }
             return false;
@@ -52,9 +53,9 @@ namespace Combat.Fog {
             var cellList = GetCircleCell(radius);
             List<(int, int)> result = new List<(int, int)>();
             foreach (var (x, y) in cellList) {
-                // if (visitedCell[x + FogConfig.VisionCellCount][y + FogConfig.VisionCellCount]) {
-                //     continue;
-                // }
+                if (visitedCell[x + FogConfig.VisionCellCount][y + FogConfig.VisionCellCount]) {
+                    continue;
+                }
                 var lineCellList = GetLineCell(x, y);
                 bool blocked = false;
                 foreach (var (lineX, lineY) in lineCellList) {
@@ -62,7 +63,7 @@ namespace Combat.Fog {
                         blocked = true;
                     }
                     if (!blocked) {
-                        result.Add((lineX, lineY));
+                        result.Add((row + lineX, col + lineY));
                     }
                     visitedCell[lineX + FogConfig.VisionCellCount][lineY + FogConfig.VisionCellCount] = true;
                 }
@@ -70,6 +71,10 @@ namespace Combat.Fog {
             foreach (var (x, y) in cellList) {
                 visitedCell[x + FogConfig.VisionCellCount][y + FogConfig.VisionCellCount] = false;
             }
+            result = result.OrderBy(t => t.Item1).ThenBy(t => t.Item2).Distinct().ToList();
+            result.RemoveAll(t =>
+                t.Item1 < 0 || t.Item1 >= FogConfig.VisionCellCount || t.Item2 < 0 ||
+                t.Item2 >= FogConfig.VisionCellCount);
             return result;
         }
         

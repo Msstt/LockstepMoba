@@ -150,6 +150,7 @@
     <Compile Include="Assets/Scripts/Navmesh/Core/HeightMap.cs" />
     <Compile Include="Assets/Scripts/Combat/Fog/Define.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Attribute.cs" />
+    <Compile Include="Assets/Scripts/Combat/Fog/FogUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Creator/ReviveChampion.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/SkillParam.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Log.cs" />
