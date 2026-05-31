@@ -52,6 +52,7 @@
     <Compile Include="Assets/Test/PlayTest/Fog/FogTest.cs" />
     <Compile Include="Assets/Test/PlayTest/Navmesh/FindPathTest.cs" />
     <Compile Include="Assets/Test/PlayTest/Fog/FogTestTexture.cs" />
+    <Compile Include="Assets/Test/PlayTest/Common/SceneTest.cs" />
     <Compile Include="Assets/Test/PlayTest/Network/EchoTest.cs" />
     <None Include="Assets/Test/PlayTest/PlayTest.asmdef" />
     <Reference Include="UnityEngine">

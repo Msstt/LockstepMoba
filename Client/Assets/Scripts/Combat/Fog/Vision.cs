@@ -1,8 +1,10 @@
+// 默认地图正方形，且行列相同
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Framework;
-using UnityEditor;
+using UnityEngine;
 
 namespace Combat.Fog {
     public class Vision {
@@ -16,13 +18,18 @@ namespace Combat.Fog {
             } catch (Exception e) {
                 Log.Error("视野遮罩图解析失败: " + e);
             }
+            
+            Material material = Resources.Load<Material>("Material/FogOfWar");
+            material.SetVector(Shader.PropertyToID("_FogStart"), blockerMap.Start.ToVector3());
+            material.SetVector(Shader.PropertyToID("_FogCellSize"), blockerMap.CellSize.ToVector3());
 
             ArrayUtils.InitArray(ref visionCount, FogConfig.VisionCellCount, FogConfig.VisionCellCount);
             ArrayUtils.InitArray(ref visitedCell, 2 * FogConfig.VisionCellCount, 2 * FogConfig.VisionCellCount);
         }
 
-        public Action AddVision(Vector3F position, FloatF radius) {
-            var cellList = GetCell(position, (int)radius);
+        public Action AddVision(Vector3F position, FloatF rowRadius) {
+            int radius = Math.Max(1, (int)(rowRadius / blockerMap.CellSize.x));
+            var cellList = GetCell(position, radius);
             foreach (var (x, y) in cellList) {
                 visionCount[x][y] += 1;
             }
@@ -142,14 +149,17 @@ namespace Combat.Fog {
                     throw new CombatException($"GetLineCell error: cell {cell} is out of line ({x}, {y})");
                 }
             }
+            if (cellList.Last().Item1 != x || cellList.Last().Item2 != y) {
+                cellList.Add((x, y));
+            }
             lineCellCache[x * 10000 + y] = cellList;
             return cellList;
         }
         
         private (int, int) GetCellIndex(Vector3F position) {
             position += blockerMap.CellSize / FloatF.two;
-            int x = (int)(position.x / blockerMap.CellSize.x);
-            int y = (int)(position.z / blockerMap.CellSize.z);
+            int x = (int)((position.x - blockerMap.Start.x) / blockerMap.CellSize.x);
+            int y = (int)((position.z - blockerMap.Start.z) / blockerMap.CellSize.z);
             x = Math.Min(Math.Max(x, 0), FogConfig.VisionCellCount - 1);
             y = Math.Min(Math.Max(y, 0), FogConfig.VisionCellCount - 1);
             return (x, y);

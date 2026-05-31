@@ -19,6 +19,10 @@ public interface IFrameUpdateSystem : ISystem {
     public void FrameUpdate(int frame);
 }
 
+public interface IQuitSystem : ISystem {
+    public void Quit();
+}
+
 public interface IFrameDriver : ISystem {
     public int Frame { get; }
     

@@ -5,23 +5,7 @@ using NUnit.Framework;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-public class FogTest {
-    [SetUp]
-    public void Setup() {
-        SceneManager.LoadScene("FogTest", LoadSceneMode.Single);
-        SceneManager.sceneLoaded += (scene, mode) => {
-            GameMgr.Instance.RegisterSystem(new HashSet<Type> { typeof(Navmesh.INavmesh), typeof(Combat.Fog.IFogSystem) });
-            GameMgr.Instance.Init();
-        };
-    }
-    
-    [UnityTest]
-    public IEnumerator Test1() {
-        while (true) {
-            GameMgr.Instance.FrameUpdate();
-            GameMgr.Instance.Update();
-            
-            yield return null;
-        }
-    }
+public class FogTest : SceneTest {
+    protected override HashSet<Type> TestSystem => new HashSet<Type> { typeof(Navmesh.INavmesh), typeof(Combat.Fog.IFogSystem) };
+    protected override string TestSceneName => "FogTest";
 }

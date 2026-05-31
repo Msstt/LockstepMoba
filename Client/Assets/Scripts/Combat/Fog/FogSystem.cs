@@ -6,7 +6,6 @@ namespace Combat.Fog {
         private readonly Vision vision = new Vision();
         private Texture2D fogTexture;
         private Color32[] fogPixels;
-        private static readonly int FogTexId = Shader.PropertyToID("_FogTex");
 
         public Texture2D FogTexture => fogTexture;
 
@@ -15,6 +14,9 @@ namespace Combat.Fog {
             fogTexture.filterMode = FilterMode.Bilinear;
             fogTexture.wrapMode = TextureWrapMode.Clamp;
             fogPixels = new Color32[FogConfig.VisionCellCount * FogConfig.VisionCellCount];
+            
+            Material material = Resources.Load<Material>("Material/FogOfWar");
+            material.SetTexture(Shader.PropertyToID("_FogTex"), fogTexture);
             
             vision.Init();
         }
@@ -34,12 +36,19 @@ namespace Combat.Fog {
             for (int x = 0; x < FogConfig.VisionCellCount; x++) {
                 for (int y = 0; y < FogConfig.VisionCellCount; y++) {
                     byte mask = vision.IsVisible(x, y) ? (byte)255 : (byte)0;
-                    fogPixels[x * FogConfig.VisionCellCount + y] = new Color32(mask, mask, mask, 255);
+                    fogPixels[y * FogConfig.VisionCellCount + x] = new Color32(mask, mask, mask, 255);
                 }
             }
             
             fogTexture.SetPixels32(fogPixels);
             fogTexture.Apply(false, false);
+        }
+
+        public void Quit() {
+            if (fogTexture != null) {
+                UnityEngine.Object.Destroy(fogTexture);
+                fogTexture = null;
+            }
         }
     }
 }

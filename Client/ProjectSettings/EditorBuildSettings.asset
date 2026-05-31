@@ -14,4 +14,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Test/Scenes/FogTest/FogTest.unity
     guid: 1b5dcc97874bb47c6ae11a8cb5468e7c
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 6a49254b48b3040839cd6b5bc8570b21, type: 2}

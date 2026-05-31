@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Framework;
 using Network;
+using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -95,6 +96,12 @@ public class GameMgr : Singleton<GameMgr> {
             (system as IFrameUpdateSystem)?.FrameUpdate(Frame);
         }
         Profiler.EndSample();
+    }
+
+    public void Quit() {
+        foreach (var system in systemList) {
+            (system as IQuitSystem)?.Quit();
+        }
     }
     
     private void RegisterSystem<T>(T system) where T : ISystem {

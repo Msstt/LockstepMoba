@@ -1,4 +1,6 @@
+using System;
 using Framework;
+using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 using UI;
 using UnityEngine;
 
@@ -30,5 +32,9 @@ public class Main : MonoBehaviour {
         GameMgr.Instance.Update();
         
         // DebugUtils.DrawDot(GameMgr.Instance.GetSystem<IActorSystem>().SelfChampion.Pos);
+    }
+
+    public void OnApplicationQuit() {
+        GameMgr.Instance.Quit();
     }
 }
