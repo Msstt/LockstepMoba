@@ -66,9 +66,8 @@ namespace Combat.Fog {
             rtBlurFinal.wrapMode = TextureWrapMode.Clamp;
             rtBlurFinal.Create();
 
-            Material fogMaterial = Resources.Load<Material>("Material/FogOfWar");
-            fogMaterial.SetTexture(Shader.PropertyToID("_FogTex"), rtBlurFinal);
-            fogMaterial.SetFloat(Shader.PropertyToID("_FogSourceSize"), SourceSize);
+            Shader.SetGlobalTexture("_FogTex", rtBlurFinal);
+            Shader.SetGlobalFloat("_FogSourceSize", SourceSize);
         }
 
         private void InitMaterials() {

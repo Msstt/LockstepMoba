@@ -1,12 +1,12 @@
 Shader "World/FogOfWarSprite" {
     Properties {
-        [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
-        _FogTex("Fog Texture", 2D) = "white" {}
-        _FogStart("Fog Start (World)", Vector) = (0, 0, 0, 0)
-        _FogCellSize("Fog Cell Size", Vector) = (1, 1, 1, 0)
+        _MainTex("Sprite Texture", 2D) = "white" {}
+//        _FogTex("Fog Texture", 2D) = "white" {}
+//        _FogStart("Fog Start (World)", Vector) = (0, 0, 0, 0)
+//        _FogCellSize("Fog Cell Size", Vector) = (1, 1, 1, 0)
         _Color("Tint", Color) = (1, 1, 1, 1)
         _FogStrength("Fog Strength", Range(0, 1)) = 0.75
-        _FogSourceSize("Fog Source Size", Float) = 128
+//        _FogSourceSize("Fog Source Size", Float) = 128
     }
 
     SubShader {

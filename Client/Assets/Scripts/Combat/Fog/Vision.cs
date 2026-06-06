@@ -19,9 +19,8 @@ namespace Combat.Fog {
                 Log.Error("视野遮罩图解析失败: " + e);
             }
             
-            Material material = Resources.Load<Material>("Material/FogOfWar");
-            material.SetVector(Shader.PropertyToID("_FogStart"), blockerMap.Start.ToVector3());
-            material.SetVector(Shader.PropertyToID("_FogCellSize"), blockerMap.CellSize.ToVector3());
+            Shader.SetGlobalVector("_FogStart", blockerMap.Start.ToVector3());
+            Shader.SetGlobalVector("_FogCellSize", blockerMap.CellSize.ToVector3());
 
             ArrayUtils.InitArray(ref visionCount, FogConfig.VisionCellCount, FogConfig.VisionCellCount);
             ArrayUtils.InitArray(ref visitedCell, 2 * FogConfig.VisionCellCount, 2 * FogConfig.VisionCellCount);
