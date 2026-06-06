@@ -1,46 +1,30 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Framework.Network;
 using Network;
-using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.TestTools;
 using UnityEngine.UI;
 
-public class LockstepTest {
+public class LockstepTest : SceneTest {
+    protected override HashSet<Type> TestSystem => new() { typeof(INetwork), typeof(ILockStep) };
+    protected override string TestSceneName => "LockstepTest";
+    
     private int count = 0;
     private Dictionary<Uid, int> inputCount = new Dictionary<Uid, int>();
     private Text statusText;
-    
-    [SetUp]
-    public void Setup() {
-        SceneManager.LoadScene("LockstepTest", LoadSceneMode.Single);
-        SceneManager.sceneLoaded += (scene, mode) => {
-            GameMgr.Instance.RegisterSystem(new HashSet<Type> { typeof(INetwork), typeof(ILockStep) });
-            GameMgr.Instance.Init();
-            
-            EventUtils.Register<EventType.OnLockStepStart>(OnLockStepStart);
-            GameObject.Find("Canvas/+1").GetComponent<Button>().onClick.AddListener(() => {
-                count = 1;
-            });
-            GameObject.Find("Canvas/connect").GetComponent<Button>().onClick.AddListener(() => {
-                GameMgr.Instance.GetSystem<INetwork>().Connect("127.0.0.1", 9980);
-            });
-            GameObject.Find("Canvas/disconnect").GetComponent<Button>().onClick.AddListener(() => {
-                GameMgr.Instance.GetSystem<INetwork>().Disconnect();
-            });
-            statusText = GameObject.Find("Canvas/status").GetComponent<Text>();
-        };
-    }
-    
-    [UnityTest]
-    public IEnumerator Test1() {
-        while (true) {
-            GameMgr.Instance.Update();
-            yield return null;
-        }
+
+    protected override void AfterSceneLoad() {
+        EventUtils.Register<EventType.OnLockStepStart>(OnLockStepStart);
+        GameObject.Find("Canvas/+1").GetComponent<Button>().onClick.AddListener(() => {
+            count = 1;
+        });
+        GameObject.Find("Canvas/connect").GetComponent<Button>().onClick.AddListener(() => {
+            GameMgr.Instance.GetSystem<INetwork>().Connect("127.0.0.1", 9980);
+        });
+        GameObject.Find("Canvas/disconnect").GetComponent<Button>().onClick.AddListener(() => {
+            GameMgr.Instance.GetSystem<INetwork>().Disconnect();
+        });
+        statusText = GameObject.Find("Canvas/status").GetComponent<Text>();
     }
 
     private void OnLockStepStart() {

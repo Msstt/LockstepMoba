@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 public abstract class SceneTest {
-    protected virtual HashSet<Type> TestSystem { get; }
-    protected virtual string TestSceneName { get; }
+    protected abstract HashSet<Type> TestSystem { get; }
+    protected abstract string TestSceneName { get; }
     
     protected virtual void BeforeSceneLoad() {
     }

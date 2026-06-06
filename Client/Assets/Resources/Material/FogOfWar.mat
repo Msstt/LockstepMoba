@@ -69,6 +69,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _FogBlurOffset: 1
+    - _FogSourceSize: 128
     - _FogStrength: 0.97
     - _GlossMapScale: 1
     - _Glossiness: 0.5

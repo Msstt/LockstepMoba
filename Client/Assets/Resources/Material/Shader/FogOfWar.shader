@@ -6,6 +6,7 @@ Shader "World/FogOfWarSprite" {
         _FogCellSize("Fog Cell Size", Vector) = (1, 1, 1, 0)
         _Color("Tint", Color) = (1, 1, 1, 1)
         _FogStrength("Fog Strength", Range(0, 1)) = 0.75
+        _FogSourceSize("Fog Source Size", Float) = 128
     }
 
     SubShader {
@@ -48,6 +49,7 @@ Shader "World/FogOfWarSprite" {
             float4 _FogCellSize;
             fixed4 _Color;
             float _FogStrength;
+            float _FogSourceSize;
 
             v2f vert(appdata_t IN) {
                 v2f OUT;
@@ -61,7 +63,7 @@ Shader "World/FogOfWarSprite" {
             fixed4 frag(v2f IN) : SV_Target {
                 fixed4 baseCol = tex2D(_MainTex, IN.uv) * IN.color;
                 float2 cellCoord = (IN.worldPos.xz - _FogStart.xz) / _FogCellSize.xz;
-                float2 fogUV = (cellCoord + 0.5) * _FogTex_TexelSize.xy;
+                float2 fogUV = (cellCoord + 0.5) / _FogSourceSize;
                 fixed fogMask = tex2D(_FogTex, fogUV).r;
                 fixed fogShadow = saturate(1.0 - fogMask) * _FogStrength;
                 baseCol.rgb *= (1.0 - fogShadow);

@@ -44,8 +44,10 @@
     <None Include="Assets/Test/Scenes/NavmeshTest/NavmeshData/navmesh_surfaces.json" />
     <None Include="Assets/Resources/Config/Skill/Json/4.json" />
     <None Include="Assets/Resources/Config/Area/Json/1.json" />
+    <None Include="Assets/Resources/Material/Shader/FogOfWarUpscale.shader" />
     <None Include="Assets/Scenes/NavmeshData/navmesh_surfaces.json" />
     <None Include="Assets/Test/Scenes/FogTest/NavmeshData/navmesh_surfaces.json" />
+    <None Include="Assets/Resources/Material/Shader/FogOfWarBlur.shader" />
     <None Include="Assets/Resources/Material/Shader/FogOfWar.shader" />
     <None Include="Assets/Resources/Material/Shader/BarWithTick.shader" />
     <None Include="Assets/Resources/Config/Skill/Json/6.json" />
