@@ -1,4 +1,5 @@
 using System;
+using Combat.Fog;
 using UnityEngine;
 
 public class FogTestVision : MonoBehaviour {
@@ -9,6 +10,6 @@ public class FogTestVision : MonoBehaviour {
     
     public void Update() {
         removeFogHandle?.Invoke();
-        removeFogHandle = FogUtils.AddVision(transform.position.ToVector3F(), radius);
+        removeFogHandle = FogUtils.AddVision(VisionType.Self, transform.position.ToVector3F(), radius);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Framework;
 using UnityEngine;
 
 namespace Combat.Fog {
@@ -7,7 +8,7 @@ namespace Combat.Fog {
         private readonly int SourceSize = FogConfig.VisionCellCount;
         private readonly int UpscaledSize = FogConfig.VisionCellCount * UpscaleFactor;
 
-        private readonly Vision vision = new Vision();
+        private Vision[] vision;
         private Texture2D fogTexture;
         private Color32[] fogPixels;
 
@@ -20,13 +21,27 @@ namespace Combat.Fog {
         private const float BlurOffset = 2.0f;
 
         public Texture2D FogTexture => fogTexture;
+        
+        private VisionBlockerMap blockerMap;
 
         public void Init() {
             InitFogTexture();
             InitRenderTextures();
             InitMaterials();
+            
+            try {
+                JsonHelper.LoadFromString(NavmeshUtils.Config.visionBlockerMap.text, out blockerMap);
+            } catch (Exception e) {
+                Log.Error("视野遮罩图解析失败: " + e);
+            }
+            Shader.SetGlobalVector("_FogStart", blockerMap.Start.ToVector3());
+            Shader.SetGlobalVector("_FogCellSize", blockerMap.CellSize.ToVector3());
 
-            vision.Init();
+            int typeCount = Enum.GetNames(typeof(VisionType)).Length;
+            vision = new Vision[typeCount];
+            vision[(int)VisionType.Global] = new OrVision(blockerMap);
+            vision[(int)VisionType.Self] = new OrVision(blockerMap);
+            vision[(int)VisionType.Limit] = new AndVision(blockerMap);
         }
 
         public void Start() {
@@ -37,8 +52,8 @@ namespace Combat.Fog {
             ProcessFog();
         }
         
-        public Action AddVision(Vector3F position, FloatF radius) {
-            return vision.AddVision(position, radius);
+        public Action AddVision(VisionType type, Vector3F position, FloatF radius) {
+            return vision[(int)type].AddVision(position, radius);
         }
         
         private void InitFogTexture() {
@@ -84,11 +99,20 @@ namespace Combat.Fog {
             Graphics.Blit(rtUpscaled, rtBlurH, blurMaterial, 0);
             Graphics.Blit(rtBlurH, rtBlurFinal, blurMaterial, 1);
         }
+        
+        private bool IsVisible(int x, int y) {
+            // 暂时先这样
+            // 如果被设置过受限视野，那一定是中 debuff 了，需要切换到受限视野的
+            if (vision[(int)VisionType.Limit].VisionCount > 0) {
+                return vision[(int)VisionType.Limit].IsVisible(x, y);
+            }
+            return vision[(int)VisionType.Self].IsVisible(x, y);
+        }
 
         private void UpdateFog() {
             for (int x = 0; x < SourceSize; x++) {
                 for (int y = 0; y < SourceSize; y++) {
-                    byte mask = vision.IsVisible(x, y) ? (byte)255 : (byte)0;
+                    byte mask = IsVisible(x, y) ? (byte)255 : (byte)0;
                     fogPixels[y * SourceSize + x] = new Color32(mask, mask, mask, 255);
                 }
             }

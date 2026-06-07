@@ -4,11 +4,6 @@ using UnityEditor;
 using UnityEngine;
 
 namespace Editor.Node {
-    public enum SkillEditorType {
-        Skill,
-        Buff,
-    }
-
     public interface INodeEditor {
         public int DataCount { get; }
         public void DrawHeader();

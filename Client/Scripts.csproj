@@ -49,6 +49,7 @@
     <Compile Include="Assets/Scripts/Navmesh/Core/PathSmoother.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/None.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SkillCom.cs" />
+    <Compile Include="Assets/Scripts/Config/Combat/Vision.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/TypeMsg.cs" />
     <Compile Include="Assets/Scripts/Combat/Level/ILevelSystem.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/MsgDispatcher.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Assets/Scripts/Input/Command/None.cs" />
     <Compile Include="Assets/Scripts/UI/UIDef.cs" />
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/VisionCOm.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
     <Compile Include="Assets/Scripts/UI/Com/UIBarCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />

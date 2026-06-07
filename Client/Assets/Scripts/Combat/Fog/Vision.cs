@@ -3,48 +3,49 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Framework;
-using UnityEngine;
 
 namespace Combat.Fog {
-    public class Vision {
+    public abstract class Vision {
         private VisionBlockerMap blockerMap;
 
-        private int[][] visionCount;
+        private int[][] visionData;
+        protected int visionCount = 0;
+        
+        public int VisionCount => visionCount;
 
-        public void Init() {
-            try {
-                JsonHelper.LoadFromString(NavmeshUtils.Config.visionBlockerMap.text, out blockerMap);
-            } catch (Exception e) {
-                Log.Error("视野遮罩图解析失败: " + e);
-            }
+        protected Vision(VisionBlockerMap blockerMap) {
+            this.blockerMap = blockerMap;
             
-            Shader.SetGlobalVector("_FogStart", blockerMap.Start.ToVector3());
-            Shader.SetGlobalVector("_FogCellSize", blockerMap.CellSize.ToVector3());
-
-            ArrayUtils.InitArray(ref visionCount, FogConfig.VisionCellCount, FogConfig.VisionCellCount);
+            ArrayUtils.InitArray(ref visionData, FogConfig.VisionCellCount, FogConfig.VisionCellCount);
             ArrayUtils.InitArray(ref visitedCell, 2 * FogConfig.VisionCellCount, 2 * FogConfig.VisionCellCount);
         }
 
         public Action AddVision(Vector3F position, FloatF rowRadius) {
-            int radius = Math.Max(1, (int)(rowRadius / blockerMap.CellSize.x));
+            int radius = (int)(rowRadius / blockerMap.CellSize.x);
+            if (radius < 1) {
+                return () => {};
+            }
             var cellList = GetCell(position, radius);
             foreach (var (x, y) in cellList) {
-                visionCount[x][y] += 1;
+                visionData[x][y] += 1;
             }
+            visionCount += 1;
             return () => {
                 foreach (var (x, y) in cellList) {
-                    visionCount[x][y] -= 1;
+                    visionData[x][y] -= 1;
                 }
+                visionCount -= 1;
             };
         }
 
         public bool IsVisible(int x, int y) {
-            if (visionCount == null || x < 0 || x >= FogConfig.VisionCellCount || y < 0 || y >= FogConfig.VisionCellCount) {
+            if (visionData == null || x < 0 || x >= FogConfig.VisionCellCount || y < 0 || y >= FogConfig.VisionCellCount) {
                 return false;
             }
-            return visionCount[x][y] > 0;
+            return IsVisible(visionData[x][y]);
         }
+
+        protected abstract bool IsVisible(int data);
 
         private bool IsBlocked(int x, int y) {
             if (blockerMap != null && x >= 0 && blockerMap.Blocker.Length > x && y >= 0 && blockerMap.Blocker[x].Length > y) {
@@ -163,5 +164,17 @@ namespace Combat.Fog {
             y = Math.Min(Math.Max(y, 0), FogConfig.VisionCellCount - 1);
             return (x, y);
         }
+    }
+
+    public class OrVision : Vision {
+        public OrVision(VisionBlockerMap blockerMap) : base(blockerMap) {}
+
+        protected override bool IsVisible(int data) => data > 0;
+    }
+    
+    public class AndVision : Vision {
+        public AndVision(VisionBlockerMap blockerMap) : base(blockerMap) {}
+
+        protected override bool IsVisible(int data) => data >= visionCount;
     }
 }

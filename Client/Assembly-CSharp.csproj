@@ -44,6 +44,7 @@
     <None Include="Assets/Test/Scenes/NavmeshTest/NavmeshData/navmesh_surfaces.json" />
     <None Include="Assets/Resources/Config/Skill/Json/4.json" />
     <None Include="Assets/Resources/Config/Area/Json/1.json" />
+    <None Include="Assets/Scenes/NavmeshData/vision_blocker_map.json" />
     <None Include="Assets/Resources/Material/Shader/FogOfWarUpscale.shader" />
     <None Include="Assets/Scenes/NavmeshData/navmesh_surfaces.json" />
     <None Include="Assets/Test/Scenes/FogTest/NavmeshData/navmesh_surfaces.json" />

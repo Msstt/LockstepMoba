@@ -10,10 +10,14 @@ namespace Combat.Actor {
             AddComponent<MoveCom>();
             AddComponent<AnimCom>();
             AddComponent<SlotCom>();
+            
             AddComponent<LevelCom>();
             AddComponent<SkillCom>();
             AddComponent<BuffCom>();
             AddComponent<EquipmentCom>();
+            
+            AddComponent<VisionCom>();
+            
             AddComponent<NormalUICom>();
         }
     }
