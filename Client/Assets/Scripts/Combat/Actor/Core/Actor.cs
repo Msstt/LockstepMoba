@@ -104,9 +104,19 @@ namespace Combat.Actor {
             }
         }
         
+        private bool? lastVisibility = null;
+        
         public void RenderUpdate() {
             foreach (var com in comList) {
                 com.RenderUpdate();
+            }
+
+            bool nowVisibility = FogUtils.IsVisible(Pos);
+            if (nowVisibility != lastVisibility) {
+                // 直接设置根节点，待测试正确性
+                go.SetActive(nowVisibility);
+                Event.OnVisibilityChange.Send(nowVisibility);
+                lastVisibility = nowVisibility;
             }
         }
 

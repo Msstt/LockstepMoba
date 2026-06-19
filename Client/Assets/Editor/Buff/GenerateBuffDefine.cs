@@ -17,9 +17,9 @@ namespace Editor.Buff {
             string factoryList = "";
             int index = 0;
             foreach (string effect in name) {
-                enumList += "        " + effect + " = " + ++index + ",";
+                enumList += "        " + effect + " = " + ++index + ",\n";
                 factoryList += "                case EffectType." + effect + ":\n                    return new " +
-                               effect + "(buff, config.Params);";
+                               effect + "(buff, config.Params);\n";
             }
 
             template = template.Replace("{EffectEnumList}", enumList);
@@ -37,7 +37,10 @@ namespace Editor.Buff {
 
             List<string> name = new List<string>();
             foreach (var file in Directory.GetFiles(ScriptPath + "Effect/", "*.cs", SearchOption.AllDirectories)) {
-                name.Add(Path.GetFileNameWithoutExtension(file));
+                string effect = Path.GetFileNameWithoutExtension(file);
+                if (effect[0] != '_') {
+                    name.Add(effect);
+                }
             }
 
             if (!GenerateEffectDefine(name)) {

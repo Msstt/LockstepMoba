@@ -44,6 +44,11 @@ namespace Combat.Fog {
             }
             return IsVisible(visionData[x][y]);
         }
+        
+        public bool IsVisible(Vector3F position) {
+            var (row, col) = GetCellIndex(position);
+            return IsVisible(row, col);
+        }
 
         protected abstract bool IsVisible(int data);
 

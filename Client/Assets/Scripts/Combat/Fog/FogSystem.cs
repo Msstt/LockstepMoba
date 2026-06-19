@@ -61,6 +61,10 @@ namespace Combat.Fog {
         public Action AddVision(VisionType type, Vector3F position, FloatF radius) {
             return vision[(int)type].AddVision(position, radius);
         }
+
+        public bool IsVisible(Vector3F position) {
+            return vision[(int)CurVisionType].IsVisible(position);
+        }
         
         private void InitFogTexture() {
             fogTexture = new Texture2D(SourceSize, SourceSize, TextureFormat.RGBA32, false);

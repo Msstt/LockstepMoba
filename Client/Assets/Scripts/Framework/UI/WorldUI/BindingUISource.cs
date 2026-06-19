@@ -49,5 +49,11 @@ namespace Framework.UI {
                 UIUtils.UnBindingUI(panel.Current.Def, transform);
             }
         }
+
+        public void SetVisible(bool isVisible) {
+            foreach (var panel in panels.Values) {
+                panel.Transform.gameObject.SetActive(isVisible);
+            }
+        }
     }
 }

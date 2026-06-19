@@ -2,14 +2,12 @@ using Combat.Buff.Effect;
 
 namespace Combat.Buff {
     public enum EffectType {
-{EffectEnumList}
-    }
+{EffectEnumList}    }
     
     public static class EffectFactory {
         public static IEffect CreateEffect(Buff buff, EffectConfig config) {
             switch (config.Type) {
-{EffectFactoryList}
-                default:
+{EffectFactoryList}                default:
                     throw new CombatException("Effect type doesn't exist: " + config.Type);
             }
         }

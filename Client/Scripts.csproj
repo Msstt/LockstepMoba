@@ -114,12 +114,12 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Context.cs" />
     <Compile Include="Assets/Scripts/Combat/Equipment/Config/EquipmentConfig.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/RandomColor.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/Effect/Stats/_ChangeStats.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Buff.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.OnHeal.cs" />
     <Compile Include="Assets/Scripts/Data/Core/DataSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Event/EventHub.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.cs" />
-    <Compile Include="Assets/Scripts/Combat/Buff/Effect/Stats/ChangeStats.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Core/Shape.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UIPanel.cs" />
     <Compile Include="Assets/Scripts/Combat/Fog/Vision.cs" />
@@ -136,7 +136,6 @@
     <Compile Include="Assets/Scripts/Input/Command/None.cs" />
     <Compile Include="Assets/Scripts/UI/UIDef.cs" />
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
-    <Compile Include="Assets/Scripts/Combat/Actor/Com/VisionCOm.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
     <Compile Include="Assets/Scripts/UI/Com/UIBarCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
@@ -161,6 +160,7 @@
     <Compile Include="Assets/Scripts/Tools/Camera/CameraCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Anim/PlayAnim.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Time/WaitForTime.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/Effect/Vision/InvisibilityByRadius.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Unit/Champion.cs" />
     <Compile Include="Assets/Scripts/GameMgr.cs" />
     <Compile Include="Assets/Scripts/Data/Combat/Level.cs" />
@@ -184,6 +184,7 @@
     <Compile Include="Assets/Scripts/UI/UIUtils.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/SafeDictionary.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillUtils.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/VisionCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Level/Level.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/RepeatSkill.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Define.cs" />
     <Compile Include="Assets/Scripts/UI/Actor/FloatingNumberPanel.cs" />
     <Compile Include="Assets/Scripts/ISystem.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/Effect/Vision/Invisibility.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/BattleMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/VariantMap.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/DebugMgr.cs" />

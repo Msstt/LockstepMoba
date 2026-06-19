@@ -1,3 +1,4 @@
+using Framework.UI;
 using UI;
 using UI.Actor;
 using UnityEngine;
@@ -17,11 +18,24 @@ namespace Combat.Actor {
             }
         }
         
+        private IUIParam StatsPanelParam {
+            get {
+                switch (Actor.Type) {
+                    case ActorType.Champion:
+                        return new ChampionStatsBarPanelParam {
+                            actor = Actor,
+                        };
+                    default:
+                        return null;
+                }
+            }
+        }
+        
         public override void Awake() {
+            Actor.Event.OnVisibilityChange.Register(OnVisibilityChange);
+            
             bindingGo = Actor.Go.transform.Find("Prefab/StatsBarBindingPoint");
-            UIUtils.BindingUI(StatsPanelDef, bindingGo, new ChampionStatsBarPanelParam {
-                actor = Actor,
-            });
+            UIUtils.BindingUI(StatsPanelDef, bindingGo, StatsPanelParam);
             UIUtils.BindingUI(UIDef.FloatingNumberPanel, bindingGo, new FloatingNumberPanelParam {
                 actor = Actor,
             });
@@ -30,6 +44,12 @@ namespace Combat.Actor {
         public override void Destroy() {
             UIUtils.UnBindingUI(StatsPanelDef, bindingGo);
             UIUtils.UnBindingUI(UIDef.FloatingNumberPanel, bindingGo);
+            
+            Actor.Event.OnVisibilityChange.UnRegister(OnVisibilityChange);
+        }
+
+        private void OnVisibilityChange(bool visible) {
+            bindingGo.GetComponent<BindingUISource>().SetVisible(visible);
         }
     }
 }

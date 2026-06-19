@@ -57,6 +57,7 @@
     <Compile Include="Assets/Editor/Area/NormalConfig.cs" />
     <Compile Include="Assets/Editor/Area/AreaNode.cs" />
     <Compile Include="Assets/Editor/Buff/NormalConfig.cs" />
+    <Compile Include="Assets/Editor/Buff/Effect/Vision.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Move.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Area.cs" />
     <Compile Include="Assets/Editor/Navmesh/NavmeshExporter.cs" />
