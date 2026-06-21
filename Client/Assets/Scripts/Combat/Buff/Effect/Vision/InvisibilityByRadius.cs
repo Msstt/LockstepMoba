@@ -24,7 +24,13 @@ namespace Combat.Buff.Effect {
             if (actor != null) {
                 actor.Stats.Invisibility -= lastInvisibility;
                 List<int> units = NavmeshUtils.RaycastInCircle(typeBitSet, actor.Pos, param.Radius);
-                lastInvisibility = units.Count > 0 ? 1 : 0;
+                lastInvisibility = 1;
+                foreach (int uid in units) {
+                    if (!ActorUtils.IsSameCamp(buff.ActorId, uid)) {
+                        lastInvisibility = 0;
+                        break;
+                    }
+                }
                 actor.Stats.Invisibility += lastInvisibility;
             }
         }

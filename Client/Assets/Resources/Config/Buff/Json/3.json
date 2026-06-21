@@ -1,0 +1,14 @@
+{
+  "Id": 3,
+  "Name": "隐身测试",
+  "IsForever": true,
+  "Time": "0",
+  "IsOnly": false,
+  "MaxCount": 1,
+  "Effect": [
+    {
+      "Type": 3,
+      "Params": {}
+    }
+  ]
+}

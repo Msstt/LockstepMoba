@@ -12,6 +12,6 @@ public static class FogUtils {
     }
 
     public static bool IsVisible(Actor actor) {
-        return actor.Stats.Invisibility == 0 && IsVisible(actor.Pos);
+        return (actor.Stats.Invisibility == 0 || ActorUtils.IsSameCamp(actor.Uid)) && IsVisible(actor.Pos);
     }
 }

@@ -1,0 +1,16 @@
+{
+  "Id": 4,
+  "Name": "潜行测试",
+  "IsForever": true,
+  "Time": "0",
+  "IsOnly": false,
+  "MaxCount": 1,
+  "Effect": [
+    {
+      "Type": 4,
+      "Params": {
+        "Radius": "20"
+      }
+    }
+  ]
+}

@@ -111,7 +111,7 @@ namespace Combat.Actor {
                 com.RenderUpdate();
             }
 
-            bool nowVisibility = FogUtils.IsVisible(Pos);
+            bool nowVisibility = FogUtils.IsVisible(this);
             if (nowVisibility != lastVisibility) {
                 // 直接设置根节点，待测试正确性
                 go.SetActive(nowVisibility);
