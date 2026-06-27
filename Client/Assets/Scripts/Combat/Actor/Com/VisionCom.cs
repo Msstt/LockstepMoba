@@ -8,6 +8,7 @@ namespace Combat.Actor {
         
         public override void Awake() {
             cancelHandleGlobal = FogUtils.AddVision(VisionType.Global, Actor.Pos, VisionRadius);
+            UnityEngine.Debug.Log(Actor.Uid +  "&&&&" + ActorUtils.IsSameCamp(Actor.Uid));
             if (ActorUtils.IsSameCamp(Actor.Uid)) {
                 cancelHandleSelf = FogUtils.AddVision(VisionType.Self, Actor.Pos, VisionRadius);
             }

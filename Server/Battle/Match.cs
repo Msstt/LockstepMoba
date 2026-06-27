@@ -1,4 +1,5 @@
 using Framework;
+using Google.Protobuf.Collections;
 using Network;
 
 namespace Battle {
@@ -29,6 +30,7 @@ namespace Battle {
         
         private battle_start_s2c GetStartMsg(Uid selfUid) {
             if (start_msg != null) {
+                start_msg.SelfUid = selfUid;
                 return start_msg;
             }
             start_msg = new battle_start_s2c {
@@ -42,6 +44,7 @@ namespace Battle {
                         Uid = uid,
                         ChampionId = 1,
                         Camp = camp,
+                        Skill = { 5, 4 }, // TODO 选技能
                     });
                 camp ^= 1;
             }

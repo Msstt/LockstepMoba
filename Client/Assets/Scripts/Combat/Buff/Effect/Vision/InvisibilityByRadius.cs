@@ -34,5 +34,12 @@ namespace Combat.Buff.Effect {
                 actor.Stats.Invisibility += lastInvisibility;
             }
         }
+
+        public override void OnDestroy() {
+            Actor.Actor actor = ActorUtils.GetActor(buff.ActorId);
+            if (actor != null) {
+                actor.Stats.Invisibility -= lastInvisibility;
+            }
+        }
     }
 }

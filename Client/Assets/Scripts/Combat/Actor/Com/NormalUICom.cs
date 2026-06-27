@@ -32,7 +32,7 @@ namespace Combat.Actor {
         }
         
         public override void Awake() {
-            Actor.Event.OnVisibilityChange.Register(OnVisibilityChange);
+            Actor.Event.OnVisibilityChangeLocal.Register(OnVisibilityChangeLocal);
             
             bindingGo = Actor.Go.transform.Find("Prefab/StatsBarBindingPoint");
             UIUtils.BindingUI(StatsPanelDef, bindingGo, StatsPanelParam);
@@ -45,10 +45,10 @@ namespace Combat.Actor {
             UIUtils.UnBindingUI(StatsPanelDef, bindingGo);
             UIUtils.UnBindingUI(UIDef.FloatingNumberPanel, bindingGo);
             
-            Actor.Event.OnVisibilityChange.UnRegister(OnVisibilityChange);
+            Actor.Event.OnVisibilityChangeLocal.UnRegister(OnVisibilityChangeLocal);
         }
 
-        private void OnVisibilityChange(bool visible) {
+        private void OnVisibilityChangeLocal(bool visible) {
             bindingGo.GetComponent<BindingUISource>().SetVisible(visible);
         }
     }

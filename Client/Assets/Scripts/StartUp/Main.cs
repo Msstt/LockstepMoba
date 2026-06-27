@@ -20,11 +20,11 @@ public class Main : MonoBehaviour {
         EventMgr.Instance.Register<EventType.OnGameStart>(() => {
             UIUtils.ShowUI(UIDef.SkillPanel);
             UIUtils.ShowUI(UIDef.LevelPanel);
-
-            var actor = ActorUtils.GetActor(2);
-            actor.GetComponent<BuffCom>().AddBuff(4, 2, 1);
-            actor = ActorUtils.GetActor(3);
-            actor.GetComponent<BuffCom>().AddBuff(4, 2, 1);
+            //
+            // var actor = ActorUtils.GetActor(2);
+            // actor?.GetComponent<BuffCom>()?.AddBuff(4, 2, 1);
+            // actor = ActorUtils.GetActor(3);
+            // actor?.GetComponent<BuffCom>()?.AddBuff(4, 2, 1);
         });
 
         if (gmTool.IsLocalDebug) {

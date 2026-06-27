@@ -8,6 +8,7 @@ namespace Battle {
         private static readonly Dictionary<string, MergeFunc> mergeFunc = new Dictionary<string, MergeFunc>() {
             { "test", Bind<test_input>(Test) },
             { "skill", Bind<skill_input>(Skill) },
+            { "level", Bind<level_input>(Level) },
         };
 
         private static MergeFunc Bind<T>(Func<T, T, T> func) where  T : class, IMessage {
@@ -68,6 +69,17 @@ namespace Battle {
             skill_input msg = new skill_input();
             foreach (var info in infos) {
                 msg.Info.Add(info);
+            }
+            return msg;
+        }
+
+        private static level_input Level(level_input lastInput, level_input input) {
+            level_input msg = new level_input();
+            foreach (var info in lastInput.LevelUp) {
+                msg.LevelUp.Add(info);
+            }
+            foreach (var info in input.LevelUp) {
+                msg.LevelUp.Add(info);
             }
             return msg;
         }

@@ -115,7 +115,7 @@ namespace Combat.Actor {
             if (nowVisibility != lastVisibility) {
                 // 直接设置根节点，待测试正确性
                 go.SetActive(nowVisibility);
-                Event.OnVisibilityChange.Send(nowVisibility);
+                Event.OnVisibilityChangeLocal.Send(nowVisibility);
                 lastVisibility = nowVisibility;
             }
         }
