@@ -44,6 +44,8 @@ namespace InputSystem {
                     commands[(int)slot] = new SinglePos(key); break;
                 case CommandType.SingleUnit:
                     commands[(int)slot] = new SingleUnit(key); break;
+                case CommandType.SingleDir:
+                    commands[(int)slot] = new SingleDir(key); break;
                 default:
                     Log.Error("InputSystem ChangeCommand Unknown CommandType"); break;
             }

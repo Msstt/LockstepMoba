@@ -9,21 +9,29 @@ namespace Combat.Skill {
         private int uid;
         public int Uid => UidIsValid ? uid : throw new CombatException("SkillParam Uid is not valid but accessed");
         public bool UidIsValid => uid != InvalidUid;
+        
+        private Vector3F dir;
+        public Vector3F Dir => DirIsValid ? dir : throw new CombatException("SkillParam Dir is not valid but accessed");
+        public bool DirIsValid => dir != InvalidDir;
 
         public SkillParam(skill_param proto) {
             pos = proto.Pos.ToVector3F();
             uid = proto.Uid;
+            dir = proto.Dir.ToVector3F();
         }
 
         public static skill_param CreateProto() {
             return new skill_param {
                 Pos = InvalidPosProto,
-                Uid = InvalidUid
+                Uid = InvalidUid,
+                Dir = InvalidDirProto,
             };
         }
         
         public static readonly Vector3F InvalidPos = new Vector3F(FloatF.max, FloatF.max, FloatF.max);
         private static readonly vector_f InvalidPosProto = InvalidPos.ToProto();
         public static readonly int InvalidUid = -1;
+        public static readonly Vector3F InvalidDir = new Vector3F(FloatF.max, FloatF.max, FloatF.max);
+        private static readonly vector_f InvalidDirProto = InvalidDir.ToProto();
     }
 }

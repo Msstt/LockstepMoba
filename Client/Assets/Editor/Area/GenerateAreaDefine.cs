@@ -17,9 +17,9 @@ namespace Editor.Area {
             string factoryList = "";
             int index = 0;
             foreach (string effect in name) {
-                enumList += "        " + effect + " = " + ++index + ",";
+                enumList += "        " + effect + " = " + ++index + ",\n";
                 factoryList += "                case EffectType." + effect + ":\n                    return new " +
-                               effect + "(area, config.Params);";
+                               effect + "(area, config.Params);\n";
             }
 
             template = template.Replace("{EffectEnumList}", enumList);

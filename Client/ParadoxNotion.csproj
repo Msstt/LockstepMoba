@@ -179,9 +179,9 @@
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Conditions/GameObject/CanSeeTarget2D.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/_DeprecatedFiles/Legacy_GoToNode.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/CanvasCore/Framework/Design/Editor/Windows/GraphEditor.Toolbar.cs" />
-    <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Conditions/GameObject/CanSeeTargetAny2D.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Modules/StateMachines/FSMConnection.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Modules/StateMachines/Nodes/ConcurrentSubTree.cs" />
+    <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Conditions/GameObject/CanSeeTargetAny2D.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Actions/GameObject/FindAllWithTag.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/CanvasCore/Framework/Design/Editor/GraphAssetPostProcessor.cs" />
     <Compile Include="Assets/Plugins/ParadoxNotion/NodeCanvas/Tasks/Actions/GameObject/DestroyGameObject.cs" />

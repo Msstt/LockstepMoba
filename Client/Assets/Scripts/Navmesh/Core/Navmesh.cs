@@ -147,6 +147,10 @@ namespace Navmesh {
         public List<int> RaycastInCircle(int typeBitSet, Vector3F center, FloatF radius) {
             return unitRaycaster.RaycastInCircle(typeBitSet, center, radius);
         }
+        
+        public List<int> RaycastInRect(int typeBitSet, Vector3F center, Vector3F direction, FloatF length, FloatF width) {
+            return unitRaycaster.RaycastInRect(typeBitSet, center, direction, length, width);
+        }
 
         #endregion
     }

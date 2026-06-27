@@ -33,6 +33,8 @@ namespace Combat.Skill {
         Flash = 1 << 2,
         [InspectorName("脱手")]
         Sell = 1 << 3,
+        [InspectorName("技能动作")]
+        Action = 1 << 4,
     }
 
     public static class Field {

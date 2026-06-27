@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 // (XZ 平面)
 public class GeoUtils {
@@ -47,5 +48,21 @@ public class GeoUtils {
             t = 1;
         }
         return Vector3F.Distance(p, a + ab * t);
+    }
+    
+    // 点是否在多边形内
+    public static bool PointInPolygon(Vector3F p, List<Vector3F> polygon) {
+        int n = polygon.Count;
+        if (n < 3) return false;
+        FloatF E6 = new FloatF(1000_000);
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            Vector3F a = polygon[i];
+            Vector3F b = polygon[(i + 1) % n];
+            if (LineIsIntersect(a, b, p, new Vector3F(p.x + E6, p.y, p.z))) {
+                count++;
+            }
+        }
+        return count % 2 == 1;
     }
 }

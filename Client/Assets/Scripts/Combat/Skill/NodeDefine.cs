@@ -21,6 +21,8 @@ namespace Combat.Skill {
         IsInRange = 17,
         CreateAreaAtSelf = 18,
         IsActorType = 19,
+        CreateAreaBySingleDir = 20,
+        SetDirByInputParam = 21,
     }
     
     public static class NodeFactory {
@@ -64,6 +66,10 @@ namespace Combat.Skill {
                     return new CreateAreaAtSelf(config.Params);
                 case NodeType.IsActorType:
                     return new IsActorType(config.Params);
+                case NodeType.CreateAreaBySingleDir:
+                    return new CreateAreaBySingleDir(config.Params);
+                case NodeType.SetDirByInputParam:
+                    return new SetDirByInputParam();
                 default:
                     throw new CombatException("Node type doesn't exist: " + config.Type);
             }

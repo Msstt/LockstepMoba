@@ -24,7 +24,7 @@ namespace Combat.Skill.SkillNode {
         }
 
         protected override NodeState OnEnter(Context context) {
-            Actor.Actor actor = ActorUtils.GetActor(context.ActorUid);
+            Actor.Actor actor = GetActor(context);
             if (actor == null) {
                 return NodeState.Fail;
             }

@@ -1,10 +1,15 @@
 {
   "Id": 6,
-  "Name": "通用近战普通攻击temp",
-  "SkillType": 2,
-  "InputType": 2,
+  "Name": "天音波",
+  "SkillType": 16,
+  "InputType": 3,
   "CD": {
-    "datas": []
+    "datas": [
+      {
+        "level": 1,
+        "value": "2"
+      }
+    ]
   },
   "CanAbortSelf": false,
   "Node": {
@@ -21,61 +26,33 @@
         },
         "Child": [
           {
-            "Type": 2,
-            "Params": {
-              "AnimName": "Run"
-            },
+            "Type": 21,
+            "Params": null,
             "Child": [
               {
-                "Type": 4,
-                "Params": null,
+                "Type": 2,
+                "Params": {
+                  "AnimName": "Skill1"
+                },
                 "Child": [
                   {
-                    "Type": 2,
+                    "Type": 7,
                     "Params": {
-                      "AnimName": "Attack"
+                      "Time": "0.5"
                     },
                     "Child": [
                       {
-                        "Type": 8,
-                        "Params": null,
+                        "Type": 20,
+                        "Params": {
+                          "AreaId": 2
+                        },
                         "Child": [
                           {
-                            "Type": 6,
+                            "Type": 7,
                             "Params": {
-                              "datas": [
-                                {
-                                  "level": 0,
-                                  "value": {
-                                    "Physical": {
-                                      "Value": "0",
-                                      "AttackScale": "1"
-                                    },
-                                    "Magic": {
-                                      "Value": "0",
-                                      "AttackScale": "0"
-                                    },
-                                    "True": {
-                                      "Value": "0",
-                                      "AttackScale": "0"
-                                    }
-                                  }
-                                }
-                              ]
+                              "Time": "0.5"
                             },
-                            "Child": [
-                              {
-                                "Type": 9,
-                                "Params": null,
-                                "Child": [
-                                  {
-                                    "Type": 11,
-                                    "Params": null,
-                                    "Child": []
-                                  }
-                                ]
-                              }
-                            ]
+                            "Child": []
                           }
                         ]
                       }

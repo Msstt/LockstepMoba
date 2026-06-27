@@ -13,6 +13,7 @@ public struct FloatF : IComparable<FloatF> {
     public static FloatF zero = new FloatF(0, true);
     public static FloatF one = new FloatF(1);
     public static FloatF two = new FloatF(2);
+    public static FloatF min = new FloatF(long.MinValue, true);
     public static FloatF max = new FloatF(long.MaxValue, true);
     public static FloatF pi = new FloatF(3141592, true);
     

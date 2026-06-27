@@ -14,6 +14,7 @@ namespace Navmesh {
         public void RegisterUnit(int id, int type, Vector3F pos, SafeEvent<Vector3F> onPosChange);
         public void UnRegisterUnit(int id, SafeEvent<Vector3F> onPosChange);
         public List<int> RaycastInCircle(int typeBitSet, Vector3F center, FloatF radius);
+        public List<int> RaycastInRect(int typeBitSet, Vector3F center, Vector3F direction, FloatF length, FloatF width);
         
         public float GetHeight(float x, float y);
     }

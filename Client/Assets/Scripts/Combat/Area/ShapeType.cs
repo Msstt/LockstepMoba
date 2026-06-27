@@ -5,6 +5,7 @@ namespace Combat.Area {
     [DrawWithUnity]
     public enum ShapeType {
         Circle = 1,
+        Rect = 2,
     }
     
     public static class ShapeFactory {
@@ -12,6 +13,8 @@ namespace Combat.Area {
             switch (type) {
                 case ShapeType.Circle:
                     return ParseParam<Circle>(json);
+                case ShapeType.Rect:
+                    return ParseParam<Rect>(json);
                 default:
                     throw new CombatException("Shape type doesn't exist: " + type);
             }

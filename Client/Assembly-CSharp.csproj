@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="Assets/Test/Scenes/NavmeshTest/NavmeshData/navmesh_surfaces.json" />
+    <None Include="Assets/Resources/Config/Area/Json/2.json" />
     <None Include="Assets/Resources/Config/Skill/Json/4.json" />
     <None Include="Assets/Resources/Config/Area/Json/1.json" />
     <None Include="Assets/Resources/Material/Shader/FogOfWarFade.shader" />

@@ -85,9 +85,10 @@
     <Compile Include="Assets/Scripts/Combat/Area/Core/Area.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/AreaUtils.cs" />
-    <Compile Include="Assets/Scripts/Combat/Area/Effect/Heal.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Anim/SetDirByInputParam.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Effect.cs" />
+    <Compile Include="Assets/Scripts/Input/Command/SingleDir.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventType.cs" />
     <Compile Include="Assets/Scripts/UI/Main/SkillPanel.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillSystem2.cs" />
@@ -172,7 +173,9 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.ActorByPath.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SlotCom.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Raycast/RaycastInSurface.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Area/CreateAreaBySingleDir.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Cache/GameObjectPool.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/Effect/Move/LinearMove.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/BuffCom.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/Log.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/PriorityQueue.cs" />
@@ -184,6 +187,7 @@
     <Compile Include="Assets/Scripts/UI/UIUtils.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/SafeDictionary.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillUtils.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/Shape/Rect.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/VisionCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Level/Level.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/RepeatSkill.cs" />
@@ -227,6 +231,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Core/HitInfo.cs" />
     <Compile Include="Assets/Scripts/Input/Command/SinglePos.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Raycaster.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/Effect/Stats/Heal.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/GameObject/GameObjectExtensions.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/ShapeType.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Log.cs" />

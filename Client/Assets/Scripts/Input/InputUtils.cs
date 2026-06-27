@@ -1,3 +1,4 @@
+using Combat.Actor;
 using InputSystem;
 using UnityEngine;
 
@@ -18,5 +19,23 @@ public static class InputUtils {
             return hitInfo.collider?.transform.GetComponent<ActorRaycasterCom>()?.Uid;
         }
         return null;
+    }
+    
+    public static Vector3F? GetMouseDir() {
+        Actor actor = ActorUtils.GetActor();
+        if (actor == null) {
+            return null;
+        }
+        Vector3F? pos = GetMousePos();
+        if (!pos.HasValue) {
+            return null;
+        }
+        Vector3F dir = pos.Value - actor.Pos;
+        dir.y = 0;
+        dir = dir.Normalized();
+        if (dir == Vector3F.zero) {
+            return null;
+        }
+        return dir;
     }
 }

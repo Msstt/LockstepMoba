@@ -1,0 +1,19 @@
+{
+  "Id": 2,
+  "Name": "天音波",
+  "Prefab": "Area/Prefab/SonicWave",
+  "ShapeType": 2,
+  "ShapeParam": {
+    "length": "2",
+    "width": "1"
+  },
+  "Time": "1",
+  "Effect": [
+    {
+      "Type": 2,
+      "Params": {
+        "Velocity": "90"
+      }
+    }
+  ]
+}

@@ -21,10 +21,15 @@ namespace Editor.Area {
         [LabelText("形状类型")]
         public ShapeType shape;
         
-        [ShowIf("@shape == ShapeType.Circle")]
+        [ShowIf("@shape == Combat.Area.ShapeType.Circle")]
         [LabelText("形状参数")]
         [InlineProperty]
         public Circle circle;
+        
+        [ShowIf("@shape == Combat.Area.ShapeType.Rect")]
+        [LabelText("形状参数")]
+        [InlineProperty]
+        public Rect rect;
 
         public AreaConfig Export() {
             AreaConfig config = new AreaConfig();
@@ -36,6 +41,9 @@ namespace Editor.Area {
             switch (shape) {
                 case ShapeType.Circle:
                     config.ShapeParam = JToken.FromObject(circle);
+                    break;
+                case ShapeType.Rect:
+                    config.ShapeParam = JToken.FromObject(rect);
                     break;
             }
             return config;

@@ -139,5 +139,73 @@ namespace Navmesh {
             });
             return result;
         }
+        
+        public List<int> RaycastInPolygon(int typeBitSet, List<Vector3F> polygon) {
+            List<int> result = new List<int>();
+            if (polygon.Count < 3) {
+                return result;
+            }
+            void Check(UnitInfo unitInfo) {
+                if (GeoUtils.PointInPolygon(unitInfo.pos, polygon)) {
+                    result.Add(unitInfo.id);
+                }
+            }
+            Vector3F min = new Vector3F(FloatF.max, FloatF.max, FloatF.max);
+            Vector3F max = new Vector3F(FloatF.min, FloatF.min, FloatF.min);
+            foreach (var point in polygon) {
+                min.x = FloatF.Min(min.x, point.x);
+                min.y = FloatF.Min(min.y, point.y);
+                min.z = FloatF.Min(min.z, point.z);
+                max.x = FloatF.Max(max.x, point.x);
+                max.y = FloatF.Max(max.y, point.y);
+                max.z = FloatF.Max(max.z, point.z);
+            }
+            IterateType(typeBitSet, (type) => {
+                IterateGrid(type, min, max, Check);
+            });
+            return result;
+        }
+        
+        public List<int> RaycastInRect(int typeBitSet, Vector3F center, Vector3F direction, FloatF length, FloatF width) {
+            List<int> result = new List<int>();
+            Vector3F forward = direction.Normalized();
+            if (forward == Vector3F.zero) {
+                forward = new Vector3F(0, 0, 1);
+            }
+            Vector3F right = new Vector3F(forward.z, 0, -forward.x);
+            Vector3F halfForward = forward * (length / 2);
+            Vector3F halfRight = right * (width / 2);
+            FloatF halfLength = length / 2;
+            FloatF halfWidth = width / 2;
+            
+            void Check(UnitInfo unitInfo) {
+                Vector3F offset = unitInfo.pos - center;
+                if (FloatF.Abs(Vector3F.Dot(offset, forward)) <= halfLength &&
+                    FloatF.Abs(Vector3F.Dot(offset, right)) <= halfWidth) {
+                    result.Add(unitInfo.id);
+                }
+            }
+            
+            List<Vector3F> points = new List<Vector3F>() {
+                center + halfForward + halfRight,
+                center + halfForward - halfRight,
+                center - halfForward - halfRight,
+                center - halfForward + halfRight,
+            };
+            Vector3F min = new Vector3F(FloatF.max, FloatF.max, FloatF.max);
+            Vector3F max = new Vector3F(FloatF.min, FloatF.min, FloatF.min);
+            foreach (var point in points) {
+                min.x = FloatF.Min(min.x, point.x);
+                min.y = FloatF.Min(min.y, point.y);
+                min.z = FloatF.Min(min.z, point.z);
+                max.x = FloatF.Max(max.x, point.x);
+                max.y = FloatF.Max(max.y, point.y);
+                max.z = FloatF.Max(max.z, point.z);
+            }
+            IterateType(typeBitSet, (type) => {
+                IterateGrid(type, min, max, Check);
+            });
+            return result;
+        }
     }
 }

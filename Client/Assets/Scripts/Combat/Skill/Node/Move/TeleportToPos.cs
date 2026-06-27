@@ -17,7 +17,7 @@ namespace Combat.Skill.SkillNode {
             if (!context.Param.PosIsValid) {
                 return NodeState.Fail;
             }
-            var actor = ActorUtils.GetActor(context.ActorUid);
+            var actor = GetActor(context);
             if (actor == null) {
                 return NodeState.Fail;
             }

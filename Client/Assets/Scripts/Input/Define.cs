@@ -12,6 +12,8 @@ namespace InputSystem {
         SinglePos,
         [InspectorName("单一目标")]
         SingleUnit,
+        [InspectorName("单一方向")]
+        SingleDir,
     }
     
     public static class Config {

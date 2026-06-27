@@ -57,6 +57,7 @@
     <Compile Include="Assets/Editor/Area/NormalConfig.cs" />
     <Compile Include="Assets/Editor/Area/AreaNode.cs" />
     <Compile Include="Assets/Editor/Buff/NormalConfig.cs" />
+    <Compile Include="Assets/Editor/Area/Effect/Stats.cs" />
     <Compile Include="Assets/Editor/Buff/Effect/Vision.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Move.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Area.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Assets/Editor/Area/GenerateAreaDefine.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Cost.cs" />
     <Compile Include="Assets/Editor/Buff/BuffGraph.cs" />
+    <Compile Include="Assets/Editor/Area/Effect/Move.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Area.cs" />
     <Compile Include="Assets/Editor/Area/AreaGraph.cs" />
     <Compile Include="Assets/Editor/Navmesh/GenerateHeightMap.cs" />
@@ -80,7 +82,6 @@
     <Compile Include="Assets/Editor/Skill/Core/SkillConnection.cs" />
     <Compile Include="Assets/Editor/Fog/GenerateVisionBlockerMap.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Anim.cs" />
-    <Compile Include="Assets/Editor/Area/EffectNode.cs" />
     <Compile Include="Assets/Editor/Network/GenerateMessageCode.cs" />
     <None Include="Assets/Editor/Network/Template/MessageDef.txt" />
     <None Include="Assets/Editor/Buff/Template/EffectDefine.txt" />

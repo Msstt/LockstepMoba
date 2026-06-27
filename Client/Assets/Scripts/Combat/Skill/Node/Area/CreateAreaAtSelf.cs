@@ -15,7 +15,7 @@ namespace Combat.Skill.SkillNode {
         public CreateAreaAtSelf(JToken json) : base(json) { }
         
         protected override NodeState OnEnter(Context context) {
-            var actor = ActorUtils.GetActor(context.ActorUid);
+            var actor = GetActor(context);
             if (actor == null) {
                 return NodeState.Fail;
             }

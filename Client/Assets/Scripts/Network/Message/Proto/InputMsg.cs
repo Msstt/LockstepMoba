@@ -28,19 +28,20 @@ namespace Network {
             "TXNnLnByb3RvInsKDGJhdHRsZV9pbnB1dBIhCgR0ZXN0GAEgASgLMhMuTmV0",
             "d29yay50ZXN0X2lucHV0EiMKBXNraWxsGAIgASgLMhQuTmV0d29yay5za2ls",
             "bF9pbnB1dBIjCgVsZXZlbBgDIAEoCzIULk5ldHdvcmsubGV2ZWxfaW5wdXQi",
-            "GwoKdGVzdF9pbnB1dBINCgVjb3VudBgBIAEoBSI6Cgtza2lsbF9wYXJhbRIe",
-            "CgNwb3MYASABKAsyES5OZXR3b3JrLnZlY3Rvcl9mEgsKA3VpZBgCIAEoBSI/",
-            "Cgpza2lsbF9pbmZvEgwKBHNsb3QYASABKAUSIwoFcGFyYW0YAiABKAsyFC5O",
-            "ZXR3b3JrLnNraWxsX3BhcmFtIjAKC3NraWxsX2lucHV0EiEKBGluZm8YASAD",
-            "KAsyEy5OZXR3b3JrLnNraWxsX2luZm8iIwoTc2tpbGxfbGV2ZWxfdXBfaW5m",
-            "bxIMCgRzbG90GAEgASgFIj0KC2xldmVsX2lucHV0Ei4KCGxldmVsX3VwGAEg",
-            "AygLMhwuTmV0d29yay5za2lsbF9sZXZlbF91cF9pbmZvYgZwcm90bzM="));
+            "GwoKdGVzdF9pbnB1dBINCgVjb3VudBgBIAEoBSJaCgtza2lsbF9wYXJhbRIe",
+            "CgNwb3MYASABKAsyES5OZXR3b3JrLnZlY3Rvcl9mEgsKA3VpZBgCIAEoBRIe",
+            "CgNkaXIYAyABKAsyES5OZXR3b3JrLnZlY3Rvcl9mIj8KCnNraWxsX2luZm8S",
+            "DAoEc2xvdBgBIAEoBRIjCgVwYXJhbRgCIAEoCzIULk5ldHdvcmsuc2tpbGxf",
+            "cGFyYW0iMAoLc2tpbGxfaW5wdXQSIQoEaW5mbxgBIAMoCzITLk5ldHdvcmsu",
+            "c2tpbGxfaW5mbyIjChNza2lsbF9sZXZlbF91cF9pbmZvEgwKBHNsb3QYASAB",
+            "KAUiPQoLbGV2ZWxfaW5wdXQSLgoIbGV2ZWxfdXAYASADKAsyHC5OZXR3b3Jr",
+            "LnNraWxsX2xldmVsX3VwX2luZm9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Network.TypeMsgReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_input), global::Network.battle_input.Parser, new[]{ "Test", "Skill", "Level" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.test_input), global::Network.test_input.Parser, new[]{ "Count" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_param), global::Network.skill_param.Parser, new[]{ "Pos", "Uid" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_param), global::Network.skill_param.Parser, new[]{ "Pos", "Uid", "Dir" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_info), global::Network.skill_info.Parser, new[]{ "Slot", "Param" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_input), global::Network.skill_input.Parser, new[]{ "Info" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.skill_level_up_info), global::Network.skill_level_up_info.Parser, new[]{ "Slot" }, null, null, null),
@@ -410,6 +411,7 @@ namespace Network {
     public skill_param(skill_param other) : this() {
       pos_ = other.pos_ != null ? other.pos_.Clone() : null;
       uid_ = other.uid_;
+      dir_ = other.dir_ != null ? other.dir_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -440,6 +442,17 @@ namespace Network {
       }
     }
 
+    /// <summary>Field number for the "dir" field.</summary>
+    public const int DirFieldNumber = 3;
+    private global::Network.vector_f dir_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Network.vector_f Dir {
+      get { return dir_; }
+      set {
+        dir_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as skill_param);
@@ -455,6 +468,7 @@ namespace Network {
       }
       if (!object.Equals(Pos, other.Pos)) return false;
       if (Uid != other.Uid) return false;
+      if (!object.Equals(Dir, other.Dir)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -463,6 +477,7 @@ namespace Network {
       int hash = 1;
       if (pos_ != null) hash ^= Pos.GetHashCode();
       if (Uid != 0) hash ^= Uid.GetHashCode();
+      if (dir_ != null) hash ^= Dir.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -484,6 +499,10 @@ namespace Network {
         output.WriteRawTag(16);
         output.WriteInt32(Uid);
       }
+      if (dir_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Dir);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -497,6 +516,9 @@ namespace Network {
       }
       if (Uid != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Uid);
+      }
+      if (dir_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Dir);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -518,6 +540,12 @@ namespace Network {
       if (other.Uid != 0) {
         Uid = other.Uid;
       }
+      if (other.dir_ != null) {
+        if (dir_ == null) {
+          Dir = new global::Network.vector_f();
+        }
+        Dir.MergeFrom(other.Dir);
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -538,6 +566,13 @@ namespace Network {
           }
           case 16: {
             Uid = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            if (dir_ == null) {
+              Dir = new global::Network.vector_f();
+            }
+            input.ReadMessage(Dir);
             break;
           }
         }
