@@ -5,6 +5,12 @@ namespace Combat.Area {
     public class EffectConfig {
         public EffectType Type;
         public JToken Params;
+        public int RaycastId;
+    }
+    
+    public class RaycastConfig {
+        public RaycastType Type;
+        public JToken Params;
     }
     
     public class AreaConfig {
@@ -15,5 +21,6 @@ namespace Combat.Area {
         public JToken ShapeParam;
         public FloatF Time;
         public List<EffectConfig> Effect;
+        public List<RaycastConfig> Raycast;
     }
 }

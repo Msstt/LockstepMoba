@@ -14,7 +14,8 @@ namespace Editor.Area {
         public override Type outConnectionType => typeof(AreaConnection);
         public override int maxInConnections => 1;
 
-        public EffectType Type => (EffectType)System.Enum.Parse(typeof(EffectType), this.GetType().Name);
+        public EffectType EffectType => (EffectType)System.Enum.Parse(typeof(EffectType), this.GetType().Name);
+        public RaycastType RaycastType => (RaycastType)System.Enum.Parse(typeof(RaycastType), this.GetType().Name);
         protected abstract object Params { get; }
 
         public JToken Export() {
@@ -33,6 +34,15 @@ namespace Editor.Area {
     public abstract class EffectNode<T> : AreaNode {
         public override int maxInConnections => 1;
         public override int maxOutConnections => 0;
+        public override bool allowAsPrime => false;
+        
+        [OdinTree] public T param;
+        protected override object Params => param;
+    }
+    
+    public abstract class RaycastNode<T> : AreaNode {
+        public override int maxInConnections => 1;
+        public override int maxOutConnections => -1;
         public override bool allowAsPrime => false;
         
         [OdinTree] public T param;

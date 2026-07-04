@@ -67,8 +67,10 @@
     <Compile Include="Assets/Editor/Area/GenerateAreaDefine.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Cost.cs" />
     <Compile Include="Assets/Editor/Buff/BuffGraph.cs" />
+    <Compile Include="Assets/Editor/Area/Effect/Normal.cs" />
     <Compile Include="Assets/Editor/Area/Effect/Move.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Area.cs" />
+    <Compile Include="Assets/Editor/Area/Raycast.cs" />
     <Compile Include="Assets/Editor/Area/AreaGraph.cs" />
     <Compile Include="Assets/Editor/Navmesh/GenerateHeightMap.cs" />
     <Compile Include="Assets/Editor/Fog/ReplaceMaterialToFog.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Assets/Editor/Skill/Node/Anim.cs" />
     <Compile Include="Assets/Editor/Network/GenerateMessageCode.cs" />
     <None Include="Assets/Editor/Network/Template/MessageDef.txt" />
+    <None Include="Assets/Editor/Area/Template/RaycastDefine.txt" />
     <None Include="Assets/Editor/Buff/Template/EffectDefine.txt" />
     <None Include="Assets/Editor/Area/Template/EffectDefine.txt" />
     <None Include="Assets/Editor/Skill/Data/SkillDefine.json" />

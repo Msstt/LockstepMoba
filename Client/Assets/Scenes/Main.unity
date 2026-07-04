@@ -1225,7 +1225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsLocalDebug: 1
-  ShowUnitRealPos: 0
+  ShowDebugMode: 0
   PrintSkillTree: 1
 --- !u!114 &854225744
 MonoBehaviour:

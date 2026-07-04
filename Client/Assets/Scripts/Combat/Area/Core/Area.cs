@@ -6,9 +6,13 @@ namespace Combat.Area {
     public class Area : IDisposable {
         public Shape Shape { get; private set; }
         private List<IEffect> effects = new List<IEffect>();
+        private List<IRaycast> raycasts = new List<IRaycast>();
+        
+        private List<List<Actor.Actor>> raycastResult = new List<List<Actor.Actor>>();
         
         public int ActorId { get; private set; }
         public int Level { get; private set; }
+        public int Uid { get; private set; }
         
         public GameObject GameObject { get; private set; }
 
@@ -35,9 +39,10 @@ namespace Combat.Area {
             }
         }
         
-        public Area(int areaId, int actorId, int level, Vector3F position, Vector3F direction) {
+        public Area(int areaId, int uid, int actorId, int level, Vector3F position, Vector3F direction) {
             ActorId = actorId;
             Level = level;
+            Uid = uid;
             
             AreaConfig config = Config.Area[areaId];
             
@@ -56,6 +61,11 @@ namespace Combat.Area {
             foreach (EffectConfig effect in config.Effect) {
                 effects.Add(EffectFactory.CreateEffect(this, effect));
             }
+
+            foreach (RaycastConfig raycast in config.Raycast) {
+                raycasts.Add(RaycastFactory.CreateEffect(this, raycast));
+                raycastResult.Add(null);
+            }
             
             ExecuteEffect((effect) => effect.OnCreate());
         }
@@ -67,7 +77,15 @@ namespace Combat.Area {
         }
 
         public void Update() {
+            for (int i = 0; i < raycasts.Count; i++) {
+                raycastResult[i] = null;
+            }
+            
             ExecuteEffect((effect) => effect.OnUpdate());
+
+            if (GameMgr.Instance.GMTool.ShowDebugMode) {
+                Shape.RenderDebug(Position, Direction);
+            }
         }
 
         public void RenderUpdate() {
@@ -78,6 +96,16 @@ namespace Combat.Area {
             foreach (IEffect effect in effects) {
                 func(effect);
             }
+        }
+
+        public List<Actor.Actor> Raycast(int raycastId) {
+            if (raycastId < 0 || raycastId >= raycasts.Count) {
+                return new List<Actor.Actor>();
+            }
+            if (raycastResult[raycastId] == null) {
+                raycastResult[raycastId] = raycasts[raycastId].Get();
+            }
+            return raycastResult[raycastId];
         }
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Combat.Area;
-using Editor.Area;
 using Framework;
 using NodeCanvas.Framework;
 using UnityEditor;
@@ -51,11 +50,31 @@ namespace Editor.Area {
             AreaConfig config = root.config.Export();
             if (root.GetChildNodes().Any()) {
                 config.Effect = new List<EffectConfig>();
+                config.Raycast = new List<RaycastConfig>();
                 foreach (var node in root.GetChildNodes()) {
-                    EffectConfig effect = new EffectConfig();
-                    effect.Type = (node as AreaNode).Type;
-                    effect.Params = (node as AreaNode).Export();
-                    config.Effect.Add(effect);
+                    if (TypeUtils.IsGenericType(node, typeof(EffectNode<>))) {
+                        EffectConfig effect = new EffectConfig();
+                        effect.Type = (node as AreaNode).EffectType;
+                        effect.Params = (node as AreaNode).Export();
+                        effect.RaycastId = -1;
+                        config.Effect.Add(effect);
+                    } else {
+                        int raycastId = config.Raycast.Count;
+                        RaycastConfig raycast = new RaycastConfig();
+                        raycast.Type = (node as AreaNode).RaycastType;
+                        raycast.Params = (node as AreaNode).Export();
+                        config.Raycast.Add(raycast);
+                        
+                        foreach (var node2 in node.GetChildNodes()) {
+                            if (TypeUtils.IsGenericType(node2, typeof(EffectNode<>))) {
+                                EffectConfig effect = new EffectConfig();
+                                effect.Type = (node2 as AreaNode).EffectType;
+                                effect.Params = (node2 as AreaNode).Export();
+                                effect.RaycastId = raycastId;
+                                config.Effect.Add(effect);
+                            }
+                        }
+                    }
                 }
             }
 

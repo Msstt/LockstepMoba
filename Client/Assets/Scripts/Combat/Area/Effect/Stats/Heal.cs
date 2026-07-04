@@ -5,15 +5,13 @@ using Sirenix.OdinInspector;
 namespace Combat.Area.Effect {
     public class Heal : Effect<Heal.Param> {
         public class Param {
-            [LabelText("单位类型")]
-            public ActorType Type;
             [LabelText("伤害")]
             public LevelNumber<StatScaler> Heal;
             [LabelText("触发间隔")]
             public FloatF Interval;
         }
         
-        public Heal(Area area, JToken json) : base(area, json) {}
+        public Heal(Area area, int raycastId, JToken json) : base(area, raycastId, json) {}
 
         private FloatF heal;
         private int nextFrame;
@@ -26,21 +24,19 @@ namespace Combat.Area.Effect {
             }
             
             nextFrame = TimeUtils.GetFrame(param.Interval);
-            TakeHeal();
+            TakeDamage();
         }
 
         public override void OnUpdate() {
             if (GameMgr.Instance.Frame >= nextFrame) {
                 nextFrame = TimeUtils.GetFrame(param.Interval);
-                TakeHeal();
+                TakeDamage();
             }
         }
 
-        private void TakeHeal() {
-            Raycast((int)param.Type, (actor) => {
-                if (ActorUtils.IsSameCamp(area.ActorId, actor.Uid)) {
-                    actor.OnHeal(heal);
-                }
+        private void TakeDamage() {
+            Raycast((actor) => {
+                actor.OnHeal(heal);
             });
         }
     }

@@ -8,7 +8,7 @@ namespace Combat.Area.Effect {
             public FloatF Velocity;
         }
         
-        public LinearMove(Area area, JToken json) : base(area, json) {}
+        public LinearMove(Area area, int raycastId, JToken json) : base(area, raycastId, json) {}
         
         public override void OnUpdate() {
             area.Position += area.Direction * param.Velocity * TimeUtils.DeltaTime;

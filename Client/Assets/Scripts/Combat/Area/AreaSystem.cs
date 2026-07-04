@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Framework;
-using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 using UnityEngine;
 
 namespace Combat.Area {
@@ -16,6 +15,7 @@ namespace Combat.Area {
         public int maxId = 0;
         
         private SafeDictionary<int, AreaInfo> areaInfos = new SafeDictionary<int, AreaInfo>();
+        private List<int> toDestroy = new List<int>();
 
         public void Init() {
             TransRoot = new GameObject("[Area]").transform;
@@ -29,6 +29,7 @@ namespace Combat.Area {
 
 
         public void FrameUpdate(int frame) {
+            DestroyArea();
             foreach (var (uid, areaInfo) in areaInfos) {
                 areaInfo.area.Update();
                 if (areaInfo.endFrame <= frame) {
@@ -36,11 +37,12 @@ namespace Combat.Area {
                     areaInfos.Remove(uid);
                 }
             }
+            DestroyArea();
         }
 
         public int CreateArea(int areaId, int actorId, int level, Vector3F position, Vector3F direction) {
-             Area area = new Area(areaId, actorId, level, position, direction);
              int uid = ++maxId;
+             Area area = new Area(areaId, uid, actorId, level, position, direction);
              areaInfos[uid] = new AreaInfo() {
                  uid = uid,
                  area = area,
@@ -50,10 +52,17 @@ namespace Combat.Area {
         }
 
         public void DestroyArea(int uid) {
-            if (areaInfos.ContainsKey(uid)) {
-                areaInfos[uid].area.Dispose();
-                areaInfos.Remove(uid);
+            toDestroy.Add(uid);
+        }
+
+        private void DestroyArea() {
+            foreach (var uid in toDestroy) {
+                if (areaInfos.ContainsKey(uid)) {
+                    areaInfos[uid].area.Dispose();
+                    areaInfos.Remove(uid);
+                }
             }
+            toDestroy.Clear();
         }
     }
 }

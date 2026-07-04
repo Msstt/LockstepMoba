@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e581b66faf14b389179cb2dee35294b, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  _serializedGraph: '{"type":"Editor.Area.AreaGraph","nodes":[{"config":{"Id":1,"Name":"\u6cbb\u7597\u672f","Note":"\u53ec\u5524\u5e08\u6280\u80fd-\u6cbb\u7597\u672f","shape":1,"circle":{"radius":{"value":85000000}}},"_position":{"x":425.0,"y":99.0},"$type":"Editor.Area.RootNode","$id":"0"},{"param":{"Type":1,"Heal":{"datas":[{"level":1,"value":{"Value":{"value":80000000}}}]}},"_position":{"x":431.0,"y":159.0},"$type":"Editor.Area.Heal","$id":"1"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"Editor.Area.AreaConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _serializedGraph: '{"type":"Editor.Area.AreaGraph","nodes":[{"config":{"Id":1,"Name":"\u6cbb\u7597\u672f","Note":"\u53ec\u5524\u5e08\u6280\u80fd-\u6cbb\u7597\u672f","shape":1,"circle":{"radius":{"value":85000000}}},"_position":{"x":425.0,"y":99.0},"$type":"Editor.Area.RootNode","$id":"0"},{"param":{"IsSameCamp":true,"Type":1},"_position":{"x":428.0,"y":178.0},"$type":"Editor.Area.AllByType","$id":"1"},{"param":{"Heal":{"datas":[{"level":1,"value":{"Value":{"value":80000000}}}]}},"_UID":"ba084b86-0914-4cdc-9876-78a64907df7b","_position":{"x":428.0,"y":255.0},"$type":"Editor.Area.Heal","$id":"2"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"Editor.Area.AreaConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"Editor.Area.AreaConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
   _objectReferences: []
   _graphSource:
     _version: 3.21

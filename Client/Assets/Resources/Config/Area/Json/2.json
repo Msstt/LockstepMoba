@@ -4,15 +4,58 @@
   "Prefab": "Area/Prefab/SonicWave",
   "ShapeType": 2,
   "ShapeParam": {
-    "length": "2",
-    "width": "1"
+    "length": "20",
+    "width": "10"
   },
   "Time": "1",
   "Effect": [
     {
+      "Type": 4,
+      "Params": {
+        "Damage": {
+          "datas": [
+            {
+              "level": 1,
+              "value": {
+                "Physical": {
+                  "Value": "100",
+                  "AttackScale": "0"
+                },
+                "Magic": {
+                  "Value": "0",
+                  "AttackScale": "0"
+                },
+                "True": {
+                  "Value": "0",
+                  "AttackScale": "0"
+                }
+              }
+            }
+          ]
+        },
+        "Interval": "0"
+      },
+      "RaycastId": 0
+    },
+    {
+      "Type": 3,
+      "Params": {},
+      "RaycastId": 0
+    },
+    {
       "Type": 2,
       "Params": {
         "Velocity": "90"
+      },
+      "RaycastId": -1
+    }
+  ],
+  "Raycast": [
+    {
+      "Type": 3,
+      "Params": {
+        "IsSameCamp": false,
+        "Count": 1
       }
     }
   ]

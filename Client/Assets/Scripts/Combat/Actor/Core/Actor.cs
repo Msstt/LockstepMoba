@@ -36,7 +36,7 @@ namespace Combat.Actor {
             this.camp = camp;
 
             debugPoint = GoUtils.NewGo("Role/Other/DebugPoint", DebugMgr.Instance.transform);
-            debugPoint.SetActive(GameMgr.Instance.GMTool.ShowUnitRealPos);
+            debugPoint.SetActive(GameMgr.Instance.GMTool.ShowDebugMode);
             
             Transform collider = go.transform.Find("Prefab/Collider");
             if (collider == null) {

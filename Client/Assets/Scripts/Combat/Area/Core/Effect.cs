@@ -14,9 +14,11 @@ namespace Combat.Area {
     public abstract class Effect<Param> : IEffect {
         protected Area area;
         protected Param param;
+        private int raycastId;
         
-        protected Effect(Area area, JToken json) {
+        protected Effect(Area area, int raycastId, JToken json) {
             this.area = area;
+            this.raycastId = raycastId;
             param = json.ToObject<Param>();
             if (param == null) {
                 throw new CombatException($"Area Effect ParseParam {typeof(Param).Name} is null");
@@ -31,22 +33,9 @@ namespace Combat.Area {
         protected T GetLevelNumber<T>(LevelNumber<T> levelNumber) => levelNumber[area.Level];
 
         protected void Raycast(Action<Actor.Actor> func) {
-            List<int> actors = area.Shape.Raycast(area.Position, area.Direction);
-            for (int i = 0; i < actors.Count; i++) {
-                Actor.Actor actor = ActorUtils.GetActor(actors[i]);
-                if (actor != null) {
-                    func(actor);
-                }
-            }
-        }
-        
-        protected void Raycast(int typeBitSet, Action<Actor.Actor> func) {
-            List<int> actors = area.Shape.Raycast(typeBitSet, area.Position, area.Direction);
-            for (int i = 0; i < actors.Count; i++) {
-                Actor.Actor actor = ActorUtils.GetActor(actors[i]);
-                if (actor != null) {
-                    func(actor);
-                }
+            List<Actor.Actor> actors = area.Raycast(raycastId);
+            foreach (Actor.Actor actor in actors) {
+                func(actor);
             }
         }
     }

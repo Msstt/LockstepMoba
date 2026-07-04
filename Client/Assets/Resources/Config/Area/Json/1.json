@@ -11,7 +11,6 @@
     {
       "Type": 1,
       "Params": {
-        "Type": 1,
         "Heal": {
           "datas": [
             {
@@ -24,6 +23,16 @@
           ]
         },
         "Interval": "0"
+      },
+      "RaycastId": 0
+    }
+  ],
+  "Raycast": [
+    {
+      "Type": 2,
+      "Params": {
+        "IsSameCamp": true,
+        "Type": 1
       }
     }
   ]
