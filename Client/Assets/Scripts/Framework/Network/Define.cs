@@ -21,4 +21,8 @@ namespace Framework.Network {
         public static int BufferSize = 1024 * 1024;
         public static int DispatchCountPerFrame = 10;
     }
+
+    public static class NetworkLogConfig {
+        public static bool EnableMessageLog = false;
+    }
 }

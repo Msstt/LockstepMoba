@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Framework;
 using InputSystem;
+using UnityEditor;
 using UnityEngine;
 
 namespace Combat.Actor {
@@ -113,8 +114,8 @@ namespace Combat.Actor {
 
             bool nowVisibility = FogUtils.IsVisible(this);
             if (nowVisibility != lastVisibility) {
-                // 直接设置根节点，待测试正确性
-                go.SetActive(nowVisibility);
+                // go.SetActive(nowVisibility);
+                go.SetVisible(nowVisibility);
                 Event.OnVisibilityChangeLocal.Send(nowVisibility);
                 lastVisibility = nowVisibility;
             }

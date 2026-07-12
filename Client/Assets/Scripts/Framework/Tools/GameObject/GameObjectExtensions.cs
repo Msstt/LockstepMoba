@@ -38,4 +38,28 @@ public static class GameObjectExtensions {
             GameObject.Destroy(trans.transform.GetChild(i).gameObject);
         }
     }
+    
+    public static void SetVisible(this GameObject go, bool visible) {
+        foreach (var coms in go.GetComponentsInChildren<Renderer>()) {
+            coms.enabled = visible;
+        }
+        
+        foreach (var coms in go.GetComponentsInChildren<Light>()) {
+            coms.enabled = visible;
+        }
+        
+        foreach (var coms in go.GetComponentsInChildren<AudioSource>()) {
+            coms.enabled = visible;
+        }
+        
+        foreach (var coms in go.GetComponentsInChildren<Canvas>()) {
+            coms.enabled = visible;
+        }
+        
+        foreach (var coms in go.GetComponentsInChildren<ParticleSystem>())
+        {
+            ParticleSystem.EmissionModule emission = coms.emission;
+            emission.enabled = visible;
+        }
+    }
 }

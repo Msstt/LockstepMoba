@@ -87,9 +87,17 @@ namespace Combat.Area {
                 Shape.RenderDebug(Position, Direction);
             }
         }
+        
+        private bool? lastVisibility = null;
 
         public void RenderUpdate() {
             ExecuteEffect((effect) => effect.OnRenderUpdate());
+            
+            bool nowVisibility = FogUtils.IsVisible(this);
+            if (nowVisibility != lastVisibility) {
+                GameObject.SetVisible(nowVisibility);
+                lastVisibility = nowVisibility;
+            }
         }
         
         private void ExecuteEffect(Action<IEffect> func) {

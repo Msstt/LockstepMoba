@@ -29,6 +29,10 @@ namespace Framework.Network {
 
         public void Init() {
             NetworkDef.RegisterDispatcher();
+
+            if (GameMgr.Instance.GMTool != null && GameMgr.Instance.GMTool.IsLocalDebug) {
+                return;
+            }
             
             Connect("127.0.0.1", 9980);
             
@@ -107,7 +111,9 @@ namespace Framework.Network {
             }
             
             writer.Send(msg);
-            Debug.Log("<color=green>Send To " + msg + "</color>");
+            if (NetworkLogConfig.EnableMessageLog) {
+                Debug.Log("<color=green>Send To " + msg + "</color>");
+            }
         }
         
         public void Send(MessageDef msgId, IMessage data) {
@@ -121,7 +127,9 @@ namespace Framework.Network {
             };
             
             writer.Send(msg);
-            Debug.Log("<color=green>Send To " + msg + "</color>");
+            if (NetworkLogConfig.EnableMessageLog) {
+                Debug.Log("<color=green>Send To " + msg + "</color>");
+            }
         }
         
         #endregion
@@ -138,7 +146,9 @@ namespace Framework.Network {
                 if (msg == null) {
                     return;
                 }
-                Debug.Log("<color=orange>Receive From " + msg + "</color>");
+                if (NetworkLogConfig.EnableMessageLog) {
+                    Debug.Log("<color=orange>Receive From " + msg + "</color>");
+                }
                 msgDispatcher.Dispatch(msg.Value);
             }
         }

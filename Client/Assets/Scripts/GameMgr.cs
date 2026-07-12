@@ -155,12 +155,12 @@ public class GameMgr : Singleton<GameMgr> {
             Camp = 1,
             Skill = { 3, 3 },
         });
-        msg.Players.Add(new battle_start_s2c.Types.player_info {
-            Uid = 3,
-            ChampionId = 1,
-            Camp = 0,
-            Skill = { 3, 3 },
-        });
+        // msg.Players.Add(new battle_start_s2c.Types.player_info {
+        //     Uid = 3,
+        //     ChampionId = 1,
+        //     Camp = 0,
+        //     Skill = { 3, 3 },
+        // });
         GetSystem<Combat.ICombatSystem>().SetStartInfo(msg);
         Start();
     }

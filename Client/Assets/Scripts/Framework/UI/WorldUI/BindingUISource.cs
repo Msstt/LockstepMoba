@@ -53,6 +53,7 @@ namespace Framework.UI {
         public void SetVisible(bool isVisible) {
             foreach (var panel in panels.Values) {
                 panel.Transform.gameObject.SetActive(isVisible);
+                // panel.Transform.gameObject.SetVisible(isVisible);
             }
         }
     }

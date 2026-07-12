@@ -1,5 +1,6 @@
 using System;
 using Combat.Actor;
+using Combat.Area;
 using Combat.Fog;
 
 public static class FogUtils {
@@ -13,5 +14,10 @@ public static class FogUtils {
 
     public static bool IsVisible(Actor actor) {
         return (actor.Stats.Invisibility == 0 || ActorUtils.IsSameCamp(actor.Uid)) && IsVisible(actor.Pos);
+    }
+    
+    public static bool IsVisible(Area area) {
+        // TODO 检测区域
+        return IsVisible(area.Position);
     }
 }
