@@ -272,6 +272,15 @@
     <Compile Include="Assets/Scripts/Combat/Skill/ISkillSystem.cs" />
     <Compile Include="Assets/Scripts/Framework/Fixed/FloatF.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Stats/Info.cs" />
+    <Compile Include="Assets\Scripts\Combat\Actor\Com\BehaviourMachineCom.cs" />
+    <Compile Include="Assets\Scripts\Combat\Actor\Com\ControlCom.cs" />
+    <Compile Include="Assets\Scripts\Combat\Actor\Config\Minion.cs" />
+    <Compile Include="Assets\Scripts\Combat\Actor\Creator\CreateMinion.cs" />
+    <Compile Include="Assets\Scripts\Combat\Actor\Unit\Minion.cs" />
+    <Compile Include="Assets\Scripts\Combat\BehaviourMachine\Core\ActorBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Combat\BehaviourMachine\Core\Behaviour.cs" />
+    <Compile Include="Assets\Scripts\Combat\BehaviourMachine\Core\Machine.cs" />
+    <Compile Include="Assets\Scripts\Combat\BehaviourMachine\Define.cs" />
     <None Include="Assets/Scripts/Scripts.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -977,6 +986,9 @@
       <Project>{ff5aee3b-3455-98b2-c6a3-1036a975f0f7}</Project>
       <Name>RedStudio.OdinTreeNodeCanvas</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Scripts\Combat\BehaviourMachine\Behaviour\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

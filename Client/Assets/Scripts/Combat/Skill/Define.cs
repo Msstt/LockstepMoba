@@ -35,6 +35,8 @@ namespace Combat.Skill {
         Sell = 1 << 3,
         [InspectorName("技能动作")]
         Action = 1 << 4,
+        
+        Count = 4,
     }
 
     public static class Field {

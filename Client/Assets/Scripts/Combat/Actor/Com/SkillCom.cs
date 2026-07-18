@@ -18,13 +18,19 @@ namespace Combat.Actor {
         private int[] level = null;
         
         private HashSet<int> hasExecuted = new HashSet<int>();
+        
+        private ControlCom controlCom;
 
         // TODO 分类型
         private ChampionConfig GetChampionConfig() {
             int championId = CombatUtils.GetChampionId(Uid);
             return Config.Champion[championId];
         }
-        
+
+        protected override void ReLife() {
+            controlCom = Actor.GetComponent<ControlCom>();
+        }
+
         protected override void Init() {
             skillSystem = GameMgr.Instance.GetSystem<ISkillSystem>();
             inputSystem = GameMgr.Instance.GetSystem<IInputSystem>();
@@ -81,6 +87,11 @@ namespace Combat.Actor {
             }
         }
 
+        private bool IsControlAbort(int skillId) {
+            SkillType skillType = Config.Skill[skillId].SkillType;
+            return controlCom?.IsAbort(skillType) == true;
+        }
+
         #region 执行
 
         public void ExecuteSkill(SkillSlot slot, SkillParam param) {
@@ -94,6 +105,9 @@ namespace Combat.Actor {
             if (level[(int)slot] <= 0) {
                 return;
             }
+            if (IsControlAbort(skillIds[(int)slot])) {
+                return;
+            }
 
             hasExecuted.Add(skillIds[(int)slot]);
             skillSystem.Execute(Uid, skillIds[(int)slot], level[(int)slot], param);
@@ -103,6 +117,9 @@ namespace Combat.Actor {
             if (InCD(skillId)) {
                 return;
             }
+            if (IsControlAbort(skillId)) {
+                return;
+            }
             
             hasExecuted.Add(skillId);
             skillSystem.ExecuteAsync(Uid, skillId, level, param);
@@ -110,6 +127,10 @@ namespace Combat.Actor {
 
         public void AbortSkill(SkillType typeList, int excludeSkillId) {
             skillSystem.AbortAsync(Uid, typeList, excludeSkillId);
+        }
+        
+        public void AbortSkill(SkillType typeList) {
+            skillSystem.Abort(Uid, typeList);
         }
 
         #endregion

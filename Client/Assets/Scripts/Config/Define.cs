@@ -11,6 +11,8 @@ using UnityEngine;
 public static partial class Config {
     public static readonly ConfigCache<ChampionConfig> Champion = new(
         (id) => Resources.Load<ChampionConfig>("Config/Actor/Champion/" + id));
+    public static readonly ConfigCache<MinionConfig> Minion = new(
+        (id) => Resources.Load<MinionConfig>("Config/Actor/Minion/" + id));
     
     public static readonly ConfigCache<EquipmentConfig> Equipment = new(
         (id) => Resources.Load<EquipmentConfig>("Config/Equipment/" + id));
