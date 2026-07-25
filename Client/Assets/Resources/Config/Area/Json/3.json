@@ -1,6 +1,6 @@
 {
-  "Id": 2,
-  "Name": "天音波",
+  "Id": 3,
+  "Name": "天音波-测试",
   "Prefab": "Area/Prefab/SonicWave",
   "ShapeType": 2,
   "ShapeParam": {

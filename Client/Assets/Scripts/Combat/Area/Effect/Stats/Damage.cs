@@ -11,7 +11,7 @@ namespace Combat.Area.Effect {
             public FloatF Interval;
         }
         
-        public Damage(Area area, int raycastId, JToken json) : base(area, raycastId, json) {}
+        public Damage(Area area, int raycastId, JToken json) : base(area, raycastId, json) { }
 
         private int nextFrame;
         private HitInfo hitInfo;

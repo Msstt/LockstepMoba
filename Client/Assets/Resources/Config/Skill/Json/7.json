@@ -1,0 +1,69 @@
+{
+  "Id": 7,
+  "Name": "天音波-测试",
+  "SkillType": 16,
+  "InputType": 3,
+  "CD": {
+    "datas": [
+      {
+        "level": 1,
+        "value": "2"
+      }
+    ]
+  },
+  "CanAbortSelf": false,
+  "Node": {
+    "Type": 3,
+    "Params": {
+      "SkillList": 3
+    },
+    "Child": [
+      {
+        "Type": 10,
+        "Params": {
+          "Slot": -1,
+          "WaitTime": "0.3"
+        },
+        "Child": [
+          {
+            "Type": 21,
+            "Params": null,
+            "Child": [
+              {
+                "Type": 2,
+                "Params": {
+                  "AnimName": "Skill1"
+                },
+                "Child": [
+                  {
+                    "Type": 7,
+                    "Params": {
+                      "Time": "0.5"
+                    },
+                    "Child": [
+                      {
+                        "Type": 20,
+                        "Params": {
+                          "AreaId": 3
+                        },
+                        "Child": [
+                          {
+                            "Type": 7,
+                            "Params": {
+                              "Time": "0.5"
+                            },
+                            "Child": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "Id": 5,
+  "Name": "眩晕测试",
+  "IsForever": false,
+  "Time": "5",
+  "IsOnly": false,
+  "MaxCount": 1,
+  "Effect": [
+    {
+      "Type": 5,
+      "Params": {
+        "Type": -1
+      }
+    }
+  ]
+}

@@ -11,7 +11,7 @@ namespace Combat.Area.Effect {
             public FloatF Interval;
         }
         
-        public Heal(Area area, int raycastId, JToken json) : base(area, raycastId, json) {}
+        public Heal(Area area, int raycastId, JToken json) : base(area, raycastId, json) { }
 
         private FloatF heal;
         private int nextFrame;

@@ -88,7 +88,12 @@ namespace Editor.Node {
                 }
                 
                 if (GUILayout.Button("复制", GUILayout.Width(50))) {
-                    CurEditor.Copy(i);
+                    INodeEditor editor = CurEditor;
+                    int copyIndex = i;
+                    EditorApplication.delayCall += () => {
+                        editor.Copy(copyIndex);
+                        Repaint();
+                    };
                 }
 
                 if (GUILayout.Button("删除", GUILayout.Width(50))) {

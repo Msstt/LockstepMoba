@@ -6,6 +6,7 @@ namespace Combat.Buff {
         ChangeAttack = 2,
         Invisibility = 3,
         InvisibilityByRadius = 4,
+        Control = 5,
     }
     
     public static class EffectFactory {
@@ -19,6 +20,8 @@ namespace Combat.Buff {
                     return new Invisibility(buff, config.Params);
                 case EffectType.InvisibilityByRadius:
                     return new InvisibilityByRadius(buff, config.Params);
+                case EffectType.Control:
+                    return new Control(buff, config.Params);
                 default:
                     throw new CombatException("Effect type doesn't exist: " + config.Type);
             }

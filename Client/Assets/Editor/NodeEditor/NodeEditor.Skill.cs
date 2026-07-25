@@ -68,16 +68,23 @@ namespace Editor.Node {
             public void Copy(int index) {
                 int targetId = data[index].Id;
                 int id = GenerateId();
-                File.Copy(SkillGraph.ImportPath + targetId + ".asset", SkillGraph.ImportPath + id + ".asset");
-                AssetDatabase.Refresh();
-                var graph = AssetDatabase.LoadAssetAtPath<SkillGraph>(SkillGraph.ImportRelaPath + id + ".asset");
-                if (!graph.GetAllNodesOfType<RootNode>().Any()) {
+                string targetPath = SkillGraph.ImportRelaPath + targetId + ".asset";
+                string copyPath = SkillGraph.ImportRelaPath + id + ".asset";
+                if (!AssetDatabase.CopyAsset(targetPath, copyPath)) {
+                    SkillGraph.ExportError("复制资源失败");
+                    return;
+                }
+                var graph = AssetDatabase.LoadAssetAtPath<SkillGraph>(copyPath);
+                if (graph == null || !graph.GetAllNodesOfType<RootNode>().Any()) {
                     SkillGraph.ExportError("缺少Root节点");
                     return;
                 }
                 var node = graph.GetAllNodesOfType<RootNode>().First();
                 node.config.Id = id;
-            
+                graph.name = id.ToString();
+                EditorUtility.SetDirty(graph);
+                AssetDatabase.SaveAssets();
+
                 graph.Export();
             
                 if (!JsonHelper.LoadFromFile<SkillConfig>(SkillGraph.ExportPath + id + ".json", out var config)) {

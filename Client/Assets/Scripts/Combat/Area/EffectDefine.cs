@@ -6,6 +6,7 @@ namespace Combat.Area {
         LinearMove = 2,
         DestroyOnHit = 3,
         Damage = 4,
+        AddBuff = 5,
     }
     
     public static class EffectFactory {
@@ -19,6 +20,8 @@ namespace Combat.Area {
                     return new DestroyOnHit(area, config.RaycastId, config.Params);
                 case EffectType.Damage:
                     return new Damage(area, config.RaycastId, config.Params);
+                case EffectType.AddBuff:
+                    return new AddBuff(area, config.RaycastId, config.Params);
                 default:
                     throw new CombatException("Effect type doesn't exist: " + config.Type);
             }

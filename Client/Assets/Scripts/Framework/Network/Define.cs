@@ -23,6 +23,6 @@ namespace Framework.Network {
     }
 
     public static class NetworkLogConfig {
-        public static bool EnableMessageLog = false;
+        public static bool EnableMessageLog = true;
     }
 }

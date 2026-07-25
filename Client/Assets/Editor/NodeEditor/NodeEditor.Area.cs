@@ -90,16 +90,23 @@ namespace Editor.Node {
             public void Copy(int index) {
                 int targetId = data[index].Id;
                 int id = GenerateId();
-                File.Copy(AreaGraph.ImportPath + targetId + ".asset", AreaGraph.ImportPath + id + ".asset");
-                AssetDatabase.Refresh();
-                var graph = AssetDatabase.LoadAssetAtPath<AreaGraph>(AreaGraph.ImportRelaPath + id + ".asset");
-                if (!graph.GetAllNodesOfType<RootNode>().Any()) {
+                string targetPath = AreaGraph.ImportRelaPath + targetId + ".asset";
+                string copyPath = AreaGraph.ImportRelaPath + id + ".asset";
+                if (!AssetDatabase.CopyAsset(targetPath, copyPath)) {
+                    AreaGraph.ExportError("复制资源失败");
+                    return;
+                }
+                var graph = AssetDatabase.LoadAssetAtPath<AreaGraph>(copyPath);
+                if (graph == null || !graph.GetAllNodesOfType<RootNode>().Any()) {
                     AreaGraph.ExportError("缺少Root节点");
                     return;
                 }
                 var node = graph.GetAllNodesOfType<RootNode>().First();
                 node.config.Id = id;
-            
+                graph.name = id.ToString();
+                EditorUtility.SetDirty(graph);
+                AssetDatabase.SaveAssets();
+
                 graph.Export();
             
                 if (!JsonHelper.LoadFromFile<AreaConfig>(AreaGraph.ExportPath + id + ".json", out var config)) {

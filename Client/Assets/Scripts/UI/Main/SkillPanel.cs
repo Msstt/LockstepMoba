@@ -75,13 +75,13 @@ namespace UI.Main {
         }
 
         private void OnLevelUp(EventType.ChampionSkillLevelUp param) {
-            if (param.Uid == CombatUtils.GetChampionId()) {
+            if (param.Uid == CombatUtils.SelfUid) {
                 RefreshLevel();
             }
         }
         
         private void OnLevelUp(EventType.ChampionLevelUp param) {
-            if (param.Uid == CombatUtils.GetChampionId()) {
+            if (param.Uid == CombatUtils.SelfUid) {
                 RefreshLevel();
             }
         }

@@ -90,16 +90,23 @@ namespace Editor.Node {
             public void Copy(int index) {
                 int targetId = data[index].Id;
                 int id = GenerateId();
-                File.Copy(BuffGraph.ImportPath + targetId + ".asset", BuffGraph.ImportPath + id + ".asset");
-                AssetDatabase.Refresh();
-                var graph = AssetDatabase.LoadAssetAtPath<BuffGraph>(BuffGraph.ImportRelaPath + id + ".asset");
-                if (!graph.GetAllNodesOfType<RootNode>().Any()) {
+                string targetPath = BuffGraph.ImportRelaPath + targetId + ".asset";
+                string copyPath = BuffGraph.ImportRelaPath + id + ".asset";
+                if (!AssetDatabase.CopyAsset(targetPath, copyPath)) {
+                    BuffGraph.ExportError("复制资源失败");
+                    return;
+                }
+                var graph = AssetDatabase.LoadAssetAtPath<BuffGraph>(copyPath);
+                if (graph == null || !graph.GetAllNodesOfType<RootNode>().Any()) {
                     BuffGraph.ExportError("缺少Root节点");
                     return;
                 }
                 var node = graph.GetAllNodesOfType<RootNode>().First();
                 node.config.Id = id;
-            
+                graph.name = id.ToString();
+                EditorUtility.SetDirty(graph);
+                AssetDatabase.SaveAssets();
+
                 graph.Export();
             
                 if (!JsonHelper.LoadFromFile<BuffConfig>(BuffGraph.ExportPath + id + ".json", out var config)) {

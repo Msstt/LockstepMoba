@@ -46,12 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Editor/Skill/Node/Time.cs" />
-    <Compile Include="Assets/Editor/Buff/EffectNode.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillDefine.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Check.cs" />
     <Compile Include="Assets/Editor/Skill/Core/SkillNode.cs" />
     <Compile Include="Assets/Editor/Skill/Core/NormalConfig.cs" />
     <Compile Include="Assets/Editor/Buff/BuffNode.cs" />
+    <Compile Include="Assets/Editor/Buff/Effect/Common.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Buff.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Buff.cs" />
     <Compile Include="Assets/Editor/Area/NormalConfig.cs" />
@@ -63,15 +63,15 @@
     <Compile Include="Assets/Editor/Skill/Node/Area.cs" />
     <Compile Include="Assets/Editor/Navmesh/NavmeshExporter.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Skill.cs" />
-    <Compile Include="Assets/Editor/Skill/Node/Normal.cs" />
     <Compile Include="Assets/Editor/Area/GenerateAreaDefine.cs" />
     <Compile Include="Assets/Editor/Skill/Node/Cost.cs" />
+    <Compile Include="Assets/Editor/Area/Effect/Common.cs" />
     <Compile Include="Assets/Editor/Buff/BuffGraph.cs" />
-    <Compile Include="Assets/Editor/Area/Effect/Normal.cs" />
     <Compile Include="Assets/Editor/Area/Effect/Move.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.Area.cs" />
     <Compile Include="Assets/Editor/Area/Raycast.cs" />
     <Compile Include="Assets/Editor/Area/AreaGraph.cs" />
+    <Compile Include="Assets/Editor/Skill/Node/Common.cs" />
     <Compile Include="Assets/Editor/Navmesh/GenerateHeightMap.cs" />
     <Compile Include="Assets/Editor/Fog/ReplaceMaterialToFog.cs" />
     <Compile Include="Assets/Editor/NodeEditor/NodeEditor.cs" />

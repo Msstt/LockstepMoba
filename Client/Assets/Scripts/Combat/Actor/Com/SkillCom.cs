@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Codice.Client.Common.WebApi;
 using Combat.Skill;
 using InputSystem;
 
@@ -28,7 +27,7 @@ namespace Combat.Actor {
         }
 
         protected override void ReLife() {
-            controlCom = Actor.GetComponent<ControlCom>();
+            controlCom = ActorUtils.GetCom<ControlCom>(Uid);
         }
 
         protected override void Init() {

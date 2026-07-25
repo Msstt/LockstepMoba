@@ -48,7 +48,6 @@
     <Compile Include="Assets/Scripts/Combat/Area/Raycast/All.cs" />
     <Compile Include="Assets/Scripts/Navmesh/NavmeshUtils.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/PathSmoother.cs" />
-    <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/None.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SkillCom.cs" />
     <Compile Include="Assets/Scripts/Config/Combat/Vision.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/TypeMsg.cs" />
@@ -61,7 +60,6 @@
     <Compile Include="Assets/Scripts/UI/Actor/ChampionStatsBarPanel.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.Camera.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Define/CampType.cs" />
-    <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/RequestSlot.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/SelectNode.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorUtils.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/SimpleTransform.cs" />
@@ -78,13 +76,12 @@
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/EffectDefine.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/TeleportToPos.cs" />
-    <Compile Include="Assets/Scripts/Combat/Area/Effect/Normal/DestroyOnHit.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/FPSDrawer.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/Effect/Common/AddBuff.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Shape/Circle.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/LevelCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Common/ObservableValue.cs" />
     <Compile Include="Assets/Scripts/Input/Command/ICommand.cs" />
-    <Compile Include="Assets/Scripts/Combat/Buff/Effect/Damage.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Core/Area.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/AreaUtils.cs" />
@@ -96,6 +93,7 @@
     <Compile Include="Assets/Scripts/UI/Main/SkillPanel.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillSystem2.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Core/Config.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Common/AbortSkill.cs" />
     <Compile Include="Assets/Scripts/Tools/TimeUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/FrameMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/Fixed/Vector3F.cs" />
@@ -115,11 +113,14 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/MoveNode.cs" />
     <Compile Include="Assets/Scripts/Combat/Spawn/ISpawnSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/EquipmentCom.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Common/RepeatSkill.cs" />
+    <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Define.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Layer.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Context.cs" />
     <Compile Include="Assets/Scripts/Combat/Equipment/Config/EquipmentConfig.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/RandomColor.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Stats/_ChangeStats.cs" />
+    <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Core/Machine.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Buff.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.OnHeal.cs" />
     <Compile Include="Assets/Scripts/Data/Core/DataSystem.cs" />
@@ -128,9 +129,11 @@
     <Compile Include="Assets/Scripts/Combat/Area/Core/Shape.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UIPanel.cs" />
     <Compile Include="Assets/Scripts/Combat/Fog/Vision.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Unit/Minion.cs" />
     <Compile Include="Assets/Scripts/Tools/Geo/GeoUtils.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Navmesh.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/SafeList.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/Effect/Stats/Damage.cs" />
     <Compile Include="Assets/Scripts/Data/Core/IData.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/EffectDefine.cs" />
     <Compile Include="Assets/Scripts/Input/InputSystem.cs" />
@@ -145,6 +148,7 @@
     <Compile Include="Assets/Scripts/UI/Com/UIBarCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
     <Compile Include="Assets/Scripts/Combat/Common/Priority.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Common/RequestSlot.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Cost/SetCD.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Check/IsInRange.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/RaycastDefine.cs" />
@@ -165,15 +169,16 @@
     <Compile Include="Assets/Scripts/Input/InputUtils.cs" />
     <Compile Include="Assets/Scripts/Tools/Camera/CameraCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Anim/PlayAnim.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/BehaviourMachineCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Time/WaitForTime.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Vision/InvisibilityByRadius.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Unit/Champion.cs" />
     <Compile Include="Assets/Scripts/GameMgr.cs" />
     <Compile Include="Assets/Scripts/Data/Combat/Level.cs" />
-    <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/AbortSkill.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/IActorSystem.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/MockLockStep.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Creator/CreateMinion.cs" />
     <Compile Include="Assets/Scripts/StartUp/Main.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.ActorByPath.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SlotCom.cs" />
@@ -196,7 +201,7 @@
     <Compile Include="Assets/Scripts/Combat/Area/Shape/Rect.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/VisionCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Level/Level.cs" />
-    <Compile Include="Assets/Scripts/Combat/Skill/Node/Normal/RepeatSkill.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/ControlCom.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Define.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Creator/ActorCreator.cs" />
@@ -214,7 +219,9 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Define.cs" />
     <Compile Include="Assets/Scripts/UI/Actor/FloatingNumberPanel.cs" />
     <Compile Include="Assets/Scripts/ISystem.cs" />
+    <Compile Include="Assets/Scripts/Combat/Area/Effect/Common/DestroyOnHit.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Vision/Invisibility.cs" />
+    <Compile Include="Assets/Scripts/Combat/Buff/Effect/Common/Control.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/BattleMsg.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/VariantMap.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Core/Raycast.cs" />
@@ -244,8 +251,10 @@
     <Compile Include="Assets/Scripts/Combat/Area/ShapeType.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Log.cs" />
     <Compile Include="Assets/Scripts/Framework/Event/SafeEvent.cs" />
+    <Compile Include="Assets/Scripts/Combat/Skill/Node/Common/None.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Tree.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Config.cs" />
+    <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Core/ActorBehaviour.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/InputMsg.cs" />
     <Compile Include="Assets/Scripts/Navmesh/NavmeshMapInfo.cs" />
     <Compile Include="Assets/Scripts/Input/Define.cs" />
@@ -253,6 +262,7 @@
     <Compile Include="Assets/Scripts/UI/Main/LevelPanel.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Message.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Node.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Config/Minion.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Stats/StatsUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Move/MoveToActorByPath.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/PersistentCom.cs" />
@@ -260,6 +270,7 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Damage/DamageToSingle.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Area/CreateAreaAtSelf.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Config.cs" />
+    <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Core/Behaviour.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/INetwork.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Define.cs" />
     <Compile Include="Assets/Scripts/Combat/Fog/IFogSystem.cs" />
@@ -272,15 +283,6 @@
     <Compile Include="Assets/Scripts/Combat/Skill/ISkillSystem.cs" />
     <Compile Include="Assets/Scripts/Framework/Fixed/FloatF.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Stats/Info.cs" />
-    <Compile Include="Assets\Scripts\Combat\Actor\Com\BehaviourMachineCom.cs" />
-    <Compile Include="Assets\Scripts\Combat\Actor\Com\ControlCom.cs" />
-    <Compile Include="Assets\Scripts\Combat\Actor\Config\Minion.cs" />
-    <Compile Include="Assets\Scripts\Combat\Actor\Creator\CreateMinion.cs" />
-    <Compile Include="Assets\Scripts\Combat\Actor\Unit\Minion.cs" />
-    <Compile Include="Assets\Scripts\Combat\BehaviourMachine\Core\ActorBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Combat\BehaviourMachine\Core\Behaviour.cs" />
-    <Compile Include="Assets\Scripts\Combat\BehaviourMachine\Core\Machine.cs" />
-    <Compile Include="Assets\Scripts\Combat\BehaviourMachine\Define.cs" />
     <None Include="Assets/Scripts/Scripts.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.41f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -986,9 +988,6 @@
       <Project>{ff5aee3b-3455-98b2-c6a3-1036a975f0f7}</Project>
       <Name>RedStudio.OdinTreeNodeCanvas</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Scripts\Combat\BehaviourMachine\Behaviour\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
