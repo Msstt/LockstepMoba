@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Assets/Test/PlayTest/Navmesh/UnitRaycastTest.cs" />
     <Compile Include="Assets/Test/PlayTest/Navmesh/RaycastInSurfaceTest.cs" />
+    <Compile Include="Assets/Test/PlayTest/Fog/FogUpscaleTest.cs" />
     <Compile Include="Assets/Test/PlayTest/Fog/FogTestVision.cs" />
     <Compile Include="Assets/Test/PlayTest/Network/LockstepTest.cs" />
     <Compile Include="Assets/Test/PlayTest/Fog/FogTest.cs" />

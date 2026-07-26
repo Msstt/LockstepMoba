@@ -106,7 +106,8 @@ namespace Combat.Fog {
         }
 
         private void InitMaterials() {
-            Shader upscaleShader = Shader.Find("Hidden/FogOfWarUpscale");
+            // Shader upscaleShader = Shader.Find("Hidden/FogOfWarUpscale");
+            Shader upscaleShader = Shader.Find("World/FogOfWarUpscale2");
             Shader blurShader = Shader.Find("Hidden/FogOfWarBlur");
             Shader fadeShader = Shader.Find("Hidden/FogOfWarFade");
 

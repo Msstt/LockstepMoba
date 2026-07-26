@@ -55,6 +55,7 @@
     <None Include="Assets/Resources/Material/Shader/FogOfWarBlur.shader" />
     <None Include="Assets/Resources/Material/Shader/FogOfWar.shader" />
     <None Include="Assets/Resources/Material/Shader/BarWithTick.shader" />
+    <None Include="Assets/Resources/Material/Shader/FogOfWarUpscale2.shader" />
     <None Include="Assets/Resources/Config/Skill/Json/6.json" />
     <None Include="Assets/Resources/Config/Skill/Json/3.json" />
     <None Include="Assets/Test/Scenes/FogTest/NavmeshData/vision_blocker_map.json" />

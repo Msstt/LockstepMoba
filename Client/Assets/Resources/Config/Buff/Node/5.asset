@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944a2fd9748f4168890f534ec3e7a832, type: 3}
   m_Name: 5
   m_EditorClassIdentifier: 
-  _serializedGraph: '{"type":"Editor.Buff.BuffGraph","nodes":[{"config":{"Id":5,"Name":"\u6f5c\u884c\u6d4b\u8bd5","IsForever":true,"MaxCount":1},"_position":{"x":100.0,"y":100.0},"$type":"Editor.Buff.RootNode","$id":"0"},{"param":{"Radius":{"value":20000000}},"_position":{"x":119.0,"y":190.0},"$type":"Editor.Buff.Effect.InvisibilityByRadius","$id":"1"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"Editor.Buff.BuffConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _serializedGraph: '{"type":"Editor.Buff.BuffGraph","nodes":[{"config":{"Id":5,"Name":"\u7729\u6655\u6d4b\u8bd5","Time":{"value":5000000},"MaxCount":1},"_position":{"x":100.0,"y":100.0},"$type":"Editor.Buff.RootNode","$id":"0"},{"param":{"Type":-1},"_position":{"x":113.0,"y":179.0},"$type":"Editor.Buff.Effect.Control","$id":"1"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"Editor.Buff.BuffConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
   _objectReferences: []
   _graphSource:
     _version: 3.21
