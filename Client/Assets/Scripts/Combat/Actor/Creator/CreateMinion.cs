@@ -15,21 +15,22 @@ namespace Combat.Actor {
                 throw new CombatException("Invalid camp for champion: " + camp);
             }
             
-            Champion actor = new Champion(id, GetNewUid(), go, camp);
+            Minion actor = new Minion(id, GetNewUid(), go, camp);
             
             SetStatusByConfig(actor, id);
 
-            // var pos = Config.Map.revivePos[uid - 1];
-            // actor.SetPos(pos.position, true, true);
-            // actor.SetDir(new Vector3F(FloatF.Cos(pos.direction), 0, FloatF.Sin(pos.direction)), true);
+            // TEST
+            var pos = Config.Map.revivePos[1];
+            actor.SetPos(pos.position, true, true);
+            actor.SetDir(new Vector3F(FloatF.Cos(pos.direction), 0, FloatF.Sin(pos.direction)), true);
             
             return actor;
         }
 
         public override string PrefabName => Config.Minion[id].prefabName;
         
-        private void SetStatusByConfig(Actor actor, int championId) {
-            MinionConfig config = Config.Minion[championId];
+        private void SetStatusByConfig(Actor actor, int Id) {
+            MinionConfig config = Config.Minion[Id];
             
             actor.Stats.Health = new LimitedPriority(config.health[1]);
             

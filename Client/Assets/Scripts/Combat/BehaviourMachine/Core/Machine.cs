@@ -3,15 +3,24 @@ using System.Collections.Generic;
 
 namespace Combat.BehaviourMachine {
     public class Machine {
+        // 行为机掌控的 actor
+        public int Uid { get; private set; }
         private Behaviour curBehaviour;
         private List<Behaviour> behaviours = new List<Behaviour>();
         private List<Func<Behaviour, bool>> customEvaluateFunc = new List<Func<Behaviour, bool>>();
         
         public Behaviour CurBehaviour => curBehaviour;
 
+        public Machine(int Uid) {
+            this.Uid = Uid;
+        }
+
         // Add 顺序等于优先级
-        public void AddBehaviour<T>() where T : Behaviour, new() {
-            behaviours.Add(new T());
+        public void AddBehaviour(Behaviour behaviour) {
+            if (behaviours.Contains(behaviour)) {
+                return;
+            }
+            behaviours.Add(behaviour);
         }
 
         public void AddCustomEvaluateFunc(Func<Behaviour, bool> func) {

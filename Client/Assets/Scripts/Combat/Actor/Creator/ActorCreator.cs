@@ -7,7 +7,7 @@ namespace Combat.Actor {
         public abstract string PrefabName { get; }
 
         protected int GetNewUid() {
-            ActorSystem system = GameMgr.Instance.GetSystem<ActorSystem>();
+            IActorSystem system = GameMgr.Instance.GetSystem<IActorSystem>();
             return system.GetUid();
         }
     }

@@ -8,4 +8,11 @@ public static class TimeUtils {
         }
         return GameMgr.Instance.Frame + FloatF.FloorInt(time / GameMgr.Instance.DeltaTime);
     }
+
+    public static int GetFrameCount(FloatF time) {
+        if (time <= 0) {
+            return 0;
+        }
+        return FloatF.FloorInt(time / GameMgr.Instance.DeltaTime);
+    }
 }

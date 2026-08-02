@@ -6,7 +6,7 @@ namespace Combat.Actor {
         private ControlCom controlCom;
         
         public override void Awake() {
-            machine = new Machine();
+            machine = new Machine(Actor.Uid);
             controlCom = Actor.GetComponent<ControlCom>();
             
             machine.AddCustomEvaluateFunc((behaviour) => {

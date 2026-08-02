@@ -172,6 +172,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Com/BehaviourMachineCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Time/WaitForTime.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Vision/InvisibilityByRadius.cs" />
+    <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Behaviour/AttackBehaviour.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Unit/Champion.cs" />
     <Compile Include="Assets/Scripts/GameMgr.cs" />
     <Compile Include="Assets/Scripts/Data/Combat/Level.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.MoveComStatus.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Check/IsSameCamp.cs" />
+    <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Core/BehaviourUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Uid.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Network.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/Json/JsonHelper.cs" />
@@ -240,6 +242,7 @@
     <Compile Include="Assets/Scripts/Navmesh/INavmesh.cs" />
     <Compile Include="Assets/Scripts/Input/Com/ActorRaycasterCom.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/IMsgDispatcher.cs" />
+    <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Behaviour/ChaseBehaviour.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Reader.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/AnimCom.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/FrameMsgDispatcher.cs" />

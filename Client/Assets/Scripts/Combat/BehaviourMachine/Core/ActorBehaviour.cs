@@ -2,6 +2,9 @@ using Combat.Skill;
 
 namespace Combat.BehaviourMachine {
     public abstract class ActorBehaviour : Behaviour {
-        public SkillType SkillType { get; }
+        public abstract SkillType SkillType { get; }
+        
+        protected ActorBehaviour(Machine machine) : base(machine) {
+        }
     }
 }
