@@ -8,6 +8,7 @@ namespace UI {
     public enum UIDef {
         None,
         ChampionStatsBarPanel,
+        MinionStatsBarPanel,
         FloatingNumberPanel,
         SkillPanel,
         LevelPanel,
@@ -26,6 +27,11 @@ namespace UI {
                 prefab = "UI/Actor/ChampionStatsBarPanel",
                 layer = UILayer.World,
                 creator = () => new ChampionStatsBarPanel(),
+            } },
+            { UIDef.MinionStatsBarPanel, new Info {
+                prefab = "UI/Actor/MinionStatsBarPanel",
+                layer = UILayer.World,
+                creator = () => new MinionStatsBarPanel(),
             } },
             { UIDef.FloatingNumberPanel, new Info {
                     prefab = "UI/Actor/FloatingNumberPanel",

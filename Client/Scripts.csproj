@@ -88,6 +88,7 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Anim/SetDirByInputParam.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Effect.cs" />
+    <Compile Include="Assets/Scripts/UI/Actor/MinionStatsBarPanel.cs" />
     <Compile Include="Assets/Scripts/Input/Command/SingleDir.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventType.cs" />
     <Compile Include="Assets/Scripts/UI/Main/SkillPanel.cs" />

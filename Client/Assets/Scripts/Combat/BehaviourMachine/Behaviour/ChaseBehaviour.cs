@@ -9,6 +9,7 @@ namespace Combat.BehaviourMachine {
         private FloatF patrolDistance;
         
         private Actor.Actor target;
+        private bool waitStart;
         
         public ChaseBehaviour(Machine machine, FloatF patrolDistance, FloatF chaseDistance) : base(machine) {
             this.patrolDistance = patrolDistance;
@@ -38,20 +39,27 @@ namespace Combat.BehaviourMachine {
             return target != null;
         }
 
+        public override void Execute(int frame) {
+            if (waitStart) {
+                waitStart = false;
+                
+                // stop_distance = 0 进入攻击范围后自动被高优先级的 AttackBehaviour 打断 
+                Actor.GetComponent<MoveCom>().MoveToActorByPath(target.Uid, 0, StopChase, StopChase);
+                Actor.GetComponent<AnimCom>()?.PlayAnim("Move");
+            }
+        }
+
         public override void OnAbort() {
-            StopChase();
+            Actor.GetComponent<MoveCom>().ForceFail();
         }
 
         private void StartChase(Actor.Actor target) {
             this.target = target;
-            // stop_distance = 0 进入攻击范围后自动被高优先级的 AttackBehaviour 打断 
-            Actor.GetComponent<MoveCom>().MoveToActorByPath(target.Uid, 0, StopChase, StopChase);
-            Actor.GetComponent<AnimCom>()?.PlayAnim("Move");
+            waitStart = true;
         }
         
         private void StopChase() {
             target = null;
-            Actor.GetComponent<MoveCom>().ForceFail();
             Actor.GetComponent<AnimCom>()?.PlayAnim("Idle");
         }
     }

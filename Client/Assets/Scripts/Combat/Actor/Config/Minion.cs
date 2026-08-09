@@ -24,5 +24,9 @@ namespace Combat.Actor {
         
         [LabelText("移速")]
         public FloatF moveSpeed;
+        [LabelText("索敌距离")]
+        public FloatF patrolDistance;
+        [LabelText("追击距离")]
+        public FloatF chaseDistance;
     }
 }

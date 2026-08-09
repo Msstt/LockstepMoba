@@ -12,6 +12,8 @@ namespace Combat.Actor {
                 switch (Actor.Type) {
                     case ActorType.Champion:
                         return UIDef.ChampionStatsBarPanel;
+                    case ActorType.Minion:
+                        return UIDef.MinionStatsBarPanel;
                     default:
                         return UIDef.None;
                 }
@@ -23,6 +25,10 @@ namespace Combat.Actor {
                 switch (Actor.Type) {
                     case ActorType.Champion:
                         return new ChampionStatsBarPanelParam {
+                            actor = Actor,
+                        };
+                    case ActorType.Minion:
+                        return new MinionStatsBarPanelParam {
                             actor = Actor,
                         };
                     default:

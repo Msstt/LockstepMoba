@@ -3,10 +3,15 @@ using System.Collections.Generic;
 
 namespace Combat.BehaviourMachine {
     public static class Define {
-        public static Dictionary<int, Action<Machine>> create = new Dictionary<int, Action<Machine>>() {
-            { 1, machine => {
-                machine.AddBehaviour(new AttackBehaviour(machine, Config.Minion[1].attackDistance));
+        public static Dictionary<int, Action<Machine>> createFunc = new Dictionary<int, Action<Machine>>() {
+            { 1001, machine => {
+                NormalMinionCreateFunc(machine, 1001);
             } },
         };
+        
+        private static void NormalMinionCreateFunc(Machine machine, int actorId) {
+            machine.AddBehaviour(new AttackBehaviour(machine, Config.Minion[actorId].attackWindupRatio));
+            machine.AddBehaviour(new ChaseBehaviour(machine, Config.Minion[actorId].patrolDistance, Config.Minion[actorId].chaseDistance));
+        }
     }
 }

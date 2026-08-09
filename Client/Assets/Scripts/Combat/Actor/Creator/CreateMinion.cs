@@ -20,7 +20,7 @@ namespace Combat.Actor {
             SetStatusByConfig(actor, id);
 
             // TEST
-            var pos = Config.Map.revivePos[1];
+            var pos = Config.Map.revivePos[2];
             actor.SetPos(pos.position, true, true);
             actor.SetDir(new Vector3F(FloatF.Cos(pos.direction), 0, FloatF.Sin(pos.direction)), true);
             

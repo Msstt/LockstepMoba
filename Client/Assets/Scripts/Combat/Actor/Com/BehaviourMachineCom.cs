@@ -20,11 +20,15 @@ namespace Combat.Actor {
                 return true;
             });
             
-            if (Define.create.ContainsKey(Actor.Id)) {
-                Define.create[Actor.Id](machine);
+            if (Define.createFunc.ContainsKey(Actor.Id)) {
+                Define.createFunc[Actor.Id](machine);
             } else {
                 Log.Warning($"BehaviourMachineCom Awake: Actor Id {Actor.Id} has no behaviour machine defined.");
             }
+        }
+
+        public override void Update(int frame) {
+            machine.Update(frame);
         }
 
         public override void Destroy() {

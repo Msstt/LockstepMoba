@@ -23,7 +23,7 @@
           {
             "Type": 2,
             "Params": {
-              "AnimName": "Run"
+              "AnimName": "Move"
             },
             "Child": [
               {

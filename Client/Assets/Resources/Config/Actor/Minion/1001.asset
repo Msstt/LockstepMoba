@@ -29,4 +29,8 @@ MonoBehaviour:
   attackDistance:
     value: 20000000
   moveSpeed:
-    value: 30000000
+    value: 25000000
+  patrolDistance:
+    value: 50000000
+  chaseDistance:
+    value: 60000000

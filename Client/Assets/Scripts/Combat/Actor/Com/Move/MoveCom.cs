@@ -85,13 +85,15 @@ namespace Combat.Actor {
         }
 
         private void Finish() {
-            finishCallback?.Invoke();
+            Action callback = finishCallback;
             Clear();
+            callback?.Invoke();
         }
 
         private void Fail() {
-            failCallback?.Invoke();
+            Action callback = failCallback;
             Clear();
+            callback?.Invoke();
         }
 
         private void CalcPath(Vector3F pos, bool force = true) {

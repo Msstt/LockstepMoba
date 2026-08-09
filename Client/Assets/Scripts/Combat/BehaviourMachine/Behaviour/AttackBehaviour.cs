@@ -7,6 +7,7 @@ namespace Combat.BehaviourMachine {
         
         private int attackWindupFrame;
         private int attackFrame;
+        private bool waitStart;
         private bool waitAttack;
         private Actor.Actor target;
         private int startFrame;
@@ -33,6 +34,11 @@ namespace Combat.BehaviourMachine {
         }
 
         public override void Execute(int frame) {
+            if (waitStart) {
+                waitStart = false;
+                Actor.GetComponent<AnimCom>()?.PlayAnim("Attack");
+            }
+            
             if (waitAttack && frame >= startFrame + attackWindupFrame) {
                 waitAttack = false;
                 Attack();
@@ -50,14 +56,15 @@ namespace Combat.BehaviourMachine {
         private void StartAttack(Actor.Actor target) {
             this.target = target;
             startFrame = GameMgr.Instance.Frame;
-            waitAttack = true;
-            Actor.GetComponent<AnimCom>()?.PlayAnim("Attack");
+            waitStart = waitAttack = true;
         }
 
         private void Attack() {
-            if (target != null) {
+            if (target == null) {
                 return;
             }
+            // 重新获取 Actor，可能前摇时 Actor 死亡
+            Actor.Actor actor = ActorUtils.GetActor(target.Uid);
             HitInfo hitInfo = new HitInfo {
                 attacker = Actor.Uid,
                 damage = new Damage {
@@ -66,7 +73,7 @@ namespace Combat.BehaviourMachine {
                     @true = 0,
                 }
             };
-            target.OnHit(hitInfo);
+            actor?.OnHit(hitInfo);
         }
         
         private void StopAttack() {
