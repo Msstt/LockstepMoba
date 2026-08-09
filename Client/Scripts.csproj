@@ -82,6 +82,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Com/LevelCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Common/ObservableValue.cs" />
     <Compile Include="Assets/Scripts/Input/Command/ICommand.cs" />
+    <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Behaviour/MinionWaveBehaviour.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Core/Area.cs" />
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/AreaUtils.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Assets/Scripts/Input/Command/None.cs" />
     <Compile Include="Assets/Scripts/UI/UIDef.cs" />
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
+    <Compile Include="Assets/Scripts/Combat/MinionWave.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
     <Compile Include="Assets/Scripts/UI/Com/UIBarCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
