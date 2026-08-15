@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: MinionWave
   m_EditorClassIdentifier: 
   spawnStartTime:
-    value: 0
+    value: 3000000
   spawnIntervalTime:
-    value: 0
+    value: 180000000
   singleIntervalTime:
-    value: 0
+    value: 3000000
   spawnId:
   - value: e9030000
