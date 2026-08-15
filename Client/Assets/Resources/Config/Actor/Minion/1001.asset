@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: 1001
   m_EditorClassIdentifier: 
   name: "\u8FD1\u6218\u5175"
-  prefabName: Role/Minion/Blue/Melee Minion/Prefab
+  bluePrefabName: Role/Minion/Blue/Melee Minion/Prefab
+  redPrefabName: Role/Minion/Red/Melee Minion/Prefab
   health:
     datas:
     - level: 0

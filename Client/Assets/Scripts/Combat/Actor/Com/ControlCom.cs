@@ -1,26 +1,19 @@
 using System;
 using System.Collections.Generic;
 using Combat.Skill;
+using Framework;
 
 namespace Combat.Actor {
     public class ControlCom : Com {
         private readonly Dictionary<SkillType, int> abortCount = new Dictionary<SkillType, int>();
 
-        public Action Abort(SkillType typeList) {
+        public ReleaseToken Abort(SkillType typeList) {
             ChangeAbortCount(typeList, 1);
 
             SkillCom system = Actor.GetComponent<SkillCom>();
             system?.AbortSkill(typeList);
 
-            bool isReleased = false;
-            return () => {
-                if (isReleased) {
-                    return;
-                }
-
-                isReleased = true;
-                ChangeAbortCount(typeList, -1);
-            };
+            return new ReleaseToken(() => ChangeAbortCount(typeList, -1));
         }
 
         public bool IsAbort(SkillType typeList) {

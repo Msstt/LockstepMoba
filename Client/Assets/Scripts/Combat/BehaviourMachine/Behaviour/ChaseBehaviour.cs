@@ -28,11 +28,14 @@ namespace Combat.BehaviourMachine {
                 return true;
             }
             
+            FloatF distance = FloatF.max;
             foreach (var uid in NavmeshUtils.RaycastInCircle(Actor.Pos, patrolDistance)) {
                 Actor.Actor actor = ActorUtils.GetActor(uid);
                 if (actor != null && actor.Camp != Actor.Camp) {
-                    StartChase(actor);
-                    break;
+                    if (Vector3F.Distance(Actor.Pos, actor.Pos) < distance) {
+                        distance = Vector3F.Distance(Actor.Pos, actor.Pos);
+                        StartChase(actor);
+                    }
                 }
             }
 

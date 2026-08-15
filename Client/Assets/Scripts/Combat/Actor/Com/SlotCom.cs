@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Framework;
 using Sirenix.OdinInspector;
 
 namespace Combat.Actor {
@@ -17,7 +18,7 @@ namespace Combat.Actor {
         private class RequestInfo {
             public int slot;
             public int frame;
-            public Action<Action> callback;
+            public Action<ReleaseToken> callback;
             public Action failCallback;
         }
         
@@ -44,17 +45,12 @@ namespace Combat.Actor {
             return (curOccupancy & slot) != 0;
         }
         
-        private Action GetReleaseFunc(int slot) {
-            bool isReleased = false;
-            return () => {
-                if (isReleased) {
-                    return;
-                }
-                isReleased = true;
+        private ReleaseToken GetReleaseFunc(int slot) {
+            return new ReleaseToken(() => {
                 Release(slot);
                 
                 HandleRequests(GameMgr.Instance.Frame);
-            };
+            });
         }
 
         private void HandleRequests(int frame) {
@@ -85,7 +81,7 @@ namespace Combat.Actor {
 
         // 返回 requestId，取消请求使用 Cancel(requestId)
         // callback(ReleaseFunc)
-        public long RequestInTime(int slot, FloatF time, Action<Action> callback, Action failCallback = null) {
+        public long RequestInTime(int slot, FloatF time, Action<ReleaseToken> callback, Action failCallback = null) {
             long id = ++requestId;
             requests[id] = new RequestInfo {
                 slot = slot,

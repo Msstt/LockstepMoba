@@ -21,7 +21,8 @@ public class Main : MonoBehaviour {
             UIUtils.ShowUI(UIDef.SkillPanel);
             UIUtils.ShowUI(UIDef.LevelPanel);
                 
-            GameMgr.Instance.GetSystem<IActorSystem>().CreateActor(new CreateMinion(1001, CampType.Red));
+            // GameMgr.Instance.GetSystem<IActorSystem>().CreateActor(new CreateMinion(1001, CampType.Blue, 0));
+            // GameMgr.Instance.GetSystem<IActorSystem>().CreateActor(new CreateMinion(1001, CampType.Red, 0));
             //
             // var actor = ActorUtils.GetActor(2);
             // actor?.GetComponent<BuffCom>()?.AddBuff(4, 2, 1);

@@ -4,10 +4,12 @@ namespace Combat.Actor {
     public class CreateMinion : ActorCreator {
         private int id;
         private CampType camp;
+        private int waveIndex;
 
-        public CreateMinion(int id, CampType camp) {
+        public CreateMinion(int id, CampType camp, int waveIndex) {
             this.id = id;
             this.camp = camp;
+            this.waveIndex = waveIndex;
         }
         
         public override Actor Create(GameObject go) {
@@ -19,15 +21,18 @@ namespace Combat.Actor {
             
             SetStatusByConfig(actor, id);
 
-            // TEST
-            var pos = Config.Map.revivePos[2];
-            actor.SetPos(pos.position, true, true);
-            actor.SetDir(new Vector3F(FloatF.Cos(pos.direction), 0, FloatF.Sin(pos.direction)), true);
+            var waves = camp == CampType.Blue ? Config.Map.blueMinionWavePos : Config.Map.redMinionWavePos;
+            if (waveIndex >= waves.Count || waves[waveIndex].Pos.Count == 0) {
+                throw new CombatException("Invalid waveIndex for minion: " + waveIndex);
+            }
+            var transform = waves[waveIndex].Pos[0];
+            actor.SetPos(transform.position, true, true);
+            actor.SetDir(new Vector3F(FloatF.Cos(transform.direction), 0, FloatF.Sin(transform.direction)), true);
             
             return actor;
         }
 
-        public override string PrefabName => Config.Minion[id].prefabName;
+        public override string PrefabName => camp == CampType.Blue ? Config.Minion[id].bluePrefabName : Config.Minion[id].redPrefabName;
         
         private void SetStatusByConfig(Actor actor, int Id) {
             MinionConfig config = Config.Minion[Id];

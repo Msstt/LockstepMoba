@@ -1,17 +1,16 @@
 using System.Collections.Generic;
-using Combat;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace OtherConfig {
-    [CreateAssetMenu(fileName = "Map", menuName = "Config/Map")]
+    [CreateAssetMenu(fileName = "Map", menuName = "Config/Other/Map")]
     public class Map : ScriptableObject {
         [LabelText("复活位置")]
         public List<SimpleTransform> revivePos = new List<SimpleTransform>();
         
         [LabelText("蓝方兵线")]
-        public List<MinionWave> blueMinionWavePos = new List<MinionWave>();
+        public List<Combat.Actor.MinionWave> blueMinionWavePos = new List<Combat.Actor.MinionWave>();
         [LabelText("红方兵线")]
-        public List<MinionWave> redMinionWavePos = new List<MinionWave>();
+        public List<Combat.Actor.MinionWave> redMinionWavePos = new List<Combat.Actor.MinionWave>();
     }
 }

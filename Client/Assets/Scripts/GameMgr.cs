@@ -95,6 +95,7 @@ public class GameMgr : Singleton<GameMgr> {
         foreach (var system in systemList) {
             (system as IFrameUpdateSystem)?.FrameUpdate(Frame);
         }
+        AsyncMgr.Instance.Update(Frame);
         Profiler.EndSample();
     }
 
@@ -149,12 +150,12 @@ public class GameMgr : Singleton<GameMgr> {
             Camp = 0,
             Skill = { 5, 4 },
         });
-        msg.Players.Add(new battle_start_s2c.Types.player_info {
-            Uid = 2,
-            ChampionId = 1,
-            Camp = 1,
-            Skill = { 3, 3 },
-        });
+        // msg.Players.Add(new battle_start_s2c.Types.player_info {
+        //     Uid = 2,
+        //     ChampionId = 1,
+        //     Camp = 1,
+        //     Skill = { 3, 3 },
+        // });
         // msg.Players.Add(new battle_start_s2c.Types.player_info {
         //     Uid = 3,
         //     ChampionId = 1,

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using Combat;
-using OtherConfig;
+using Combat.Actor;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,12 +9,12 @@ namespace Editor {
 
         [MenuItem(MenuPath, true)]
         private static bool ValidateExecute() {
-            return Selection.activeObject is Map;
+            return Selection.activeObject is OtherConfig.Map;
         }
 
         [MenuItem(MenuPath)]
         private static void Execute() {
-            if (Selection.activeObject is not Map mapConfig) {
+            if (Selection.activeObject is not OtherConfig.Map mapConfig) {
                 Debug.LogError("请先选中 OtherConfig.Map 配置资源");
                 return;
             }

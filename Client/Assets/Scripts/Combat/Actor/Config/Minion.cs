@@ -7,8 +7,10 @@ namespace Combat.Actor {
         [LabelText("名称")]
         public string name;
         
-        [LabelText("预制体")]
-        public string prefabName;
+        [LabelText("蓝方预制体")]
+        public string bluePrefabName;
+        [LabelText("红方预制体")]
+        public string redPrefabName;
         
         [LabelText("生命值")]
         public LevelNumber<int> health;

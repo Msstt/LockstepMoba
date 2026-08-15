@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace OtherConfig {
-    [CreateAssetMenu(fileName = "Exp", menuName = "Config/Exp")]
+    [CreateAssetMenu(fileName = "Exp", menuName = "Config/Other/Exp")]
     public class Exp : ScriptableObject {
         [LabelText("升级经验(等级)")]
         public LevelNumber<int> upgradeExp = new LevelNumber<int>();

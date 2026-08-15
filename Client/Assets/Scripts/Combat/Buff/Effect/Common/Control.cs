@@ -1,6 +1,6 @@
-using System;
 using Combat.Actor;
 using Combat.Skill;
+using Framework;
 using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 
@@ -13,7 +13,7 @@ namespace Combat.Buff.Effect {
         
         public Control(Buff buff, JToken json) : base(buff, json) { }
 
-        private Action releaseFunc;
+        private ReleaseToken releaseFunc;
 
         public override void OnCreate() {
             ControlCom com = ActorUtils.GetCom<ControlCom>(buff.ActorId);
@@ -21,7 +21,7 @@ namespace Combat.Buff.Effect {
         }
 
         public override void OnDestroy() {
-            releaseFunc?.Invoke();
+            releaseFunc?.Release();
         }
     }
 }

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b314d0c105143a2a4746f38c608cf24, type: 3}
+  m_Name: MinionWave
+  m_EditorClassIdentifier: 
+  spawnStartTime:
+    value: 0
+  spawnIntervalTime:
+    value: 0
+  singleIntervalTime:
+    value: 0
+  spawnId:
+  - value: e9030000

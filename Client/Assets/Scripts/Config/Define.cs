@@ -30,4 +30,5 @@ public static partial class Config {
     public static readonly OtherConfig.Map Map = Resources.Load<OtherConfig.Map>("Config/Other/Map");
     public static readonly OtherConfig.Exp Exp = Resources.Load<OtherConfig.Exp>("Config/Other/Exp");
     public static readonly OtherConfig.Vision Vision = Resources.Load<OtherConfig.Vision>("Config/Other/Vision");
+    public static readonly OtherConfig.MinionWave MinionWave = Resources.Load<OtherConfig.MinionWave>("Config/Other/MinionWave");
 }

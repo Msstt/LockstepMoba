@@ -1,7 +1,7 @@
 // 技能树节点：请求占用槽位
 
-using System;
 using Combat.Actor;
+using Framework;
 using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 
@@ -47,8 +47,8 @@ namespace Combat.Skill.SkillNode {
         }
         
         protected override void OnFinish(Context context) {
-            var releaseFunc = GetValue<Action>(context, "ReleaseFunc");
-            releaseFunc?.Invoke();
+            var releaseFunc = GetValue<ReleaseToken>(context, "ReleaseFunc");
+            releaseFunc?.Release();
         }
 
         protected override void OnFail(Context context) {
@@ -59,8 +59,8 @@ namespace Combat.Skill.SkillNode {
                 GetCom<SlotCom>(context)?.Cancel(requestId);
             } else if (res == 0) {
                 // 已经获得槽位，释放槽位
-                var releaseFunc = GetValue<Action>(context, "ReleaseFunc");
-                releaseFunc?.Invoke();
+                var releaseFunc = GetValue<ReleaseToken>(context, "ReleaseFunc");
+                releaseFunc?.Release();
             }
         }
     }

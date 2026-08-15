@@ -52,6 +52,7 @@
     <Compile Include="Assets/Scripts/Config/Combat/Vision.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/TypeMsg.cs" />
     <Compile Include="Assets/Scripts/Combat/Level/ILevelSystem.cs" />
+    <Compile Include="Assets/Scripts/Tools/Async/AsyncMgr.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/MsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkDef.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Effect/Stats/Damage.cs" />
@@ -122,10 +123,13 @@
     <Compile Include="Assets/Scripts/Combat/Equipment/Config/EquipmentConfig.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/RandomColor.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Stats/_ChangeStats.cs" />
+    <Compile Include="Assets/Scripts/Combat/Spawn/Minion/MinionWave.cs" />
     <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Core/Machine.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Buff.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.OnHeal.cs" />
+    <Compile Include="Assets/Scripts/Combat/Spawn/ChampionSpawn.cs" />
     <Compile Include="Assets/Scripts/Data/Core/DataSystem.cs" />
+    <Compile Include="Assets/Scripts/Framework/Tools/SerializableList.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Event/EventHub.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Core/Shape.cs" />
@@ -133,6 +137,7 @@
     <Compile Include="Assets/Scripts/Combat/Fog/Vision.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Unit/Minion.cs" />
     <Compile Include="Assets/Scripts/Tools/Geo/GeoUtils.cs" />
+    <Compile Include="Assets/Scripts/Combat/Spawn/Minion/MinionSpawn.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Navmesh.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/SafeList.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Stats/Damage.cs" />
@@ -146,7 +151,7 @@
     <Compile Include="Assets/Scripts/Input/Command/None.cs" />
     <Compile Include="Assets/Scripts/UI/UIDef.cs" />
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
-    <Compile Include="Assets/Scripts/Combat/MinionWave.cs" />
+    <Compile Include="Assets/Scripts/Framework/Tools/CancelToken.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
     <Compile Include="Assets/Scripts/UI/Com/UIBarCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
@@ -179,6 +184,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Unit/Champion.cs" />
     <Compile Include="Assets/Scripts/GameMgr.cs" />
     <Compile Include="Assets/Scripts/Data/Combat/Level.cs" />
+    <Compile Include="Assets/Scripts/Tools/Async/AsyncUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/IActorSystem.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/MockLockStep.cs" />
@@ -242,6 +248,7 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Check/IsActorType.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Raycast/GetTIdByPoint.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/WorldUI/UISystem.cs" />
+    <Compile Include="Assets/Scripts/Config/Combat/MinionWave.cs" />
     <Compile Include="Assets/Scripts/Navmesh/INavmesh.cs" />
     <Compile Include="Assets/Scripts/Input/Com/ActorRaycasterCom.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/IMsgDispatcher.cs" />

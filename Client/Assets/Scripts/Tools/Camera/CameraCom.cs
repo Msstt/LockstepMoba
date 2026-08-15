@@ -4,6 +4,8 @@
 // 2. 缩放惯性
 
 using System;
+using Combat;
+using Combat.Actor;
 using UnityEngine;
 
 public class CameraCom : MonoBehaviour {
@@ -36,22 +38,33 @@ public class CameraCom : MonoBehaviour {
         }
         Move();
         Scale();
+        MoveToSelf();
         mainCamera.transform.position = cameraPos - mainCamera.transform.forward * curHeight;
     }
 
     private void Move() {
         Vector3 mousePos = Input.mousePosition;
         if (mousePos.x <= screenPadding) {
-            cameraPos += Time.deltaTime * moveSpeed * Vector3.left;
+            cameraPos -= Time.deltaTime * moveSpeed * Vector3.left;
         }
         if (mousePos.x >= Screen.width - screenPadding) {
-            cameraPos += Time.deltaTime * moveSpeed * Vector3.right;
+            cameraPos -= Time.deltaTime * moveSpeed * Vector3.right;
         }
         if (mousePos.y <= screenPadding) {
-            cameraPos += Time.deltaTime * moveSpeed * Vector3.back;
+            cameraPos -= Time.deltaTime * moveSpeed * Vector3.back;
         }
         if (mousePos.y >= Screen.height - screenPadding) {
-            cameraPos += Time.deltaTime * moveSpeed * Vector3.forward;
+            cameraPos -= Time.deltaTime * moveSpeed * Vector3.forward;
+        }
+    }
+
+    private void MoveToSelf() {
+        if (Input.GetKey(KeyCode.Space)) {
+            var self = ActorUtils.GetActor(CombatUtils.SelfUid);
+            if (self != null) {
+                cameraPos.x = self.Pos.ToVector3().x;
+                cameraPos.z = self.Pos.ToVector3().z;
+            }
         }
     }
     

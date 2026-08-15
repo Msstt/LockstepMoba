@@ -8,7 +8,7 @@ namespace Combat.Actor {
             // TODO 助攻
             int level = ActorUtils.GetCom<LevelCom>(param.Uid).Level;
             int exp = Config.Exp.killChampionExp[level];
-            ActorUtils.GetCom<LevelCom>(param.KillerUid).AddExp(exp);
+            ActorUtils.GetCom<LevelCom>(param.KillerUid)?.AddExp(exp);
         }
     }
 }
