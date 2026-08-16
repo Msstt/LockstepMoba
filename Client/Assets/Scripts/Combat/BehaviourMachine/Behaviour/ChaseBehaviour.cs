@@ -21,6 +21,7 @@ namespace Combat.BehaviourMachine {
         
         public override bool Evaluate() {
             if (target != null) {
+                // 超过距离后失去仇恨
                 if (Vector3F.Distance(Actor.Pos, target.Pos) > chaseDistance) {
                     return false;
                 }

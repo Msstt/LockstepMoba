@@ -17,7 +17,7 @@ namespace Combat.Actor {
                 throw new CombatException("Invalid camp for champion: " + camp);
             }
             
-            Minion actor = new Minion(id, GetNewUid(), go, camp);
+            Minion actor = new Minion(id, GetNewUid(), go, camp, waveIndex);
             
             SetStatusByConfig(actor, id);
 

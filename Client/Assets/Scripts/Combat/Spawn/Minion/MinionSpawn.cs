@@ -14,7 +14,7 @@ namespace Combat.Actor {
                     throw new CombatException("MinionWave spawnIntervalTime is too small");
                 }
                 
-                AsyncUtils.Start(Config.MinionWave.spawnStartTime, SpawnMinionWave);
+                AsyncUtils.StartSecond(Config.MinionWave.spawnStartTime, SpawnMinionWave);
             }
             
             private void SpawnMinionWave() {
@@ -22,13 +22,13 @@ namespace Combat.Actor {
                 FloatF intervalTime = Config.MinionWave.singleIntervalTime;
                 for (int i = 0; i < ids.Count; i++) {
                     int id = ids[i];
-                    AsyncUtils.Start(i * intervalTime, () => {
+                    AsyncUtils.StartSecond(i * intervalTime, () => {
                         SpawnMinion(id);
                     });
                 }
                 waveIndex = (waveIndex + 1) % Config.MinionWave.spawnId.Count;
                 
-                AsyncUtils.Start(Config.MinionWave.spawnIntervalTime, SpawnMinionWave);
+                AsyncUtils.StartSecond(Config.MinionWave.spawnIntervalTime, SpawnMinionWave);
             }
 
             private void SpawnMinion(int minionId) {

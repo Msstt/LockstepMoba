@@ -62,7 +62,12 @@ namespace Combat.Fog {
             return vision[(int)type].AddVision(position, radius);
         }
 
-        public bool IsVisible(Vector3F position) {
+        public bool IsVisible(Vector3F position) { 
+#if UNITY_EDITOR
+            if (GameMgr.Instance.GMTool.DisableFog) {
+                return true;
+            } 
+#endif
             return vision[(int)CurVisionType].IsVisible(position);
         }
         

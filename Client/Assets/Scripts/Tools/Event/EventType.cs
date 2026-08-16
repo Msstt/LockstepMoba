@@ -1,3 +1,4 @@
+using Combat.Actor;
 using Combat.Skill;
 
 namespace EventType {
@@ -8,6 +9,7 @@ namespace EventType {
     
     public struct ActorDead {
         public int Uid;
+        public ActorType Type;
         public int KillerUid;
     }
     

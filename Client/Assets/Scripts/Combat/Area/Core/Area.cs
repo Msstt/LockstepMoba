@@ -83,9 +83,11 @@ namespace Combat.Area {
             
             ExecuteEffect((effect) => effect.OnUpdate());
 
+#if UNITY_EDITOR
             if (GameMgr.Instance.GMTool.ShowDebugMode) {
                 Shape.RenderDebug(Position, Direction);
             }
+#endif
         }
         
         private bool? lastVisibility = null;

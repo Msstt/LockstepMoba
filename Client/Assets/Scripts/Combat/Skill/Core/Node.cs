@@ -19,7 +19,9 @@ namespace Combat.Skill {
         protected Node() {
             Id = globalId++;
 
+#if UNITY_EDITOR
             PrintSkillTree = GameMgr.Instance.GMTool.PrintSkillTree;
+#endif
         }
         
         protected virtual NodeState OnEnter(Context context) => NodeState.NoKnow;

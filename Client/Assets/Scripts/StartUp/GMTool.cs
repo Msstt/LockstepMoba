@@ -10,4 +10,7 @@ public class GMTool : MonoBehaviour {
     
     [LabelText("打印技能树")]
     public bool PrintSkillTree = false;
+    
+    [LabelText("关闭战争迷雾")]
+    public bool DisableFog = false;
 }

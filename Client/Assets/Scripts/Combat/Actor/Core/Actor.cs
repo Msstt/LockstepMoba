@@ -35,9 +35,10 @@ namespace Combat.Actor {
             Uid = uid;
             this.go = go;
             this.camp = camp;
-
+#if UNITY_EDITOR
             debugPoint = GoUtils.NewGo("Role/Other/DebugPoint", DebugMgr.Instance.transform);
             debugPoint.SetActive(GameMgr.Instance.GMTool.ShowDebugMode);
+#endif
             
             Transform collider = go.transform.Find("Prefab/Collider");
             if (collider == null) {

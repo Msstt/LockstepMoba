@@ -21,7 +21,7 @@ MonoBehaviour:
       z:
         value: 1360000122
     direction:
-      value: -3141540
+      value: -3141589
   - position:
       x:
         value: 500000030
@@ -50,7 +50,7 @@ MonoBehaviour:
         z:
           value: 1326250000
       direction:
-        value: 1570770
+        value: 1570793
     - position:
         x:
           value: 581250061
@@ -59,7 +59,7 @@ MonoBehaviour:
         z:
           value: 1251500122
       direction:
-        value: 1570770
+        value: 1570793
     - position:
         x:
           value: 464250030
@@ -68,7 +68,7 @@ MonoBehaviour:
         z:
           value: 1131750000
       direction:
-        value: 1570770
+        value: 1570793
   redMinionWavePos:
   - Pos:
     - position:
@@ -79,16 +79,25 @@ MonoBehaviour:
         z:
           value: 1131750000
       direction:
-        value: 1570770
+        value: 1570793
     - position:
         x:
-          value: 581250061
+          value: 546500061
         y:
           value: 125000061
         z:
-          value: 1251500122
+          value: 1202250122
       direction:
-        value: 1570770
+        value: 1570793
+    - position:
+        x:
+          value: 600200012
+        y:
+          value: 125000061
+        z:
+          value: 1265100097
+      direction:
+        value: 1570793
     - position:
         x:
           value: 652250061
@@ -97,4 +106,4 @@ MonoBehaviour:
         z:
           value: 1326250000
       direction:
-        value: 1570770
+        value: 1570793

@@ -19,7 +19,9 @@ namespace Combat.Skill {
             Type = config.SkillType;
             CanAbortSelf = config.CanAbortSelf;
             root = InitNode(config.Node);
+#if UNITY_EDITOR
             PrintSkillTree = GameMgr.Instance.GMTool.PrintSkillTree;
+#endif
         }
 
         public NodeState Execute(Context context) {

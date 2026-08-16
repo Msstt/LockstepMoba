@@ -2,8 +2,11 @@ using UnityEngine;
 
 namespace Combat.Actor {
     public class Minion : Actor {
-        public Minion(int id, int uid, GameObject go, CampType camp) : base(id, uid, go, camp) {
+        public int WaveIndex { get; private set; }
+        
+        public Minion(int id, int uid, GameObject go, CampType camp, int waveIndex) : base(id, uid, go, camp) {
             Type = ActorType.Minion;
+            WaveIndex = waveIndex;
         }
         
         public override void BindCom() {

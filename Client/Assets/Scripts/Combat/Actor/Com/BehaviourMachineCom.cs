@@ -21,7 +21,9 @@ namespace Combat.Actor {
             });
             
             if (Define.createFunc.ContainsKey(Actor.Id)) {
-                Define.createFunc[Actor.Id](machine);
+                AsyncUtils.StartEndFrame(() => {
+                    Define.createFunc[Actor.Id](machine);
+                });
             } else {
                 Log.Warning($"BehaviourMachineCom Awake: Actor Id {Actor.Id} has no behaviour machine defined.");
             }

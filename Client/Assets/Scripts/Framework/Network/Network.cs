@@ -30,9 +30,11 @@ namespace Framework.Network {
         public void Init() {
             NetworkDef.RegisterDispatcher();
 
-            if (GameMgr.Instance.GMTool != null && GameMgr.Instance.GMTool.IsLocalDebug) {
+#if UNITY_EDITOR
+            if (GameMgr.Instance.GMTool.IsLocalDebug) {
                 return;
             }
+#endif
             
             Connect("127.0.0.1", 9980);
             

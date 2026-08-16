@@ -9,6 +9,7 @@ namespace Combat.Actor {
                 OnDead();
                 EventUtils.Send(new EventType.ActorDead {
                     Uid = Uid,
+                    Type = Type,
                     KillerUid = info.attacker,
                 });
             }
