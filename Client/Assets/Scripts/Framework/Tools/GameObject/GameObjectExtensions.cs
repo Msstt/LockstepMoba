@@ -26,11 +26,11 @@ public static class GameObjectExtensions {
     }
     
     public static GameObject GetGameObject(this Transform trans, string path) {
-        return trans?.Find(path)?.GetComponent<Transform>().gameObject;
+        return trans?.Find(path)?.gameObject;
     }
     
     public static GameObject GetGameObject(this GameObject trans, string path) {
-        return trans?.transform.Find(path)?.GetComponent<Transform>().gameObject;
+        return trans?.transform.Find(path)?.gameObject;
     }
     
     public static void DestroyAllChildren(this GameObject trans) {

@@ -13,24 +13,29 @@ MonoBehaviour:
   m_Name: 1001
   m_EditorClassIdentifier: 
   name: "\u8FD1\u6218\u5175"
-  bluePrefabName: Role/Minion/Blue/Melee Minion/Prefab
-  redPrefabName: Role/Minion/Red/Melee Minion/Prefab
   health:
     datas:
-    - level: 0
+    - level: 1
       value: 300
   attack:
     datas:
-    - level: 0
+    - level: 1
       value: 20
   attackSpeed:
-    value: 1000000
+    datas:
+    - level: 1
+      value:
+        value: 1000000
   attackWindupRatio:
     value: 500000
   attackDistance:
     value: 20000000
+  areaPrefabName: 
+  areaVelocity: 
   moveSpeed:
     value: 25000000
+  bluePrefabName: Role/Minion/Blue/Melee Minion/Prefab
+  redPrefabName: Role/Minion/Red/Melee Minion/Prefab
   patrolDistance:
     value: 50000000
   chaseDistance:

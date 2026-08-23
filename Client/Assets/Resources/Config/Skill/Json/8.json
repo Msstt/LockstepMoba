@@ -1,0 +1,82 @@
+{
+  "Id": 8,
+  "Name": "通用远程普通攻击",
+  "SkillType": 2,
+  "InputType": 0,
+  "CD": {
+    "datas": []
+  },
+  "CanAbortSelf": false,
+  "Node": {
+    "Type": 3,
+    "Params": {
+      "SkillList": 3
+    },
+    "Child": [
+      {
+        "Type": 10,
+        "Params": {
+          "Slot": -1,
+          "WaitTime": "0.3"
+        },
+        "Child": [
+          {
+            "Type": 2,
+            "Params": {
+              "AnimName": "Move"
+            },
+            "Child": [
+              {
+                "Type": 4,
+                "Params": null,
+                "Child": [
+                  {
+                    "Type": 2,
+                    "Params": {
+                      "AnimName": "Attack"
+                    },
+                    "Child": [
+                      {
+                        "Type": 8,
+                        "Params": null,
+                        "Child": [
+                          {
+                            "Type": 22,
+                            "Params": {
+                              "AreaId": 4,
+                              "Offset": {
+                                "position": {
+                                  "x": "0",
+                                  "y": "0",
+                                  "z": "0"
+                                },
+                                "direction": "0"
+                              }
+                            },
+                            "Child": [
+                              {
+                                "Type": 9,
+                                "Params": null,
+                                "Child": [
+                                  {
+                                    "Type": 11,
+                                    "Params": null,
+                                    "Child": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

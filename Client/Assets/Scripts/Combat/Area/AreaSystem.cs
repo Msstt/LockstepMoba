@@ -40,9 +40,9 @@ namespace Combat.Area {
             DestroyArea();
         }
 
-        public int CreateArea(int areaId, int actorId, int level, Vector3F position, Vector3F direction) {
+        public int CreateArea(int areaId, int actorId, int level, Vector3F position, Vector3F direction, int? targetUid) {
              int uid = ++maxId;
-             Area area = new Area(areaId, uid, actorId, level, position, direction);
+             Area area = new Area(areaId, uid, actorId, level, position, direction, targetUid);
              areaInfos[uid] = new AreaInfo() {
                  uid = uid,
                  area = area,

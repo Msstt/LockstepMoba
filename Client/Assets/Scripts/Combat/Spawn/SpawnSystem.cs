@@ -4,16 +4,21 @@ namespace Combat.Actor {
         private MinionSpawn minion = new MinionSpawn();
         
         public void Start() {
-            champion.Init();
-            minion.Init();
+#if UNITY_EDITOR
+            if (GameMgr.Instance.GMTool.DisableMinion) {
+                minion = null;
+            }
+#endif
+            champion?.Init();
+            minion?.Init();
         }
 
         public void FrameUpdate(int frame) {
-            champion.AutoReviveChampion(frame);
+            champion?.AutoReviveChampion(frame);
         }
         
         public void ReviveChampion(int uid) {
-            champion.ReviveChampion(uid);
+            champion?.ReviveChampion(uid);
         }
     }
 }

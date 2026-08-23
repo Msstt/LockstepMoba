@@ -1,0 +1,57 @@
+{
+  "Id": 4,
+  "Name": "通用远程普通攻击",
+  "Prefab": "{areaPrefabName}",
+  "ShapeType": 0,
+  "ShapeParam": null,
+  "Time": "100",
+  "Effect": [
+    {
+      "Type": 6,
+      "Params": {
+        "Velocity": "-1",
+        "RotateSpeed": "0"
+      },
+      "RaycastId": -1
+    },
+    {
+      "Type": 4,
+      "Params": {
+        "Damage": {
+          "datas": [
+            {
+              "level": 1,
+              "value": {
+                "Physical": {
+                  "Value": "0",
+                  "AttackScale": "1"
+                },
+                "Magic": {
+                  "Value": "0",
+                  "AttackScale": "0"
+                },
+                "True": {
+                  "Value": "0",
+                  "AttackScale": "0"
+                }
+              }
+            }
+          ]
+        },
+        "Interval": "0"
+      },
+      "RaycastId": 0
+    },
+    {
+      "Type": 3,
+      "Params": {},
+      "RaycastId": 0
+    }
+  ],
+  "Raycast": [
+    {
+      "Type": 4,
+      "Params": {}
+    }
+  ]
+}

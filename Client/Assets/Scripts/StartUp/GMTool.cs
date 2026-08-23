@@ -13,4 +13,7 @@ public class GMTool : MonoBehaviour {
     
     [LabelText("关闭战争迷雾")]
     public bool DisableFog = false;
+    
+    [LabelText("关闭小兵")]
+    public bool DisableMinion = false;
 }

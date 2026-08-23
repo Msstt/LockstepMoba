@@ -9,6 +9,9 @@ namespace Combat.Area {
         public void OnUpdate();
         public void OnRenderUpdate();
         public void OnDestroy();
+        
+        // 内部的优先级，无视配置，比如位置更新类的 Effect 必须先 Update
+        public int Priority { get; }
     }
     
     public abstract class Effect<Param> : IEffect {
@@ -30,6 +33,8 @@ namespace Combat.Area {
         public virtual void OnRenderUpdate() { }
         public virtual void OnDestroy() { }
 
+        public virtual int Priority => 0;
+
         protected T GetLevelNumber<T>(LevelNumber<T> levelNumber) => levelNumber[area.Level];
 
         protected void Raycast(Action<Actor.Actor> func) {
@@ -38,5 +43,11 @@ namespace Combat.Area {
                 func(actor);
             }
         }
+    }
+
+    public abstract class MoveEffect<Param> : Effect<Param> {
+        protected MoveEffect(Area area, int raycastId, JToken json) : base(area, raycastId, json) { }
+        
+        public override int Priority => -10;
     }
 }

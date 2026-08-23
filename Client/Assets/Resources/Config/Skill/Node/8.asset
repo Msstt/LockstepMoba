@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e0f67aacdec4738b45b670bace48b6, type: 3}
+  m_Name: 8
+  m_EditorClassIdentifier: 
+  _serializedGraph: '{"type":"Editor.Skill.SkillGraph","nodes":[{"config":{"Id":8,"Name":"\u901a\u7528\u8fdc\u7a0b\u666e\u901a\u653b\u51fb","Note":"\u901a\u7528\u8fdc\u7a0b\u666e\u901a\u653b\u51fb","SkillType":2,"CD":{"datas":[]}},"_position":{"x":544.0,"y":101.0},"$type":"Editor.Skill.RootNode","$id":"0"},{"param":{"SkillList":3},"_position":{"x":542.8566,"y":197.7523},"$type":"Editor.Skill.AbortSkill","$id":"1"},{"param":{"Slot":-1,"WaitTime":{"value":300000}},"_position":{"x":546.3638,"y":266.3063},"$type":"Editor.Skill.RequestSlot","$id":"2"},{"param":{"AnimName":"Move"},"_position":{"x":460.8566,"y":362.7521},"$type":"Editor.Skill.PlayAnim","$id":"3"},{"_position":{"x":609.9487,"y":359.7864},"$type":"Editor.Skill.MoveToActorByPathInAttackDistance","$id":"4"},{"param":{"AnimName":"Attack"},"_position":{"x":474.9487,"y":455.7864},"$type":"Editor.Skill.PlayAnim","$id":"5"},{"_position":{"x":634.9487,"y":453.7864},"$type":"Editor.Skill.WaitForAttackWindup","$id":"6"},{"param":{"AreaId":4,"Offset":{}},"_position":{"x":544.3361,"y":532.8764},"$type":"Editor.Skill.CreateAreaToTargetUid","$id":"7"},{"_position":{"x":553.9487,"y":605.7865},"$type":"Editor.Skill.WaitForAttackBackswing","$id":"8"},{"_position":{"x":554.1827,"y":672.5193},"$type":"Editor.Skill.RepeatSkill","$id":"9"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"3"},"_targetNode":{"$ref":"4"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"5"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"5"},"_targetNode":{"$ref":"6"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"7"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"7"},"_targetNode":{"$ref":"8"},"$type":"Editor.Skill.SkillConnection"},{"_sourceNode":{"$ref":"8"},"_targetNode":{"$ref":"9"},"$type":"Editor.Skill.SkillConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _objectReferences: []
+  _graphSource:
+    _version: 3.21
+    _category: 
+    _comments: 
+    _translation: {x: 74, y: 38}
+    _zoomFactor: 0.8726228
+  _haltSerialization: 0

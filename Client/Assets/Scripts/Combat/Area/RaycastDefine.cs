@@ -5,6 +5,7 @@ namespace Combat.Area {
         All = 1,
         AllByType = 2,
         MaxCount = 3,
+        ArriveTargetUid = 4,
     }
     
     public static class RaycastFactory {
@@ -16,6 +17,8 @@ namespace Combat.Area {
                     return new AllByType(area, config.Params);
                 case RaycastType.MaxCount:
                     return new MaxCount(area, config.Params);
+                case RaycastType.ArriveTargetUid:
+                    return new ArriveTargetUid(area, config.Params);
                 default:
                     throw new CombatException("Raycast type doesn't exist: " + config.Type);
             }

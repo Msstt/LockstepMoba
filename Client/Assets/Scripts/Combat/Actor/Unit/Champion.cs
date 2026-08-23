@@ -1,9 +1,11 @@
 using UnityEngine;
+using GlobalConfig = Config;
 
 namespace Combat.Actor {
     public class Champion : Actor {
         public Champion(int id, int uid, GameObject go, CampType camp) : base(id, uid, go, camp) {
             Type = ActorType.Champion;
+            Config = GlobalConfig.Champion[id];
         }
         
         public override void BindCom() {

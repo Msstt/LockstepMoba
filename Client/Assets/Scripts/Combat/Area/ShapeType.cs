@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 namespace Combat.Area {
     [DrawWithUnity]
     public enum ShapeType {
+        None = 0,
         Circle = 1,
         Rect = 2,
     }
@@ -11,6 +12,8 @@ namespace Combat.Area {
     public static class ShapeFactory {
         public static Shape CreateShape(ShapeType type, JToken json) {
             switch (type) {
+                case ShapeType.None:
+                    return new None();
                 case ShapeType.Circle:
                     return ParseParam<Circle>(json);
                 case ShapeType.Rect:

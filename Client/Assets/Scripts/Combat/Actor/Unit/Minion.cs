@@ -1,4 +1,5 @@
 using UnityEngine;
+using GlobalConfig = Config;
 
 namespace Combat.Actor {
     public class Minion : Actor {
@@ -6,6 +7,7 @@ namespace Combat.Actor {
         
         public Minion(int id, int uid, GameObject go, CampType camp, int waveIndex) : base(id, uid, go, camp) {
             Type = ActorType.Minion;
+            Config = GlobalConfig.Minion[id];
             WaveIndex = waveIndex;
         }
         

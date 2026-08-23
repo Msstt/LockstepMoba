@@ -1,3 +1,5 @@
+// 生成小兵
+
 using UnityEngine;
 
 namespace Combat.Actor {
@@ -40,7 +42,7 @@ namespace Combat.Actor {
             actor.Stats.Health = new LimitedPriority(config.health[1]);
             
             actor.Stats.Attack = new Priority(config.attack[1]);
-            actor.Stats.AttackSpeed = new Priority(config.attackSpeed);
+            actor.Stats.AttackSpeed = new Priority(config.attackSpeed[1]);
             actor.Stats.AttackDistance = new Priority(config.attackDistance);
             
             actor.Stats.MoveSpeed = new Priority(config.moveSpeed);

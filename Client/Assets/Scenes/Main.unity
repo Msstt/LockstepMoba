@@ -1228,6 +1228,7 @@ MonoBehaviour:
   ShowDebugMode: 0
   PrintSkillTree: 1
   DisableFog: 1
+  DisableMinion: 1
 --- !u!114 &854225744
 MonoBehaviour:
   m_ObjectHideFlags: 0

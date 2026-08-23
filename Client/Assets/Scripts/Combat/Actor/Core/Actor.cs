@@ -10,6 +10,7 @@ namespace Combat.Actor {
         public int Id { get; private set; }
         public int Uid { get; private set; }
         public ActorType Type { get; protected set; }
+        public ActorConfig Config { get; protected set; }
         
         private Dictionary<Type, Com> coms = new Dictionary<Type, Com>();
         private List<Com> comList = new List<Com>();

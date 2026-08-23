@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   name: "\u674E\u9752"
-  prefabName: Role/Champion/Lee Sin/Prefab
   health:
     datas:
     - level: 1
@@ -38,13 +37,17 @@ MonoBehaviour:
     value: 400000
   attackDistance:
     value: 12500000
+  areaPrefabName: 
+  areaVelocity:
+    value: 0
   moveSpeed:
     value: 34500000
+  prefabName: Role/Champion/Lee Sin/Prefab
   skill:
   - skillId: 1
     initLevel: 1
     maxLevel: 1
-  - skillId: 2
+  - skillId: 8
     initLevel: 1
     maxLevel: 1
   - skillId: 6

@@ -39,16 +39,25 @@ namespace Combat.Area {
             }
         }
         
-        public Area(int areaId, int uid, int actorId, int level, Vector3F position, Vector3F direction) {
+        private int? targetUid;
+        public int TargetUid => TargetUidIsValid ? targetUid.Value : throw new CombatException("Area TargetUid is not valid but accessed");
+        public bool TargetUidIsValid => targetUid.HasValue;
+        
+        public Area(int areaId, int uid, int actorId, int level, Vector3F position, Vector3F direction, int? targetUid) {
             ActorId = actorId;
             Level = level;
             Uid = uid;
+            this.targetUid = targetUid;
             
             AreaConfig config = Config.Area[areaId];
             
             GameObject = new GameObject("Area_" + areaId);
             GameObject.transform.SetParent(AreaUtils.TransRoot);
-            var prefab = GoUtils.NewGo(config.Prefab, GameObject.transform);
+            string prefabName = config.Prefab;
+            if (prefabName == "{areaPrefabName}") {
+                prefabName = ActorUtils.GetActor(actorId)?.Config.areaPrefabName;
+            }
+            var prefab = GoUtils.NewGo(prefabName, GameObject.transform);
             if (prefab != null) {
                 prefab.name = "Prefab";
                 rawY = prefab.transform.localPosition.y;
