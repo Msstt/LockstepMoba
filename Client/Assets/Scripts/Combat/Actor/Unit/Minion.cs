@@ -21,7 +21,7 @@ namespace Combat.Actor {
             
             AddComponent<VisionCom>();
             
-            AddComponent<NormalUICom>();
+            AddComponent<CommonUICom>();
         }
     }
 }

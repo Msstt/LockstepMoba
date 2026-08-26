@@ -16,4 +16,7 @@ public class GMTool : MonoBehaviour {
     
     [LabelText("关闭小兵")]
     public bool DisableMinion = false;
+    
+    [LabelText("关闭防御塔")]
+    public bool DisableTurret = false;
 }

@@ -21,7 +21,7 @@ namespace Combat.Actor {
             
             Minion actor = new Minion(id, GetNewUid(), go, camp, waveIndex);
             
-            SetStatusByConfig(actor, id);
+            SetStatusByConfig(actor, Config.Minion[id]);
 
             var waves = camp == CampType.Blue ? Config.Map.blueMinionWavePos : Config.Map.redMinionWavePos;
             if (waveIndex >= waves.Count || waves[waveIndex].Pos.Count == 0) {
@@ -35,17 +35,5 @@ namespace Combat.Actor {
         }
 
         public override string PrefabName => camp == CampType.Blue ? Config.Minion[id].bluePrefabName : Config.Minion[id].redPrefabName;
-        
-        private void SetStatusByConfig(Actor actor, int Id) {
-            MinionConfig config = Config.Minion[Id];
-            
-            actor.Stats.Health = new LimitedPriority(config.health[1]);
-            
-            actor.Stats.Attack = new Priority(config.attack[1]);
-            actor.Stats.AttackSpeed = new Priority(config.attackSpeed[1]);
-            actor.Stats.AttackDistance = new Priority(config.attackDistance);
-            
-            actor.Stats.MoveSpeed = new Priority(config.moveSpeed);
-        }
     }
 }

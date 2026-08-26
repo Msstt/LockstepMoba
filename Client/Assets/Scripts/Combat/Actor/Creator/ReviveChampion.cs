@@ -19,7 +19,7 @@ namespace Combat.Actor {
             
             Champion actor = new Champion(championId, uid, go, camp);
             
-            SetStatusByConfig(actor, championId);
+            SetStatusByConfig(actor, Config.Champion[championId]);
 
             // 暂时先 uid 对应下标
             var pos = Config.Map.revivePos[uid - 1];
@@ -34,18 +34,6 @@ namespace Combat.Actor {
                 int championId = CombatUtils.GetChampionId(uid);
                 return Config.Champion[championId].prefabName;
             }
-        }
-        
-        private void SetStatusByConfig(Actor actor, int championId) {
-            ChampionConfig config = Config.Champion[championId];
-            
-            actor.Stats.Health = new LimitedPriority(config.health[1]);
-            
-            actor.Stats.Attack = new Priority(config.attack[1]);
-            actor.Stats.AttackSpeed = new Priority(config.attackSpeed[1]);
-            actor.Stats.AttackDistance = new Priority(config.attackDistance);
-            
-            actor.Stats.MoveSpeed = new Priority(config.moveSpeed);
         }
     }
 }

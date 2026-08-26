@@ -1,4 +1,5 @@
-using System;
+// 中转组件，根据 debuff 中断技能树、行为机
+
 using System.Collections.Generic;
 using Combat.Skill;
 using Framework;

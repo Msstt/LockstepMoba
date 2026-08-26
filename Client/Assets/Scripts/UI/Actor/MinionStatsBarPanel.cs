@@ -1,6 +1,5 @@
 using Combat;
 using Framework.UI;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 

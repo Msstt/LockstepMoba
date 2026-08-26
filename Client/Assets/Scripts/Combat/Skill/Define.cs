@@ -27,6 +27,7 @@ namespace Combat.Skill {
         None = 0,
         [InspectorName("移动")]
         Move = 1 << 0,
+        // TODO 普通攻击由寻路和攻击两个阶段，需要细分 Type
         [InspectorName("普通攻击")]
         NormalAttack = 1 << 1,
         [InspectorName("闪现")]

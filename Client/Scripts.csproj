@@ -50,6 +50,7 @@
     <Compile Include="Assets/Scripts/Navmesh/Core/PathSmoother.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/SkillCom.cs" />
     <Compile Include="Assets/Scripts/Config/Combat/Vision.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Unit/Turret.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/TypeMsg.cs" />
     <Compile Include="Assets/Scripts/Combat/Level/ILevelSystem.cs" />
     <Compile Include="Assets/Scripts/Tools/Async/AsyncMgr.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Core/SelectNode.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorUtils.cs" />
     <Compile Include="Assets/Scripts/Framework/DS/SimpleTransform.cs" />
+    <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Behaviour/MeleeAttackBehaviour.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/StringExtensions.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/NormalUICom.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Stats/ChangeAttack.cs" />
@@ -72,7 +74,9 @@
     <Compile Include="Assets/Scripts/Combat/Skill/NodeDefine.cs" />
     <Compile Include="Assets/Scripts/Framework/Event/EventMgr.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Com.cs" />
+    <Compile Include="Assets/Scripts/UI/Actor/TurretStatsBarPanel.cs" />
     <Compile Include="Assets/Scripts/Config/Core/Config.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Config/Turret.cs" />
     <Compile Include="Assets/Scripts/Combat/Fog/FogSystem.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/EffectDefine.cs" />
@@ -88,11 +92,13 @@
     <Compile Include="Assets/Scripts/Combat/Log.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/AreaUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Anim/SetDirByInputParam.cs" />
+    <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Behaviour/RangedAttackBehaviour.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Effect.cs" />
     <Compile Include="Assets/Scripts/UI/Actor/MinionStatsBarPanel.cs" />
     <Compile Include="Assets/Scripts/Input/Command/SingleDir.cs" />
     <Compile Include="Assets/Scripts/Tools/Event/EventType.cs" />
+    <Compile Include="Assets/Scripts/Config/TempConfig.cs" />
     <Compile Include="Assets/Scripts/UI/Main/SkillPanel.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/SkillSystem2.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Core/Config.cs" />
@@ -127,7 +133,6 @@
     <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Core/Machine.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Buff.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Core/Actor.OnHeal.cs" />
-    <Compile Include="Assets/Scripts/Combat/Spawn/ChampionSpawn.cs" />
     <Compile Include="Assets/Scripts/Data/Core/DataSystem.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/SerializableList.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Event/EventHub.cs" />
@@ -182,10 +187,10 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Com/BehaviourMachineCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Time/WaitForTime.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Vision/InvisibilityByRadius.cs" />
-    <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Behaviour/AttackBehaviour.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Unit/Champion.cs" />
     <Compile Include="Assets/Scripts/GameMgr.cs" />
     <Compile Include="Assets/Scripts/Data/Combat/Level.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Creator/CreateTurret.cs" />
     <Compile Include="Assets/Scripts/Tools/Async/AsyncUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/IActorSystem.cs" />
@@ -290,9 +295,11 @@
     <Compile Include="Assets/Scripts/Combat/Buff/Core/Config.cs" />
     <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Core/Behaviour.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/INetwork.cs" />
+    <Compile Include="Assets/Scripts/Combat/Spawn/Champion/ChampionSpawn.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Define.cs" />
     <Compile Include="Assets/Scripts/Combat/Fog/IFogSystem.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/WorldUI/BindingUISource.cs" />
+    <Compile Include="Assets/Scripts/Combat/Spawn/Turret/TurretSpawn.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/GameObject/GoUtils.cs" />
     <Compile Include="Assets/Scripts/Network/Dispatcher/BattleMsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/IUISystem.cs" />

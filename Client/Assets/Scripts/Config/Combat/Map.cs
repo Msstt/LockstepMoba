@@ -12,5 +12,10 @@ namespace OtherConfig {
         public List<Combat.Actor.MinionWave> blueMinionWavePos = new List<Combat.Actor.MinionWave>();
         [LabelText("红方兵线")]
         public List<Combat.Actor.MinionWave> redMinionWavePos = new List<Combat.Actor.MinionWave>();
+        
+        [LabelText("蓝方防御塔位置")]
+        public List<SimpleTransform> blueTurretPos = new List<SimpleTransform>();
+        [LabelText("红方防御塔位置")]
+        public List<SimpleTransform> redTurretPos = new List<SimpleTransform>();
     }
 }

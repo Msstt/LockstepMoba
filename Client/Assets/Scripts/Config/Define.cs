@@ -13,6 +13,8 @@ public static partial class Config {
         (id) => Resources.Load<ChampionConfig>("Config/Actor/Champion/" + id));
     public static readonly ConfigCache<MinionConfig> Minion = new(
         (id) => Resources.Load<MinionConfig>("Config/Actor/Minion/" + id));
+    public static readonly ConfigCache<TurretConfig> Turret = new(
+        (id) => Resources.Load<TurretConfig>("Config/Actor/Turret/" + id));
     
     public static readonly ConfigCache<EquipmentConfig> Equipment = new(
         (id) => Resources.Load<EquipmentConfig>("Config/Equipment/" + id));

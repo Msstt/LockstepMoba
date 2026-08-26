@@ -29,7 +29,7 @@ public class CameraCom : MonoBehaviour {
     public void Start() {
         mainCamera.transform.position = -mainCamera.transform.forward * cameraHeight.y;
         curHeight = cameraHeight.y;
-        cameraPos = Vector3.zero;
+        MoveToSelf();
     }
 
     public void Update() {
@@ -38,11 +38,16 @@ public class CameraCom : MonoBehaviour {
         }
         Move();
         Scale();
-        MoveToSelf();
+        if (Input.GetKey(KeyCode.Space)) {
+            MoveToSelf();
+        }
         mainCamera.transform.position = cameraPos - mainCamera.transform.forward * curHeight;
     }
 
     private void Move() {
+#if UNITY_EDITOR
+        return;
+#endif
         Vector3 mousePos = Input.mousePosition;
         if (mousePos.x <= screenPadding) {
             cameraPos -= Time.deltaTime * moveSpeed * Vector3.left;
@@ -59,12 +64,10 @@ public class CameraCom : MonoBehaviour {
     }
 
     private void MoveToSelf() {
-        if (Input.GetKey(KeyCode.Space)) {
-            var self = ActorUtils.GetActor(CombatUtils.SelfUid);
-            if (self != null) {
-                cameraPos.x = self.Pos.ToVector3().x;
-                cameraPos.z = self.Pos.ToVector3().z;
-            }
+        var self = ActorUtils.GetActor(CombatUtils.SelfUid);
+        if (self != null) {
+            cameraPos.x = self.Pos.ToVector3().x;
+            cameraPos.z = self.Pos.ToVector3().z;
         }
     }
     

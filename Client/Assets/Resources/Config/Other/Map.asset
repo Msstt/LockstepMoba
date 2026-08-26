@@ -21,7 +21,7 @@ MonoBehaviour:
       z:
         value: 1360000122
     direction:
-      value: -3141589
+      value: -3141592
   - position:
       x:
         value: 500000030
@@ -50,7 +50,7 @@ MonoBehaviour:
         z:
           value: 1326250000
       direction:
-        value: 1570793
+        value: 1570796
     - position:
         x:
           value: 581250061
@@ -59,7 +59,7 @@ MonoBehaviour:
         z:
           value: 1251500122
       direction:
-        value: 1570793
+        value: 1570796
     - position:
         x:
           value: 464250030
@@ -68,7 +68,7 @@ MonoBehaviour:
         z:
           value: 1131750000
       direction:
-        value: 1570793
+        value: 1570796
   redMinionWavePos:
   - Pos:
     - position:
@@ -79,7 +79,7 @@ MonoBehaviour:
         z:
           value: 1131750000
       direction:
-        value: 1570793
+        value: 1570796
     - position:
         x:
           value: 546500061
@@ -88,7 +88,7 @@ MonoBehaviour:
         z:
           value: 1202250122
       direction:
-        value: 1570793
+        value: 1570796
     - position:
         x:
           value: 600200012
@@ -97,7 +97,7 @@ MonoBehaviour:
         z:
           value: 1265100097
       direction:
-        value: 1570793
+        value: 1570796
     - position:
         x:
           value: 652250061
@@ -106,4 +106,24 @@ MonoBehaviour:
         z:
           value: 1326250000
       direction:
-        value: 1570793
+        value: 1570796
+  blueTurretPos:
+  - position:
+      x:
+        value: 696925048
+      y:
+        value: 125000061
+      z:
+        value: 1337150024
+    direction:
+      value: 1570770
+  redTurretPos:
+  - position:
+      x:
+        value: 473250030
+      y:
+        value: 129750000
+      z:
+        value: 1151000122
+    direction:
+      value: 1570770

@@ -2,7 +2,7 @@ using Combat.Actor;
 using Combat.Skill;
 
 namespace Combat.BehaviourMachine {
-    public class AttackBehaviour : ActorBehaviour {
+    public class RangedAttackBehaviour : ActorBehaviour {
         public override SkillType SkillType => SkillType.NormalAttack;
         
         private int attackWindupFrame;
@@ -12,9 +12,9 @@ namespace Combat.BehaviourMachine {
         private Actor.Actor target;
         private int startFrame;
 
-        public AttackBehaviour(Machine machine, FloatF attackWindupRatio) : base(machine) {
-            attackWindupFrame = TimeUtils.GetFrameCount(attackWindupRatio * Actor.Stats.AttackSpeed);
-            attackFrame = TimeUtils.GetFrameCount(Actor.Stats.AttackSpeed);
+        public RangedAttackBehaviour(Machine machine, FloatF attackWindupRatio) : base(machine) {
+            attackWindupFrame = TimeUtils.GetFrameCount(attackWindupRatio * FloatF.one/ Actor.Stats.AttackSpeed);
+            attackFrame = TimeUtils.GetFrameCount(FloatF.one/ Actor.Stats.AttackSpeed);
         }
         
         public override bool Evaluate() {
@@ -65,15 +65,7 @@ namespace Combat.BehaviourMachine {
             }
             // 重新获取 Actor，可能前摇时 Actor 死亡
             Actor.Actor actor = ActorUtils.GetActor(target.Uid);
-            HitInfo hitInfo = new HitInfo {
-                attacker = Actor.Uid,
-                damage = new Damage {
-                    physical = Actor.Stats.Attack,
-                    magic = 0,
-                    @true = 0,
-                }
-            };
-            actor?.OnHit(hitInfo);
+            AreaUtils.CreateArea(TempConfig.AttackAreaId, Actor.Uid, 1, Actor.Pos, Actor.Dir, actor.Uid);
         }
         
         private void StopAttack() {

@@ -4,7 +4,7 @@ using UI.Actor;
 using UnityEngine;
 
 namespace Combat.Actor {
-    public class NormalUICom : Com {
+    public class CommonUICom : Com {
         private Transform bindingGo;
 
         private UIDef StatsPanelDef {
@@ -14,6 +14,8 @@ namespace Combat.Actor {
                         return UIDef.ChampionStatsBarPanel;
                     case ActorType.Minion:
                         return UIDef.MinionStatsBarPanel;
+                    case ActorType.Turret:
+                        return UIDef.TurretStatsBarPanel;
                     default:
                         return UIDef.None;
                 }
@@ -29,6 +31,10 @@ namespace Combat.Actor {
                         };
                     case ActorType.Minion:
                         return new MinionStatsBarPanelParam {
+                            actor = Actor,
+                        };
+                    case ActorType.Turret:
+                        return new TurretStatsBarPanelParam {
                             actor = Actor,
                         };
                     default:

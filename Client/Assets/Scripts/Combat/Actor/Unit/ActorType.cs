@@ -8,5 +8,6 @@ namespace Combat.Actor {
     public enum ActorType {
         Champion = 1 << 0,
         Minion = 1 << 1,
+        Turret = 1 << 2,
     }
 }

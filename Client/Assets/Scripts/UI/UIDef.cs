@@ -7,8 +7,11 @@ using UI.Main;
 namespace UI {
     public enum UIDef {
         None,
+        
         ChampionStatsBarPanel,
         MinionStatsBarPanel,
+        TurretStatsBarPanel,
+        
         FloatingNumberPanel,
         SkillPanel,
         LevelPanel,
@@ -32,6 +35,11 @@ namespace UI {
                 prefab = "UI/Actor/MinionStatsBarPanel",
                 layer = UILayer.World,
                 creator = () => new MinionStatsBarPanel(),
+            } },
+            { UIDef.TurretStatsBarPanel, new Info {
+                prefab = "UI/Actor/TurretStatsBarPanel",
+                layer = UILayer.World,
+                creator = () => new TurretStatsBarPanel(),
             } },
             { UIDef.FloatingNumberPanel, new Info {
                     prefab = "UI/Actor/FloatingNumberPanel",

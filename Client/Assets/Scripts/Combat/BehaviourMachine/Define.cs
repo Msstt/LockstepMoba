@@ -8,10 +8,14 @@ namespace Combat.BehaviourMachine {
             { 1001, machine => {
                 NormalMinionCreateFunc(machine, 1001);
             } },
+            
+            { 1101, machine => {
+                machine.AddBehaviour(new RangedAttackBehaviour(machine, Config.Turret[1101].attackWindupRatio));
+            } },
         };
         
         private static void NormalMinionCreateFunc(Machine machine, int actorId) {
-            machine.AddBehaviour(new AttackBehaviour(machine, Config.Minion[actorId].attackWindupRatio));
+            machine.AddBehaviour(new MeleeAttackBehaviour(machine, Config.Minion[actorId].attackWindupRatio));
             machine.AddBehaviour(new ChaseBehaviour(machine, Config.Minion[actorId].patrolDistance, Config.Minion[actorId].chaseDistance));
             
             if (ActorUtils.GetActor(machine.Uid) is Minion minion) {

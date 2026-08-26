@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa56387214d4b488e1a2fcef1c82972, type: 3}
+  m_Name: 1101
+  m_EditorClassIdentifier: 
+  name: "\u9632\u5FA1\u5854"
+  health:
+    datas:
+    - level: 1
+      value: 1000
+  attack:
+    datas:
+    - level: 1
+      value: 200
+  attackSpeed:
+    datas:
+    - level: 1
+      value:
+        value: 500000
+  attackWindupRatio:
+    value: 0
+  attackDistance:
+    value: 120000000
+  areaPrefabName: Area/Prefab/SonicWave
+  areaVelocity:
+    value: 5000000
+  moveSpeed:
+    value: 0
+  bluePrefabName: Role/Building/Blue/Turret/Prefab
+  redPrefabName: Role/Building/Red/Turret/Prefab

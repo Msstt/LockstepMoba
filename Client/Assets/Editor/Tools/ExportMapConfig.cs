@@ -28,8 +28,11 @@ namespace Editor {
 
             Transform reviveRoot = FindChild(config, "RevivePos", "Revive", "复活位置");
             Transform minionWaveRoot = FindChild(config, "MinionWavePos", "MinionWave", "兵线");
-            Transform blueMinionWaveRoot = minionWaveRoot.Find("Blue");
-            Transform redMinionWaveRoot = minionWaveRoot.Find("Red");
+            Transform blueMinionWaveRoot = minionWaveRoot?.Find("Blue");
+            Transform redMinionWaveRoot = minionWaveRoot?.Find("Red");
+            Transform turretRoot = FindChild(config, "TurretPos", "Turret", "防御塔");
+            Transform blueTurretRoot = turretRoot?.Find("Blue");
+            Transform redTurretRoot = turretRoot?.Find("Red");
 
             List<SimpleTransform> revivePos = ExportTransforms(reviveRoot);
             if (revivePos.Count == 0) {
@@ -41,10 +44,12 @@ namespace Editor {
             mapConfig.revivePos = revivePos;
             mapConfig.blueMinionWavePos = blueMinionWaveRoot == null ? new List<MinionWave>() : ExportMinionWaves(blueMinionWaveRoot);
             mapConfig.redMinionWavePos = redMinionWaveRoot == null ? new List<MinionWave>() : ExportMinionWaves(redMinionWaveRoot);
+            mapConfig.blueTurretPos = ExportTransforms(blueTurretRoot);
+            mapConfig.redTurretPos = ExportTransforms(redTurretRoot);
             EditorUtility.SetDirty(mapConfig);
             AssetDatabase.SaveAssets();
 
-            Debug.Log($"地图配置导出完成：复活点 {mapConfig.revivePos.Count} 个");
+            Debug.Log($"地图配置导出完成：复活点 {mapConfig.revivePos.Count} 个，蓝方兵线 {mapConfig.blueMinionWavePos.Count} 条，红方兵线 {mapConfig.redMinionWavePos.Count} 条，蓝方防御塔 {mapConfig.blueTurretPos.Count} 个，红方防御塔 {mapConfig.redTurretPos.Count} 个");
         }
 
         private static Transform FindChild(Transform parent, params string[] names) {
@@ -59,6 +64,10 @@ namespace Editor {
 
         private static List<SimpleTransform> ExportTransforms(Transform root, Transform excludedChild = null) {
             List<SimpleTransform> result = new List<SimpleTransform>();
+            if (root == null) {
+                return result;
+            }
+
             for (int i = 0; i < root.childCount; i++) {
                 Transform child = root.GetChild(i);
                 if (child == excludedChild) {
