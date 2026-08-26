@@ -58,14 +58,19 @@ namespace Framework.Network {
         private void AcceptClient() {
             var tcpClient = listener.Accept();
             if (tcpClient != null) {
-                Client client = new Client(GetUid(), tcpClient);
-                clients.TryAdd(client.Uid, client);
-                EventMgr.Instance.Send(new EventType.OnPlayerConnected {
-                    uid = client.Uid,
-                });
-                
-                ThreadPool.QueueUserWorkItem(_ => clients[client.Uid].FlushRead());
-                ThreadPool.QueueUserWorkItem(_ => clients[client.Uid].FlushWrite());
+                Uid uid = GetUid();
+                if (uid > Config.Instance.Network.auto_start_count) {
+                    tcpClient.Close();
+                } else {
+                    Client client = new Client(uid, tcpClient);
+                    clients.TryAdd(client.Uid, client);
+                    EventMgr.Instance.Send(new EventType.OnPlayerConnected {
+                        uid = client.Uid,
+                    });
+                    
+                    ThreadPool.QueueUserWorkItem(_ => clients[client.Uid].FlushRead());
+                    ThreadPool.QueueUserWorkItem(_ => clients[client.Uid].FlushWrite());
+                }
             }
             ThreadPool.QueueUserWorkItem(_ => AcceptClient());
         }

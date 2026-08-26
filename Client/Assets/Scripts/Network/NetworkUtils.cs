@@ -25,6 +25,13 @@ namespace Network {
             GameMgr.Instance.GetSystem<ILockStep>()?.UnRegisterHandler(id, handler);
         }
         
+        public static void RegisterMsgHandler<T>(MessageDef id, Action<T> handler) where T : IMessage {
+            GameMgr.Instance.GetSystem<INetwork>()?.RegisterHandler(id, handler);
+        }
+        public static void UnRegisterMsgHandler<T>(MessageDef id, Action<T> handler) where T : IMessage {
+            GameMgr.Instance.GetSystem<INetwork>()?.UnRegisterHandler(id, handler);
+        }
+        
         public static bool CheckMessageType(MessageDef msgId, Type type) {
             if (MessageMapping.type[msgId] != type) {
                 Debug.LogError($"Message type does not match for msgId: {msgId}");

@@ -281,6 +281,7 @@
     <Compile Include="Assets/Scripts/Navmesh/NavmeshMapInfo.cs" />
     <Compile Include="Assets/Scripts/Input/Define.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/InputMsg.cs" />
+    <Compile Include="Assets/Scripts/UI/Prepare/SelectChampionPanel.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Raycast/ArriveTargetUid.cs" />
     <Compile Include="Assets/Scripts/UI/Main/LevelPanel.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/Message.cs" />

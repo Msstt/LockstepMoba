@@ -6,6 +6,8 @@
 using System;
 using Combat;
 using Combat.Actor;
+using EventType;
+using Framework;
 using UnityEngine;
 
 public class CameraCom : MonoBehaviour {
@@ -26,10 +28,17 @@ public class CameraCom : MonoBehaviour {
         mainCamera = GetComponent<Camera>();
     }
 
+    private void OnEnable() {
+        EventMgr.Instance.Register<OnGameStart>(OnGameStart);
+    }
+    
+    private void OnDisable() {
+        EventMgr.Instance.UnRegister<OnGameStart>(OnGameStart);
+    }
+
     public void Start() {
         mainCamera.transform.position = -mainCamera.transform.forward * cameraHeight.y;
         curHeight = cameraHeight.y;
-        MoveToSelf();
     }
 
     public void Update() {
@@ -42,6 +51,10 @@ public class CameraCom : MonoBehaviour {
             MoveToSelf();
         }
         mainCamera.transform.position = cameraPos - mainCamera.transform.forward * curHeight;
+    }
+
+    private void OnGameStart() {
+        MoveToSelf();
     }
 
     private void Move() {

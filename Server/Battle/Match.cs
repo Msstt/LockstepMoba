@@ -1,10 +1,10 @@
 using Framework;
-using Google.Protobuf.Collections;
 using Network;
 
 namespace Battle {
     public class Match : Singleton<Match> {
         private battle_start_s2c? start_msg = null;
+        private Dictionary<int, int> championId = new Dictionary<int, int>();
         
         public void Start() {
             // 广播玩家信息
@@ -20,10 +20,27 @@ namespace Battle {
                 CheckAutoStart();
             }
         }
+        
+        public void SetChampion(Uid uid, int championId) {
+            if (LockStep.Instance.IsRunning) {
+                return;
+            }
+
+            this.championId[uid] = championId;
+            NetworkUtils.Send(uid, MessageDef.select_champion_s2c, new select_champion_s2c {
+                ChampionId = championId,
+            });
+            CheckAutoStart();
+        }
 
         private void CheckAutoStart() {
-            List<Uid> uids = NetworkUtils.GetAllClientUid();
-            if (uids.Count >= Config.Instance.Network.auto_start_count) {
+            int count = 0;
+            foreach (var uid in NetworkUtils.GetAllClientUid()) {
+                if (championId.ContainsKey(uid)) {
+                    count += 1;
+                }
+            }
+            if (count >= Config.Instance.Network.auto_start_count) {
                 Start();
             }
         }
@@ -42,7 +59,7 @@ namespace Battle {
                 start_msg.Players.Add(
                     new battle_start_s2c.Types.player_info {
                         Uid = uid,
-                        ChampionId = 1,
+                        ChampionId = championId[uid],
                         Camp = camp,
                         Skill = { 5, 4 }, // TODO 选技能
                     });

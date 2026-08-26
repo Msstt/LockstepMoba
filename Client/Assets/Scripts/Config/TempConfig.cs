@@ -3,4 +3,5 @@
 public static class TempConfig {
     public static int TurretId = 1101;
     public static int AttackAreaId = 4;
+    public static int ChampionCount = 2;
 }

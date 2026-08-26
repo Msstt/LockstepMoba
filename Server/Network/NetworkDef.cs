@@ -3,6 +3,7 @@ namespace Network {
         public static void RegisterDispatcher() {
             TestMsgDispatcher.Register();
             FrameMsgDispatcher.Register();
+            BattleMsgDispatcher.Register();
         }
     }
 }

@@ -16,6 +16,8 @@ public class Main : MonoBehaviour {
 
     public void Start() {
         GameMgr.Instance.Init();
+        
+        UIUtils.ShowUI(UIDef.SelectChampionPanel);
 
         EventMgr.Instance.Register<EventType.OnGameStart>(() => {
             UIUtils.ShowUI(UIDef.SkillPanel);

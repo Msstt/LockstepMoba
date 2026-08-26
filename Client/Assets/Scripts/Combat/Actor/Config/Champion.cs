@@ -7,6 +7,8 @@ namespace Combat.Actor {
     public class ChampionConfig : ActorConfig {
         [LabelText("预制体")]
         public string prefabName;
+        [LabelText("头像")]
+        public string icon;
         
         [LabelText("技能")]
         public SkillInfo[] skill = new SkillInfo[6];

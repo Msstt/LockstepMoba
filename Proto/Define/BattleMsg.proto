@@ -14,3 +14,12 @@ message battle_start_s2c {
   int32 self_uid = 1;
   repeated player_info players = 2;
 }
+
+// 选择英雄
+message select_champion_c2s {
+  int32 champion_id = 1;
+}
+
+message select_champion_s2c {
+  int32 champion_id = 1;
+}

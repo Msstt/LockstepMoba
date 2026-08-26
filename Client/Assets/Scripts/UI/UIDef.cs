@@ -15,6 +15,7 @@ namespace UI {
         FloatingNumberPanel,
         SkillPanel,
         LevelPanel,
+        SelectChampionPanel,
     }
     
     public enum UILayer {
@@ -55,6 +56,11 @@ namespace UI {
                 prefab = "UI/Main/LevelPanel",
                 layer = UILayer.Back,
                 creator = () => new LevelPanel(),
+            } },
+            { UIDef.SelectChampionPanel, new Info {
+                prefab = "UI/Prepare/SelectChampionPanel",
+                layer = UILayer.Top,
+                creator = () => new SelectChampionPanel(),
             } },
         };
             

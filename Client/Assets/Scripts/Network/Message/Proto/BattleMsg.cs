@@ -28,11 +28,15 @@ namespace Network {
             "c3RhcnRfczJjEhAKCHNlbGZfdWlkGAEgASgFEjYKB3BsYXllcnMYAiADKAsy",
             "JS5OZXR3b3JrLmJhdHRsZV9zdGFydF9zMmMucGxheWVyX2luZm8aTAoLcGxh",
             "eWVyX2luZm8SCwoDdWlkGAEgASgFEhMKC2NoYW1waW9uX2lkGAIgASgFEgwK",
-            "BGNhbXAYAyABKAUSDQoFc2tpbGwYBCADKAViBnByb3RvMw=="));
+            "BGNhbXAYAyABKAUSDQoFc2tpbGwYBCADKAUiKgoTc2VsZWN0X2NoYW1waW9u",
+            "X2MycxITCgtjaGFtcGlvbl9pZBgBIAEoBSIqChNzZWxlY3RfY2hhbXBpb25f",
+            "czJjEhMKC2NoYW1waW9uX2lkGAEgASgFYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c), global::Network.battle_start_s2c.Parser, new[]{ "SelfUid", "Players" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c.Types.player_info), global::Network.battle_start_s2c.Types.player_info.Parser, new[]{ "Uid", "ChampionId", "Camp", "Skill" }, null, null, null)})
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c), global::Network.battle_start_s2c.Parser, new[]{ "SelfUid", "Players" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Network.battle_start_s2c.Types.player_info), global::Network.battle_start_s2c.Types.player_info.Parser, new[]{ "Uid", "ChampionId", "Camp", "Skill" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.select_champion_c2s), global::Network.select_champion_c2s.Parser, new[]{ "ChampionId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.select_champion_s2c), global::Network.select_champion_s2c.Parser, new[]{ "ChampionId" }, null, null, null)
           }));
     }
     #endregion
@@ -410,6 +414,264 @@ namespace Network {
 
     }
     #endregion
+
+  }
+
+  public sealed partial class select_champion_c2s : pb::IMessage<select_champion_c2s> {
+    private static readonly pb::MessageParser<select_champion_c2s> _parser = new pb::MessageParser<select_champion_c2s>(() => new select_champion_c2s());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<select_champion_c2s> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Network.BattleMsgReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public select_champion_c2s() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public select_champion_c2s(select_champion_c2s other) : this() {
+      championId_ = other.championId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public select_champion_c2s Clone() {
+      return new select_champion_c2s(this);
+    }
+
+    /// <summary>Field number for the "champion_id" field.</summary>
+    public const int ChampionIdFieldNumber = 1;
+    private int championId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ChampionId {
+      get { return championId_; }
+      set {
+        championId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as select_champion_c2s);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(select_champion_c2s other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ChampionId != other.ChampionId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ChampionId != 0) hash ^= ChampionId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ChampionId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ChampionId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ChampionId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ChampionId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(select_champion_c2s other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ChampionId != 0) {
+        ChampionId = other.ChampionId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ChampionId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class select_champion_s2c : pb::IMessage<select_champion_s2c> {
+    private static readonly pb::MessageParser<select_champion_s2c> _parser = new pb::MessageParser<select_champion_s2c>(() => new select_champion_s2c());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<select_champion_s2c> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Network.BattleMsgReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public select_champion_s2c() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public select_champion_s2c(select_champion_s2c other) : this() {
+      championId_ = other.championId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public select_champion_s2c Clone() {
+      return new select_champion_s2c(this);
+    }
+
+    /// <summary>Field number for the "champion_id" field.</summary>
+    public const int ChampionIdFieldNumber = 1;
+    private int championId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ChampionId {
+      get { return championId_; }
+      set {
+        championId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as select_champion_s2c);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(select_champion_s2c other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ChampionId != other.ChampionId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ChampionId != 0) hash ^= ChampionId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ChampionId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ChampionId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ChampionId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ChampionId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(select_champion_s2c other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ChampionId != 0) {
+        ChampionId = other.ChampionId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ChampionId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
 
   }
 
