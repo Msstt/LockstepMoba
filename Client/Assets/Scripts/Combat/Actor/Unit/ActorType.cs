@@ -9,5 +9,7 @@ namespace Combat.Actor {
         Champion = 1 << 0,
         Minion = 1 << 1,
         Turret = 1 << 2,
+        
+        Test = 1 << 19,
     }
 }

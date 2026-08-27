@@ -134,6 +134,15 @@ namespace Combat.Actor {
             failCallback = fail;
             typeToStatus[curType].Enter();
         }
+
+        public Vector3F? NextExpectMove {
+            get {
+                if (curType == MoveType.None) {
+                    return null;
+                }
+                return typeToStatus[curType].NextExpectMove;
+            }
+        }
         
         #endregion
     }

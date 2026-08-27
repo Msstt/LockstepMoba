@@ -53,6 +53,7 @@
     <Compile Include="Assets/Scripts/Combat/Actor/Unit/Turret.cs" />
     <Compile Include="Assets/Scripts/Network/Message/Proto/TypeMsg.cs" />
     <Compile Include="Assets/Scripts/Combat/Level/ILevelSystem.cs" />
+    <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/ObstacleAvoidUtils.cs" />
     <Compile Include="Assets/Scripts/Tools/Async/AsyncMgr.cs" />
     <Compile Include="Assets/Scripts/Framework/Network/MsgDispatcher.cs" />
     <Compile Include="Assets/Scripts/Network/NetworkDef.cs" />

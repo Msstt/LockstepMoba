@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
@@ -25,8 +26,9 @@ public abstract class SceneTest {
         SceneManager.sceneLoaded += (scene, mode) => {
             GameMgr.Instance.RegisterSystem(TestSystem);
             GameMgr.Instance.Init();
+            GameMgr.Instance.GMTool = GameObject.Find("Config")?.GetComponent<GMTool>();
+            AfterSceneLoad();
         };
-        AfterSceneLoad();
     }
     
     [UnityTest]

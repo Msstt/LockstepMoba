@@ -7,6 +7,8 @@ namespace Combat.Actor {
         public Priority AttackDistance;
         
         public Priority MoveSpeed;
+        
+        public Priority Radius;
 
         public int Invisibility; // == 0 表示可见
     }

@@ -19,6 +19,7 @@ namespace Combat.Actor {
             actor.Stats.AttackDistance = new Priority(config.attackDistance);
             
             actor.Stats.MoveSpeed = new Priority(config.moveSpeed);
+            actor.Stats.Radius = new Priority(config.radius);
         }
     }
 }

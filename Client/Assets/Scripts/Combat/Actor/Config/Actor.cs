@@ -25,5 +25,8 @@ namespace Combat.Actor {
         
         [LabelText("移速")]
         public FloatF moveSpeed;
+        
+        [LabelText("半径")]
+        public FloatF radius;
     }
 }

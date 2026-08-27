@@ -15,6 +15,8 @@ namespace Combat.Actor {
             protected void Finish() => com.Finish();
             protected void Fail() => com.Fail();
             protected void CalcPath(Vector3F pos, bool force = true) => com.CalcPath(pos, force);
+
+            public virtual Vector3F? NextExpectMove => null;
         }
     }
 }

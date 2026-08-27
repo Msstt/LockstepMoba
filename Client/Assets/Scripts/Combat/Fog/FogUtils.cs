@@ -9,7 +9,7 @@ public static class FogUtils {
     }
     
     public static bool IsVisible(Vector3F position) {
-        return GameMgr.Instance.GetSystem<IFogSystem>()?.IsVisible(position) ?? false;
+        return GameMgr.Instance.GetSystem<IFogSystem>()?.IsVisible(position) ?? true;
     }
 
     public static bool IsVisible(Actor actor) {

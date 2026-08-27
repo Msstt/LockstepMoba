@@ -35,7 +35,7 @@ public class GameMgr : Singleton<GameMgr> {
             if (system == null || system.Contains(typeof(T1))) {
                 RegisterSystem<T1>(new T2());
             }
-        }
+        }   
         
         // 注册顺序即为更新顺序
         Register<Data.IDataSystem, Data.DataSystem>();
@@ -127,7 +127,7 @@ public class GameMgr : Singleton<GameMgr> {
         if (systems.ContainsKey(type)) {
             return systems[type] as T;
         }
-        Debug.LogError($"[GameMgr!!!] System {type} not found");
+        // Debug.LogError($"[GameMgr!!!] System {type} not found");
         return null;
     }
 
