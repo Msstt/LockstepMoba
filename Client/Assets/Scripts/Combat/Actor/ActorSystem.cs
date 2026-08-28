@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Combat.Skill;
 using Framework;
 using Network;
@@ -139,6 +140,34 @@ namespace Combat.Actor {
                 return com as T;
             }
             return GetActor(uid)?.GetComponent<T>();
+        }
+
+        public int GetStatusCode() {
+            int statusCode = StatusCode.Seed;
+            var actorList = new List<(int uid, Actor actor)>();
+            foreach (var pair in actors) {
+                actorList.Add(pair);
+            }
+            statusCode = StatusCode.Combine(statusCode, actorList.Count);
+            foreach (var (uid, actor) in actorList.OrderBy(pair => pair.uid)) {
+                statusCode = StatusCode.Combine(statusCode, uid);
+                statusCode = StatusCode.CombineData(statusCode, actor);
+            }
+
+            var deadPersistentComs = persistentComs
+                .Where(pair => GetActor(pair.Key) == null)
+                .OrderBy(pair => pair.Key)
+                .ToList();
+            statusCode = StatusCode.Combine(statusCode, deadPersistentComs.Count);
+            foreach (var (uid, coms) in deadPersistentComs) {
+                statusCode = StatusCode.Combine(statusCode, uid);
+                statusCode = StatusCode.Combine(statusCode, coms.Count);
+                foreach (var pair in coms.OrderBy(pair => pair.Key.FullName, StringComparer.Ordinal)) {
+                    statusCode = StatusCode.CombineType(statusCode, pair.Key);
+                    statusCode = StatusCode.Combine(statusCode, pair.Value.GetStatusCode());
+                }
+            }
+            return statusCode;
         }
     }
 }

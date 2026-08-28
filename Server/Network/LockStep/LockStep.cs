@@ -1,4 +1,6 @@
+using Battle;
 using Framework;
+using Framework.Network;
 
 namespace Network {
     public class LockStep : Singleton<LockStep> {
@@ -23,11 +25,16 @@ namespace Network {
         private float outTime = 0;
         private bool isCollectingInput = false;
         private int frameMaxDelay = 0;
+
+        private bool hasDiffStatusCode = false;
+        private Dictionary<int, int> statusCode = new Dictionary<int, int>();
         
         private void Clear() {
             frame = 0;
             inputs = new Dictionary<Uid, battle_input>();
             historyInputs = new List<Dictionary<Uid, battle_input>>();
+            hasDiffStatusCode = false;
+            statusCode = new Dictionary<int, int>();
         }
         
         public void Start() {
@@ -67,7 +74,7 @@ namespace Network {
         }
 
         public void AddInput(int frame, Uid uid, battle_input input) {
-            if (frame < frame - frameMaxDelay) {
+            if (frame < this.frame - frameMaxDelay) {
                 return;
             }
 
@@ -120,6 +127,16 @@ namespace Network {
             }
 
             return msg;
+        }
+        
+        public void AddStatusCode(int frame, int code) {
+            if (!statusCode.TryAdd(frame, code)) {
+                if (statusCode[frame] != code && !hasDiffStatusCode) {
+                    hasDiffStatusCode = true;
+                    string logPath = FileLog.Instance.RecordInputData(Match.Instance.GetStartMsg(1), historyInputs);
+                    Log.Error("Frame {0} has different status code: {1} vs {2}, log saved to {3}", frame, statusCode[frame], code, logPath);
+                }
+            }
         }
     }
 }

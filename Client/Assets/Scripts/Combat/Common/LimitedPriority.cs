@@ -2,7 +2,7 @@ using System;
 using Framework;
 
 namespace Combat {
-    public struct LimitedPriority {
+    public struct LimitedPriority : ICheckableData {
         public enum ModifierType {
             Constant,
             Follow,
@@ -75,6 +75,12 @@ namespace Combat {
             ret.curValue -= value;
             ret.RefreshValue();
             return ret;
+        }
+
+        public int GetStatusCode() {
+            int code = StatusCode.Seed;
+            code = StatusCode.CombineData(code, maxValue);
+            return StatusCode.Combine(code, curValue);
         }
     }
 }

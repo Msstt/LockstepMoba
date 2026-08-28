@@ -26,18 +26,18 @@ namespace Network {
           string.Concat(
             "ChVEZWZpbmUvRnJhbWVNc2cucHJvdG8SB05ldHdvcmsaFkRlZmluZS9CYXR0",
             "bGVNc2cucHJvdG8aFURlZmluZS9JbnB1dE1zZy5wcm90byIgCg9mcmFtZV9z",
-            "dGFydF9zMmMSDQoFZnJhbWUYASABKAUiRgoPZnJhbWVfaW5wdXRfYzJzEg0K",
+            "dGFydF9zMmMSDQoFZnJhbWUYASABKAUiWwoPZnJhbWVfaW5wdXRfYzJzEg0K",
             "BWZyYW1lGAEgASgFEiQKBWlucHV0GAIgASgLMhUuTmV0d29yay5iYXR0bGVf",
-            "aW5wdXQilgEKD2ZyYW1lX2lucHV0X3MyYxINCgVmcmFtZRgBIAEoBRIzCgZp",
-            "bnB1dHMYAiADKAsyIy5OZXR3b3JrLmZyYW1lX2lucHV0X3MyYy5pbnB1dF9p",
-            "bmZvGj8KCmlucHV0X2luZm8SCwoDdWlkGAEgASgFEiQKBWlucHV0GAIgASgL",
-            "MhUuTmV0d29yay5iYXR0bGVfaW5wdXQiJAoTZnJhbWVfcmVjb25uZWN0X2My",
-            "cxINCgVmcmFtZRgBIAEoBWIGcHJvdG8z"));
+            "aW5wdXQSEwoLc3RhdHVzX2NvZGUYAyABKAUilgEKD2ZyYW1lX2lucHV0X3My",
+            "YxINCgVmcmFtZRgBIAEoBRIzCgZpbnB1dHMYAiADKAsyIy5OZXR3b3JrLmZy",
+            "YW1lX2lucHV0X3MyYy5pbnB1dF9pbmZvGj8KCmlucHV0X2luZm8SCwoDdWlk",
+            "GAEgASgFEiQKBWlucHV0GAIgASgLMhUuTmV0d29yay5iYXR0bGVfaW5wdXQi",
+            "JAoTZnJhbWVfcmVjb25uZWN0X2MycxINCgVmcmFtZRgBIAEoBWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Network.BattleMsgReflection.Descriptor, global::Network.InputMsgReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_start_s2c), global::Network.frame_start_s2c.Parser, new[]{ "Frame" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_input_c2s), global::Network.frame_input_c2s.Parser, new[]{ "Frame", "Input" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_input_c2s), global::Network.frame_input_c2s.Parser, new[]{ "Frame", "Input", "StatusCode" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_input_s2c), global::Network.frame_input_s2c.Parser, new[]{ "Frame", "Inputs" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_input_s2c.Types.input_info), global::Network.frame_input_s2c.Types.input_info.Parser, new[]{ "Uid", "Input" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Network.frame_reconnect_c2s), global::Network.frame_reconnect_c2s.Parser, new[]{ "Frame" }, null, null, null)
           }));
@@ -208,6 +208,7 @@ namespace Network {
     public frame_input_c2s(frame_input_c2s other) : this() {
       frame_ = other.frame_;
       input_ = other.input_ != null ? other.input_.Clone() : null;
+      statusCode_ = other.statusCode_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -238,6 +239,17 @@ namespace Network {
       }
     }
 
+    /// <summary>Field number for the "status_code" field.</summary>
+    public const int StatusCodeFieldNumber = 3;
+    private int statusCode_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int StatusCode {
+      get { return statusCode_; }
+      set {
+        statusCode_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as frame_input_c2s);
@@ -253,6 +265,7 @@ namespace Network {
       }
       if (Frame != other.Frame) return false;
       if (!object.Equals(Input, other.Input)) return false;
+      if (StatusCode != other.StatusCode) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -261,6 +274,7 @@ namespace Network {
       int hash = 1;
       if (Frame != 0) hash ^= Frame.GetHashCode();
       if (input_ != null) hash ^= Input.GetHashCode();
+      if (StatusCode != 0) hash ^= StatusCode.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -282,6 +296,10 @@ namespace Network {
         output.WriteRawTag(18);
         output.WriteMessage(Input);
       }
+      if (StatusCode != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(StatusCode);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -295,6 +313,9 @@ namespace Network {
       }
       if (input_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Input);
+      }
+      if (StatusCode != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(StatusCode);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -316,6 +337,9 @@ namespace Network {
         }
         Input.MergeFrom(other.Input);
       }
+      if (other.StatusCode != 0) {
+        StatusCode = other.StatusCode;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -336,6 +360,10 @@ namespace Network {
               Input = new global::Network.battle_input();
             }
             input.ReadMessage(Input);
+            break;
+          }
+          case 24: {
+            StatusCode = input.ReadInt32();
             break;
           }
         }

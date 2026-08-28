@@ -1,5 +1,7 @@
 using Combat.Buff;
 using Framework;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Combat.Actor {
     public class BuffCom : Com {
@@ -84,5 +86,23 @@ namespace Combat.Actor {
         }
 
         private int GetEndFrame(BuffConfig config) => config.IsForever ? InValidEndFrame : TimeUtils.GetFrame(config.Time);
+
+        public override int GetStatusCode() {
+            var buffGroups = new List<(int id, SafeList<BuffInfo> list)>();
+            foreach (var pair in buffs) {
+                buffGroups.Add(pair);
+            }
+
+            int code = StatusCode.Combine(StatusCode.Seed, buffGroups.Count);
+            foreach (var (buffId, list) in buffGroups.OrderBy(pair => pair.id)) {
+                code = StatusCode.Combine(code, buffId);
+                code = StatusCode.Combine(code, list.Count);
+                foreach (BuffInfo info in list) {
+                    code = StatusCode.Combine(code, info.endFrame);
+                    code = StatusCode.CombineData(code, info.buff);
+                }
+            }
+            return code;
+        }
     }
 }

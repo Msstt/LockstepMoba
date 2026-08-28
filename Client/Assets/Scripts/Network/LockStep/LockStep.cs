@@ -65,6 +65,7 @@ namespace Network {
             frame_input_c2s msg = new frame_input_c2s() {
                 Frame = Frame + 1,
                 Input = new battle_input(),
+                StatusCode = GameMgr.Instance.GetStatusCode(),
             };
             foreach (var (msgId, setter) in NetworkDef.InputMsgDef.setter) {
                 try {

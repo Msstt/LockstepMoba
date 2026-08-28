@@ -45,7 +45,7 @@ namespace Battle {
             }
         }
         
-        private battle_start_s2c GetStartMsg(Uid selfUid) {
+        public battle_start_s2c GetStartMsg(Uid selfUid) {
             if (start_msg != null) {
                 start_msg.SelfUid = selfUid;
                 return start_msg;

@@ -1,6 +1,6 @@
 
 namespace Combat.Skill {
-    public interface ISkillSystem : ISystem, IFrameUpdateSystem {
+    public interface ISkillSystem : ISystem, IFrameUpdateSystem, ICheckableSystem {
         public void Execute(int actorUid, int skillId, int level, SkillParam param);
         public void Abort(int actorUid, int skillId);
         public void Abort(int actorUid, SkillType typeList);

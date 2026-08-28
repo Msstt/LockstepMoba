@@ -1,5 +1,5 @@
 namespace Combat.Actor {
-    public abstract class Com {
+    public abstract class Com : ICheckableData {
         private Actor actor = null;
         public Actor Actor {
             get => actor;
@@ -21,5 +21,7 @@ namespace Combat.Actor {
         public virtual void RenderUpdate() { }
         
         public virtual void Destroy() { }
+
+        public virtual int GetStatusCode() => Framework.StatusCode.Seed;
     }
 }

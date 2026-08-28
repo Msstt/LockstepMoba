@@ -38,7 +38,7 @@ namespace Combat.Actor {
             }
 
             private FloatF GetReviveTime(EventType.ActorDead param) {
-                int level = DataUtils.Get<LevelData>()[param.Uid].level;
+                int level = ActorUtils.GetCom<LevelCom>(param.Uid).Level;
                 return Config.Time.championReviveTime[level];
             }
 

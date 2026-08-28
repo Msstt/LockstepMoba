@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Framework;
 using UnityEngine;
 
@@ -63,6 +64,27 @@ namespace Combat.Area {
                 }
             }
             toDestroy.Clear();
+        }
+
+        public int GetStatusCode() {
+            var infos = new List<(int uid, AreaInfo info)>();
+            foreach (var pair in areaInfos) {
+                infos.Add(pair);
+            }
+
+            int code = StatusCode.Combine(StatusCode.Seed, maxId);
+            code = StatusCode.Combine(code, infos.Count);
+            foreach (var (uid, info) in infos.OrderBy(pair => pair.uid)) {
+                code = StatusCode.Combine(code, uid);
+                code = StatusCode.Combine(code, info.endFrame);
+                code = StatusCode.CombineData(code, info.area);
+            }
+
+            code = StatusCode.Combine(code, toDestroy.Count);
+            foreach (int uid in toDestroy.OrderBy(uid => uid)) {
+                code = StatusCode.Combine(code, uid);
+            }
+            return code;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Framework {
     public class VariantMap {
@@ -31,6 +32,15 @@ namespace Framework {
                 }
             }
             return defaultValue;
+        }
+
+        public int GetStatusCode() {
+            int code = StatusCode.Combine(StatusCode.Seed, map.Count);
+            foreach (string key in map.Keys.OrderBy(key => key, System.StringComparer.Ordinal)) {
+                code = StatusCode.Combine(code, key);
+                code = StatusCode.CombineValue(code, map[key]);
+            }
+            return code;
         }
     }
 }

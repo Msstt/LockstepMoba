@@ -1,6 +1,7 @@
 // 中转组件，根据 debuff 中断技能树、行为机
 
 using System.Collections.Generic;
+using System.Linq;
 using Combat.Skill;
 using Framework;
 
@@ -51,6 +52,15 @@ namespace Combat.Actor {
 
                 value &= ~bit;
             }
+        }
+
+        public override int GetStatusCode() {
+            int code = StatusCode.Combine(StatusCode.Seed, abortCount.Count);
+            foreach (var pair in abortCount.OrderBy(pair => (int)pair.Key)) {
+                code = StatusCode.Combine(code, (int)pair.Key);
+                code = StatusCode.Combine(code, pair.Value);
+            }
+            return code;
         }
     }
 }

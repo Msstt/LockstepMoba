@@ -1,8 +1,9 @@
 using Combat.Actor;
+using Framework;
 using Newtonsoft.Json.Linq;
 
 namespace Combat.Buff {
-    public interface IEffect {
+    public interface IEffect : ICheckableData {
         public void OnCreate();
         public void OnRefresh();
         public void OnUpdate();
@@ -27,5 +28,7 @@ namespace Combat.Buff {
         public virtual void OnDestroy() { }
 
         protected T GetLevelNumber<T>(LevelNumber<T> levelNumber) => levelNumber[buff.Level];
+
+        public virtual int GetStatusCode() => StatusCode.Seed;
     }
 }

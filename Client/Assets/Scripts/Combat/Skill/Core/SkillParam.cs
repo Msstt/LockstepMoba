@@ -1,7 +1,8 @@
 using Network;
+using Framework;
 
 namespace Combat.Skill {
-    public class SkillParam {
+    public class SkillParam : ICheckableData {
         private Vector3F pos;
         public Vector3F Pos => PosIsValid ? pos : throw new CombatException("SkillParam Pos is not valid but accessed");
         public bool PosIsValid => pos != InvalidPos;
@@ -33,5 +34,12 @@ namespace Combat.Skill {
         public static readonly int InvalidUid = -1;
         public static readonly Vector3F InvalidDir = new Vector3F(FloatF.max, FloatF.max, FloatF.max);
         private static readonly vector_f InvalidDirProto = InvalidDir.ToProto();
+
+        public int GetStatusCode() {
+            int code = StatusCode.Seed;
+            code = StatusCode.Combine(code, pos);
+            code = StatusCode.Combine(code, uid);
+            return StatusCode.Combine(code, dir);
+        }
     }
 }

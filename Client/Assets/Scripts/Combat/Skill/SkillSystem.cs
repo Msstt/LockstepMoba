@@ -116,5 +116,22 @@ namespace Combat.Skill {
                 throw new CombatException("SkillSystem Tree is locked");
             }
         }
+
+        public int GetStatusCode() {
+            int code = StatusCode.Combine(StatusCode.Seed, contexts.Count);
+            foreach (var (skillId, dict) in contexts) {
+                var contextList = new List<(int uid, Context context)>();
+                foreach (var pair in dict) {
+                    contextList.Add(pair);
+                }
+                code = StatusCode.Combine(code, skillId);
+                code = StatusCode.Combine(code, contextList.Count);
+                foreach (var (uid, context) in contextList.OrderBy(pair => pair.uid)) {
+                    code = StatusCode.Combine(code, uid);
+                    code = StatusCode.CombineData(code, context);
+                }
+            }
+            return code;
+        }
     }
 }

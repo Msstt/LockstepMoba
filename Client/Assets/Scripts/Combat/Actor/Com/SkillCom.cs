@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using Combat.Skill;
+using Framework;
 using InputSystem;
 
 namespace Combat.Actor {
@@ -230,6 +232,30 @@ namespace Combat.Actor {
         
         public int GetSkillLevel(SkillSlot slot) {
             return level[(int)slot];
+        }
+
+        public override int GetStatusCode() {
+            int code = StatusCode.Combine(StatusCode.Seed, Uid);
+            code = StatusCode.Combine(code, skillIds?.Length ?? -1);
+            if (skillIds != null) {
+                foreach (int skillId in skillIds) {
+                    code = StatusCode.Combine(code, skillId);
+                }
+            }
+
+            code = StatusCode.Combine(code, level?.Length ?? -1);
+            if (level != null) {
+                foreach (int skillLevel in level) {
+                    code = StatusCode.Combine(code, skillLevel);
+                }
+            }
+
+            code = StatusCode.Combine(code, cd.Count);
+            foreach (var pair in cd.OrderBy(pair => pair.Key)) {
+                code = StatusCode.Combine(code, pair.Key);
+                code = StatusCode.Combine(code, pair.Value);
+            }
+            return code;
         }
 
 

@@ -417,6 +417,9 @@ namespace Network {
 
   }
 
+  /// <summary>
+  /// 选择英雄
+  /// </summary>
   public sealed partial class select_champion_c2s : pb::IMessage<select_champion_c2s> {
     private static readonly pb::MessageParser<select_champion_c2s> _parser = new pb::MessageParser<select_champion_c2s>(() => new select_champion_c2s());
     private pb::UnknownFieldSet _unknownFields;

@@ -14,6 +14,7 @@ message frame_start_s2c {
 message frame_input_c2s {
   int32 frame = 1;
   battle_input input = 2;
+  int32 status_code = 3;
 }
 
 // 帧操作广播

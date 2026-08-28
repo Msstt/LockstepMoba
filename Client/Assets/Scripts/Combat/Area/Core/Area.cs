@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Framework;
 using UnityEngine;
 
 namespace Combat.Area {
-    public class Area : IDisposable {
+    public class Area : IDisposable, ICheckableData {
         public Shape Shape { get; private set; }
         private List<IEffect> effects = new List<IEffect>();
         private List<IRaycast> raycasts = new List<IRaycast>();
@@ -11,6 +12,7 @@ namespace Combat.Area {
         private List<List<Actor.Actor>> raycastResult = new List<List<Actor.Actor>>();
         
         public int ActorId { get; private set; }
+        public int Id { get; private set; }
         public int Level { get; private set; }
         public int Uid { get; private set; }
         
@@ -44,6 +46,7 @@ namespace Combat.Area {
         public bool TargetUidIsValid => targetUid.HasValue;
         
         public Area(int areaId, int uid, int actorId, int level, Vector3F position, Vector3F direction, int? targetUid) {
+            Id = areaId;
             ActorId = actorId;
             Level = level;
             Uid = uid;
@@ -125,6 +128,25 @@ namespace Combat.Area {
                 raycastResult[raycastId] = raycasts[raycastId].Get();
             }
             return raycastResult[raycastId];
+        }
+
+        public int GetStatusCode() {
+            int code = StatusCode.Seed;
+            code = StatusCode.Combine(code, Id);
+            code = StatusCode.Combine(code, Uid);
+            code = StatusCode.Combine(code, ActorId);
+            code = StatusCode.Combine(code, Level);
+            code = StatusCode.Combine(code, Position);
+            code = StatusCode.Combine(code, Direction);
+            code = StatusCode.Combine(code, TargetUidIsValid);
+            if (TargetUidIsValid) {
+                code = StatusCode.Combine(code, targetUid.Value);
+            }
+            code = StatusCode.Combine(code, effects.Count);
+            foreach (IEffect effect in effects) {
+                code = StatusCode.CombineData(code, effect);
+            }
+            return code;
         }
     }
 }

@@ -1,3 +1,5 @@
+using Framework;
+
 namespace Combat.Actor {
     public class LevelCom : PersistentCom {
         private readonly int MaxLevel = 18;
@@ -27,6 +29,13 @@ namespace Combat.Actor {
                 Uid = Uid,
                 Level = level.Value,
             });
+        }
+
+        public override int GetStatusCode() {
+            int code = StatusCode.Combine(StatusCode.Seed, Uid);
+            code = StatusCode.Combine(code, level.Value);
+            code = StatusCode.Combine(code, exp.Value);
+            return StatusCode.Combine(code, needExp);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Combat.Equipment;
 using Combat.Skill;
+using Framework;
 
 namespace Combat.Actor {
     public class EquipmentCom : PersistentCom {
@@ -45,6 +46,15 @@ namespace Combat.Actor {
             }
             SkillCom skillCom = ActorUtils.GetCom<SkillCom>(Uid);
             skillCom?.ChangeSkill(Slot[index], config.skillId);
+        }
+
+        public override int GetStatusCode() {
+            int code = StatusCode.Combine(StatusCode.Seed, Uid);
+            code = StatusCode.Combine(code, equipmentList.Count);
+            foreach (int equipmentId in equipmentList) {
+                code = StatusCode.Combine(code, equipmentId);
+            }
+            return code;
         }
     }
 }

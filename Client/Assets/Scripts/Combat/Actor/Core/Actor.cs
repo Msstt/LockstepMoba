@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Framework;
 using InputSystem;
-using UnityEditor;
 using UnityEngine;
 
 namespace Combat.Actor {
-    public abstract partial class Actor : IDisposable {
+    public abstract partial class Actor : IDisposable, ICheckableData {
         public int Id { get; private set; }
         public int Uid { get; private set; }
         public ActorType Type { get; protected set; }
@@ -165,6 +165,23 @@ namespace Combat.Actor {
             RemoveAllComponent();
             GameObject.Destroy(go);
             GameObject.Destroy(debugPoint);
+        }
+
+        public int GetStatusCode() {
+            int code = StatusCode.Seed;
+            code = StatusCode.Combine(code, Id);
+            code = StatusCode.Combine(code, Uid);
+            code = StatusCode.Combine(code, (int)Type);
+            code = StatusCode.Combine(code, (int)Camp);
+            code = StatusCode.Combine(code, Pos);
+            code = StatusCode.Combine(code, Dir);
+            code = StatusCode.CombineData(code, Stats);
+            code = StatusCode.Combine(code, comList.Count);
+            foreach (var com in comList.OrderBy(com => com.GetType().FullName, StringComparer.Ordinal)) {
+                code = StatusCode.CombineType(code, com.GetType());
+                code = StatusCode.Combine(code, com.GetStatusCode());
+            }
+            return code;
         }
     }
 }

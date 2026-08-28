@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Combat.Actor;
+using Framework;
 using Newtonsoft.Json.Linq;
 
 namespace Combat.Area {
-    public interface IEffect {
+    public interface IEffect : ICheckableData {
         public void OnCreate();
         public void OnUpdate();
         public void OnRenderUpdate();
@@ -14,7 +15,7 @@ namespace Combat.Area {
         public int Priority { get; }
     }
     
-    public abstract class Effect<Param> : IEffect {
+    public abstract class Effect<Param> : IEffect, ICheckableData {
         protected Area area;
         protected Param param;
         private int raycastId;
@@ -43,6 +44,8 @@ namespace Combat.Area {
                 func(actor);
             }
         }
+
+        public virtual int GetStatusCode() => 0;
     }
 
     public abstract class MoveEffect<Param> : Effect<Param> {

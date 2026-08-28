@@ -8,6 +8,7 @@ public class FrameMsgDispatcher : MsgDispatcher {
     
     [Message(MessageDef.frame_input_c2s)]
     private static void frame_input_c2s(Uid uid, frame_input_c2s msg) {
+        LockStep.Instance.AddStatusCode(msg.Frame, msg.StatusCode);
         LockStep.Instance.AddInput(msg.Frame, uid, msg.Input);
     }
     

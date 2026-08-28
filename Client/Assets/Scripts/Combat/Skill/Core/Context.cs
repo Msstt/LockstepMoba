@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using Framework;
 
 namespace Combat.Skill {
-    public class Context {
+    public class Context : ICheckableData {
         public int ActorUid { get; private set; }
         public int TreeId { get; private set; }
         public Node CurNode { get; private set; }
@@ -52,6 +53,24 @@ namespace Combat.Skill {
             if (!nodeVariants.ContainsKey(nodeId)) {
                 nodeVariants[nodeId] = new VariantMap();
             }
+        }
+
+        public int GetStatusCode() {
+            int code = StatusCode.Seed;
+            code = StatusCode.Combine(code, ActorUid);
+            code = StatusCode.Combine(code, TreeId);
+            code = StatusCode.Combine(code, Level);
+            code = StatusCode.Combine(code, StartFrame);
+            code = StatusCode.CombineData(code, Param);
+            code = StatusCode.CombineType(code, CurNode?.GetType());
+            code = StatusCode.Combine(code, CurNode?.Id ?? -1);
+            code = StatusCode.Combine(code, variants.GetStatusCode());
+            code = StatusCode.Combine(code, nodeVariants.Count);
+            foreach (var pair in nodeVariants.OrderBy(pair => pair.Key)) {
+                code = StatusCode.Combine(code, pair.Key);
+                code = StatusCode.Combine(code, pair.Value.GetStatusCode());
+            }
+            return code;
         }
     }
 }

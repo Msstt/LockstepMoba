@@ -190,7 +190,6 @@
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Vision/InvisibilityByRadius.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Unit/Champion.cs" />
     <Compile Include="Assets/Scripts/GameMgr.cs" />
-    <Compile Include="Assets/Scripts/Data/Combat/Level.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Creator/CreateTurret.cs" />
     <Compile Include="Assets/Scripts/Tools/Async/AsyncUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/CombatSystem.cs" />
@@ -278,6 +277,7 @@
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Tree.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Config.cs" />
     <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Core/ActorBehaviour.cs" />
+    <Compile Include="Assets/Scripts/Framework/Tools/StatusCode.cs" />
     <Compile Include="Assets/Scripts/Network/LockStep/InputMsg.cs" />
     <Compile Include="Assets/Scripts/Navmesh/NavmeshMapInfo.cs" />
     <Compile Include="Assets/Scripts/Input/Define.cs" />

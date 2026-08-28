@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using Framework;
 using Network;
-using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 using UnityEngine;
 using UnityEngine.Profiling;
 
 public class GameMgr : Singleton<GameMgr> {
     private Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
     private List<ISystem> systemList = new List<ISystem>();
-    
+
     private IFrameDriver driver = null;
     private bool frameHasStarted = false;
     
@@ -131,6 +130,17 @@ public class GameMgr : Singleton<GameMgr> {
         return null;
     }
 
+    public int GetStatusCode() {
+        int code = StatusCode.Seed;
+        foreach (var system in systemList) {
+            if (system is ICheckableSystem checkable) {
+                code = StatusCode.CombineType(code, system.GetType());
+                code = StatusCode.Combine(code, checkable.GetStatusCode());
+            }
+        }
+        return code;
+    }
+
     #region 本地调试模式
 
     private bool isLocalDebug = false;
@@ -150,12 +160,12 @@ public class GameMgr : Singleton<GameMgr> {
             Camp = 0,
             Skill = { 5, 4 },
         });
-        // msg.Players.Add(new battle_start_s2c.Types.player_info {
-        //     Uid = 2,
-        //     ChampionId = 1,
-        //     Camp = 1,
-        //     Skill = { 3, 3 },
-        // });
+        msg.Players.Add(new battle_start_s2c.Types.player_info {
+            Uid = 2,
+            ChampionId = 1,
+            Camp = 1,
+            Skill = { 3, 3 },
+        });
         // msg.Players.Add(new battle_start_s2c.Types.player_info {
         //     Uid = 3,
         //     ChampionId = 1,

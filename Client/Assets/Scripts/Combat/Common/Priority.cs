@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Combat {
-    public struct Priority {
+    public struct Priority : ICheckableData {
         [DrawWithUnity]
         public enum ModifierType {
             [InspectorName("+")]
@@ -69,6 +69,15 @@ namespace Combat {
         private void RefreshValue() {
             finalValue = (baseValue + addValue) * (1 + addPercent / f100) * multValue;
             onValueChanged?.Send(finalValue);
+        }
+
+        public int GetStatusCode() {
+            int code = StatusCode.Seed;
+            code = StatusCode.Combine(code, baseValue);
+            code = StatusCode.Combine(code, finalValue);
+            code = StatusCode.Combine(code, addValue);
+            code = StatusCode.Combine(code, addPercent);
+            return StatusCode.Combine(code, multValue);
         }
     }
 }

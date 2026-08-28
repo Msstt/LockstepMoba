@@ -28,3 +28,11 @@ public interface IFrameDriver : ISystem {
     
     public bool FrameReady();
 }
+
+public interface ICheckableSystem {
+    public int GetStatusCode();
+}
+
+public interface ICheckableData {
+    public int GetStatusCode();
+}

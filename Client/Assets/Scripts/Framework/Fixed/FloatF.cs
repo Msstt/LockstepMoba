@@ -21,6 +21,7 @@ public struct FloatF : IComparable<FloatF> {
     
     [SerializeField, JsonProperty]
     private long value;
+    public long RawValue => value;
     
     public FloatF(long f, bool isRaw = false) {
         if (isRaw) {
