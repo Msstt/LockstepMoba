@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   championVisionRadius:
     value: 120000000
+  minionVisionRadius:
+    value: 100000000
+  buildingVisionRadius:
+    value: 150000000

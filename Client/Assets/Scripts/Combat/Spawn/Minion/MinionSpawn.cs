@@ -37,7 +37,7 @@ namespace Combat.Actor {
                     actorSystem.CreateActor(new CreateMinion(minionId, CampType.Blue, i));
                 }
                 var redMinionWave = Config.Map.redMinionWavePos;
-                for (int i = 0; i < blueMinionWave.Count; i++) {
+                for (int i = 0; i < redMinionWave.Count; i++) {
                     actorSystem.CreateActor(new CreateMinion(minionId, CampType.Red, i));
                 }
             }

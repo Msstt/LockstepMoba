@@ -70,7 +70,7 @@ namespace Editor {
 
             for (int i = 0; i < root.childCount; i++) {
                 Transform child = root.GetChild(i);
-                if (child == excludedChild) {
+                if (child == excludedChild || !child.gameObject.activeInHierarchy) {
                     continue;
                 }
                 result.Add(ToSimpleTransform(child));
@@ -81,8 +81,13 @@ namespace Editor {
         private static List<MinionWave> ExportMinionWaves(Transform root) {
             List<MinionWave> result = new List<MinionWave>();
             for (int laneIndex = 0; laneIndex < root.childCount; laneIndex++) {
+                Transform lane = root.GetChild(laneIndex);
+                if (!lane.gameObject.activeInHierarchy) {
+                    continue;
+                }
+
                 MinionWave lanes = new MinionWave {
-                    Pos = ExportTransforms(root.GetChild(laneIndex))
+                    Pos = ExportTransforms(lane)
                 };
                 result.Add(lanes);
             }

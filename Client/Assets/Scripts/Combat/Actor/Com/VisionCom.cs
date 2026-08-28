@@ -34,6 +34,12 @@ namespace Combat.Actor {
                 if (Actor.Type == ActorType.Champion) {
                     return Config.Vision.championVisionRadius;
                 }
+                if (Actor.Type == ActorType.Minion) {
+                    return Config.Vision.minionVisionRadius;
+                }
+                if (Actor.Type == ActorType.Turret) {
+                    return Config.Vision.buildingVisionRadius;
+                }
                 return FloatF.zero;
             }
         }

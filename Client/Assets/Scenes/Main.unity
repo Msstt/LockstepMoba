@@ -1224,12 +1224,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50819f4a67724ff88d9778d38fbac69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsLocalDebug: 0
+  IsLocalDebug: 1
   ShowDebugMode: 0
   PrintSkillTree: 0
   DisableFog: 1
   DisableMinion: 0
-  DisableTurret: 1
+  DisableTurret: 0
 --- !u!114 &854225744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1415,22 +1415,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 212588825}
-    - target: {fileID: 2313806792035460732, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.383
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313806792035460732, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 5.061
-      objectReference: {fileID: 0}
-    - target: {fileID: 2823441951646614361, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2823441951646614361, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 4.739
-      objectReference: {fileID: 0}
     - target: {fileID: 3004068146920950643, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_originalMesh
       value: 

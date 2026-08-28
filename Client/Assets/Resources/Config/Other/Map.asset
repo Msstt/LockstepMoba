@@ -15,29 +15,92 @@ MonoBehaviour:
   revivePos:
   - position:
       x:
-        value: 600000061
+        value: 810250061
       y:
         value: 125000061
       z:
-        value: 1360000122
+        value: 1502500122
     direction:
       value: -3141592
   - position:
       x:
-        value: 500000030
+        value: -575250061
       y:
         value: 125000061
       z:
-        value: 1360000122
+        value: 111000007
     direction:
       value: 0
   - position:
       x:
-        value: 550000061
+        value: 838250061
       y:
         value: 125000061
       z:
-        value: 1400000122
+        value: 1498500122
+    direction:
+      value: 0
+  - position:
+      x:
+        value: -564075012
+      y:
+        value: 125000061
+      z:
+        value: 93325004
+    direction:
+      value: 0
+  - position:
+      x:
+        value: 812750061
+      y:
+        value: 125000061
+      z:
+        value: 1528750000
+    direction:
+      value: 0
+  - position:
+      x:
+        value: -597500061
+      y:
+        value: 125000061
+      z:
+        value: 109000007
+    direction:
+      value: 0
+  - position:
+      x:
+        value: 855250061
+      y:
+        value: 150000061
+      z:
+        value: 1498500122
+    direction:
+      value: 0
+  - position:
+      x:
+        value: -576000000
+      y:
+        value: 125000061
+      z:
+        value: 71250000
+    direction:
+      value: 0
+  - position:
+      x:
+        value: 825250061
+      y:
+        value: 125000061
+      z:
+        value: 1547500122
+    direction:
+      value: 0
+  - position:
+      x:
+        value: -631750000
+      y:
+        value: 125000061
+      z:
+        value: 87000000
     direction:
       value: 0
   blueMinionWavePos:
@@ -69,8 +132,352 @@ MonoBehaviour:
           value: 1131750000
       direction:
         value: 1570796
+    - position:
+        x:
+          value: 318500030
+        y:
+          value: 125000061
+        z:
+          value: 1003000061
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 192500000
+        y:
+          value: 125000061
+        z:
+          value: 902500000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 105500007
+        y:
+          value: 125000061
+        z:
+          value: 810750061
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 14500000
+        y:
+          value: 125000061
+        z:
+          value: 737250000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -122500007
+        y:
+          value: 125000061
+        z:
+          value: 580000000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -250000015
+        y:
+          value: 125000061
+        z:
+          value: 440000030
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -370000030
+        y:
+          value: 125000061
+        z:
+          value: 322500000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -421000030
+        y:
+          value: 125000061
+        z:
+          value: 263500030
+      direction:
+        value: 1570796
+  - Pos:
+    - position:
+        x:
+          value: 760500061
+        y:
+          value: 125000061
+        z:
+          value: 1310500122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 766000000
+        y:
+          value: 125000061
+        z:
+          value: 1241750122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 748000061
+        y:
+          value: 125000061
+        z:
+          value: 1055750122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 737500061
+        y:
+          value: 125000061
+        z:
+          value: 810000061
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 740000061
+        y:
+          value: 125000061
+        z:
+          value: 472500030
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 667500061
+        y:
+          value: 125000061
+        z:
+          value: 272500030
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 477500030
+        y:
+          value: 125000061
+        z:
+          value: 172500015
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 137500015
+        y:
+          value: 125000061
+        z:
+          value: 155000015
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -110000007
+        y:
+          value: 125000061
+        z:
+          value: 160000000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -350000030
+        y:
+          value: 125000061
+        z:
+          value: 165000015
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -409500030
+        y:
+          value: 125000061
+        z:
+          value: 178000015
+      direction:
+        value: 1570796
+  - Pos:
+    - position:
+        x:
+          value: 612500061
+        y:
+          value: 125000061
+        z:
+          value: 1427500122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 565000061
+        y:
+          value: 125000061
+        z:
+          value: 1460000122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 375000030
+        y:
+          value: 125000061
+        z:
+          value: 1445000122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 103500007
+        y:
+          value: 125000061
+        z:
+          value: 1458750122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -252500015
+        y:
+          value: 125000061
+        z:
+          value: 1424250122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -428500030
+        y:
+          value: 125000061
+        z:
+          value: 1314500000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -532500061
+        y:
+          value: 125000061
+        z:
+          value: 1157500122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -540000061
+        y:
+          value: 125000061
+        z:
+          value: 812500061
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -525000000
+        y:
+          value: 125000061
+        z:
+          value: 552500061
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -531000061
+        y:
+          value: 125000061
+        z:
+          value: 340000030
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -512500000
+        y:
+          value: 125000061
+        z:
+          value: 275500030
+      direction:
+        value: 1570796
   redMinionWavePos:
   - Pos:
+    - position:
+        x:
+          value: -421000030
+        y:
+          value: 125000061
+        z:
+          value: 263500030
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -370000030
+        y:
+          value: 125000061
+        z:
+          value: 322500000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -250000015
+        y:
+          value: 125000061
+        z:
+          value: 440000030
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -122500007
+        y:
+          value: 125000061
+        z:
+          value: 580000000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 14500000
+        y:
+          value: 125000061
+        z:
+          value: 737250000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 105500007
+        y:
+          value: 125000061
+        z:
+          value: 810750061
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 192500000
+        y:
+          value: 125000061
+        z:
+          value: 902500000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 318500030
+        y:
+          value: 125000061
+        z:
+          value: 1003000061
+      direction:
+        value: 1570796
     - position:
         x:
           value: 464250030
@@ -82,20 +489,11 @@ MonoBehaviour:
         value: 1570796
     - position:
         x:
-          value: 530000000
+          value: 595750000
         y:
           value: 125000061
         z:
-          value: 1184750000
-      direction:
-        value: 1570796
-    - position:
-        x:
-          value: 600200012
-        y:
-          value: 125000061
-        z:
-          value: 1265100097
+          value: 1265250000
       direction:
         value: 1570796
     - position:
@@ -105,6 +503,206 @@ MonoBehaviour:
           value: 125000061
         z:
           value: 1326250000
+      direction:
+        value: 1570796
+  - Pos:
+    - position:
+        x:
+          value: -409500030
+        y:
+          value: 125000061
+        z:
+          value: 178000015
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -350000030
+        y:
+          value: 125000061
+        z:
+          value: 165000015
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -110000007
+        y:
+          value: 125000061
+        z:
+          value: 160000000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 137500015
+        y:
+          value: 125000061
+        z:
+          value: 155000015
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 477500030
+        y:
+          value: 125000061
+        z:
+          value: 172500015
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 667500061
+        y:
+          value: 125000061
+        z:
+          value: 272500030
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 740000061
+        y:
+          value: 125000061
+        z:
+          value: 472500030
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 737500061
+        y:
+          value: 125000061
+        z:
+          value: 810000061
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 748000061
+        y:
+          value: 125000061
+        z:
+          value: 1055750122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 766000000
+        y:
+          value: 125000061
+        z:
+          value: 1241750122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 760500061
+        y:
+          value: 125000061
+        z:
+          value: 1310500122
+      direction:
+        value: 1570796
+  - Pos:
+    - position:
+        x:
+          value: -512500000
+        y:
+          value: 125000061
+        z:
+          value: 275500030
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -531000061
+        y:
+          value: 125000061
+        z:
+          value: 340000030
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -525000000
+        y:
+          value: 125000061
+        z:
+          value: 552500061
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -540000061
+        y:
+          value: 125000061
+        z:
+          value: 812500061
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -532500061
+        y:
+          value: 125000061
+        z:
+          value: 1157500122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -428500030
+        y:
+          value: 125000061
+        z:
+          value: 1314500000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: -252500015
+        y:
+          value: 125000061
+        z:
+          value: 1424250122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 103500007
+        y:
+          value: 125000061
+        z:
+          value: 1458750122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 375000030
+        y:
+          value: 125000061
+        z:
+          value: 1445000122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 565000061
+        y:
+          value: 125000061
+        z:
+          value: 1460000122
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 612500061
+        y:
+          value: 125000061
+        z:
+          value: 1427500122
       direction:
         value: 1570796
   blueTurretPos:
@@ -117,13 +715,193 @@ MonoBehaviour:
         value: 1337150024
     direction:
       value: 1570796
+  - position:
+      x:
+        value: 654250061
+      y:
+        value: 125000061
+      z:
+        value: 1385500000
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: 499000030
+      y:
+        value: 125000061
+      z:
+        value: 1186500000
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: 357750030
+      y:
+        value: 125000061
+      z:
+        value: 1071750122
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: 275250000
+      y:
+        value: 125000061
+      z:
+        value: 914750061
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: 435200042
+      y:
+        value: 125000061
+      z:
+        value: 1441875122
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: 166425018
+      y:
+        value: 125000061
+      z:
+        value: 1416900146
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: -203000000
+      y:
+        value: 125000061
+      z:
+        value: 1463250122
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: 756500061
+      y:
+        value: 125000061
+      z:
+        value: 1126000122
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: 721750061
+      y:
+        value: 125250061
+      z:
+        value: 886575012
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: 774650024
+      y:
+        value: 125000061
+      z:
+        value: 498725036
+    direction:
+      value: 1570796
   redTurretPos:
   - position:
       x:
-        value: 473250030
+        value: -420250030
       y:
         value: 129750000
       z:
-        value: 1151000122
+        value: 220750015
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: -465750030
+      y:
+        value: 129750000
+      z:
+        value: 270850006
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: -265500030
+      y:
+        value: 129750000
+      z:
+        value: 412750030
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: -130750015
+      y:
+        value: 129750000
+      z:
+        value: 526750061
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: -43650005
+      y:
+        value: 129750000
+      z:
+        value: 698425048
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: -525075073
+      y:
+        value: 129750000
+      z:
+        value: 478700042
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: -494000030
+      y:
+        value: 129750000
+      z:
+        value: 721000061
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: -550450073
+      y:
+        value: 129750000
+      z:
+        value: 1105300048
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: -202900024
+      y:
+        value: 129750000
+      z:
+        value: 160825012
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: 57375003
+      y:
+        value: 129750000
+      z:
+        value: 190100006
+    direction:
+      value: 1570796
+  - position:
+      x:
+        value: 430900024
+      y:
+        value: 129750000
+      z:
+        value: 138750015
     direction:
       value: 1570796

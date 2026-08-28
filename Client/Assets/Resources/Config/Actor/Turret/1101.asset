@@ -20,7 +20,7 @@ MonoBehaviour:
   attack:
     datas:
     - level: 1
-      value: 200
+      value: 50
   attackSpeed:
     datas:
     - level: 1
@@ -32,8 +32,10 @@ MonoBehaviour:
     value: 120000000
   areaPrefabName: Area/Prefab/SonicWave
   areaVelocity:
-    value: 5000000
+    value: 20000000
   moveSpeed:
+    value: 0
+  radius:
     value: 0
   bluePrefabName: Role/Building/Blue/Turret/Prefab
   redPrefabName: Role/Building/Red/Turret/Prefab

@@ -13,7 +13,7 @@ namespace Combat.Area.Effect {
 
         public TargetActorMove(Area area, int raycastId, JToken json) : base(area, raycastId, json) {
             if (param.Velocity <= 0) {
-                param.Velocity = ActorUtils.GetActor(area.Uid)?.Config.areaVelocity ?? 50;
+                param.Velocity = ActorUtils.GetActor(area.ActorId)?.Config.areaVelocity ?? 5;
             }
         }
         

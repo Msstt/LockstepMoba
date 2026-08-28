@@ -6,5 +6,9 @@ namespace OtherConfig {
     public class Vision : ScriptableObject {
         [LabelText("英雄视野半径")]
         public FloatF championVisionRadius;
+        [LabelText("小兵视野半径")]
+        public FloatF minionVisionRadius;
+        [LabelText("防御塔视野半径")]
+        public FloatF buildingVisionRadius;
     }
 }

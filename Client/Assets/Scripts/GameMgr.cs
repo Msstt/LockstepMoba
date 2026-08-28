@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using Framework;
 using Network;
+using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.Profiling;
 
 public class GameMgr : Singleton<GameMgr> {
     private Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
     private List<ISystem> systemList = new List<ISystem>();
+    private Dictionary<ISystem, ProfilerMarker> updateMarkers = new Dictionary<ISystem, ProfilerMarker>();
+    private Dictionary<ISystem, ProfilerMarker> frameUpdateMarkers = new Dictionary<ISystem, ProfilerMarker>();
 
     private IFrameDriver driver = null;
     private bool frameHasStarted = false;
@@ -83,7 +86,11 @@ public class GameMgr : Singleton<GameMgr> {
         }
         Profiler.BeginSample("GameMgr.Update");
         foreach (var system in systemList) {
-            (system as IUpdateSystem)?.Update();
+            if (system is IUpdateSystem updateSystem) {
+                using (updateMarkers[system].Auto()) {
+                    updateSystem.Update();
+                }
+            }
         }
         Profiler.EndSample();
         UpdateLocalDebug();
@@ -92,7 +99,11 @@ public class GameMgr : Singleton<GameMgr> {
     public void FrameUpdate() {
         Profiler.BeginSample("GameMgr.FrameUpdate");
         foreach (var system in systemList) {
-            (system as IFrameUpdateSystem)?.FrameUpdate(Frame);
+            if (system is IFrameUpdateSystem frameUpdateSystem) {
+                using (frameUpdateMarkers[system].Auto()) {
+                    frameUpdateSystem.FrameUpdate(Frame);
+                }
+            }
         }
         AsyncMgr.Instance.Update(Frame);
         Profiler.EndSample();
@@ -112,6 +123,13 @@ public class GameMgr : Singleton<GameMgr> {
         }
         systems[type] = system;
         systemList.Add(system);
+        var systemName = system.GetType().FullName;
+        if (system is IUpdateSystem) {
+            updateMarkers.Add(system, new ProfilerMarker($"GameMgr.Update.{systemName}"));
+        }
+        if (system is IFrameUpdateSystem) {
+            frameUpdateMarkers.Add(system, new ProfilerMarker($"GameMgr.FrameUpdate.{systemName}"));
+        }
         if (system is IFrameDriver) {
             if (driver != null) {
                 Debug.LogError("[GameMgr!!!] Frame driver already registered");
