@@ -40,6 +40,12 @@ public struct Vector3F {
         return FloatF.Sqrt(dx * dx + dy * dy + dz * dz);
     }
     
+    public static FloatF DistanceXZ(Vector3F a, Vector3F b) {
+        FloatF dx = a.x - b.x;
+        FloatF dz = a.z - b.z;
+        return FloatF.Sqrt(dx * dx + dz * dz);
+    }
+    
     public static FloatF Distance2(Vector3F a, Vector3F b) {
         FloatF dx = a.x - b.x;
         FloatF dy = a.y - b.y;

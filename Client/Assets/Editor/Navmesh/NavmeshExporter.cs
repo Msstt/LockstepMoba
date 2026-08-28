@@ -28,8 +28,18 @@ namespace Editor.Navmesh {
                 if (data == null) {
                     continue;
                 }
+                var serializedData = new SerializedObject(data);
+                var agentTypeIdProperty = serializedData.FindProperty("m_AgentTypeID");
+                if (agentTypeIdProperty == null) {
+                    Debug.LogError($"无法读取 NavMeshData 的 Agent Type ID: {file}");
+                    continue;
+                }
+                var settings = NavMesh.GetSettingsByID(agentTypeIdProperty.intValue);
+                if (settings.agentTypeID == -1) {
+                    Debug.LogError($"找不到 Agent Type 配置: {agentTypeIdProperty.intValue}, NavMeshData: {file}");
+                    continue;
+                }
                 var instance = NavMesh.AddNavMeshData(data);
-                var settings = NavMesh.GetSettingsByID(int.Parse(Path.GetFileNameWithoutExtension(file)));
                 surfaces[settings.agentRadius.ToFloatF()] = ExportNavmeshData();
                 NavMesh.RemoveNavMeshData(instance);
             }

@@ -8,7 +8,7 @@ namespace Combat.Actor {
             public PosByPath(MoveCom com) : base(com) { }
 
             public override void Enter() {
-                if (Vector3F.Distance(Actor.Pos, com.TargetPos) < 1) { // TODO radius
+                if (Vector3F.DistanceXZ(Actor.Pos, com.TargetPos) <= Actor.Stats.Radius) {
                     Finish();
                     return;
                 }
@@ -20,7 +20,7 @@ namespace Combat.Actor {
             public override void Update(int frame) {
                 FloatF remDis = Actor.Stats.MoveSpeed * GameMgr.Instance.DeltaTime;
                 // while (remDis > 0) {
-                if (Vector3F.Distance(Actor.Pos, com.TargetPos) <= Actor.Stats.Radius) {
+                if (Vector3F.DistanceXZ(Actor.Pos, com.TargetPos) <= Actor.Stats.Radius) {
                     Finish();
                     return;
                 }
@@ -35,7 +35,7 @@ namespace Combat.Actor {
                     nextMove = ObstacleAvoidUtils.GetNextMove(Actor, nextMove.Value);
                     Actor.SetPos(Actor.Pos + nextMove.Value);
 
-                    if (Vector3F.Distance(Actor.Pos, com.Path[index]) <= Actor.Stats.Radius) {
+                    if (Vector3F.DistanceXZ(Actor.Pos, com.Path[index]) <= Actor.Stats.Radius) {
                         index++;
                     }
                 }
@@ -53,13 +53,13 @@ namespace Combat.Actor {
 
             public override void Exit() { }
             
-            public override Vector3F? NextExpectMove {
+            public override Vector3F NextExpectMove {
                 get {
                     if (index >= com.Path.Count) {
-                        return null;
+                        return Vector3F.zero;
                     }
                     FloatF remDis = Actor.Stats.MoveSpeed * GameMgr.Instance.DeltaTime;
-                    FloatF dis = Vector3F.Distance(Actor.Pos, com.Path[index]);
+                    FloatF dis = Vector3F.DistanceXZ(Actor.Pos, com.Path[index]);
                     Actor.SetDir(com.Path[index] - Actor.Pos);
                     if (remDis >= dis) {
                         return com.Path[index] - Actor.Pos;

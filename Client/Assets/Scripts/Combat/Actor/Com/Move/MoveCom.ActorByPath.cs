@@ -17,32 +17,31 @@ namespace Combat.Actor {
 
             public override void Update(int frame) {
                 FloatF remDis = Actor.Stats.MoveSpeed * GameMgr.Instance.DeltaTime;
-                while (remDis > 0) {
-                    if (CheckIsReach()) {
-                        return;
-                    }
+                // while (remDis > 0) {
+                if (CheckIsReach()) {
+                    return;
+                }
 
-                    if (index >= com.Path.Count) {
-                        index = 0;
-                        CalcPath();
-                    }
+                if (index >= com.Path.Count) {
+                    Fail();
+                    return;
+                }
 
-                    if (index >= com.Path.Count) {
-                        Fail();
-                        return;
-                    }
+                Vector3F? nextMove = NextExpectMove;
+                if (nextMove.HasValue) {
+                    nextMove = ObstacleAvoidUtils.GetNextMove(Actor, nextMove.Value);
+                    Actor.SetPos(Actor.Pos + nextMove.Value);
 
-                    FloatF dis = Vector3F.Distance(Actor.Pos, com.Path[index]);
-                    Actor.SetDir(com.Path[index] - Actor.Pos);
-                    if (remDis >= dis) {
-                        Actor.SetPos(com.Path[index]);
+                    if (Vector3F.DistanceXZ(Actor.Pos, com.Path[index]) <= Actor.Stats.Radius) {
                         index++;
-                        remDis -= dis;
-                    } else {
-                        Actor.SetPos(Actor.Pos + (com.Path[index] - Actor.Pos) * (remDis / dis));
-                        remDis = 0;
                     }
                 }
+                
+                if (index >= com.Path.Count) {
+                    index = 0;
+                    CalcPath();
+                }
+                // }
 
                 // if (frame - lastEventFrame > GameMgr.Instance.FramePerSecond) {
                     // Actor.Event.OnChangePos.Send();
@@ -73,6 +72,22 @@ namespace Combat.Actor {
                 }
 
                 return false;
+            }
+            
+            public override Vector3F NextExpectMove {
+                get {
+                    if (index >= com.Path.Count) {
+                        return Vector3F.zero;
+                    }
+                    FloatF remDis = Actor.Stats.MoveSpeed * GameMgr.Instance.DeltaTime;
+                    FloatF dis = Vector3F.DistanceXZ(Actor.Pos, com.Path[index]);
+                    Actor.SetDir(com.Path[index] - Actor.Pos);
+                    if (remDis >= dis) {
+                        return com.Path[index] - Actor.Pos;
+                    } else {
+                        return (com.Path[index] - Actor.Pos) * (remDis / dis);
+                    }
+                }
             }
         }
     }

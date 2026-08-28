@@ -97,7 +97,7 @@ namespace Combat.Actor {
         }
 
         private void CalcPath(Vector3F pos, bool force = true) {
-            NavmeshUtils.FindPath(Actor.Pos, pos, (path) => { // TODO radius
+            NavmeshUtils.FindPath(Actor.Pos, pos, (path) => {
                 // for (int i = 0; i < path.Count - 1; i++) {
                 //     DebugUtils.DrawLine(path[i], path[i + 1]);
                 // }
@@ -135,10 +135,10 @@ namespace Combat.Actor {
             typeToStatus[curType].Enter();
         }
 
-        public Vector3F? NextExpectMove {
+        public Vector3F NextExpectMove {
             get {
                 if (curType == MoveType.None) {
-                    return null;
+                    return Vector3F.zero;
                 }
                 return typeToStatus[curType].NextExpectMove;
             }

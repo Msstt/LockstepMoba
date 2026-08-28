@@ -52,7 +52,7 @@ namespace Combat.BehaviourMachine {
         }
 
         private void UpdateIndex() {
-            if (Vector3F.Distance(Actor.Pos, wave.Pos[index].position) < eps) {
+            if (Vector3F.DistanceXZ(Actor.Pos, wave.Pos[index].position) <= Actor.Stats.Radius + eps) {
                 index++;
                 return;
             }

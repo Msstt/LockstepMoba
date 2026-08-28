@@ -53,11 +53,11 @@ MonoBehaviour:
         value: 1570796
     - position:
         x:
-          value: 581250061
+          value: 595750000
         y:
           value: 125000061
         z:
-          value: 1251500122
+          value: 1265250000
       direction:
         value: 1570796
     - position:
@@ -82,11 +82,11 @@ MonoBehaviour:
         value: 1570796
     - position:
         x:
-          value: 546500061
+          value: 530000000
         y:
           value: 125000061
         z:
-          value: 1202250122
+          value: 1184750000
       direction:
         value: 1570796
     - position:
@@ -116,7 +116,7 @@ MonoBehaviour:
       z:
         value: 1337150024
     direction:
-      value: 1570770
+      value: 1570796
   redTurretPos:
   - position:
       x:
@@ -126,4 +126,4 @@ MonoBehaviour:
       z:
         value: 1151000122
     direction:
-      value: 1570770
+      value: 1570796

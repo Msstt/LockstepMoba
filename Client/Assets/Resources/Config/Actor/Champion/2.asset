@@ -42,6 +42,8 @@ MonoBehaviour:
     value: 0
   moveSpeed:
     value: 34500000
+  radius:
+    value: 5000000
   prefabName: Role/Champion/Lee Sin/Prefab
   icon: Role/Champion/Lee Sin/Icon/icon
   skill:

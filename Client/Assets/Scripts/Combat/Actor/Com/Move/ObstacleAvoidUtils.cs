@@ -1,7 +1,11 @@
+// 已知问题：
+// 1. 动态障碍和静态障碍形成的死角表现不佳
+
 using System.Collections.Generic;
 
 namespace Combat.Actor {
     public static class ObstacleAvoidUtils {
+        private static bool Disable = false;
         private static readonly FloatF DetectRadius = 50;
         private static readonly FloatF PredictFrameCount = 8;
 
@@ -39,6 +43,10 @@ namespace Combat.Actor {
         };
 
         public static Vector3F GetNextMove(Actor actor, Vector3F expectMove) {
+            if (Disable) {
+                return expectMove;
+            }
+            
             if (actor == null || expectMove == Vector3F.zero) {
                 return Vector3F.zero;
             }
