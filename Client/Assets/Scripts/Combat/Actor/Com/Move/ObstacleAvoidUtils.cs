@@ -54,16 +54,16 @@ namespace Combat.Actor {
 
                 Actor obstacleActor = ActorUtils.GetActor(uid);
                 MoveCom obstacleMoveCom = obstacleActor?.GetComponent<MoveCom>();
-                if (obstacleMoveCom == null || !obstacleMoveCom.NextExpectMove.HasValue) {
-                    continue;
+                Vector3F? nextMove = obstacleMoveCom?.NextExpectMove;
+                if (nextMove.HasValue) {
+                    obstacles.Add(new Obstacle(obstacleActor, nextMove.Value));
                 }
-                obstacles.Add(new Obstacle(obstacleActor, obstacleMoveCom.NextExpectMove.Value));
             }
 
             foreach (Candidate candidate in Candidates) {
                 Vector3F move = Rotate(expectMove, candidate.Cos, candidate.Sin);
                 move = LimitInSurface(actor, move);
-                if (move != Vector3F.zero && IsSafe(actor, move, obstacles)) {
+                if (move != Vector3F.zero && IsSafe(actor, expectMove, move, obstacles)) {
                     return move;
                 }
             }
@@ -88,24 +88,29 @@ namespace Combat.Actor {
             return Vector3F.zero;
         }
 
-        private static bool IsSafe(Actor actor, Vector3F move, List<Obstacle> obstacles) {
+        private static bool IsSafe(Actor actor, Vector3F expectMove, Vector3F candidateMove,
+            List<Obstacle> obstacles) {
             foreach (Obstacle obstacle in obstacles) {
                 Vector3F offset = actor.Pos - obstacle.Actor.Pos;
-                Vector3F relativeMove = move - obstacle.ExpectMove;
                 FloatF radius = actor.Stats.Radius.Value + obstacle.Actor.Stats.Radius.Value;
                 FloatF radius2 = radius * radius;
                 FloatF currentDistance2 = Vector3F.Dot(offset, offset);
 
+                // RVO 假设双方各承担一半速度修正。以双方原速度的平均值为锥顶，
+                // 将当前候选速度映射成双方完成对称修正后的相对位移。
+                Vector3F rvoApex = (expectMove + obstacle.ExpectMove) / FloatF.two;
+                Vector3F reciprocalRelativeMove = (candidateMove - rvoApex) * FloatF.two;
+
                 // 已经重叠时只允许能扩大间距的移动，避免双方原地锁死。
                 if (currentDistance2 < radius2) {
-                    Vector3F nextOffset = offset + relativeMove;
+                    Vector3F nextOffset = offset + reciprocalRelativeMove;
                     if (Vector3F.Dot(nextOffset, nextOffset) <= currentDistance2) {
                         return false;
                     }
                     continue;
                 }
 
-                Vector3F predictMove = relativeMove * PredictFrameCount;
+                Vector3F predictMove = reciprocalRelativeMove * PredictFrameCount;
                 FloatF predictLength2 = Vector3F.Dot(predictMove, predictMove);
                 if (predictLength2 <= FloatF.eps) {
                     continue;
