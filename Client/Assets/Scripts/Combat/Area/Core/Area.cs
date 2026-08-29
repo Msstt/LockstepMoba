@@ -93,7 +93,11 @@ namespace Combat.Area {
                 raycastResult[i] = null;
             }
             
-            ExecuteEffect((effect) => effect.OnUpdate());
+            ExecuteEffect((effect) => {
+                Profiler.Instance.BeginAreaEffectUpdate(effect.GetType());
+                effect.OnUpdate();
+                Profiler.Instance.EndAreaEffectUpdate(effect.GetType());
+            });
 
 #if UNITY_EDITOR
             if (GameMgr.Instance.GMTool.ShowDebugMode) {

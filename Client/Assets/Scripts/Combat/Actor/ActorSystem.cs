@@ -43,7 +43,9 @@ namespace Combat.Actor {
                     continue;
                 }
                 foreach (var (_, com) in coms) {
+                    Profiler.Instance.BeginActorComUpdate(com.GetType());
                     com.Update(frame);
+                    Profiler.Instance.EndActorComUpdate(com.GetType());
                 }
             }
         }

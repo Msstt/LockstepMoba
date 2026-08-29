@@ -1227,7 +1227,7 @@ MonoBehaviour:
   IsLocalDebug: 1
   ShowDebugMode: 0
   PrintSkillTree: 0
-  DisableFog: 1
+  DisableFog: 0
   DisableMinion: 0
   DisableTurret: 0
 --- !u!114 &854225744
@@ -1407,6 +1407,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 54712827510801300, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 116775664119305883, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223432186233331004, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_Name
+      value: TestConfig
+      objectReference: {fileID: 0}
     - target: {fileID: 625123939767696657, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_Name
       value: Map
@@ -1415,6 +1427,34 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 212588825}
+    - target: {fileID: 860292649708299968, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163724578452323966, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465673790880244989, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1674102227921768804, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2133362505522742770, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: DrawDebugTriangle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662665081684943250, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2987348575707063166, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 96e7b83a81f624e1fa7ad8b14933bbcb, type: 2}
     - target: {fileID: 3004068146920950643, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_originalMesh
       value: 
@@ -1423,6 +1463,14 @@ PrefabInstance:
       propertyPath: m_simplifiedMesh
       value: 
       objectReference: {fileID: 212588825}
+    - target: {fileID: 3702246372538125861, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260924493830193775, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
+      propertyPath: m_Name
+      value: Config
+      objectReference: {fileID: 0}
     - target: {fileID: 6508610243314606421, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1527,14 +1575,6 @@ PrefabInstance:
     - target: {fileID: 1551596172009936390, guid: 7434a2deef54f4bd089f80686d316b32, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8078769071177885980, guid: 7434a2deef54f4bd089f80686d316b32, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -74.362976
-      objectReference: {fileID: 0}
-    - target: {fileID: 8078769071177885980, guid: 7434a2deef54f4bd089f80686d316b32, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -28.885986
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

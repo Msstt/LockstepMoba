@@ -2,15 +2,11 @@ using System;
 using System.Collections.Generic;
 using Framework;
 using Network;
-using Unity.Profiling;
 using UnityEngine;
-using UnityEngine.Profiling;
 
 public class GameMgr : Singleton<GameMgr> {
     private Dictionary<Type, ISystem> systems = new Dictionary<Type, ISystem>();
     private List<ISystem> systemList = new List<ISystem>();
-    private Dictionary<ISystem, ProfilerMarker> updateMarkers = new Dictionary<ISystem, ProfilerMarker>();
-    private Dictionary<ISystem, ProfilerMarker> frameUpdateMarkers = new Dictionary<ISystem, ProfilerMarker>();
 
     private IFrameDriver driver = null;
     private bool frameHasStarted = false;
@@ -84,29 +80,29 @@ public class GameMgr : Singleton<GameMgr> {
         if (frameHasStarted && driver != null && driver.FrameReady()) {
             FrameUpdate();
         }
-        Profiler.BeginSample("GameMgr.Update");
+        Profiler.Instance.BeginUpdate();
         foreach (var system in systemList) {
             if (system is IUpdateSystem updateSystem) {
-                using (updateMarkers[system].Auto()) {
-                    updateSystem.Update();
-                }
+                Profiler.Instance.BeginUpdateSystem(updateSystem.GetType());
+                updateSystem.Update();
+                Profiler.Instance.EndUpdateSystem(updateSystem.GetType());
             }
         }
-        Profiler.EndSample();
+        Profiler.Instance.EndUpdate();
         UpdateLocalDebug();
     }
     
     public void FrameUpdate() {
-        Profiler.BeginSample("GameMgr.FrameUpdate");
+        Profiler.Instance.BeginFrameUpdate();
         foreach (var system in systemList) {
             if (system is IFrameUpdateSystem frameUpdateSystem) {
-                using (frameUpdateMarkers[system].Auto()) {
-                    frameUpdateSystem.FrameUpdate(Frame);
-                }
+                Profiler.Instance.BeginFrameUpdateSystem(frameUpdateSystem.GetType());
+                frameUpdateSystem.FrameUpdate(Frame);
+                Profiler.Instance.EndFrameUpdateSystem(frameUpdateSystem.GetType());
             }
         }
         AsyncMgr.Instance.Update(Frame);
-        Profiler.EndSample();
+        Profiler.Instance.EndFrameUpdate();
     }
 
     public void Quit() {
@@ -123,13 +119,6 @@ public class GameMgr : Singleton<GameMgr> {
         }
         systems[type] = system;
         systemList.Add(system);
-        var systemName = system.GetType().FullName;
-        if (system is IUpdateSystem) {
-            updateMarkers.Add(system, new ProfilerMarker($"GameMgr.Update.{systemName}"));
-        }
-        if (system is IFrameUpdateSystem) {
-            frameUpdateMarkers.Add(system, new ProfilerMarker($"GameMgr.FrameUpdate.{systemName}"));
-        }
         if (system is IFrameDriver) {
             if (driver != null) {
                 Debug.LogError("[GameMgr!!!] Frame driver already registered");

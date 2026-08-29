@@ -103,7 +103,9 @@ namespace Combat.Actor {
         
         public void Update(int frame) {
             foreach (var com in comList) {
+                Profiler.Instance.BeginActorComUpdate(com.GetType());
                 com.Update(frame);
+                Profiler.Instance.EndActorComUpdate(com.GetType());
             }
         }
         
@@ -134,7 +136,9 @@ namespace Combat.Actor {
             }
             Event.OnChangePos.Send(pos);
 
-            debugPoint.transform.position = pos.ToVector3();
+            if (debugPoint) {
+                debugPoint.transform.position = pos.ToVector3();
+            }
         }
         
         public void SetDir(Vector3F dir, bool updateGo = false) {

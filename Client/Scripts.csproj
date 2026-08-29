@@ -149,6 +149,7 @@
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Stats/Damage.cs" />
     <Compile Include="Assets/Scripts/Data/Core/IData.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Node/Area/CreateAreaToTargetUid.cs" />
+    <Compile Include="Assets/Scripts/Framework/Profiler/Profiler.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/EffectDefine.cs" />
     <Compile Include="Assets/Scripts/Input/InputSystem.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Connection.cs" />

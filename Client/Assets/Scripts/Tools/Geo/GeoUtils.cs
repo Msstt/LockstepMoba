@@ -10,9 +10,17 @@ public class GeoUtils {
         if (FloatF.Max(a.x, b.x) < FloatF.Min(c.x, d.x)) return false;
         if (FloatF.Max(a.z, b.z) < FloatF.Min(c.z, d.z)) return false;
         a.y = b.y = c.y = d.y = 0;
-        if (Vector3F.Cross(c - a, d - a).y * Vector3F.Cross(c - b, d - b).y > 0) return false;
-        if (Vector3F.Cross(a - c, b - c).y * Vector3F.Cross(a - d, b - d).y > 0) return false;
+        FloatF cross1 = Vector3F.Cross(c - a, d - a).y;
+        FloatF cross2 = Vector3F.Cross(c - b, d - b).y;
+        if (IsSameNonZeroSign(cross1, cross2)) return false;
+        FloatF cross3 = Vector3F.Cross(a - c, b - c).y;
+        FloatF cross4 = Vector3F.Cross(a - d, b - d).y;
+        if (IsSameNonZeroSign(cross3, cross4)) return false;
         return true;
+    }
+
+    private static bool IsSameNonZeroSign(FloatF a, FloatF b) {
+        return (a > 0 && b > 0) || (a < 0 && b < 0);
     }
     
     // 线段交点 TODO：平行还没处理
