@@ -114,6 +114,7 @@
     <Compile Include="Assets/Scripts/Input/Command/Move.cs" />
     <Compile Include="Assets/Scripts/Framework/Tools/TypeUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/Move/MoveCom.PosByPath.cs" />
+    <Compile Include="Assets/Scripts/Framework/Tools/ReleaseToken.cs" />
     <Compile Include="Assets/Scripts/Combat/Spawn/SpawnSystem.cs" />
     <Compile Include="Assets/Scripts/Combat/Fog/VisionBlockerMap.cs" />
     <Compile Include="Assets/Scripts/Input/IInputSystem.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Assets/Scripts/Combat/BehaviourMachine/Define.cs" />
     <Compile Include="Assets/Scripts/Navmesh/Core/Layer.cs" />
     <Compile Include="Assets/Scripts/Combat/Skill/Core/Context.cs" />
+    <Compile Include="Assets/Scripts/Combat/Fog/IVisionHandle.cs" />
     <Compile Include="Assets/Scripts/Combat/Equipment/Config/EquipmentConfig.cs" />
     <Compile Include="Assets/Scripts/Tools/Debug/RandomColor.cs" />
     <Compile Include="Assets/Scripts/Combat/Buff/Effect/Stats/_ChangeStats.cs" />
@@ -160,7 +162,6 @@
     <Compile Include="Assets/Scripts/Input/Command/None.cs" />
     <Compile Include="Assets/Scripts/UI/UIDef.cs" />
     <Compile Include="Assets/Scripts/Network/Message/MessageDef.cs" />
-    <Compile Include="Assets/Scripts/Framework/Tools/CancelToken.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/ActorSystem.cs" />
     <Compile Include="Assets/Scripts/UI/Com/UIBarCom.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Config/Champion.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Assets/Scripts/Combat/Skill/SkillUtils.cs" />
     <Compile Include="Assets/Scripts/Combat/Area/Shape/Rect.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/VisionCom.cs" />
+    <Compile Include="Assets/Scripts/Combat/Fog/VisionHandle.cs" />
     <Compile Include="Assets/Scripts/Combat/Level/Level.cs" />
     <Compile Include="Assets/Scripts/Combat/Actor/Com/ControlCom.cs" />
     <Compile Include="Assets/Scripts/Framework/UI/UISystem.cs" />

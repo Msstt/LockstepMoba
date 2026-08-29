@@ -3,14 +3,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Framework;
 
 namespace Combat.Fog {
     public abstract class Vision {
         private VisionBlockerMap blockerMap;
 
-        private int[][] visionData;
+        protected int[][] visionData;
         protected int visionCount = 0;
-        
+        protected bool dirtyFlag = false;
+        public bool DirtyFlag => dirtyFlag;
+
         public int VisionCount => visionCount;
 
         protected Vision(VisionBlockerMap blockerMap) {
@@ -19,23 +22,33 @@ namespace Combat.Fog {
             ArrayUtils.InitArray(ref visionData, FogConfig.VisionCellCount, FogConfig.VisionCellCount);
             ArrayUtils.InitArray(ref visitedCell, 2 * FogConfig.VisionCellCount, 2 * FogConfig.VisionCellCount);
         }
+        
+        public IVisionHandle GetVisionHandle(Vector3F position, FloatF rowRadius) {
+            return new VisionHandle(this, position, rowRadius);
+        }
 
-        public Action AddVision(Vector3F position, FloatF rowRadius) {
+        public ReleaseToken AddVision(Vector3F position, FloatF rowRadius) {
             int radius = (int)(rowRadius / blockerMap.CellSize.x);
             if (radius < 1) {
-                return () => {};
+                return new ReleaseToken();
             }
             var cellList = GetCell(position, radius);
             foreach (var (x, y) in cellList) {
-                visionData[x][y] += 1;
+                UpdateVisionData(x, y, 1);
             }
             visionCount += 1;
-            return () => {
+            return new ReleaseToken(() => {
                 foreach (var (x, y) in cellList) {
-                    visionData[x][y] -= 1;
+                    UpdateVisionData(x, y, -1);
                 }
                 visionCount -= 1;
-            };
+            });
+        }
+
+        protected abstract void UpdateVisionData(int x, int y, int delta);
+        
+        public void ClearDirtyFlag() {
+            dirtyFlag = false;
         }
 
         public bool IsVisible(int x, int y) {
@@ -161,7 +174,7 @@ namespace Combat.Fog {
             return cellList;
         }
         
-        private (int, int) GetCellIndex(Vector3F position) {
+        public (int, int) GetCellIndex(Vector3F position) {
             position += blockerMap.CellSize / FloatF.two;
             int x = (int)((position.x - blockerMap.Start.x) / blockerMap.CellSize.x);
             int y = (int)((position.z - blockerMap.Start.z) / blockerMap.CellSize.z);
@@ -175,11 +188,24 @@ namespace Combat.Fog {
         public OrVision(VisionBlockerMap blockerMap) : base(blockerMap) {}
 
         protected override bool IsVisible(int data) => data > 0;
+        
+        protected override void UpdateVisionData(int x, int y, int delta) {
+            bool lastVisible = IsVisible(x, y);
+            visionData[x][y] += delta;
+            if (lastVisible != IsVisible(x, y)) {
+                dirtyFlag = true;
+            }
+        }
     }
     
     public class AndVision : Vision {
         public AndVision(VisionBlockerMap blockerMap) : base(blockerMap) {}
 
         protected override bool IsVisible(int data) => data >= visionCount;
+        
+        protected override void UpdateVisionData(int x, int y, int delta) {
+            visionData[x][y] += delta;
+            dirtyFlag = true;
+        }
     }
 }

@@ -137,7 +137,12 @@ public class GameMgr : Singleton<GameMgr> {
         return null;
     }
 
+    private static int StatusCodeInterval = 10;
+    
     public int GetStatusCode() {
+        if (Frame % StatusCodeInterval != 0) {
+            return 0;
+        }
         int code = StatusCode.Seed;
         foreach (var system in systemList) {
             if (system is ICheckableSystem checkable) {

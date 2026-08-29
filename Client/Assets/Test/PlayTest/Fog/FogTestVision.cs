@@ -1,15 +1,20 @@
-using System;
 using Combat.Fog;
 using UnityEngine;
 
 public class FogTestVision : MonoBehaviour {
-    private Action removeFogHandle;
+    private IVisionHandle handle;
 
     [Header("半径")]
     public FloatF radius;
     
     public void Update() {
-        removeFogHandle?.Invoke();
-        removeFogHandle = FogUtils.AddVision(VisionType.Self, transform.position.ToVector3F(), radius);
+        if (handle == null) {
+            handle = FogUtils.AddVision(VisionType.Self, transform.position.ToVector3F(), radius);
+        }
+        handle.UpdatePos(transform.position.ToVector3F());
+    }
+    
+    public void OnDestroy() {
+        handle.Dispose();
     }
 }

@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7426c542eaa4438da8f5f03f7ac4bc8c, type: 3}
+  m_Name: TestMap
+  m_EditorClassIdentifier: 
+  revivePos:
+  - position:
+      x:
+        value: 600000061
+      y:
+        value: 125000061
+      z:
+        value: 1360000122
+    direction:
+      value: -3141592
+  - position:
+      x:
+        value: 500000030
+      y:
+        value: 125000061
+      z:
+        value: 1360000122
+    direction:
+      value: 0
+  - position:
+      x:
+        value: 550000061
+      y:
+        value: 125000061
+      z:
+        value: 1400000122
+    direction:
+      value: 0
+  blueMinionWavePos:
+  - Pos:
+    - position:
+        x:
+          value: 652250061
+        y:
+          value: 125000061
+        z:
+          value: 1326250000
+      direction:
+        value: 1570770
+    - position:
+        x:
+          value: 595750000
+        y:
+          value: 125000061
+        z:
+          value: 1265250000
+      direction:
+        value: 1570770
+    - position:
+        x:
+          value: 464250030
+        y:
+          value: 125000061
+        z:
+          value: 1131750000
+      direction:
+        value: 1570770
+  redMinionWavePos:
+  - Pos:
+    - position:
+        x:
+          value: 464250030
+        y:
+          value: 125000061
+        z:
+          value: 1131750000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 530000000
+        y:
+          value: 125000061
+        z:
+          value: 1184750000
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 600200012
+        y:
+          value: 125000061
+        z:
+          value: 1265100097
+      direction:
+        value: 1570796
+    - position:
+        x:
+          value: 652250061
+        y:
+          value: 125000061
+        z:
+          value: 1326250000
+      direction:
+        value: 1570796
+  blueTurretPos:
+  - position:
+      x:
+        value: 696925048
+      y:
+        value: 125000061
+      z:
+        value: 1337150024
+    direction:
+      value: 1570796
+  redTurretPos:
+  - position:
+      x:
+        value: 460750030
+      y:
+        value: 129750000
+      z:
+        value: 1134000000
+    direction:
+      value: 1570796

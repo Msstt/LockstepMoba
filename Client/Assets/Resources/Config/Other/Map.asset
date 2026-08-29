@@ -113,7 +113,7 @@ MonoBehaviour:
         z:
           value: 1427500122
       direction:
-        value: 1570796
+        value: 1570770
     - position:
         x:
           value: 565000061
@@ -122,7 +122,7 @@ MonoBehaviour:
         z:
           value: 1460000122
       direction:
-        value: 1570796
+        value: 1570770
     - position:
         x:
           value: 375000030
@@ -131,7 +131,7 @@ MonoBehaviour:
         z:
           value: 1445000122
       direction:
-        value: 1570796
+        value: 1570770
     - position:
         x:
           value: 103500007
@@ -140,7 +140,7 @@ MonoBehaviour:
         z:
           value: 1458750122
       direction:
-        value: 1570796
+        value: 1570770
     - position:
         x:
           value: -252500015
@@ -149,7 +149,7 @@ MonoBehaviour:
         z:
           value: 1424250122
       direction:
-        value: 1570796
+        value: 1570770
     - position:
         x:
           value: -428500030
@@ -158,7 +158,7 @@ MonoBehaviour:
         z:
           value: 1314500000
       direction:
-        value: 1570796
+        value: 1570770
     - position:
         x:
           value: -532500061
@@ -167,7 +167,7 @@ MonoBehaviour:
         z:
           value: 1157500122
       direction:
-        value: 1570796
+        value: 1570770
     - position:
         x:
           value: -540000061
@@ -176,7 +176,7 @@ MonoBehaviour:
         z:
           value: 812500061
       direction:
-        value: 1570796
+        value: 1570770
     - position:
         x:
           value: -525000000
@@ -185,7 +185,7 @@ MonoBehaviour:
         z:
           value: 552500061
       direction:
-        value: 1570796
+        value: 1570770
     - position:
         x:
           value: -531000061
@@ -194,7 +194,7 @@ MonoBehaviour:
         z:
           value: 340000030
       direction:
-        value: 1570796
+        value: 1570770
     - position:
         x:
           value: -512500000
@@ -203,7 +203,7 @@ MonoBehaviour:
         z:
           value: 275500030
       direction:
-        value: 1570796
+        value: 1570770
   redMinionWavePos: []
   blueTurretPos:
   - position:

@@ -58,8 +58,8 @@ namespace Combat.Fog {
             lastVisionType = CurVisionType;
         }
         
-        public Action AddVision(VisionType type, Vector3F position, FloatF radius) {
-            return vision[(int)type].AddVision(position, radius);
+        public IVisionHandle AddVision(VisionType type, Vector3F position, FloatF radius) {
+            return vision[(int)type].GetVisionHandle(position, radius);
         }
 
         public bool IsVisible(Vector3F position) { 
@@ -155,6 +155,11 @@ namespace Combat.Fog {
         }
 
         private void UpdateFog() {
+            if (lastVisionType == CurVisionType && !vision[(int)CurVisionType].DirtyFlag) {
+                return;
+            }
+            vision[(int)CurVisionType].ClearDirtyFlag();
+            
             for (int x = 0; x < SourceSize; x++) {
                 for (int y = 0; y < SourceSize; y++) {
                     byte mask = IsVisible(x, y) ? (byte)255 : (byte)0;

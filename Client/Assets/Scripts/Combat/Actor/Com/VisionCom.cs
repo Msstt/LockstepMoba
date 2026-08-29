@@ -1,10 +1,9 @@
-using System;
 using Combat.Fog;
 
 namespace Combat.Actor {
     public class VisionCom : Com {
-        private Action cancelHandleGlobal;
-        private Action cancelHandleSelf;
+        private IVisionHandle cancelHandleGlobal;
+        private IVisionHandle cancelHandleSelf;
         
         public override void Awake() {
             cancelHandleGlobal = FogUtils.AddVision(VisionType.Global, Actor.Pos, VisionRadius);
@@ -17,16 +16,14 @@ namespace Combat.Actor {
 
         public override void Destroy() {
             Actor.Event.OnChangePos.UnRegister(OnChangePos);
+            
+            cancelHandleGlobal?.Dispose();
+            cancelHandleSelf?.Dispose();
         }
 
         private void OnChangePos(Vector3F pos) {
-            cancelHandleGlobal?.Invoke();
-            cancelHandleSelf?.Invoke();
-            
-            cancelHandleGlobal = FogUtils.AddVision(VisionType.Global, Actor.Pos, VisionRadius);
-            if (ActorUtils.IsSameCamp(Actor.Uid)) {
-                cancelHandleSelf = FogUtils.AddVision(VisionType.Self, Actor.Pos, VisionRadius);
-            }
+            cancelHandleGlobal?.UpdatePos(pos);
+            cancelHandleSelf?.UpdatePos(pos);
         }
 
         private FloatF VisionRadius {

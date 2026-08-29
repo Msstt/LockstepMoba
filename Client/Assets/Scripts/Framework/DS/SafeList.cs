@@ -14,7 +14,8 @@ namespace Framework {
         private Dictionary<T, Item> dict = new Dictionary<T, Item>();
         private Queue<Item> q1 = new Queue<Item>();
         private Queue<Item> q2 = new Queue<Item>();
-        private bool isIterating = false;
+        private int iterationId;
+        private int activeIterationId;
         
         public SafeList() { }
         
@@ -44,25 +45,54 @@ namespace Framework {
         }
 
         public Enumerator GetEnumerator() {
-            if (isIterating) {
+            if (activeIterationId != 0) {
                 throw new InvalidOperationException("Cannot iterate multiple times at the same time");
             }
-            isIterating = true;
-            return new Enumerator(this);
+            unchecked {
+                iterationId++;
+                if (iterationId == 0) {
+                    iterationId++;
+                }
+            }
+            activeIterationId = iterationId;
+            return new Enumerator(this, activeIterationId);
+        }
+
+        private void EndIteration(int id) {
+            if (activeIterationId != id) {
+                return;
+            }
+            while (q1.Any()) {
+                Item item = q1.Dequeue();
+                if (item.isDeleted) {
+                    dict.Remove(item.value);
+                } else {
+                    q2.Enqueue(item);
+                }
+            }
+            (q1, q2) = (q2, q1);
+            activeIterationId = 0;
         }
         
-        public struct Enumerator {
+        public struct Enumerator : IDisposable {
             private readonly SafeList<T> self;
+            private readonly int iterationId;
             private int count;
+            private bool isDisposed;
             public T Current { get; private set; }
 
-            internal Enumerator(SafeList<T> self) {
+            internal Enumerator(SafeList<T> self, int iterationId) {
                 this.self = self;
+                this.iterationId = iterationId;
                 count = 0;
+                isDisposed = false;
                 Current = default;
             }
             
             public bool MoveNext() {
+                if (isDisposed || self.activeIterationId != iterationId) {
+                    return false;
+                }
                 while (self.q1.Any()) {
                     if (count++ >= 1000000) {
                         throw new InvalidOperationException("Too many modifications during enumeration");
@@ -76,9 +106,16 @@ namespace Framework {
                         return true;
                     }
                 }
-                (self.q1, self.q2) = (self.q2, self.q1);
-                self.isIterating = false;
+                Dispose();
                 return false;
+            }
+
+            public void Dispose() {
+                if (isDisposed) {
+                    return;
+                }
+                isDisposed = true;
+                self.EndIteration(iterationId);
             }
         }
         
