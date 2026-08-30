@@ -23,7 +23,7 @@ namespace Combat.BehaviourMachine {
         public override bool Evaluate() {
             if (target != null) {
                 // 超过距离后失去仇恨
-                if (Vector3F.Distance(Actor.Pos, target.Pos) > chaseDistance) {
+                if (Vector3F.DistanceXZ(Actor.Pos, target.Pos) > chaseDistance) {
                     return false;
                 }
                 
@@ -36,8 +36,9 @@ namespace Combat.BehaviourMachine {
                 foreach (int uid in uids) {
                     Actor.Actor actor = ActorUtils.GetActor(uid);
                     if (actor != null && actor.Camp != Actor.Camp) {
-                        if (Vector3F.Distance(Actor.Pos, actor.Pos) < distance) {
-                            distance = Vector3F.Distance(Actor.Pos, actor.Pos);
+                        FloatF distanceXZ = Vector3F.DistanceXZ(Actor.Pos, actor.Pos);
+                        if (distanceXZ < distance) {
+                            distance = distanceXZ;
                             StartChase(actor);
                         }
                     }

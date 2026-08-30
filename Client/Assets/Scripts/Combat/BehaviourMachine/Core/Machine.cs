@@ -39,7 +39,19 @@ namespace Combat.BehaviourMachine {
                 if (noPass) {
                     continue;
                 }
-                if (!behaviour.Evaluate()) {
+#if ENABLE_PROFILER
+                Type behaviourType = behaviour.GetType();
+                Framework.Profiler.Instance.BeginBehaviourEvaluate(behaviourType);
+                bool evaluateResult;
+                try {
+                    evaluateResult = behaviour.Evaluate();
+                } finally {
+                    Framework.Profiler.Instance.EndBehaviourEvaluate(behaviourType);
+                }
+#else
+                bool evaluateResult = behaviour.Evaluate();
+#endif
+                if (!evaluateResult) {
                     continue;
                 }
                 nextBehaviour = behaviour;
@@ -51,7 +63,19 @@ namespace Combat.BehaviourMachine {
                 nextBehaviour?.OnStart();
                 curBehaviour = nextBehaviour;
             }
-            curBehaviour?.Execute(frame);
+            if (curBehaviour != null) {
+#if ENABLE_PROFILER
+                Type behaviourType = curBehaviour.GetType();
+                Framework.Profiler.Instance.BeginBehaviourExecute(behaviourType);
+                try {
+                    curBehaviour.Execute(frame);
+                } finally {
+                    Framework.Profiler.Instance.EndBehaviourExecute(behaviourType);
+                }
+#else
+                curBehaviour.Execute(frame);
+#endif
+            }
         }
 
         public void Abort() {

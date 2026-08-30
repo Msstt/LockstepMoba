@@ -1409,7 +1409,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 54712827510801300, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 116775664119305883, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -1429,19 +1429,19 @@ PrefabInstance:
       objectReference: {fileID: 212588825}
     - target: {fileID: 860292649708299968, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1163724578452323966, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1465673790880244989, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1674102227921768804, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2133362505522742770, guid: a90da94a318e14295b2e02ce4390885b, type: 3}
       propertyPath: DrawDebugTriangle

@@ -12,6 +12,8 @@ namespace Framework {
         private readonly Dictionary<Type, ProfilerMarker> frameUpdateSystemMarkers = new Dictionary<Type, ProfilerMarker>();
         private readonly Dictionary<Type, ProfilerMarker> actorComUpdateMarkers = new Dictionary<Type, ProfilerMarker>();
         private readonly Dictionary<Type, ProfilerMarker> areaEffectUpdateMarkers = new Dictionary<Type, ProfilerMarker>();
+        private readonly Dictionary<Type, ProfilerMarker> behaviourEvaluateMarkers = new Dictionary<Type, ProfilerMarker>();
+        private readonly Dictionary<Type, ProfilerMarker> behaviourExecuteMarkers = new Dictionary<Type, ProfilerMarker>();
 
         [Conditional("ENABLE_PROFILER")]
         public void BeginUpdate() {
@@ -81,6 +83,26 @@ namespace Framework {
         [Conditional("ENABLE_PROFILER")]
         public void EndAreaEffectUpdate(Type type) {
             GetMarker(areaEffectUpdateMarkers, "Area.Effect.Update.", type).End();
+        }
+
+        [Conditional("ENABLE_PROFILER")]
+        public void BeginBehaviourEvaluate(Type type) {
+            GetMarker(behaviourEvaluateMarkers, "BM.Evaluate.", type).Begin();
+        }
+
+        [Conditional("ENABLE_PROFILER")]
+        public void EndBehaviourEvaluate(Type type) {
+            GetMarker(behaviourEvaluateMarkers, "BM.Evaluate.", type).End();
+        }
+
+        [Conditional("ENABLE_PROFILER")]
+        public void BeginBehaviourExecute(Type type) {
+            GetMarker(behaviourExecuteMarkers, "BM.Execute.", type).Begin();
+        }
+
+        [Conditional("ENABLE_PROFILER")]
+        public void EndBehaviourExecute(Type type) {
+            GetMarker(behaviourExecuteMarkers, "BM.Execute.", type).End();
         }
 
         private static ProfilerMarker GetMarker(Dictionary<Type, ProfilerMarker> markers, string prefix, Type type) {
