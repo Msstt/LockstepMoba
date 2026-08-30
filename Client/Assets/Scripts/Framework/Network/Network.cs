@@ -36,7 +36,7 @@ namespace Framework.Network {
             }
 #endif
             
-            Connect("127.0.0.1", 9980);
+            Connect(GameMgr.Instance.GMTool.ServerIP, GameMgr.Instance.GMTool.ServerPort);
             
             Send(MessageDef.frame_reconnect_c2s, new frame_reconnect_c2s {
                 Frame = 1,

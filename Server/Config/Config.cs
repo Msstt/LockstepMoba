@@ -2,9 +2,15 @@ using Framework;
 using Newtonsoft.Json;
 
 public class Config : Singleton<Config> {
-    private static readonly string ConfigFilePath = Directory.GetCurrentDirectory() + "/../../../Config/Config/";
+    private string ConfigFilePath { get; set; } = Path.GetFullPath(
+        Path.Combine(Directory.GetCurrentDirectory(), "../../../Config/Config"));
     
     public NetworkConfig Network { get; private set; }
+
+    public void OverrideConfigFilePath(string path) {
+        ConfigFilePath = Path.GetFullPath(path);
+        Console.WriteLine($"[Config] config path: {ConfigFilePath}");
+    }
 
     public bool ParseConfig() {
         if (!ParseNetworkConfig()) return false;
@@ -12,7 +18,7 @@ public class Config : Singleton<Config> {
     }
     
     private bool ParseNetworkConfig() {
-        Network = LoadFromFile<NetworkConfig>(ConfigFilePath + "network.json");
+        Network = LoadFromFile<NetworkConfig>(Path.Combine(ConfigFilePath, "network.json"));
         if (Network == null) {
             return false;
         }

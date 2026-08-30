@@ -1,7 +1,17 @@
-﻿using Framework;
-using Network;
+﻿using Network;
 
-void Main() {
+void Main(string[] args) {
+    for (int i = 0; i < args.Length; i++) {
+        if (args[i] != "--config") continue;
+
+        if (i + 1 >= args.Length) {
+            Console.WriteLine("Missing value for --config");
+            return;
+        }
+
+        Config.Instance.OverrideConfigFilePath(args[++i]);
+    }
+
     if (!Config.Instance.ParseConfig()) {
         Console.WriteLine("Config parse failed!");
         return;
@@ -24,4 +34,4 @@ void Main() {
     }
 }
 
-Main();
+Main(args);

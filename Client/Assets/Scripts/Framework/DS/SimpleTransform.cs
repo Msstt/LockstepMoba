@@ -1,7 +1,9 @@
 using System;
-using Sirenix.OdinInspector.Editor;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+using Sirenix.OdinInspector.Editor;
+#endif
 
 [Serializable]
 public class SimpleTransform {
@@ -9,6 +11,7 @@ public class SimpleTransform {
     public FloatF direction;
 }
 
+#if UNITY_EDITOR
 public class SimpleTransformDrawer : OdinValueDrawer<SimpleTransform> {
     protected override void DrawPropertyLayout(GUIContent label) {
         SimpleTransform t = ValueEntry.SmartValue;
@@ -35,3 +38,4 @@ public class SimpleTransformDrawer : OdinValueDrawer<SimpleTransform> {
         value = FloatF.Parse(input) * scale ?? value;
     }
 }
+#endif

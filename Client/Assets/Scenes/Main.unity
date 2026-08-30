@@ -1224,12 +1224,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50819f4a67724ff88d9778d38fbac69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsLocalDebug: 1
+  IsLocalDebug: 0
   ShowDebugMode: 0
   PrintSkillTree: 0
   DisableFog: 0
   DisableMinion: 0
   DisableTurret: 0
+  ServerIP: 127.0.0.1
+  ServerPort: 9980
 --- !u!114 &854225744
 MonoBehaviour:
   m_ObjectHideFlags: 0

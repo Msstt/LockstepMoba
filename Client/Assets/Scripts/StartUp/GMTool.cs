@@ -19,4 +19,9 @@ public class GMTool : MonoBehaviour {
     
     [LabelText("关闭防御塔")]
     public bool DisableTurret = false;
+    
+    [LabelText("服务器地址")]
+    public string ServerIP = "";
+    [LabelText("服务器端口")]
+    public int ServerPort = 9980;
 }

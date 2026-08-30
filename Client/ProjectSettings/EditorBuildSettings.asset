@@ -5,17 +5,20 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Test/Scenes/LockstepTest/LockstepTest.unity
     guid: 122fb658317994a1e92a97c04a082bcc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Test/Scenes/NavmeshTest/NavmeshTest.unity
     guid: 004f8df6fd4ef40a4b97372589e5d070
-  - enabled: 1
+  - enabled: 0
     path: Assets/Test/Scenes/FogTest/FogTest.unity
     guid: 1b5dcc97874bb47c6ae11a8cb5468e7c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Test/Scenes/FogTest/FogUpscaleTest.unity
     guid: f75c93ba8510b40d58d7bc1dde5013d0
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 6a49254b48b3040839cd6b5bc8570b21, type: 2}

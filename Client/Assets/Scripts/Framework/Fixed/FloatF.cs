@@ -1,11 +1,12 @@
 // 帧同步定点数，保留 6 位小数
 
 using System;
-using System.Diagnostics.Contracts;
 using Newtonsoft.Json;
-using Sirenix.OdinInspector.Editor;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+using Sirenix.OdinInspector.Editor;
+#endif
 
 [Serializable, JsonConverter(typeof(FloatFConverter))]
 public struct FloatF : IComparable<FloatF> {
@@ -181,6 +182,7 @@ public class FloatFConverter : JsonConverter<FloatF> {
 
 #region PropertyDrawer
 
+#if UNITY_EDITOR
 public class FloatFPropertyDrawer : OdinValueDrawer<FloatF> {
     protected override void DrawPropertyLayout(GUIContent label) {
         FloatF f = ValueEntry.SmartValue;
@@ -200,6 +202,7 @@ public class FloatFPropertyDrawer : OdinValueDrawer<FloatF> {
         ValueEntry.SmartValue = f;
     }
 }
+#endif
 
 #endregion
 

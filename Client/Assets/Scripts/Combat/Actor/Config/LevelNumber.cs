@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+using Sirenix.OdinInspector.Editor;
+#endif
 
 namespace Combat.Actor {
     [Serializable]
@@ -35,6 +37,7 @@ namespace Combat.Actor {
         }
     }
     
+#if UNITY_EDITOR
     public class LevelNumberDrawer<T> : OdinValueDrawer<LevelNumber<T>> {
         protected override void DrawPropertyLayout(GUIContent label) {
             LevelNumber<T> v = ValueEntry.SmartValue;
@@ -54,4 +57,5 @@ namespace Combat.Actor {
             ValueEntry.SmartValue = v;
         }
     }
+#endif
 }

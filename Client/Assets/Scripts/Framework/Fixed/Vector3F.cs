@@ -1,9 +1,11 @@
 // 帧同步 Vector3
 
 using System;
-using Sirenix.OdinInspector.Editor;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+using Sirenix.OdinInspector.Editor;
+#endif
 
 [Serializable]
 public struct Vector3F {
@@ -91,6 +93,7 @@ public struct Vector3F {
     public Network.vector_f ToProto() => new Network.vector_f { X = x.ToProto(), Y = y.ToProto(), Z = z.ToProto() };
 }
 
+#if UNITY_EDITOR
 public class Vector3FDrawer : OdinValueDrawer<Vector3F> {
     protected override void DrawPropertyLayout(GUIContent label) {
         Vector3F v = ValueEntry.SmartValue;
@@ -110,6 +113,7 @@ public class Vector3FDrawer : OdinValueDrawer<Vector3F> {
         ValueEntry.SmartValue = v;
     }
 }
+#endif
 
 public static class Vector3FProtoExtensions {
     public static Vector3F ToVector3F(this Network.vector_f msg) => new Vector3F(msg.X.ToFloatF(), msg.Y.ToFloatF(), msg.Z.ToFloatF());
