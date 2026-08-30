@@ -2,6 +2,7 @@
 // 1. 动态障碍和静态障碍形成的死角表现不佳
 
 using System.Collections.Generic;
+using Framework;
 
 namespace Combat.Actor {
     public static class ObstacleAvoidUtils {
@@ -51,28 +52,29 @@ namespace Combat.Actor {
                 return Vector3F.zero;
             }
 
-            List<int> uids = NavmeshUtils.RaycastInCircle(actor.Pos, DetectRadius);
-            uids.Sort();
-
-            List<Obstacle> obstacles = new List<Obstacle>();
-            foreach (int uid in uids) {
-                if (uid == actor.Uid) {
-                    continue;
+            using (PooledList<int> uids = PooledList<int>.Get())
+            using (PooledList<Obstacle> obstacles = PooledList<Obstacle>.Get()) {
+                NavmeshUtils.RaycastInCircle(actor.Pos, DetectRadius, uids);
+                uids.Sort();
+                foreach (int uid in uids) {
+                    if (uid == actor.Uid) {
+                        continue;
+                    }
+    
+                    Actor obstacleActor = ActorUtils.GetActor(uid);
+                    MoveCom obstacleMoveCom = obstacleActor?.GetComponent<MoveCom>();
+                    Vector3F? nextMove = obstacleMoveCom?.NextExpectMove;
+                    if (nextMove.HasValue) {
+                        obstacles.Add(new Obstacle(obstacleActor, nextMove.Value));
+                    }
                 }
-
-                Actor obstacleActor = ActorUtils.GetActor(uid);
-                MoveCom obstacleMoveCom = obstacleActor?.GetComponent<MoveCom>();
-                Vector3F? nextMove = obstacleMoveCom?.NextExpectMove;
-                if (nextMove.HasValue) {
-                    obstacles.Add(new Obstacle(obstacleActor, nextMove.Value));
-                }
-            }
-
-            foreach (Candidate candidate in Candidates) {
-                Vector3F move = Rotate(expectMove, candidate.Cos, candidate.Sin);
-                move = LimitInSurface(actor, move);
-                if (move != Vector3F.zero && IsSafe(actor, expectMove, move, obstacles)) {
-                    return move;
+    
+                foreach (Candidate candidate in Candidates) {
+                    Vector3F move = Rotate(expectMove, candidate.Cos, candidate.Sin);
+                    move = LimitInSurface(actor, move);
+                    if (move != Vector3F.zero && IsSafe(actor, expectMove, move, obstacles)) {
+                        return move;
+                    }
                 }
             }
 
@@ -88,12 +90,8 @@ namespace Combat.Actor {
         }
 
         private static Vector3F LimitInSurface(Actor actor, Vector3F move) {
-            Vector3F target = actor.Pos + move;
-            if (NavmeshUtils.IsReachableByRadius(actor.Stats.Radius, target)) {
-                Vector3F surfaceTarget = NavmeshUtils.RaycastInSurface(actor.Stats.Radius, actor.Pos, target);
-                return surfaceTarget - actor.Pos;
-            }
-            return Vector3F.zero;
+            Vector3F surfaceTarget = NavmeshUtils.RaycastInSurface(actor.Stats.Radius, actor.Pos, actor.Pos + move);
+            return surfaceTarget - actor.Pos;
         }
 
         private static bool IsSafe(Actor actor, Vector3F expectMove, Vector3F candidateMove,

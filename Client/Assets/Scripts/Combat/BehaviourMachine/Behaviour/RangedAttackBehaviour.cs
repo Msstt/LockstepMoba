@@ -1,5 +1,6 @@
 using Combat.Actor;
 using Combat.Skill;
+using Framework;
 
 namespace Combat.BehaviourMachine {
     public class RangedAttackBehaviour : ActorBehaviour {
@@ -22,11 +23,14 @@ namespace Combat.BehaviourMachine {
                 return true;
             }
             
-            foreach (var uid in NavmeshUtils.RaycastInCircle(Actor.Pos, Actor.Stats.AttackDistance)) {
-                Actor.Actor actor = ActorUtils.GetActor(uid);
-                if (actor != null && actor.Camp != Actor.Camp) {
-                    StartAttack(actor);
-                    break;
+            using (PooledList<int> uids = PooledList<int>.Get()) {
+                NavmeshUtils.RaycastInCircle(Actor.Pos, Actor.Stats.AttackDistance, uids);
+                foreach (int uid in uids) {
+                    Actor.Actor actor = ActorUtils.GetActor(uid);
+                    if (actor != null && actor.Camp != Actor.Camp) {
+                        StartAttack(actor);
+                        break;
+                    }
                 }
             }
 

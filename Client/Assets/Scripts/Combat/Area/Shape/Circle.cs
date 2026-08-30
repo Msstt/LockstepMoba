@@ -8,12 +8,12 @@ namespace Combat.Area {
         [LabelText("半径")]
         public FloatF radius;
         
-        public override List<int> Raycast(Vector3F position, Vector3F direction) {
-            return NavmeshUtils.RaycastInCircle(position, radius);
+        public override void Raycast(Vector3F position, Vector3F direction, List<int> results) {
+            NavmeshUtils.RaycastInCircle(position, radius, results);
         }
 
-        public override List<int> Raycast(int typeBitSet, Vector3F position, Vector3F direction) {
-            return NavmeshUtils.RaycastInCircle(typeBitSet, position, radius);
+        public override void Raycast(int typeBitSet, Vector3F position, Vector3F direction, List<int> results) {
+            NavmeshUtils.RaycastInCircle(typeBitSet, position, radius, results);
         }
     }
 }

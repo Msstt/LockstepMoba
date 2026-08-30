@@ -11,12 +11,12 @@ namespace Combat.Area {
         [LabelText("宽")]
         public FloatF width;
         
-        public override List<int> Raycast(Vector3F position, Vector3F direction) {
-            return NavmeshUtils.RaycastInRect(position, direction, length, width);
+        public override void Raycast(Vector3F position, Vector3F direction, List<int> results) {
+            NavmeshUtils.RaycastInRect(position, direction, length, width, results);
         }
 
-        public override List<int> Raycast(int typeBitSet, Vector3F position, Vector3F direction) {
-            return NavmeshUtils.RaycastInRect(typeBitSet, position, direction, length, width);
+        public override void Raycast(int typeBitSet, Vector3F position, Vector3F direction, List<int> results) {
+            NavmeshUtils.RaycastInRect(typeBitSet, position, direction, length, width, results);
         }
 
         // TODO 优化显示

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Framework;
 using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 
@@ -13,14 +14,16 @@ namespace Combat.Area.Raycast {
         
         public override List<Actor.Actor> Get() {
             List<Actor.Actor> result = new List<Actor.Actor>();
-            List<int> actors = area.Shape.Raycast(area.Position, area.Direction);
-            for (int i = 0; i < actors.Count; i++) {
-                if (ActorUtils.IsSameCamp(area.ActorId, actors[i]) != param.IsSameCamp) {
-                    continue;
-                }
-                Actor.Actor actor = ActorUtils.GetActor(actors[i]);
-                if (actor != null) {
-                    result.Add(actor);
+            using (PooledList<int> actors = PooledList<int>.Get()) {
+                area.Shape.Raycast(area.Position, area.Direction, actors);
+                for (int i = 0; i < actors.Count; i++) {
+                    if (ActorUtils.IsSameCamp(area.ActorId, actors[i]) != param.IsSameCamp) {
+                        continue;
+                    }
+                    Actor.Actor actor = ActorUtils.GetActor(actors[i]);
+                    if (actor != null) {
+                        result.Add(actor);
+                    }
                 }
             }
             return result;

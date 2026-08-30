@@ -11,7 +11,7 @@ public class Main : MonoBehaviour {
     public void Awake() {
         gmTool = GetComponent<GMTool>();
         if (gmTool.IsLocalDebug) {
-            Config.Map = Resources.Load<OtherConfig.Map>("Config/Other/TestMap");
+            // Config.Map = Resources.Load<OtherConfig.Map>("Config/Other/TestMap");
         }
         
         GameMgr.Instance.GMTool = gmTool;

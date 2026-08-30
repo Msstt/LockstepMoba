@@ -37,11 +37,13 @@ public class UnitRaycastTest : SceneTest {
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) {
                 DebugUtils.DrawCircle(hit.point, 3, 0.05f);
                 Vector3F pos = hit.point.ToVector3F();
-                List<int> result = NavmeshUtils.RaycastInCircle(pos, 3);
-                Debug.Log(result.Count);
-                foreach (int unitId in result) {
-                    Debug.Log($"unitId: {unitId}");
-                    DebugUtils.DrawDot(dot[unitId - 1], Color.green, 2, 0.1f);
+                using (PooledList<int> result = PooledList<int>.Get()) {
+                    NavmeshUtils.RaycastInCircle(pos, 3, result);
+                    Debug.Log(result.Count);
+                    foreach (int unitId in result) {
+                        Debug.Log($"unitId: {unitId}");
+                        DebugUtils.DrawDot(dot[unitId - 1], Color.green, 2, 0.1f);
+                    }
                 }
             }
         }

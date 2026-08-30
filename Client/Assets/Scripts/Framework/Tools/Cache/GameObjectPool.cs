@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Framework {
     public class GameObjectPool {
@@ -15,18 +17,18 @@ namespace Framework {
             cache.SetInitFunc(InitFunc);
         }
         
-        public GameObject Get()
-        {
+        public GameObject Get() {
             return cache.Get();
         }
 
-        public void Recycle(GameObject go)
-        {
+        public void Recycle(GameObject go) {
+            if (go == null) {
+                throw new ArgumentNullException("Cannot recycle a null object.");
+            }
             cache.Recycle(go);
         }
         
-        public void Dispose()
-        {
+        public void Dispose() {
             cache.Dispose();
         }
 

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Test/EditTest/Framework/SafeListTest.cs" />
+    <Compile Include="Assets/Test/EditTest/Framework/PooledListTest.cs" />
     <Compile Include="Assets/Test/EditTest/Framework/PriorityQueueTest.cs" />
     <Compile Include="Assets/Test/EditTest/Framework/SafeDictionaryTest.cs" />
     <Compile Include="Assets/Test/EditTest/Combat/PriorityTest.cs" />

@@ -7,6 +7,7 @@ namespace Framework {
     public sealed class Profiler : Singleton<Profiler> {
         private readonly ProfilerMarker updateMarker = new ProfilerMarker("GameMgr.Update");
         private readonly ProfilerMarker frameUpdateMarker = new ProfilerMarker("GameMgr.FrameUpdate");
+        private readonly ProfilerMarker navmeshFindPathMarker = new ProfilerMarker("Navmesh.FindPath");
         private readonly Dictionary<Type, ProfilerMarker> updateSystemMarkers = new Dictionary<Type, ProfilerMarker>();
         private readonly Dictionary<Type, ProfilerMarker> frameUpdateSystemMarkers = new Dictionary<Type, ProfilerMarker>();
         private readonly Dictionary<Type, ProfilerMarker> actorComUpdateMarkers = new Dictionary<Type, ProfilerMarker>();
@@ -30,6 +31,16 @@ namespace Framework {
         [Conditional("ENABLE_PROFILER")]
         public void EndFrameUpdate() {
             frameUpdateMarker.End();
+        }
+
+        [Conditional("ENABLE_PROFILER")]
+        public void BeginNavmeshFindPath() {
+            navmeshFindPathMarker.Begin();
+        }
+
+        [Conditional("ENABLE_PROFILER")]
+        public void EndNavmeshFindPath() {
+            navmeshFindPathMarker.End();
         }
 
         [Conditional("ENABLE_PROFILER")]

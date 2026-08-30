@@ -1,5 +1,6 @@
 using Combat.Actor;
 using Combat.Skill;
+using Framework;
 
 namespace Combat.BehaviourMachine {
     public class ChaseBehaviour : ActorBehaviour {
@@ -30,12 +31,15 @@ namespace Combat.BehaviourMachine {
             }
             
             FloatF distance = FloatF.max;
-            foreach (var uid in NavmeshUtils.RaycastInCircle(Actor.Pos, patrolDistance)) {
-                Actor.Actor actor = ActorUtils.GetActor(uid);
-                if (actor != null && actor.Camp != Actor.Camp) {
-                    if (Vector3F.Distance(Actor.Pos, actor.Pos) < distance) {
-                        distance = Vector3F.Distance(Actor.Pos, actor.Pos);
-                        StartChase(actor);
+            using (PooledList<int> uids = PooledList<int>.Get()) {
+                NavmeshUtils.RaycastInCircle(Actor.Pos, patrolDistance, uids);
+                foreach (int uid in uids) {
+                    Actor.Actor actor = ActorUtils.GetActor(uid);
+                    if (actor != null && actor.Camp != Actor.Camp) {
+                        if (Vector3F.Distance(Actor.Pos, actor.Pos) < distance) {
+                            distance = Vector3F.Distance(Actor.Pos, actor.Pos);
+                            StartChase(actor);
+                        }
                     }
                 }
             }

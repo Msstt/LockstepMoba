@@ -44,21 +44,21 @@ public static class NavmeshUtils {
         
     }
 
-    public static List<int> RaycastInCircle(int typeBitSet, Vector3F center, FloatF radius) {
-        return GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInCircle(typeBitSet, center, radius) ?? new List<int>();
+    public static void RaycastInCircle(int typeBitSet, Vector3F center, FloatF radius, List<int> results) {
+        GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInCircle(typeBitSet, center, radius, results);
     }
     
     private static int allTypeBitSet = (1 << UnitRaycaster.MaxTypeCount) - 1;
-    public static List<int> RaycastInCircle(Vector3F center, FloatF radius) {
-        return GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInCircle(allTypeBitSet, center, radius) ?? new List<int>();
+    public static void RaycastInCircle(Vector3F center, FloatF radius, List<int> results) {
+        RaycastInCircle(allTypeBitSet, center, radius, results);
     }
     
-    public static List<int> RaycastInRect(int typeBitSet, Vector3F center, Vector3F direction, FloatF length, FloatF width) {
-        return GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInRect(typeBitSet, center, direction, length, width) ?? new List<int>();
+    public static void RaycastInRect(int typeBitSet, Vector3F center, Vector3F direction, FloatF length, FloatF width, List<int> results) {
+        GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInRect(typeBitSet, center, direction, length, width, results);
     }
     
-    public static List<int> RaycastInRect(Vector3F center, Vector3F direction, FloatF length, FloatF width) {
-        return GameMgr.Instance.GetSystem<INavmesh>()?.RaycastInRect(allTypeBitSet, center, direction, length, width) ?? new List<int>();
+    public static void RaycastInRect(Vector3F center, Vector3F direction, FloatF length, FloatF width, List<int> results) {
+        RaycastInRect(allTypeBitSet, center, direction, length, width, results);
     }
 
     public static float GetHeight(float x, float y) {

@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Combat.Actor;
+using Framework;
 using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 
@@ -23,12 +23,14 @@ namespace Combat.Buff.Effect {
             Actor.Actor actor = ActorUtils.GetActor(buff.ActorId);
             if (actor != null) {
                 actor.Stats.Invisibility -= lastInvisibility;
-                List<int> units = NavmeshUtils.RaycastInCircle(typeBitSet, actor.Pos, param.Radius);
-                lastInvisibility = 1;
-                foreach (int uid in units) {
-                    if (!ActorUtils.IsSameCamp(buff.ActorId, uid)) {
-                        lastInvisibility = 0;
-                        break;
+                using (PooledList<int> units = PooledList<int>.Get()) {
+                    NavmeshUtils.RaycastInCircle(typeBitSet, actor.Pos, param.Radius, units);
+                    lastInvisibility = 1;
+                    foreach (int uid in units) {
+                        if (!ActorUtils.IsSameCamp(buff.ActorId, uid)) {
+                            lastInvisibility = 0;
+                            break;
+                        }
                     }
                 }
                 actor.Stats.Invisibility += lastInvisibility;

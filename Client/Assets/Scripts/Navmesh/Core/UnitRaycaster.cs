@@ -125,8 +125,8 @@ namespace Navmesh {
             }
         }
         
-        public List<int> RaycastInCircle(int typeBitSet, Vector3F center, FloatF radius) {
-            List<int> result = new List<int>();
+        public void RaycastInCircle(int typeBitSet, Vector3F center, FloatF radius, List<int> result) {
+            result.Clear();
             void Check(UnitInfo unitInfo) {
                 if (Vector3F.Distance2(unitInfo.pos, center) <= radius * radius) {
                     result.Add(unitInfo.id);
@@ -137,13 +137,12 @@ namespace Navmesh {
             IterateType(typeBitSet, (type) => {
                 IterateGrid(type, min, max, Check);
             });
-            return result;
         }
         
-        public List<int> RaycastInPolygon(int typeBitSet, List<Vector3F> polygon) {
-            List<int> result = new List<int>();
+        public void RaycastInPolygon(int typeBitSet, List<Vector3F> polygon, List<int> result) {
+            result.Clear();
             if (polygon.Count < 3) {
-                return result;
+                return;
             }
             void Check(UnitInfo unitInfo) {
                 if (GeoUtils.PointInPolygon(unitInfo.pos, polygon)) {
@@ -163,11 +162,10 @@ namespace Navmesh {
             IterateType(typeBitSet, (type) => {
                 IterateGrid(type, min, max, Check);
             });
-            return result;
         }
         
-        public List<int> RaycastInRect(int typeBitSet, Vector3F center, Vector3F direction, FloatF length, FloatF width) {
-            List<int> result = new List<int>();
+        public void RaycastInRect(int typeBitSet, Vector3F center, Vector3F direction, FloatF length, FloatF width, List<int> result) {
+            result.Clear();
             Vector3F forward = direction.Normalized();
             if (forward == Vector3F.zero) {
                 forward = new Vector3F(0, 0, 1);
@@ -186,26 +184,21 @@ namespace Navmesh {
                 }
             }
             
-            List<Vector3F> points = new List<Vector3F>() {
-                center + halfForward + halfRight,
-                center + halfForward - halfRight,
-                center - halfForward - halfRight,
-                center - halfForward + halfRight,
-            };
+            Vector3F point1 = center + halfForward + halfRight;
+            Vector3F point2 = center + halfForward - halfRight;
+            Vector3F point3 = center - halfForward - halfRight;
+            Vector3F point4 = center - halfForward + halfRight;
             Vector3F min = new Vector3F(FloatF.max, FloatF.max, FloatF.max);
             Vector3F max = new Vector3F(FloatF.min, FloatF.min, FloatF.min);
-            foreach (var point in points) {
-                min.x = FloatF.Min(min.x, point.x);
-                min.y = FloatF.Min(min.y, point.y);
-                min.z = FloatF.Min(min.z, point.z);
-                max.x = FloatF.Max(max.x, point.x);
-                max.y = FloatF.Max(max.y, point.y);
-                max.z = FloatF.Max(max.z, point.z);
-            }
+            min.x = FloatF.Min(FloatF.Min(point1.x, point2.x), FloatF.Min(point3.x, point4.x));
+            min.y = FloatF.Min(FloatF.Min(point1.y, point2.y), FloatF.Min(point3.y, point4.y));
+            min.z = FloatF.Min(FloatF.Min(point1.z, point2.z), FloatF.Min(point3.z, point4.z));
+            max.x = FloatF.Max(FloatF.Max(point1.x, point2.x), FloatF.Max(point3.x, point4.x));
+            max.y = FloatF.Max(FloatF.Max(point1.y, point2.y), FloatF.Max(point3.y, point4.y));
+            max.z = FloatF.Max(FloatF.Max(point1.z, point2.z), FloatF.Max(point3.z, point4.z));
             IterateType(typeBitSet, (type) => {
                 IterateGrid(type, min, max, Check);
             });
-            return result;
         }
     }
 }

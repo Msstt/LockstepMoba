@@ -77,12 +77,17 @@ namespace Navmesh {
         #region 寻路
 
         private List<Vector3F> FindPath(FloatF radius, Vector3F start, Vector3F end) {
-            foreach (var r in allRadius) {
-                if (radius <= r) {
-                    return layers[r].FindPath(start, end);
+            Profiler.Instance.BeginNavmeshFindPath();
+            try {
+                foreach (var r in allRadius) {
+                    if (radius <= r) {
+                        return layers[r].FindPath(start, end);
+                    }
                 }
+                return new List<Vector3F> { start };
+            } finally {
+                Profiler.Instance.EndNavmeshFindPath();
             }
-            return new List<Vector3F> { start };
         }
         
         public void FindPath(FloatF radius, Vector3F start, Vector3F end, Action<List<Vector3F>> callback, bool force) {
@@ -144,12 +149,12 @@ namespace Navmesh {
             unitRaycaster.UnRegister(id, onPosChange);
         }
 
-        public List<int> RaycastInCircle(int typeBitSet, Vector3F center, FloatF radius) {
-            return unitRaycaster.RaycastInCircle(typeBitSet, center, radius);
+        public void RaycastInCircle(int typeBitSet, Vector3F center, FloatF radius, List<int> results) {
+            unitRaycaster.RaycastInCircle(typeBitSet, center, radius, results);
         }
         
-        public List<int> RaycastInRect(int typeBitSet, Vector3F center, Vector3F direction, FloatF length, FloatF width) {
-            return unitRaycaster.RaycastInRect(typeBitSet, center, direction, length, width);
+        public void RaycastInRect(int typeBitSet, Vector3F center, Vector3F direction, FloatF length, FloatF width, List<int> results) {
+            unitRaycaster.RaycastInRect(typeBitSet, center, direction, length, width, results);
         }
 
         #endregion

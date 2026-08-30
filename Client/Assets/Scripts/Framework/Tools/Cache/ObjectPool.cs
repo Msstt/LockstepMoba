@@ -18,6 +18,8 @@ namespace Framework {
         private RecycleFunc recycleFunc;
         private InitFunc initFunc;
         
+        private bool isDisposed = false;
+        
         public ObjectPool(CreateFunc createFunc, DestroyFunc destroyFunc) {
             if (createFunc == null || destroyFunc == null) {
                 throw new ArgumentNullException("CreateFunc and DestroyFunc cannot be null.");
@@ -35,17 +37,33 @@ namespace Framework {
         }
 
         public T Get() {
+            if (isDisposed) {
+                throw new ObjectDisposedException("ObjectPool has been disposed or obj is null.");
+            }
+            
             T obj = cache.Any() ? cache.Pop() : createFunc();
             initFunc?.Invoke(obj);
             return obj;
         }
 
         public void Recycle(T obj) {
+            if (isDisposed) {
+                throw new ObjectDisposedException("ObjectPool has been disposed or obj is null.");
+            }
+            if (ReferenceEquals(obj, null)) {
+                throw new ArgumentNullException("Cannot recycle a null object.");
+            }
+            
             recycleFunc?.Invoke(obj);
             cache.Push(obj);
         }
 
         public void Dispose() {
+            if (isDisposed) {
+                return;
+            }
+            isDisposed = true;
+            
             foreach (var obj in cache) {
                 destroyFunc(obj);
             }
